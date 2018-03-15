@@ -11,6 +11,15 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::auth();
+
+//admin
+Route::group(['middleware' => 'auth'], function () {
+    //if user is admin
+    Route::group(['prefix' => 'admin'], function() {
+        
+        Route::get('/', 'Backend\AdminController@index');
+        Route::resource('/roles', 'Backend\RolesController');
+        
+    });
 });
