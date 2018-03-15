@@ -16,6 +16,8 @@
     <!-- plugin CSS-->
     <link href="{{ asset('assets/backend/css/dataTables.bootstrap4.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/backend/css/sb-admin.css') }}" rel="stylesheet">
+    
+    @yield('css')
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="body-admin">
@@ -60,6 +62,7 @@
         <!-- Custom scripts for this page-->
         <script src="{{ asset('assets/backend/js/sb-admin-datatables.min.js') }}"></script>
 <!--        <script src="{{ asset('assets/backend/js/sb-admin-charts.min.js') }}"></script>-->
+        @yield('javascript')
     </div>
 </body>
 
