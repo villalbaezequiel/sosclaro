@@ -29,6 +29,12 @@
             <!-- Header -->
             @include('backend.components.header')
 
+            <div class="row">
+                <div class="col-xl-12">@yield('message')</div>
+            </div>
+            
+            @yield('nav-button')
+            
             <!-- Content -->
             <div class="card mb-3">
                 <div class="card-header">@yield('title')</div>
