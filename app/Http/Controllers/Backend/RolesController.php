@@ -40,14 +40,14 @@ class RolesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        $roles = new Roles;
-        $roles->name = $request->get('name');
-        $roles->save();
+    {   
+        $role = new Roles;
+        $role->name = $request->get('name_role');
+        $role->permission = json_encode($request->get('permission_role'));
+        $role->active = $request->get('active_role');
+        $role->save();
         
-        return view('backend.roles.index', [
-            'message' => "Role: ".$request->get('name')." creado con exito."
-        ]);
+        return redirect('/admin/roles')->with('message', "Role: ".$request->get('name_role')." creado con exito!");
     }
 
     /**
@@ -86,12 +86,12 @@ class RolesController extends Controller
     public function update(Request $request, $id)
     {
         $role = Roles::find($id);
-        $role->name = $request->get('name');
+        $role->name = $request->get('name_role');
+        $role->permission = json_encode($request->get('permission_role'));
+        $role->active = $request->get('active_role');
         $role->save();
         
-        return view('backend.roles.index', [
-            'message' => "Role: ".$request->get('name')." actualizado con exito."
-        ]);
+        return redirect('/admin/roles')->with('message', "Role: ".$request->get('name_role')." actualizado con exito!");
     }
 
     /**
@@ -105,9 +105,6 @@ class RolesController extends Controller
         $role = Roles::find($id);
         $role->delete();
         
-        return view('backend.roles.index', [
-            'message' => "Role eliminado con exito."
-        ]);
-
+        return redirect('/admin/roles')->with('message', 'Role eliminado con exito!');
     }
 }
