@@ -18,6 +18,42 @@
                 </a>
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right">
+                <a class="nav-link" href="{{ url('/admin/products') }}">
+                    <i class="fa fa-fw fa-cogs"></i>
+                    <span class="nav-link-text">Consejos . Categorias</span>
+                </a>
+            </li>
+            <li class="nav-item" data-toggle="tooltip" data-placement="right">
+                <a class="nav-link" href="{{ url('/admin/locations') }}">
+                    <i class="fa fa-fw fa-cogs"></i>
+                    <span class="nav-link-text">Ubicaciones</span>
+                </a>
+            </li>
+            <li class="nav-item" data-toggle="tooltip" data-placement="right">
+                <a class="nav-link" href="{{ url('/admin/products') }}">
+                    <i class="fa fa-fw fa-cogs"></i>
+                    <span class="nav-link-text">Encuestas</span>
+                </a>
+            </li>
+            <li class="nav-item" data-toggle="tooltip" data-placement="right">
+                <a class="nav-link" href="{{ url('/admin/categories') }}">
+                    <i class="fa fa-fw fa-cogs"></i>
+                    <span class="nav-link-text">Categorias</span>
+                </a>
+            </li>
+            <li class="nav-item" data-toggle="tooltip" data-placement="right">
+                <a class="nav-link" href="{{ url('/admin/products') }}">
+                    <i class="fa fa-fw fa-cogs"></i>
+                    <span class="nav-link-text">Productos</span>
+                </a>
+            </li>
+            <li class="nav-item" data-toggle="tooltip" data-placement="right">
+                <a class="nav-link" href="{{ url('/admin/exchange') }}">
+                    <i class="fa fa-fw fa-cogs"></i>
+                    <span class="nav-link-text">Canjes</span>
+                </a>
+            </li>
+            <li class="nav-item" data-toggle="tooltip" data-placement="right">
                 <a class="nav-link" href="{{ url('/admin/settings') }}">
                     <i class="fa fa-fw fa-cogs"></i>
                     <span class="nav-link-text">Configuracion</span>

@@ -19,7 +19,16 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['prefix' => 'admin'], function() {
         
         Route::get('/', 'Backend\AdminController@index');
+
+        //peticiones AJAX
+        Route::get('/locations/getRegions', 'Backend\LocationsController@getRegions');
+        Route::get('/locations/getProvinces/{id}', 'Backend\LocationsController@getProvinces');
+        Route::get('/locations/getCities/{id}', 'Backend\LocationsController@getCities');
+        
+        //ABM
+        Route::resource('/users', 'Backend\UsersController');
         Route::resource('/roles', 'Backend\RolesController');
+        Route::resource('/locations', 'Backend\LocationsController');
         
     });
 });
