@@ -1,6 +1,6 @@
 @extends('layouts.backend')
 
-@section('title', "Roles / Modificar")
+@section('title', "Roles / Editar")
 @section('content')
 {!! Form::open(['route' => ['admin.roles.update', $role->id], 'method' => 'PUT']) !!}
     <div class="form-group">
@@ -20,6 +20,7 @@
             <option value="0" @if($role->active == 0) selected="selected" @endif>No</option>
         </select>
     </div>
-    <button type="submit" class="btn btn-primary">Modificar</button>
+    <button type="submit" class="btn btn-primary">Editar</button>
+    <a href="" onclick="window.history.go(-1); return false;" class="btn btn-danger">Cancelar</a>
 {!! Form::close() !!}
 @endsection

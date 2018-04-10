@@ -21,5 +21,6 @@
         </select>
     </div>
     <button type="submit" class="btn btn-primary">Crear</button>
+    <a href="" onclick="window.history.go(-1); return false;" class="btn btn-danger">Cancelar</a>
 {!! Form::close() !!}
 @endsection
