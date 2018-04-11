@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Products;
+use App\Categories;
 
 class Categories extends Model
 {
@@ -16,6 +17,11 @@ class Categories extends Model
         } else {
             return $countProducts;
         }
+    }
+    
+    static public function getNameCategory($id) {
+        $category = Categories::find($id);
+        return $category->name;
     }
 
 }
