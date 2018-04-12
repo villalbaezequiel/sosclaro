@@ -4,23 +4,46 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+        <ul class="navbar-nav navbar-sidenav" style="overflow: auto;">
+            
             <li class="nav-item" data-toggle="tooltip" data-placement="right">
-                <a class="nav-link" href="{{ url('/admin/users') }}">
-                    <i class="fa fa-fw fa-users"></i>
-                    <span class="nav-link-text">Usuarios</span>
+                <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#nav_products">
+                    <i class="fa fa-fw fa-cogs"></i>
+                    <span class="nav-link-text">Productos</span>
+                </a>
+                <ul class="sidenav-second-level collapse" id="nav_products">
+                    <li>
+                        <a href="{{ url('/admin/categories') }}">Categorias</a>
+                    </li>
+                    <li>
+                        <a href="{{ url('/admin/products') }}">Productos</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item" data-toggle="tooltip" data-placement="right">
+                <a class="nav-link" href="{{ url('/admin/exchange') }}">
+                    <i class="fa fa-fw fa-cogs"></i>
+                    <span class="nav-link-text">Canjes</span>
                 </a>
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right">
-                <a class="nav-link" href="{{ url('/admin/roles') }}">
-                    <i class="fa fa-fw fa-user-secret"></i>
-                    <span class="nav-link-text">Roles</span>
+                <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#nav_tips">
+                    <i class="fa fa-fw fa-cogs"></i>
+                    <span class="nav-link-text">Consejos</span>
                 </a>
+                <ul class="sidenav-second-level collapse" id="nav_tips">
+                    <li>
+                        <a href="{{ url('/admin/categories') }}">Categorias</a>
+                    </li>
+                    <li>
+                        <a href="{{ url('/admin/products') }}">Consejos</a>
+                    </li>
+                </ul>
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right">
                 <a class="nav-link" href="{{ url('/admin/products') }}">
                     <i class="fa fa-fw fa-cogs"></i>
-                    <span class="nav-link-text">Consejos . Categorias</span>
+                    <span class="nav-link-text">Encuestas</span>
                 </a>
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right">
@@ -30,34 +53,50 @@
                 </a>
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right">
-                <a class="nav-link" href="{{ url('/admin/products') }}">
-                    <i class="fa fa-fw fa-cogs"></i>
-                    <span class="nav-link-text">Encuestas</span>
+                <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#nav_users">
+                    <i class="fa fa-fw fa-users"></i>
+                    <span class="nav-link-text">Usuarios</span>
                 </a>
+                <ul class="sidenav-second-level collapse" id="nav_users">
+                    <li>
+                        <a href="{{ url('/admin/users') }}">Usuarios</a>
+                    </li>
+                    <li>
+                        <a href="{{ url('/admin/roles') }}">Roles</a>
+                    </li>
+                    <li>
+                        <a href="{{ url('/admin/roles') }}">Indicadores</a>
+                    </li>
+                    <li>
+                        <a href="{{ url('/admin/users') }}">Usuarios Ganadores</a>
+                    </li>
+                    <li>
+                        <a href="{{ url('/admin/users') }}">Historial Usuarios</a>
+                    </li>
+                </ul>
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right">
-                <a class="nav-link" href="{{ url('/admin/categories') }}">
-                    <i class="fa fa-fw fa-cogs"></i>
-                    <span class="nav-link-text">Categorias</span>
-                </a>
-            </li>
-            <li class="nav-item" data-toggle="tooltip" data-placement="right">
-                <a class="nav-link" href="{{ url('/admin/products') }}">
-                    <i class="fa fa-fw fa-cogs"></i>
-                    <span class="nav-link-text">Productos</span>
-                </a>
-            </li>
-            <li class="nav-item" data-toggle="tooltip" data-placement="right">
-                <a class="nav-link" href="{{ url('/admin/exchange') }}">
-                    <i class="fa fa-fw fa-cogs"></i>
-                    <span class="nav-link-text">Canjes</span>
-                </a>
-            </li>
-            <li class="nav-item" data-toggle="tooltip" data-placement="right">
-                <a class="nav-link" href="{{ url('/admin/settings') }}">
+                <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#nav_settings">
                     <i class="fa fa-fw fa-cogs"></i>
                     <span class="nav-link-text">Configuracion</span>
                 </a>
+                <ul class="sidenav-second-level collapse" id="nav_settings">
+                    <li>
+                        <a href="cards.html">Redes Sociales</a>
+                    </li>
+                    <li>
+                        <a href="cards.html">Email</a>
+                    </li>
+                    <li>
+                        <a href="cards.html">Politica y Privacidad</a>
+                    </li>
+                    <li>
+                        <a href="cards.html">Legales Canjes Productos</a>
+                    </li>
+                    <li>
+                        <a href="cards.html">Modals</a>
+                    </li>
+                </ul>
             </li>
         </ul>
 
