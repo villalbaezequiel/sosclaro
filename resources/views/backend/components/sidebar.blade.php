@@ -33,10 +33,10 @@
                 </a>
                 <ul class="sidenav-second-level collapse" id="nav_tips">
                     <li>
-                        <a href="{{ url('/admin/categories') }}">Categorias</a>
+                        <a href="{{ url('/admin/tips/categories') }}">Categorias</a>
                     </li>
                     <li>
-                        <a href="{{ url('/admin/products') }}">Consejos</a>
+                        <a href="{{ url('/admin/tips') }}">Consejos</a>
                     </li>
                 </ul>
             </li>
