@@ -43,22 +43,15 @@ class TipsCategoriesController extends Controller
     {
         $message;
         try {
-            $imagen_category = $request->file('imagen_category');
             
-            $category = new Categories;
-            $category->name = $request->get('name_category');
-            $category->image = $imagen_category->getClientOriginalName();
-            $category->description = $request->get('description_category');
-            $category->active = $request->get('active_category');
-            $category->save();
+            $tip_tip_category = new TipsCategories;
+            $tip_tip_category->name = $request->get('name_tip_category');
+            $tip_tip_category->active = $request->get('active_tip_category');
+            $tip_tip_category->save();
      
-            if($request->hasFile('imagen_category')){
-                Storage::disk('public')->put('categories/'.$category->id.'/'.$imagen_category->getClientOriginalName(), true);
-            }
-
-            $message = "Categoria: ".$request->get('name_category')." creada con exito!";
+            $message = "Categoria de Consejo: ".$request->get('name_tip_category')." creada con exito!";
             
-            return redirect('/admin/categories')->with('message', $message);
+            return redirect('/admin/tips/categories')->with('message', $message);
         
         } catch(\Exception $e) {
 
@@ -96,8 +89,8 @@ class TipsCategoriesController extends Controller
      */
     public function edit($id)
     {
-        return view('backend.categories.edit', [
-            'category' => Categories::find($id)
+        return view('backend.tips_categories.edit', [
+            'tip_category' => TipsCategories::find($id)
         ]);
     }
 
@@ -109,27 +102,18 @@ class TipsCategoriesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
+    {   
         $message;
         try {
             
-            if($request->hasFile('imagen_category')){
-                Storage::delete('public/categories/'.$id.'/'.$request->get('imagen_category_old'));
-                
-                $imagen_category = $request->file('imagen_category');
-                Storage::disk('public')->put('categories/'.$id.'/'.$imagen_category->getClientOriginalName(), true);
-            }
-                
-            $category = Categories::find($id);
-            $category->name = $request->get('name_category');
-            $category->image = ($request->hasFile('imagen_category') ? $imagen_category->getClientOriginalName() : $request->get('imagen_category_old'));
-            $category->description = $request->get('description_category');
-            $category->active = $request->get('active_category');
-            $category->save();
+            $tip_tip_category = TipsCategories::find($id);
+            $tip_tip_category->name = $request->get('name_tip_category');
+            $tip_tip_category->active = $request->get('active_tip_category');
+            $tip_tip_category->save();
      
-            $message = "Categoria: ".$request->get('name_category')." editada con exito!";
+            $message = "Categoria de Consejo: ".$request->get('name_tip_category')." editada con exito!";
             
-            return redirect('/admin/categories')->with('message', $message);
+            return redirect('/admin/tips/categories')->with('message', $message);
         
         } catch(\Exception $e) {
 
@@ -155,11 +139,9 @@ class TipsCategoriesController extends Controller
      */
     public function destroy($id)
     {
-        $category = Categories::find($id);
-        $category->delete();
+        $tip_tip_category = TipsCategories::find($id);
+        $tip_tip_category->delete();
      
-        Storage::deleteDirectory('public/categories/'.$id);
-        
-        return redirect('/admin/categories')->with('message', 'Categoría eliminada con exito!');
+        return redirect('/admin/tips/categories')->with('message', 'Categoría de Consejo eliminada con exito!');
     }
 }

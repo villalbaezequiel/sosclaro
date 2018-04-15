@@ -11,7 +11,7 @@
 @endsection
 
 @section('nav-button')
-<a class="btn btn-primary mb-3" href="{{ url('/admin/tips/categories/create') }}">Nueva Categoría</a>
+<a class="btn btn-primary mb-3" href="{{ url('/admin/tips/categories/create') }}">Nueva Categoría de Consejo</a>
 @endsection
 
 @section('content')
@@ -30,7 +30,7 @@
         <tr>
             <td>{{ $category->id }}</td>
             <td>{{ $category->name }}</td>
-            <td>{{ \App\TipsCategories::countProducts($category->id) }}</td>
+            <td>{{ \App\TipsCategories::countTips($category->id) }}</td>
             <td>{{ \App\Functions::getActive($category->active) }}</td>
             <td>
                 {!! Form::open(['route' => ['admin.tips.categories.destroy', $category->id], 'method' => 'DELETE']) !!}
