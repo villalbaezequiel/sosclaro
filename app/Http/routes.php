@@ -34,5 +34,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('/tips/categories', 'Backend\TipsCategoriesController');
         Route::resource('/tips', 'Backend\TipsController');
         
+        //Settings
+        Route::resource('/settings/politics_privacy', 'Backend\PoliticsPrivacyController');
+        
     });
 });

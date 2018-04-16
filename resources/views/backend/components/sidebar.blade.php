@@ -88,7 +88,7 @@
                         <a href="cards.html">Email</a>
                     </li>
                     <li>
-                        <a href="cards.html">Politica y Privacidad</a>
+                        <a href="{{ url('/admin/settings/politics_privacy') }}">Politica y Privacidad</a>
                     </li>
                     <li>
                         <a href="cards.html">Legales Canjes Productos</a>
