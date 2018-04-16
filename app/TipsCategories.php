@@ -17,4 +17,9 @@ class TipsCategories extends Model
             return $countTips;
         }
     }
+    
+    static public function getNameCategory($id) {
+        $category = TipsCategories::find($id);
+        return $category->name;
+    }
 }
