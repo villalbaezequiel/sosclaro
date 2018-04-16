@@ -91,7 +91,7 @@
                         <a href="{{ url('/admin/settings/politics_privacy') }}">Politica y Privacidad</a>
                     </li>
                     <li>
-                        <a href="cards.html">Legales Canjes Productos</a>
+                        <a href="{{ url('/admin/settings/legal_products') }}">Legales Canjes Productos</a>
                     </li>
                     <li>
                         <a href="cards.html">Modals</a>

@@ -36,6 +36,7 @@ Route::group(['middleware' => 'auth'], function () {
         
         //Settings
         Route::resource('/settings/politics_privacy', 'Backend\PoliticsPrivacyController');
+        Route::resource('/settings/legal_products', 'Backend\LegalProductsController');
         
     });
 });
