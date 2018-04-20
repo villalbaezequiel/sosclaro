@@ -41,10 +41,18 @@
                 </ul>
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right">
-                <a class="nav-link" href="{{ url('/admin/products') }}">
+                <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#nav_guests">
                     <i class="fa fa-fw fa-cogs"></i>
                     <span class="nav-link-text">Encuestas</span>
                 </a>
+                <ul class="sidenav-second-level collapse" id="nav_guests">
+                    <li>
+                        <a href="{{ url('/admin/guests') }}">Encuestas</a>
+                    </li>
+                    <li>
+                        <a href="{{ url('/admin/guests/questions') }}">Entradas de Encuestas</a>
+                    </li>
+                </ul>
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right">
                 <a class="nav-link" href="{{ url('/admin/locations') }}">
@@ -82,16 +90,16 @@
                 </a>
                 <ul class="sidenav-second-level collapse" id="nav_settings">
                     <li>
-                        <a href="cards.html">Redes Sociales</a>
+                        <a href="{{ url('/admin/settings/social_networks') }}">Redes Sociales</a>
                     </li>
                     <li>
-                        <a href="cards.html">Email</a>
+                        <a href="{{ url('/admin/settings/emails') }}">Email</a>
                     </li>
                     <li>
                         <a href="{{ url('/admin/settings/politics_privacy') }}">Politica y Privacidad</a>
                     </li>
                     <li>
-                        <a href="{{ url('/admin/settings/legal_products') }}">Legales Canjes Productos</a>
+                        <a href="{{ url('/admin/settings/legal_products') }}">Legales de Productos</a>
                     </li>
                     <li>
                         <a href="cards.html">Modals</a>

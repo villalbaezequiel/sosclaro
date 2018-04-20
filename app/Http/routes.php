@@ -33,10 +33,14 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('/products', 'Backend\ProductsController');
         Route::resource('/tips/categories', 'Backend\TipsCategoriesController');
         Route::resource('/tips', 'Backend\TipsController');
+        Route::resource('/guests', 'Backend\GuestsController');
+        Route::resource('/guests/questions', 'Backend\GuestsQuestionsController');
         
         //Settings
         Route::resource('/settings/politics_privacy', 'Backend\PoliticsPrivacyController');
         Route::resource('/settings/legal_products', 'Backend\LegalProductsController');
+        Route::resource('/settings/social_networks', 'Backend\SocialNetworksController');
+        Route::resource('/settings/emails', 'Backend\EmailsController');
         
     });
 });
