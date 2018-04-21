@@ -15,7 +15,7 @@
 
     <div class="form-group">
         <label>Puntos:</label>
-        <input type="number" class="form-control" name="puntos_guest" value="{{ $guest->puntos }}" placeholder="Valor/Puntos de la Encuesta" required>
+        <input type="number" class="form-control" name="puntos_guest" value="{{ $guest->puntos }}" placeholder="Valor/Puntos de la Encuesta">
     </div>
 
     <div class="form-group">
