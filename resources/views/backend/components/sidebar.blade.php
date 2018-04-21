@@ -50,7 +50,7 @@
                         <a href="{{ url('/admin/guests') }}">Encuestas</a>
                     </li>
                     <li>
-                        <a href="{{ url('/admin/guests/questions') }}">Entradas de Encuestas</a>
+                        <a href="{{ url('/admin/guests/questions') }}">Preguntas de Encuestas</a>
                     </li>
                 </ul>
             </li>
