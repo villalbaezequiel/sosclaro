@@ -28,6 +28,7 @@ Route::group(['middleware' => 'auth'], function () {
         //ABM
         Route::resource('/users', 'Backend\UsersController');
         Route::resource('/roles', 'Backend\RolesController');
+        Route::resource('/regions', 'Backend\RegionsController');
         Route::resource('/locations', 'Backend\LocationsController');
         Route::resource('/categories', 'Backend\CategoriesController');
         Route::resource('/products', 'Backend\ProductsController');

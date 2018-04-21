@@ -55,6 +55,12 @@
                 </ul>
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right">
+                <a class="nav-link" href="{{ url('/admin/regions') }}">
+                    <i class="fa fa-fw fa-cogs"></i>
+                    <span class="nav-link-text">Regiones</span>
+                </a>
+            </li>
+            <li class="nav-item" data-toggle="tooltip" data-placement="right">
                 <a class="nav-link" href="{{ url('/admin/locations') }}">
                     <i class="fa fa-fw fa-cogs"></i>
                     <span class="nav-link-text">Ubicaciones</span>

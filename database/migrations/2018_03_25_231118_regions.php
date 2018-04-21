@@ -15,6 +15,7 @@ class Regions extends Migration
         Schema::create('regions', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->enum('active', ['0', '1']);            
             $table->timestamps();
         });
     }
