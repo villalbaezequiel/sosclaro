@@ -8,6 +8,8 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Functions;
 use App\Guest;
+use App\GuestQuestions;
+use Illuminate\Support\Facades\DB;
 
 class GuestsController extends Controller
 {
@@ -144,10 +146,15 @@ class GuestsController extends Controller
      */
     public function destroy($id)
     {
+        //Elimina todas las entradas relacionada a la Encuesta $id
+        $guestQuestions = GuestQuestions::where('id_guest', $id)->get();         
+        foreach ($guestQuestions as $value) {
+            $guestQ = GuestQuestions::find($value->id);
+            $guestQ->delete();
+        }
+        
         $guest = Guest::find($id);
         $guest->delete();
-        
-        //Eliminar todas las entradas relacionada a la Encuesta $id
      
         return redirect('/admin/guests')->with('message', 'Encuesta eliminada con exito!');
     }

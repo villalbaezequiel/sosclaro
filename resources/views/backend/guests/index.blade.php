@@ -46,6 +46,10 @@
 </table>
 @endsection
 
+@section('content-footer')
+<i>* Al Eliminar una Encuesta, se eliminarán las entradas(Preguntas) relacionada a la misma.</i>
+@endsection
+
 @section('javascript')
 <script type="text/javascript">
 $(document).ready(function(){
