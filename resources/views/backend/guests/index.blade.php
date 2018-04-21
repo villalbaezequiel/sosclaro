@@ -31,7 +31,7 @@
         <tr>
             <td>{{ $guest->id }}</td>
             <td>{{ $guest->name }}</td>
-            <td></td>
+            <td>{{ \App\Guest::getCountQuestions($guest->id) }}</td>
             <td>{{ $guest->puntos }}</td>
             <td>{{ \App\Functions::getActive($guest->active) }}</td>
             <td>
