@@ -30,6 +30,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('/roles', 'Backend\RolesController');
         Route::resource('/itec', 'Backend\ItecController');
         Route::resource('/regions', 'Backend\RegionsController');
+        Route::resource('/indicadores', 'Backend\IndicadoresController');
         Route::resource('/locations', 'Backend\LocationsController');
         Route::resource('/categories', 'Backend\CategoriesController');
         Route::resource('/products', 'Backend\ProductsController');
