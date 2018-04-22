@@ -52,6 +52,9 @@
                     <li>
                         <a href="{{ url('/admin/guests/questions') }}">Preguntas de Encuestas</a>
                     </li>
+                    <li>
+                        <a href="{{ url('/admin/guests/users') }}">Completas por Usuarios</a>
+                    </li>
                 </ul>
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right">

@@ -36,6 +36,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('/products', 'Backend\ProductsController');
         Route::resource('/tips/categories', 'Backend\TipsCategoriesController');
         Route::resource('/tips', 'Backend\TipsController');
+        Route::resource('/guests/users', 'Backend\GuestUsersController');
         Route::resource('/guests/questions', 'Backend\GuestQuestionsController');
         Route::resource('/guests', 'Backend\GuestsController');
         
