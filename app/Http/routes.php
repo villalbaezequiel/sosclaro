@@ -47,4 +47,16 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('/settings/emails', 'Backend\EmailsController');
         
     });
+  
+    Route::group(['prefix' => 'api'], function() {
+        Route::group(['namespace' => 'Api'], function() {
+            
+            Route::resource('employees', 'EmployeesController');
+            Route::get(
+                'employees/{employee_id}/orders', [
+                'as' => 'employees.orders',
+                'uses' => 'EmployeesController@getOrdersByEmployee'
+            ]);
+        });
+    });
 });
