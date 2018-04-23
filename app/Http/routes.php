@@ -52,6 +52,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::group(['namespace' => 'Api'], function() {
             
             Route::resource('employees', 'EmployeesController');
+            Route::resource('users', 'UsersController');
+            
             Route::get(
                 'employees/{employee_id}/orders', [
                 'as' => 'employees.orders',
