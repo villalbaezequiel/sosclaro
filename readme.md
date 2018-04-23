@@ -25,3 +25,22 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+
+
+## JSON API
+
+Sobre vendor\nilportugues\laravel5-json-api\src\NilPortugues\Laravel5\JsonApi\Providers\Laravel52Provider.php, sobre escribir la function calculateRoute() por
+´    protected function calculateRoute(array $value)
+    {
+        $router = Container::getInstance()->make('url');
+        $route = '';
+
+        /** @var \Illuminate\Routing\Route $routerObject */
+        foreach ($this->getRouterCollection($router) as $routerObject) {
+            if ($routerObject->getName() === $value['name']) {
+                $route = $routerObject->getPath();
+
+                return $this->calculateFullPath($value, $route);
+            }
+        }
+    }´

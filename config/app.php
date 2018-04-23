@@ -158,6 +158,7 @@ return [
         
         Collective\Html\HtmlServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
+        NilPortugues\Laravel5\JsonApi\Laravel5JsonApiServiceProvider::class
 
     ],
 
