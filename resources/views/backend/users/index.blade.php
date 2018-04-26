@@ -11,7 +11,7 @@
 @endsection
 
 @section('nav-button')
-<a class="btn btn-primary mb-3" href="{{ url('/admin/users/create') }}">Nuevo Usuario</a>
+<a class="btn btn-primary mb-3" href="{{ url('/admin/users/create') }}">Exportar Usuarios</a>
 @endsection
 
 @section('content')
@@ -20,7 +20,7 @@
         <tr>
             <th>Nombre</th>
             <th>Email</th>
-            <th>Role</th>
+            <th>Puntos</th>
             <th>Activo</th>
             <th>Acciones</th>
         </tr>
@@ -30,7 +30,7 @@
         <tr>
             <td>{{ $user->name }}</td>
             <td>{{ $user->email }}</td>
-            <td>{{ $user->id_role }}</td>
+            <td>{{ \App\Dni::getPuntos($user->id) }}</td>
             <td>
                 {!! Form::open(['route' => ['admin.users.destroy', $user->id], 'method' => 'DELETE']) !!}
                     <a href="{{ url('/admin/users/'.$user->id.'/edit') }}" class="btn btn-outline-primary">Editar</a>
