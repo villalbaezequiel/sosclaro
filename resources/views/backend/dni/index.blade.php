@@ -30,7 +30,7 @@
         <tr>
             <td>{{ $dni->id }}</td>
             <td>{{ $dni->dni }}</td>
-            <td>{{ $dni->indicador }}</td>
+            <td>{{ \App\Indicadores::getNameJson($dni->indicador) }}</td>
             <td>{{ $dni->puntos }}</td>
             <td>
                 @if($dni->id_user == 0) 

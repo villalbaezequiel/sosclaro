@@ -97,4 +97,10 @@ class DniController extends Controller
             return \Response::json($respuesta);
 	} 
     }
+    
+    public function show($id){
+        return view('backend.dni.show', [
+            'dni' => Dni::find($id)
+        ]);
+    }
 }
