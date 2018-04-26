@@ -28,6 +28,11 @@
         <textarea class="form-control" name="description_product" rows="3" required>{{ $product->description }}</textarea>
     </div>
 
+    <div class="form-group">
+        <label>Politica Legal del Producto:</label>
+        <textarea class="form-control" name="politica_legal_product" rows="3" required>{{ $product->politica_legal }}</textarea>
+    </div>
+
     <div class="custom-file">
         <input type="hidden" class="custom-file-input" name="imagen_product_old" value="{{ $product->image }}">
         

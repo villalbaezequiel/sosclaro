@@ -28,6 +28,11 @@
         <textarea class="form-control" name="description_product" rows="3" required></textarea>
     </div>
 
+    <div class="form-group">
+        <label>Politica Legal del Producto:</label>
+        <textarea class="form-control" name="politica_legal_product" rows="3" required></textarea>
+    </div>
+
     <div class="custom-file">
         <input type="file" class="custom-file-input" id="imagen_product" name="imagen_product" required>
         <label class="custom-file-label" for="imagen_product">Imagén</label>

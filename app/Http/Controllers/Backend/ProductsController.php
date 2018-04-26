@@ -54,6 +54,7 @@ class ProductsController extends Controller
             $product->id_category = $request->get('id_category');
             $product->name = $request->get('name_product');
             $product->description = $request->get('description_product');
+            $product->politica_legal = $request->get('politica_legal_product');
             $product->image = $imagen_product->getClientOriginalName();
             $product->price = $request->get('price_product');
             $product->stock = $request->get('stock_product');
@@ -134,6 +135,7 @@ class ProductsController extends Controller
             $product->id_category = $request->get('id_category');
             $product->name = $request->get('name_product');
             $product->description = $request->get('description_product');
+            $product->politica_legal = $request->get('politica_legal_product');
             $product->image = ($request->hasFile('imagen_product') ? $imagen_product->getClientOriginalName() : $request->get('imagen_product_old'));
             $product->price = $request->get('price_product');
             $product->stock = $request->get('stock_product');

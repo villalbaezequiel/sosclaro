@@ -18,6 +18,7 @@ class Products extends Migration
             $table->integer('id_category');
             $table->string('name');
             $table->string('description', 2500);
+            $table->string('politica_legal', 5000);
             $table->string('image');
             $table->integer('price');
             $table->integer('stock');
