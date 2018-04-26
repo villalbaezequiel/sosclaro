@@ -7,6 +7,11 @@
         <label>Nombre Producto:</label>
         <input type="text" class="form-control" name="name_product" placeholder="Nombre Producto" required>
     </div>
+    
+    <div class="form-group">
+        <label>Codigo Producto:</label>
+        <input type="text" class="form-control" name="codigo_product" placeholder="Codigo Producto" required>
+    </div>
 
     <div class="form-group">
         <label>Categoría:</label>

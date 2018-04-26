@@ -9,6 +9,11 @@
     </div>
 
     <div class="form-group">
+        <label>Codigo Producto:</label>
+        <input type="text" class="form-control" name="codigo_product" value="{{ $product->codigo }}" placeholder="Nombre Producto" required>
+    </div>
+
+    <div class="form-group">
         <label>Categoría:</label>
         <select class="form-control" name="id_category" required>
             <option value="">Seleccionar...</option>
