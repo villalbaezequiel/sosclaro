@@ -12,11 +12,13 @@ class Itec extends Migration
      */
     public function up()
     {
-        Schema::create('itec', function (Blueprint $table) {
+        Schema::create('dni', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('itec');
-            $table->string('indicador');
+            $table->string('dni');
+            $table->string('name');
+            $table->string('last_name');
             $table->string('puntos');
+            $table->string('indicador');
             $table->integer('id_user');
             $table->timestamps();
         });
@@ -29,6 +31,6 @@ class Itec extends Migration
      */
     public function down()
     {
-        Schema::drop('itec');
+        Schema::drop('dni');
     }
 }

@@ -76,7 +76,7 @@
                 </a>
                 <ul class="sidenav-second-level collapse" id="nav_users">
                     <li>
-                        <a href="{{ url('/admin/itec') }}">ITEC</a>
+                        <a href="{{ url('/admin/dni') }}">DNI</a>
                     </li>
                     <li>
                         <a href="{{ url('/admin/users') }}">Usuarios</a>

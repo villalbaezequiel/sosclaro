@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Itec extends Model
+class Dni extends Model
 {
-    protected $table = 'itec';
+    protected $table = 'dni';
 }
