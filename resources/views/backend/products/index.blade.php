@@ -20,6 +20,7 @@
         <tr>
             <th>#</th>
             <th>Nombre</th>
+            <th>Codigo</th>
             <th>Categoría</th>
             <th>Stock</th>
             <th>Precio</th>
@@ -32,6 +33,7 @@
         <tr>
             <td>{{ $product->id }}</td>
             <td>{{ $product->name }}</td>
+            <td>{{ $product->codigo }}</td>
             <td>{{ \App\Categories::getNameCategory($product->id_category) }}</td>
             <td>{{ $product->stock }}</td>
             <td>{{ $product->price }}</td>

@@ -50,7 +50,7 @@ class ProductsController extends Controller
             $imagen_product = $request->file('imagen_product');
             
             $product = new Products;
-            $product->codigo = $request->get('codigo');
+            $product->codigo = $request->get('codigo_product');
             $product->id_category = $request->get('id_category');
             $product->name = $request->get('name_product');
             $product->description = $request->get('description_product');
@@ -131,7 +131,7 @@ class ProductsController extends Controller
             }
                 
             $product = Products::find($id);
-            $product->codigo = $request->get('codigo');
+            $product->codigo = $request->get('codigo_product');
             $product->id_category = $request->get('id_category');
             $product->name = $request->get('name_product');
             $product->description = $request->get('description_product');
