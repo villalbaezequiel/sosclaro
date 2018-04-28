@@ -18,6 +18,7 @@
 <table class="table table-bordered" id="list_users" width="100%" cellspacing="0">
     <thead>
         <tr>
+            <th>#DNI</th>
             <th>Nombre</th>
             <th>Email</th>
             <th>Puntos</th>
@@ -28,9 +29,11 @@
     <tbody>
         @foreach($users as $user)
         <tr>
-            <td>{{ $user->name }}</td>
+            <td>{{ \App\Dni::getDni($user->id) }}</td>
+            <td>{{ \App\User::getName($user->id) }}</td>
             <td>{{ $user->email }}</td>
             <td>{{ \App\Dni::getPuntos($user->id) }}</td>
+            <td>{{ \App\Functions::getActive($user->active) }}</td>
             <td>
                 {!! Form::open(['route' => ['admin.users.destroy', $user->id], 'method' => 'DELETE']) !!}
                     <a href="{{ url('/admin/users/'.$user->id.'/edit') }}" class="btn btn-outline-primary">Editar</a>

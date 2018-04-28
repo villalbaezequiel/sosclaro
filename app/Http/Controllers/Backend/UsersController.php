@@ -8,6 +8,11 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Functions;
 use App\User;
+use App\UsersProfile;
+use App\Dni;
+use App\Cities;
+use App\Regions;
+use App\Indicadores;
 
 class UsersController extends Controller
 {
@@ -30,7 +35,7 @@ class UsersController extends Controller
      */
     public function create()
     {
-        return view('backend.users.create');
+        //
     }
 
     /**
@@ -63,7 +68,14 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('backend.users.edit', [
+            'user' => User::find($id),
+            'user_profile' => UsersProfile::where('id_user', '=', $id)->get(),
+            'user_dni' => Dni::where('id_user', '=', $id)->get(),
+            'cities' => Cities::all(),
+            'regions' => Regions::all(),
+            'indicadores' => Indicadores::all()
+        ]);
     }
 
     /**
@@ -75,7 +87,41 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $message;
+        try {
+            
+            $user = User::find($id);
+            $user->name = $request->get('name_user');    
+            $user->email = $request->get('email_user');    
+            $user->active = $request->get('active_user');    
+            $user->save();    
+            
+            $user_profile = UsersProfile::find($request->get('id_user_profile'));
+            $user_profile->id_city = $request->get('city_user_profile');    
+            $user_profile->id_region = $request->get('region_user_profile');    
+            $user_profile->telephone = $request->get('telephone_user_profile');    
+            $user_profile->telephone_other = $request->get('telephone_other_user_profile');    
+            $user_profile->address = $request->get('address_user_profile');    
+            $user_profile->save();    
+                       
+            $message = "Usuario Alias: ".$request->get('name_user')." editado con exito! DNI: ". $request->get('dni');
+            
+            return redirect('/admin/users')->with('message', $message);
+        
+        } catch(\Exception $e) {
+
+            if(\Config::get('app.debug'))
+                    $message = 'ERROR('.$e->getLine().'): '.$e->getMessage();
+            else
+                    $message = 'Se ha producido un error. Por favor intente nuevamente.';
+
+            $respuesta = array(
+                    'estado' => false,
+                    'mensaje' => $message
+            );
+
+            return \Response::json($respuesta);
+	}
     }
 
     /**

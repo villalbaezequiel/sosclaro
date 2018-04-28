@@ -16,14 +16,12 @@ class UsersProfile extends Migration
             $table->increments('id');
             $table->integer('id_user');
             $table->integer('id_city');
+            $table->integer('id_region');
+            $table->integer('id_role');
             $table->string('avatar');
-            $table->string('name');
-            $table->string('lastname');
-            $table->string('dni');
             $table->string('telephone');
             $table->string('telephone_other');
             $table->string('address');
-            $table->string('address_other');
             $table->timestamps();
         });
     }
