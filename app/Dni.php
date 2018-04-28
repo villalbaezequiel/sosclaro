@@ -13,4 +13,9 @@ class Dni extends Model
         $puntos = Dni::find($id);
         return $puntos->puntos;
     }
+    
+    static public function getDni($id) {
+        $dni = Dni::where('id', '=', $id)->get();
+        return $dni[0]->dni;
+    }
 }
