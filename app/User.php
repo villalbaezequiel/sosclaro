@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\User;
+use App\Dni;
 
 class User extends Authenticatable
 {
@@ -12,10 +13,11 @@ class User extends Authenticatable
      *
      * @var array
      */
+    protected $table = "users";
     protected $fillable = [
         'name', 'email', 'password',
     ];
-
+        
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -26,7 +28,12 @@ class User extends Authenticatable
     ];
     
     static function getName($id) {
-        $user = User::find($id);
-        return $user->name;
+        $user = Dni::find($id);
+        return $user->name." ".$user->last_name;
+    }
+    
+    public function latestUsersProfile()
+    {
+        return $this->hasMany(UsersProfile::class, 'id_user')->limit(10);
     }
 }
