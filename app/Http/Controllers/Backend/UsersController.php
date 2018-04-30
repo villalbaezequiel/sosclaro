@@ -51,7 +51,7 @@ class UsersController extends Controller
         $active = $request->get('active_users');
         Excel::create('export_users_'.$timestamp, function($excel) {
  
-            $excel->sheet('Productos', function($sheet) {
+            $excel->sheet('Usuarios', function($sheet) {
  
                 //hacer join con datos de model DNI y UsersProfile
                 //$users = User::where('active', '=',$active)->get();
