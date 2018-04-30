@@ -110,13 +110,15 @@ class UsersController extends Controller
             $user->active = $request->get('active_user');    
             $user->save();    
             
-            $user_profile = UsersProfile::find($request->get('id_user_profile'));
-            $user_profile->id_city = $request->get('city_user_profile');    
-            $user_profile->id_region = $request->get('region_user_profile');    
-            $user_profile->telephone = $request->get('telephone_user_profile');    
-            $user_profile->telephone_other = $request->get('telephone_other_user_profile');    
-            $user_profile->address = $request->get('address_user_profile');    
-            $user_profile->save();    
+            if($request->get('id_user_profile')){
+                $user_profile = UsersProfile::find($request->get('id_user_profile'));
+                $user_profile->id_city = $request->get('city_user_profile');    
+                $user_profile->id_region = $request->get('region_user_profile');    
+                $user_profile->telephone = $request->get('telephone_user_profile');    
+                $user_profile->telephone_other = $request->get('telephone_other_user_profile');    
+                $user_profile->address = $request->get('address_user_profile');    
+                $user_profile->save();    
+            }
                        
             $message = "Usuario Alias: ".$request->get('name_user')." editado con exito! DNI: ". $request->get('dni');
             

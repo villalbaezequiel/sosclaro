@@ -30,6 +30,8 @@
 
     <!-- end table DNI -->
 
+    @if($user_profile && !empty($user_profile[0]))
+    
     <div class="form-group">
         <label>Ubicacion</label>
         <select class="form-control" name="city_user_profile" required>
@@ -62,6 +64,9 @@
         <label>Direccion</label>
         <input type="text" class="form-control" name="address_user_profile" placeholder="Direccion Usuario" value="{{ $user_profile[0]->address }}" required>
     </div>
+    <input type="hidden" name="id_user_profile" value="{{ $user_profile[0]->id }}">
+    
+    @endif
     
     <!-- end table USERS_PROFILE -->
     
@@ -85,7 +90,6 @@
      <!-- end table USERS -->
      
     <input type="hidden" name="dni" value="{{ $user_dni[0]->dni }}">
-    <input type="hidden" name="id_user_profile" value="{{ $user_profile[0]->id }}">
     <input type="hidden" name="id_user" value="{{ $user->id }}">
     
     <button type="submit" class="btn btn-primary">Editar</button>
