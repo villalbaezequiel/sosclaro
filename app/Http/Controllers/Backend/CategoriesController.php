@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Storage;
 use App\Functions;
 use App\Categories;
@@ -163,5 +164,19 @@ class CategoriesController extends Controller
         Storage::deleteDirectory('public/categories/'.$id);
         
         return redirect('/admin/categories')->with('message', 'Categoría eliminada con exito!');
+    }
+    
+    public function export()
+    {
+        $timestamp = date('Y_m_d_h_i_s');
+        Excel::create('export_categories_products_'.$timestamp, function($excel) {
+ 
+            $excel->sheet('Categorias_de_Productos', function($sheet) {
+                $categories = Categories::all();
+                $sheet->fromArray($categories);
+            });
+            
+        })->export('xls');
+        
     }
 }

@@ -27,6 +27,7 @@ Route::group(['middleware' => 'auth'], function () {
 
         //Export 
         Route::get('/products/export', 'Backend\ProductsController@export');
+        Route::get('/categories/export', 'Backend\CategoriesController@export');
         
         //ABM
         Route::resource('/users', 'Backend\UsersController');
