@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Storage;
 use App\Functions;
 use App\Products;
@@ -176,5 +177,19 @@ class ProductsController extends Controller
         Storage::deleteDirectory('public/products/'.$id);
         
         return redirect('/admin/products')->with('message', 'Producto eliminado con exito!');
+    }
+    
+    public function export()
+    {
+        $timestamp = date('Y_m_d_h_i_s');
+        Excel::create('export_products_'.$timestamp, function($excel) {
+ 
+            $excel->sheet('Productos', function($sheet) {
+                $products = Products::all();
+                $sheet->fromArray($products);
+            });
+            
+        })->export('xls');
+        
     }
 }

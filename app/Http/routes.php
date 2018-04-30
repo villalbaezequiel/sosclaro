@@ -24,6 +24,9 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/locations/getRegions', 'Backend\LocationsController@getRegions');
         Route::get('/locations/getProvinces/{id}', 'Backend\LocationsController@getProvinces');
         Route::get('/locations/getCities/{id}', 'Backend\LocationsController@getCities');
+
+        //Export 
+        Route::get('/products/export', 'Backend\ProductsController@export');
         
         //ABM
         Route::resource('/users', 'Backend\UsersController');
