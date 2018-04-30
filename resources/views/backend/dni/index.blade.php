@@ -36,7 +36,7 @@
                 @if($dni->id_user == 0) 
                     No hay usuario relacionado/registrado 
                 @else
-                    {{ \App\User::getName($dni->id_user) }}
+                    {{ \App\Dni::getName($dni->id_user) }}
                 @endif
             </td>
         </tr>
