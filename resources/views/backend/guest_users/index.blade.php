@@ -11,7 +11,7 @@
 @endsection
 
 @section('nav-button')
-<a class="btn btn-primary mb-3" href="{{ url('/admin/guests/users/export/all') }}">Exportar Encuestas Completas por Usuarios</a>
+<a class="btn btn-primary mb-3" href="{{ url('/admin/guests/users/export') }}">Exportar Encuestas Completas por Usuarios</a>
 @endsection
 
 @section('content')
@@ -29,7 +29,7 @@
         <tr>
             <td>{{ $guest_user->id }}</td>
             <td>{{ \App\Guest::getNameGuest($guest_user->id_guest) }}</td>
-            <td>{{ \App\User::getName($guest_user->id_user) }}</td>
+            <td>{{ \App\Dni::getName($guest_user->id_user) }}</td>
             <td>
                 <a href="{{ url('/admin/guests/users/'.$guest_user->id ) }}" class="btn btn-outline-primary" style="width: 100%">Ver</a>
             </td>

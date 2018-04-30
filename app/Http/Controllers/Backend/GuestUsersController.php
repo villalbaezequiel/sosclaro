@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Maatwebsite\Excel\Facades\Excel;
 use App\GuestUsers;
 use App\Guest;
 use App\User;
@@ -97,11 +98,17 @@ class GuestUsersController extends Controller
         //
     }
     
-    public function exportAll() {
-        
+    public function export()
+    {
+        $timestamp = date('Y_m_d_h_i_s');
+        Excel::create('export_guest_users'.$timestamp, function($excel) {
+ 
+            $excel->sheet('Encuestas_por_Usuarios', function($sheet) {
+                $guest_users = GuestUsers::all();
+                $sheet->fromArray($guest_users);
+            });
+            
+        })->export('xls');
     }
     
-    public function exportForUserGuest($id) {
-        
-    }
 }
