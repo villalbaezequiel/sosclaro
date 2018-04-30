@@ -110,12 +110,12 @@
                     <li>
                         <a href="{{ url('/admin/settings/politics_privacy') }}">Politica y Privacidad</a>
                     </li>
-                    <li>
+<!--                    <li>
                         <a href="{{ url('/admin/settings/legal_products') }}">Legales de Productos</a>
                     </li>
                     <li>
                         <a href="cards.html">Modals</a>
-                    </li>
+                    </li>-->
                 </ul>
             </li>
         </ul>
@@ -131,7 +131,7 @@
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
                 <a href="{{ url('/logout') }}" class="nav-link">
-                    <i class="fa fa-fw fa-sign-out"></i>Logout
+                    <i class="fa fa-fw fa-sign-out"></i>Cerrar Seción
                 </a>
             </li>
         </ul>
