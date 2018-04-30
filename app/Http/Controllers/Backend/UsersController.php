@@ -130,8 +130,19 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request ,$id)
     {
-        //
+        $user = User::find($id);
+        $user->delete();
+    
+        if($request->get('id_user_profile')){
+            $user_profile = UsersProfile::find($request->get('id_user_profile'));
+            $user_profile->delete();
+        }
+    
+        Dni::setIdUser($request->get('id_dni'));
+        
+     
+        return redirect('/admin/users')->with('message', 'Usuario eliminada con exito!');
     }
 }
