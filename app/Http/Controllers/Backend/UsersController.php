@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Maatwebsite\Excel\Facades\Excel;
 use App\Functions;
 use App\User;
 use App\UsersProfile;
@@ -35,7 +36,7 @@ class UsersController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.users.create');
     }
 
     /**
@@ -46,7 +47,20 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $timestamp = date('Y_m_d_h_i_s');
+        $active = $request->get('active_users');
+        Excel::create('export_users_'.$timestamp, function($excel) {
+ 
+            $excel->sheet('Productos', function($sheet) {
+ 
+                //hacer join con datos de model DNI y UsersProfile
+                //$users = User::where('active', '=',$active)->get();
+                $users = User::all();
+                $sheet->fromArray($users);
+ 
+            });
+            
+        })->export('xls');
     }
 
     /**
