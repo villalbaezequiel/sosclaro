@@ -1,7 +1,7 @@
 <header class="header">
     <div class="container">
         <hgroup class="brand">
-            <a class="brand-link" href="dashboard.html">
+            <a class="brand-link" href="{{ url('/dashboard') }}">
                 <img class="brand-logo" src="{{ asset('assets/frontend/img/logo-black.png') }}" alt="SOS CLARO">
             </a>
         </hgroup>
@@ -39,7 +39,7 @@
                                 <a class="dropdown-item" href="usuario-historial.html">Historial de cuenta</a>
                                 <a class="dropdown-item" href="usuario-cuenta.html">Mi cuenta</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="index.html">Salir</a>
+                                <a class="dropdown-item" href="{{ url('/auth/logout') }}">Salir</a>
                             </div>
                         </div>
                     </li>
