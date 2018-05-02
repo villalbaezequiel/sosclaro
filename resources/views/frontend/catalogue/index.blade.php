@@ -29,7 +29,7 @@
         </hgroup>
         <article class="section-content" id="catalogo">
             <div class="producto">
-                <a class="card" href="{{ url('//catalogo/producto') }}">
+                <a class="card" href="{{ url('/catalogo/producto') }}">
                     <img class="card-img-top" src="http://via.placeholder.com/640x480" alt="Card image cap">
                     <div class="card-body">
                         <h5 class="card-title">Nombre del Producto</h5>
