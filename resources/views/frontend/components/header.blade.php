@@ -1,8 +1,50 @@
-<?php
-
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
+<header class="header">
+    <div class="container">
+        <hgroup class="brand">
+            <a class="brand-link" href="dashboard.html">
+                <img class="brand-logo" src="{{ asset('assets/frontend/img/logo-black.png') }}" alt="SOS CLARO">
+            </a>
+        </hgroup>
+        <nav class="nav" role="navigation">
+            <div class="nav-toggle">
+                <a href="#">
+                    <i class="fa fa-bars" aria-hidden="true"></i>
+                </a>
+            </div>
+            <div class="nav-menu">
+                <ul class="nav-main">
+                    <li class="nav-item">
+                        <a href="catalogo.html">Catálogo</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="desempeno.html">Desempeño</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="ranking.html">Ranking</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="consejos.html">Consejos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="encuestas.html">Encuestas</a>
+                    </li>
+                </ul>
+                <ul class="nav-social">
+                    <li class="nav-item">
+                        <div class="dropdown">
+                            <button class="btn btn-black dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Lucas</button>
+                            <span class="badge badge-danger">120 puntos</span>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="usuario-canjes.html">Mis canjes</a>
+                                <a class="dropdown-item" href="usuario-historial.html">Historial de cuenta</a>
+                                <a class="dropdown-item" href="usuario-cuenta.html">Mi cuenta</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="index.html">Salir</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+</header>
