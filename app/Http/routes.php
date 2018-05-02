@@ -13,7 +13,7 @@
 
 Route::auth();
 
-//admin
+//Backend
 Route::group(['middleware' => 'auth'], function () {
     //if user is admin
     Route::group(['prefix' => 'admin'], function() {
@@ -67,3 +67,13 @@ Route::group(['middleware' => 'auth'], function () {
         });
     });
 });
+
+
+//Frontend
+
+Route::get('/', 'Frontend\HomeController@index');
+
+//auth
+Route::get('/ingresar', 'Frontend\AuthController@login');
+Route::get('/registrate', 'Frontend\AuthController@register');
+Route::get('/recuperar-contrasena', 'Frontend\AuthController@passwordRecovery');
