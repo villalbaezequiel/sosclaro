@@ -14,7 +14,7 @@
             <div class="nav-menu">
                 <ul class="nav-main">
                     <li class="nav-item">
-                        <a href="catalogo.html">Catálogo</a>
+                        <a href="{{ url('/catalogo') }}">Catálogo</a>
                     </li>
                     <li class="nav-item">
                         <a href="desempeno.html">Desempeño</a>

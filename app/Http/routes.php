@@ -78,4 +78,11 @@ Route::get('/ingresar', 'Frontend\AuthController@login');
 Route::get('/registrate', 'Frontend\AuthController@register');
 Route::get('/recuperar-contrasena', 'Frontend\AuthController@passwordRecovery');
 
+//catalogue
+Route::get('/catalogo', 'Frontend\CatalogueController@index');
+Route::get('/catalogo/producto', 'Frontend\CatalogueController@product');
+Route::get('/catalogo/success', 'Frontend\CatalogueController@success');
+
+
+//dashboard
 Route::get('/dashboard', 'Frontend\DashboardController@index');
