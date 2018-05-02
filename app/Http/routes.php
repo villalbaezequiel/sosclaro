@@ -77,3 +77,5 @@ Route::get('/', 'Frontend\HomeController@index');
 Route::get('/ingresar', 'Frontend\AuthController@login');
 Route::get('/registrate', 'Frontend\AuthController@register');
 Route::get('/recuperar-contrasena', 'Frontend\AuthController@passwordRecovery');
+
+Route::get('/dashboard', 'Frontend\DashboardController@index');
