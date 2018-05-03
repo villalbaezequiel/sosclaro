@@ -28,20 +28,22 @@
     </thead>
     <tbody>
         @foreach($users as $user)
-        <tr>
-            <td>{{ \App\Dni::getDni($user->id) }}</td>
-            <td>{{ \App\Dni::getName($user->id) }}</td>
-            <td>{{ $user->email }}</td>
-            <td>{{ \App\Dni::getPuntos($user->id) }}</td>
-            <td>{{ \App\Functions::getActive($user->active) }}</td>
-            <td>
-                {!! Form::open(['route' => ['admin.users.destroy', $user->id], 'method' => 'DELETE']) !!}
-                    <a href="{{ url('/admin/users/'.$user->id.'/edit') }}" class="btn btn-outline-primary">Editar</a>
-                    <input type="hidden" name="id_user_profile" value="{{  \App\UsersProfile::getIdUser($user->id) }}">
-                    <button type="submit" class="btn btn-outline-danger">Eliminar</button>
-                {!! Form::close() !!}
-            </td>
-        </tr>
+            @if(\App\UsersProfile::getRole($user->id) == 2)
+            <tr>
+                <td>{{ \App\Dni::getDni($user->id) }}</td>
+                <td>{{ \App\Dni::getName($user->id) }}</td>
+                <td>{{ $user->email }}</td>
+                <td>{{ \App\Dni::getPuntos($user->id) }}</td>
+                <td>{{ \App\Functions::getActive($user->active) }}</td>
+                <td>
+                    {!! Form::open(['route' => ['admin.users.destroy', $user->id], 'method' => 'DELETE']) !!}
+                        <a href="{{ url('/admin/users/'.$user->id.'/edit') }}" class="btn btn-outline-primary">Editar</a>
+                        <input type="hidden" name="id_user_profile" value="{{  \App\UsersProfile::getIdUser($user->id) }}">
+                        <button type="submit" class="btn btn-outline-danger">Eliminar</button>
+                    {!! Form::close() !!}
+                </td>
+            </tr>
+            @endif
         @endforeach
     </tbody>
 </table>
