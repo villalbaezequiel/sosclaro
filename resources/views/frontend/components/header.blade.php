@@ -35,9 +35,9 @@
                             <button class="btn btn-black dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Lucas</button>
                             <span class="badge badge-danger">120 puntos</span>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="usuario-canjes.html">Mis canjes</a>
-                                <a class="dropdown-item" href="usuario-historial.html">Historial de cuenta</a>
-                                <a class="dropdown-item" href="usuario-cuenta.html">Mi cuenta</a>
+                                <a class="dropdown-item" href="{{ url('/usuario/canjes') }}">Mis canjes</a>
+                                <a class="dropdown-item" href="{{ url('/usuario/historial') }}">Historial de cuenta</a>
+                                <a class="dropdown-item" href="{{ url('/usuario/mi-cuenta') }}">Mi cuenta</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="{{ url('/auth/logout') }}">Salir</a>
                             </div>

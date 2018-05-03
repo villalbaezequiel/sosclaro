@@ -81,6 +81,12 @@ Route::get('/ingresar', 'Frontend\AuthController@login');
 Route::get('/registrate', 'Frontend\AuthController@register');
 Route::get('/recuperar-contrasena', 'Frontend\AuthController@passwordRecovery');
 
+//user
+Route::get('/usuario/mi-cuenta', 'Frontend\UserController@profile');
+Route::get('/usuario/historial', 'Frontend\UserController@history');
+Route::get('/usuario/canjes', 'Frontend\UserController@exchanges');
+Route::get('/usuario/canjes/1', 'Frontend\UserController@singleExchange');
+
 //catalogue
 Route::get('/catalogo', 'Frontend\CatalogueController@index');
 Route::get('/catalogo/producto/{id}', 'Frontend\CatalogueController@product');
