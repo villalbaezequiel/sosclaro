@@ -10,7 +10,7 @@
             </h1>
         </hgroup>
         <div class="content">
-            <form action="">
+            <form action="{{ url('/dashboard') }}">
                 <h3 class="title text-center">Ingresar</h3>
                 <div class="alert alert-danger" role="alert">El código y la contraseña no coinciden.</div>
                 <div class="form-group has-error">
@@ -28,7 +28,7 @@
         </div>
         <div class="actions">
             <a href="{{ url('/') }}">Volver</a> |
-            <a href="{{ url('recuperar-contrasena') }}">Recuperar contraseña</a>
+            <a href="{{ url('/recuperar-contrasena') }}">Recuperar contraseña</a>
         </div>
     </section>
 </main>
