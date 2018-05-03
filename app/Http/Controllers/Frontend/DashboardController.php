@@ -6,10 +6,13 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Products;
 
 class DashboardController extends Controller
 {
     public function index() {
-        return view('frontend.dashboard.index');
+        return view('frontend.dashboard.index', [
+            'products' => Products::where('active', '=', 1)->get()
+        ]);
     }
 }

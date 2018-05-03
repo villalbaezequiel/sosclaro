@@ -58,150 +58,20 @@
             </aside>
         </hgroup>
         <article class="section-content" id="catalogo">
-            <div class="producto">
-                <a class="card" href="catalogo-producto.html">
-                    <img class="card-img-top" src="http://via.placeholder.com/640x480" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Nombre del Producto</h5>
-                        <h6 class="card-subtitle">
-                            <span class="badge badge-danger">
-                                <span class="puntos">210</puntos> puntos</span>
-                        </h6>
-                    </div>
-                </a>
-            </div>
-            <div class="producto">
-                <a class="card" href="catalogo-producto.html">
-                    <img class="card-img-top" src="http://via.placeholder.com/640x480" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Cafetera</h5>
-                        <h6 class="card-subtitle">
-                            <span class="badge badge-danger">
-                                <span class="puntos">205</puntos> puntos</span>
-                        </h6>
-                    </div>
-                </a>
-            </div>
-            <div class="producto">
-                <a class="card" href="catalogo-producto.html">
-                    <img class="card-img-top" src="http://via.placeholder.com/640x480" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Set matero</h5>
-                        <h6 class="card-subtitle">
-                            <span class="badge badge-danger">
-                                <span class="puntos">180</puntos> puntos</span>
-                        </h6>
-                    </div>
-                </a>
-            </div>
-            <div class="producto">
-                <a class="card" href="catalogo-producto.html">
-                    <img class="card-img-top" src="http://via.placeholder.com/640x480" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Entradas a la final del mundial</h5>
-                        <h6 class="card-subtitle">
-                            <span class="badge badge-danger">
-                                <span class="puntos">170</puntos> puntos</span>
-                        </h6>
-                    </div>
-                </a>
-            </div>
-            <div class="producto">
-                <a class="card" href="catalogo-producto.html">
-                    <img class="card-img-top" src="http://via.placeholder.com/640x480" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Reloj de pared</h5>
-                        <h6 class="card-subtitle">
-                            <span class="badge badge-danger">
-                                <span class="puntos">155</puntos> puntos</span>
-                        </h6>
-                    </div>
-                </a>
-            </div>
-            <div class="producto">
-                <a class="card" href="catalogo-producto.html">
-                    <img class="card-img-top" src="http://via.placeholder.com/640x480" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Show de Abel Pintos</h5>
-                        <h6 class="card-subtitle">
-                            <span class="badge badge-danger">
-                                <span class="puntos">130</puntos> puntos</span>
-                        </h6>
-                    </div>
-                </a>
-            </div>
-            <div class="producto disponible">
-                <a class="card" href="catalogo-producto.html">
-                    <img class="card-img-top" src="http://via.placeholder.com/640x480" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Samsung S7 (caja)</h5>
-                        <h6 class="card-subtitle">
-                            <span class="badge badge-danger">
-                                <span class="puntos">110</puntos> puntos</span>
-                        </h6>
-                    </div>
-                </a>
-            </div>
-            <div class="producto disponible">
-                <a class="card" href="catalogo-producto.html">
-                    <img class="card-img-top" src="http://via.placeholder.com/640x480" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">iPhone 10 (caja)</h5>
-                        <h6 class="card-subtitle">
-                            <span class="badge badge-danger">
-                                <span class="puntos">90</puntos> puntos</span>
-                        </h6>
-                    </div>
-                </a>
-            </div>
-            <div class="producto disponible">
-                <a class="card" href="catalogo-producto.html">
-                    <img class="card-img-top" src="http://via.placeholder.com/640x480" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Gorra</h5>
-                        <h6 class="card-subtitle">
-                            <span class="badge badge-danger">
-                                <span class="puntos">80</puntos> puntos</span>
-                        </h6>
-                    </div>
-                </a>
-            </div>
-            <div class="producto disponible">
-                <a class="card" href="catalogo-producto.html">
-                    <img class="card-img-top" src="http://via.placeholder.com/640x480" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Pelota de fútbol</h5>
-                        <h6 class="card-subtitle">
-                            <span class="badge badge-danger">
-                                <span class="puntos">75</puntos> puntos</span>
-                        </h6>
-                    </div>
-                </a>
-            </div>
-            <div class="producto disponible">
-                <a class="card" href="catalogo-producto.html">
-                    <img class="card-img-top" src="http://via.placeholder.com/640x480" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Parasol</h5>
-                        <h6 class="card-subtitle">
-                            <span class="badge badge-danger">
-                                <span class="puntos">70</puntos> puntos</span>
-                        </h6>
-                    </div>
-                </a>
-            </div>
-            <div class="producto disponible">
-                <a class="card" href="catalogo-producto.html">
-                    <img class="card-img-top" src="http://via.placeholder.com/640x480" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Paragua</h5>
-                        <h6 class="card-subtitle">
-                            <span class="badge badge-danger">
-                                <span class="puntos">65</puntos> puntos</span>
-                        </h6>
-                    </div>
-                </a>
-            </div>
+            @foreach($products as $product)            
+                <div class="producto">
+                    <a class="card" href="{{ url('/catalogo/producto/'.$product->id) }}">
+                        <img class="card-img-top" src="http://via.placeholder.com/640x480" alt="{{ $product->name }}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ $product->name }}</h5>
+                            <h6 class="card-subtitle">
+                                <span class="badge badge-danger">
+                                    <span class="puntos">{{ $product->price }}</puntos> puntos</span>
+                            </h6>
+                        </div>
+                    </a>
+                </div>
+            @endforeach
         </article>
     </section>
 </main>
