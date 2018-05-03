@@ -92,6 +92,8 @@ Route::get('/catalogo', 'Frontend\CatalogueController@index');
 Route::get('/catalogo/producto/{id}', 'Frontend\CatalogueController@product');
 Route::get('/catalogo/success', 'Frontend\CatalogueController@success');
 
+//desempeño
+Route::get('/desempeno', 'Frontend\DesempenoController@index');
 
 //dashboard
 Route::get('/dashboard', 'Frontend\DashboardController@index');
