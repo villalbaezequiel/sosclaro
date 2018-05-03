@@ -20,7 +20,7 @@
                         <a href="{{ url('/desempeno') }}">Desempeño</a>
                     </li>
                     <li class="nav-item">
-                        <a href="ranking.html">Ranking</a>
+                        <a href="{{ url('/ranking') }}">Ranking</a>
                     </li>
                     <li class="nav-item">
                         <a href="consejos.html">Consejos</a>

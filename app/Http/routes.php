@@ -95,5 +95,8 @@ Route::get('/catalogo/success', 'Frontend\CatalogueController@success');
 //desempeño
 Route::get('/desempeno', 'Frontend\DesempenoController@index');
 
+//ranking
+Route::get('/ranking', 'Frontend\RankingController@index');
+
 //dashboard
 Route::get('/dashboard', 'Frontend\DashboardController@index');
