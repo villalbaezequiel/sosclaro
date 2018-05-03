@@ -22,4 +22,20 @@ class UsersProfile extends Model
         }
     }
     
+    static public function getCountUsersRole($id_role) {
+        $countUsers = UsersProfile::where('id_role', '=', $id_role)->count();
+        if($countUsers == 0){
+            return "No hay Usuarios Asociados.";
+        } else {
+            return $countUsers;
+        }
+    }
+    
+    static public function getRole($id_user) {
+        $role = UsersProfile::where('id_user', '=', $id_user)->get();
+        if(!empty($role[0])){
+            return $role[0]->id_role;
+        }
+    }
+    
 }
