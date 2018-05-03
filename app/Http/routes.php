@@ -18,7 +18,10 @@ Route::group(['middleware' => 'auth'], function () {
     //if user is admin
     Route::group(['prefix' => 'admin'], function() {
         
-        Route::get('/', 'Backend\AdminController@index');
+        //Route::get('/', 'Backend\AdminController@index');
+        Route::get('/', function(){
+            return redirect('/admin/products');
+        });
 
         //peticiones AJAX
         Route::get('/locations/getRegions', 'Backend\LocationsController@getRegions');
