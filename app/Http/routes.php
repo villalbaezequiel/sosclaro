@@ -80,7 +80,7 @@ Route::get('/recuperar-contrasena', 'Frontend\AuthController@passwordRecovery');
 
 //catalogue
 Route::get('/catalogo', 'Frontend\CatalogueController@index');
-Route::get('/catalogo/producto', 'Frontend\CatalogueController@product');
+Route::get('/catalogo/producto/{id}', 'Frontend\CatalogueController@product');
 Route::get('/catalogo/success', 'Frontend\CatalogueController@success');
 
 
