@@ -1,5 +1,6 @@
-@extends('layouts.auth')
+@extends('layouts.frontend')
 
+@section('title', "Recuperar contraseña")
 @section('content')
 <div class="container">
     <div class="row">

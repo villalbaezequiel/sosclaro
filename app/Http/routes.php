@@ -13,49 +13,72 @@
 
 Route::auth();
 
-//Backend
 Route::group(['middleware' => 'auth'], function () {
-    //if user is admin
-    Route::group(['prefix' => 'admin'], function() {
-        
-        //Route::get('/', 'Backend\AdminController@index');
-        Route::get('/', function(){
-            return redirect('/admin/products');
+    
+    //BACKEND
+        Route::group(['prefix' => 'admin'], function() {
+
+            //Route::get('/', 'Backend\AdminController@index');
+            Route::get('/', function(){
+                return redirect('/admin/products');
+            });
+
+            //peticiones AJAX
+            Route::get('/locations/getRegions', 'Backend\LocationsController@getRegions');
+            Route::get('/locations/getProvinces/{id}', 'Backend\LocationsController@getProvinces');
+            Route::get('/locations/getCities/{id}', 'Backend\LocationsController@getCities');
+
+            //Export 
+            Route::get('/products/export', 'Backend\ProductsController@export');
+            Route::get('/categories/export', 'Backend\CategoriesController@export');
+            Route::get('/guests/users/export', 'Backend\GuestUsersController@export');
+
+            //ABM
+            Route::resource('/users', 'Backend\UsersController');
+            Route::resource('/roles', 'Backend\RolesController');
+            Route::resource('/dni', 'Backend\DniController');
+            Route::resource('/regions', 'Backend\RegionsController');
+            Route::resource('/indicadores', 'Backend\IndicadoresController');
+            Route::resource('/locations', 'Backend\LocationsController');
+            Route::resource('/categories', 'Backend\CategoriesController');
+            Route::resource('/products', 'Backend\ProductsController');
+            Route::resource('/tips/categories', 'Backend\TipsCategoriesController');
+            Route::resource('/tips', 'Backend\TipsController');
+            Route::resource('/guests/users', 'Backend\GuestUsersController');
+            Route::resource('/guests/questions', 'Backend\GuestQuestionsController');
+            Route::resource('/guests', 'Backend\GuestsController');
+
+            //Settings
+            Route::resource('/settings/politics_privacy', 'Backend\PoliticsPrivacyController');
+            Route::resource('/settings/legal_products', 'Backend\LegalProductsController');
+            Route::resource('/settings/social_networks', 'Backend\SocialNetworksController');
+            Route::resource('/settings/emails', 'Backend\EmailsController');
+
         });
+    
+    //FRONTEND
+    //user
+    Route::get('/usuario/mi-cuenta', 'Frontend\UserController@profile');
+    Route::get('/usuario/historial', 'Frontend\UserController@history');
+    Route::get('/usuario/canjes', 'Frontend\UserController@exchanges');
+    Route::get('/usuario/canjes/1', 'Frontend\UserController@singleExchange');
 
-        //peticiones AJAX
-        Route::get('/locations/getRegions', 'Backend\LocationsController@getRegions');
-        Route::get('/locations/getProvinces/{id}', 'Backend\LocationsController@getProvinces');
-        Route::get('/locations/getCities/{id}', 'Backend\LocationsController@getCities');
+    //catalogue
+    Route::get('/catalogo', 'Frontend\CatalogueController@index');
+    Route::get('/catalogo/producto/{id}', 'Frontend\CatalogueController@product');
+    Route::get('/catalogo/success', 'Frontend\CatalogueController@success');
 
-        //Export 
-        Route::get('/products/export', 'Backend\ProductsController@export');
-        Route::get('/categories/export', 'Backend\CategoriesController@export');
-        Route::get('/guests/users/export', 'Backend\GuestUsersController@export');
-        
-        //ABM
-        Route::resource('/users', 'Backend\UsersController');
-        Route::resource('/roles', 'Backend\RolesController');
-        Route::resource('/dni', 'Backend\DniController');
-        Route::resource('/regions', 'Backend\RegionsController');
-        Route::resource('/indicadores', 'Backend\IndicadoresController');
-        Route::resource('/locations', 'Backend\LocationsController');
-        Route::resource('/categories', 'Backend\CategoriesController');
-        Route::resource('/products', 'Backend\ProductsController');
-        Route::resource('/tips/categories', 'Backend\TipsCategoriesController');
-        Route::resource('/tips', 'Backend\TipsController');
-        Route::resource('/guests/users', 'Backend\GuestUsersController');
-        Route::resource('/guests/questions', 'Backend\GuestQuestionsController');
-        Route::resource('/guests', 'Backend\GuestsController');
-        
-        //Settings
-        Route::resource('/settings/politics_privacy', 'Backend\PoliticsPrivacyController');
-        Route::resource('/settings/legal_products', 'Backend\LegalProductsController');
-        Route::resource('/settings/social_networks', 'Backend\SocialNetworksController');
-        Route::resource('/settings/emails', 'Backend\EmailsController');
-        
-    });
-  
+    //desempeño
+    Route::get('/desempeno', 'Frontend\DesempenoController@index');
+
+    //ranking
+    Route::get('/ranking', 'Frontend\RankingController@index');
+
+    //dashboard
+    Route::get('/dashboard', 'Frontend\DashboardController@index');
+    
+    
+    //API
     Route::group(['prefix' => 'api'], function() {
         Route::group(['namespace' => 'Api'], function() {
             
@@ -73,30 +96,9 @@ Route::group(['middleware' => 'auth'], function () {
 
 
 //Frontend
-
+//home
 Route::get('/', 'Frontend\HomeController@index');
 
 //auth
-Route::get('/ingresar', 'Frontend\AuthController@login');
-Route::get('/registrate', 'Frontend\AuthController@register');
-Route::get('/recuperar-contrasena', 'Frontend\AuthController@passwordRecovery');
-
-//user
-Route::get('/usuario/mi-cuenta', 'Frontend\UserController@profile');
-Route::get('/usuario/historial', 'Frontend\UserController@history');
-Route::get('/usuario/canjes', 'Frontend\UserController@exchanges');
-Route::get('/usuario/canjes/1', 'Frontend\UserController@singleExchange');
-
-//catalogue
-Route::get('/catalogo', 'Frontend\CatalogueController@index');
-Route::get('/catalogo/producto/{id}', 'Frontend\CatalogueController@product');
-Route::get('/catalogo/success', 'Frontend\CatalogueController@success');
-
-//desempeño
-Route::get('/desempeno', 'Frontend\DesempenoController@index');
-
-//ranking
-Route::get('/ranking', 'Frontend\RankingController@index');
-
-//dashboard
-Route::get('/dashboard', 'Frontend\DashboardController@index');
+Route::get('/registro', 'Frontend\AuthController@indexRegister');
+Route::post('/registro/store', 'Frontend\AuthController@storeRegister');

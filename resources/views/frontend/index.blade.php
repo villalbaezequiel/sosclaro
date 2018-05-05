@@ -30,8 +30,8 @@
             </div>
         </div>
         <div class="actions">
-            <a href="{{ url('ingresar') }}" class="btn btn-block">INGRESAR</a>
-            <a href="{{ url('registrate') }}" class="btn btn-block">CREAR MI CUENTA</a>
+            <a href="{{ url('/login') }}" class="btn btn-block">INGRESAR</a>
+            <a href="{{ url('/registro') }}" class="btn btn-block">CREAR MI CUENTA</a>
         </div>
     </section>
 </main>

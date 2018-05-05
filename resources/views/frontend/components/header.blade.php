@@ -39,7 +39,7 @@
                                 <a class="dropdown-item" href="{{ url('/usuario/historial') }}">Historial de cuenta</a>
                                 <a class="dropdown-item" href="{{ url('/usuario/mi-cuenta') }}">Mi cuenta</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="{{ url('/auth/logout') }}">Salir</a>
+                                <a class="dropdown-item" href="{{ url('/logout') }}">Salir</a>
                             </div>
                         </div>
                     </li>
