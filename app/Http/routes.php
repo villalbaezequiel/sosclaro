@@ -13,50 +13,61 @@
 
 Route::auth();
 
-Route::group(['middleware' => 'auth'], function () {
+//home
+Route::get('/', 'Frontend\HomeController@index');
+
+//auth
+Route::get('/registro', 'Frontend\AuthController@indexRegister');
+Route::post('/registro/store', 'Frontend\AuthController@storeRegister');
+
+//BACKEND
+Route::group(['middleware' => ['auth', 'admin']], function () {
     
-    //BACKEND
-        Route::group(['prefix' => 'admin'], function() {
+    Route::group(['prefix' => 'admin'], function() {
 
-            //Route::get('/', 'Backend\AdminController@index');
-            Route::get('/', function(){
-                return redirect('/admin/products');
-            });
-
-            //peticiones AJAX
-            Route::get('/locations/getRegions', 'Backend\LocationsController@getRegions');
-            Route::get('/locations/getProvinces/{id}', 'Backend\LocationsController@getProvinces');
-            Route::get('/locations/getCities/{id}', 'Backend\LocationsController@getCities');
-
-            //Export 
-            Route::get('/products/export', 'Backend\ProductsController@export');
-            Route::get('/categories/export', 'Backend\CategoriesController@export');
-            Route::get('/guests/users/export', 'Backend\GuestUsersController@export');
-
-            //ABM
-            Route::resource('/users', 'Backend\UsersController');
-            Route::resource('/roles', 'Backend\RolesController');
-            Route::resource('/dni', 'Backend\DniController');
-            Route::resource('/regions', 'Backend\RegionsController');
-            Route::resource('/indicadores', 'Backend\IndicadoresController');
-            Route::resource('/locations', 'Backend\LocationsController');
-            Route::resource('/categories', 'Backend\CategoriesController');
-            Route::resource('/products', 'Backend\ProductsController');
-            Route::resource('/tips/categories', 'Backend\TipsCategoriesController');
-            Route::resource('/tips', 'Backend\TipsController');
-            Route::resource('/guests/users', 'Backend\GuestUsersController');
-            Route::resource('/guests/questions', 'Backend\GuestQuestionsController');
-            Route::resource('/guests', 'Backend\GuestsController');
-
-            //Settings
-            Route::resource('/settings/politics_privacy', 'Backend\PoliticsPrivacyController');
-            Route::resource('/settings/legal_products', 'Backend\LegalProductsController');
-            Route::resource('/settings/social_networks', 'Backend\SocialNetworksController');
-            Route::resource('/settings/emails', 'Backend\EmailsController');
-
+        //Route::get('/', 'Backend\AdminController@index');
+        Route::get('/', function(){
+            return redirect('/admin/products');
         });
+
+        //peticiones AJAX
+        Route::get('/locations/getRegions', 'Backend\LocationsController@getRegions');
+        Route::get('/locations/getProvinces/{id}', 'Backend\LocationsController@getProvinces');
+        Route::get('/locations/getCities/{id}', 'Backend\LocationsController@getCities');
+
+        //Export 
+        Route::get('/products/export', 'Backend\ProductsController@export');
+        Route::get('/categories/export', 'Backend\CategoriesController@export');
+        Route::get('/guests/users/export', 'Backend\GuestUsersController@export');
+
+        //ABM
+        Route::resource('/users', 'Backend\UsersController');
+        Route::resource('/roles', 'Backend\RolesController');
+        Route::resource('/dni', 'Backend\DniController');
+        Route::resource('/regions', 'Backend\RegionsController');
+        Route::resource('/indicadores', 'Backend\IndicadoresController');
+        Route::resource('/locations', 'Backend\LocationsController');
+        Route::resource('/categories', 'Backend\CategoriesController');
+        Route::resource('/products', 'Backend\ProductsController');
+        Route::resource('/tips/categories', 'Backend\TipsCategoriesController');
+        Route::resource('/tips', 'Backend\TipsController');
+        Route::resource('/guests/users', 'Backend\GuestUsersController');
+        Route::resource('/guests/questions', 'Backend\GuestQuestionsController');
+        Route::resource('/guests', 'Backend\GuestsController');
+
+        //Settings
+        Route::resource('/settings/politics_privacy', 'Backend\PoliticsPrivacyController');
+        Route::resource('/settings/legal_products', 'Backend\LegalProductsController');
+        Route::resource('/settings/social_networks', 'Backend\SocialNetworksController');
+        Route::resource('/settings/emails', 'Backend\EmailsController');
+
+    });
     
-    //FRONTEND
+});    
+    
+//FRONTEND
+Route::group(['middleware' => 'auth'], function () {    
+    
     //user
     Route::get('/usuario/mi-cuenta', 'Frontend\UserController@profile');
     Route::get('/usuario/historial', 'Frontend\UserController@history');
@@ -76,29 +87,21 @@ Route::group(['middleware' => 'auth'], function () {
 
     //dashboard
     Route::get('/dashboard', 'Frontend\DashboardController@index');
-    
-    
-    //API
-    Route::group(['prefix' => 'api'], function() {
-        Route::group(['namespace' => 'Api'], function() {
-            
-            Route::resource('employees', 'EmployeesController');
-            Route::resource('users', 'UsersController');
-            
-            Route::get(
-                'employees/{employee_id}/orders', [
-                'as' => 'employees.orders',
-                'uses' => 'EmployeesController@getOrdersByEmployee'
-            ]);
-        });
-    });
+
 });
 
 
-//Frontend
-//home
-Route::get('/', 'Frontend\HomeController@index');
+//API
+Route::group(['prefix' => 'api'], function() {
+    Route::group(['namespace' => 'Api'], function() {
 
-//auth
-Route::get('/registro', 'Frontend\AuthController@indexRegister');
-Route::post('/registro/store', 'Frontend\AuthController@storeRegister');
+        Route::resource('employees', 'EmployeesController');
+        Route::resource('users', 'UsersController');
+
+        Route::get(
+            'employees/{employee_id}/orders', [
+            'as' => 'employees.orders',
+            'uses' => 'EmployeesController@getOrdersByEmployee'
+        ]);
+    });
+});
