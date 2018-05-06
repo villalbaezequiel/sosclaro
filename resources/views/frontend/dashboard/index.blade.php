@@ -5,6 +5,8 @@
 
 @include('frontend.components.header')
 <main class="main main-user">
+    
+    @if(\App\UsersProfile::getStatus(Auth::user()->id) == 0)
     <div class="alert alert-info">
         <strong>Bienvenido</strong>. Sabías que completando tu perfil obtenés
         <strong>20 puntos</strong> de regalo?
@@ -13,6 +15,8 @@
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
+    @endif
+    
     <section class="section section-dashboard">
         <div class="slider slider-single">
             <div class="slider-item">
@@ -61,7 +65,7 @@
             @foreach($products as $product)            
                 <div class="producto">
                     <a class="card" href="{{ url('/catalogo/producto/'.$product->id) }}">
-                        <img class="card-img-top" src="http://via.placeholder.com/640x480" alt="{{ $product->name }}">
+                        <img class="card-img-top" src="{{ asset('storage/app/public/products/') }}/{{ $product->id."/".$product->image }}" alt="{{ $product->name }}">
                         <div class="card-body">
                             <h5 class="card-title">{{ $product->name }}</h5>
                             <h6 class="card-subtitle">

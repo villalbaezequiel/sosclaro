@@ -69,11 +69,14 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
 Route::group(['middleware' => 'auth'], function () {    
     
     //user
-    Route::get('/usuario/mi-cuenta', 'Frontend\UserController@profile');
+    Route::get('/usuario/mi-cuenta', 'Frontend\UserController@profileEdit');
     Route::get('/usuario/historial', 'Frontend\UserController@history');
     Route::get('/usuario/canjes', 'Frontend\UserController@exchanges');
     Route::get('/usuario/canjes/1', 'Frontend\UserController@singleExchange');
 
+    //user POST
+    Route::post('/usuario/mi-cuenta', 'Frontend\UserController@profileUpdate');
+    
     //catalogue
     Route::get('/catalogo', 'Frontend\CatalogueController@index');
     Route::get('/catalogo/producto/{id}', 'Frontend\CatalogueController@product');

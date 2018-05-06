@@ -38,4 +38,11 @@ class UsersProfile extends Model
         }
     }
     
+    static public function getStatus($id_user) {
+        $status = UsersProfile::where('id_user', '=', $id_user)->get();
+        if(!empty($status[0])){
+            return $status[0]->status;
+        }
+    }
+    
 }

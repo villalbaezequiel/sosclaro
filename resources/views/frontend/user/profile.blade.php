@@ -5,8 +5,19 @@
 
 @include('frontend.components.header')
 <main class="main main-user">
-    <div class="alert alert-info">Sabías que completando tu perfil tenes
-        <strong>20 puntos</strong> de regalo?</div>
+    
+    @if($user_profile[0]['status'] == 0)
+        <div class="alert alert-info">Sabías que completando tu perfil tenes
+            <strong>20 puntos</strong> de regalo?
+        </div>
+    @endif
+    
+    @if (session('message'))
+        <div class="alert alert-info">
+            {{ session('message') }}
+        </div>
+    @endif
+    
     <section class="section-wrapper">
         <hgroup class="section-header">
             <span class="title">Mi cuenta</span>
@@ -14,79 +25,116 @@
         <article class="section-content">
             <div class="article">
                 <div class="article-body">
-                    <form>
+                    <form action="{{ url('/usuario/mi-cuenta') }}" method="POST">
+                        {{ csrf_field() }}    
                         <div class="form-group row">
-                            <label class="col col-sm-3 col-form-label" for="user1">Código ITEC</label>
+                            <label class="col col-sm-3 col-form-label">DNI</label>
                             <div class="col col-sm-9">
-                                <input type="text" class="form-control" id="user1" placeholder="12378128397" readonly>
+                                <input type="text" class="form-control" value="{{ $dni[0]['dni'] }}" disabled>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col col-sm-3 col-form-label" for="user1">Nombre</label>
+                            <label class="col col-sm-3 col-form-label">Alias</label>
                             <div class="col col-sm-9">
-                                <input type="text" class="form-control" id="user1" value="Lucas Rene" required>
+                                <input type="text" class="form-control" name="user_name" value="{{ Auth::user()->name }}" required>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col col-sm-3 col-form-label" for="user1">Apellido</label>
+                            <label class="col col-sm-3 col-form-label">Nombre</label>
                             <div class="col col-sm-9">
-                                <input type="text" class="form-control" id="user1" value="Marozzi" required>
+                                <input type="text" class="form-control" name="dni_name" value="{{ $dni[0]['name'] }}" required>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col col-sm-3 col-form-label" for="user1">DNI</label>
+                            <label class="col col-sm-3 col-form-label">Apellido</label>
                             <div class="col col-sm-9">
-                                <input type="number" class="form-control" id="user1" value="29123876" required>
+                                <input type="text" class="form-control" name="dni_last_name" value="{{ $dni[0]['last_name'] }}" required>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col col-sm-3 col-form-label" for="user1">Email</label>
+                            <label class="col col-sm-3 col-form-label">Email</label>
                             <div class="col col-sm-9">
-                                <input type="email" class="form-control" id="user1" value="lucar.marozzi@claro.com.ar" required>
+                                <input type="email" class="form-control" name="user_email" value="{{ Auth::user()->email }}" required>
                             </div>
                         </div>
+                        
+                        <!-- UserProfile -->
                         <div class="form-group row">
-                            <label class="col col-sm-3 col-form-label" for="user1">Sexo</label>
+                            <label class="col col-sm-3 col-form-label">Sexo</label>
                             <div class="col col-sm-9">
                                 <div class="custom-control custom-radio">
-                                    <input class="custom-control-input" type="radio" name="encuestaPreguntaRadios" id="encuestaPreguntaRadios1" value="option1" checked>
-                                    <label class="custom-control-label" for="encuestaPreguntaRadios1">Masculino</label>
+                                    <input class="custom-control-input" type="radio" name="user_profile_sexo" id="user_profile_sexo_male" value="male" @if($user_profile[0]['sexo'] == 'male') checked @endif>
+                                    <label class="custom-control-label" for="user_profile_sexo_male">Masculino</label>
                                 </div>
                                 <div class="custom-control custom-radio">
-                                    <input class="custom-control-input" type="radio" name="encuestaPreguntaRadios" id="encuestaPreguntaRadios2" value="option2">
-                                    <label class="custom-control-label" for="encuestaPreguntaRadios2">Femenino</label>
+                                    <input class="custom-control-input" type="radio" name="user_profile_sexo" id="user_profile_sexo_female" value="female" @if($user_profile[0]['sexo'] == 'female') checked @endif>
+                                    <label class="custom-control-label" for="user_profile_sexo_female">Femenino</label>
                                 </div>
                             </div>
                         </div>
+                        
                         <div class="form-group row">
-                            <label class="col col-sm-3 col-form-label" for="user1">Nacimiento</label>
+                            <label class="col col-sm-3 col-form-label">Nacimiento</label>
                             <div class="col col-sm-3">
-                                <input type="number" class="form-control" id="user1" placeholder="DD" required>
+                                <input type="number" class="form-control" name="user_profile_date_year[]" value="" placeholder="DD" required>
                             </div>
                             <div class="col col-sm-3">
-                                <input type="number" class="form-control" id="user1" placeholder="MM" required>
+                                <input type="number" class="form-control" name="user_profile_date_year[]" value="" placeholder="MM" required>
                             </div>
                             <div class="col col-sm-3">
-                                <input type="number" class="form-control" id="user1" placeholder="YYYY" required>
+                                <input type="number" class="form-control" name="user_profile_date_year[]" value="" placeholder="YYYY" required>
                             </div>
                         </div>
+                        
                         <div class="form-group row">
-                            <label class="col col-sm-3 col-form-label" for="user1">Teléfono</label>
+                            <label class="col col-sm-3 col-form-label">Teléfono</label>
                             <div class="col col-sm-9">
-                                <input type="text" class="form-control" id="user1" placeholder="+5491159998888" required>
+                                <input type="text" class="form-control" name="user_profile_telephone" value="{{ $user_profile[0]['telephone'] }}" placeholder="+5491159998888" required>
                             </div>
                         </div>
+                        
                         <div class="form-group row">
-                            <label class="col col-sm-3 col-form-label" for="user1">Región</label>
+                            <label class="col col-sm-3 col-form-label">Otro Teléfono</label>
                             <div class="col col-sm-9">
-                                <select class="form-control" id="encuestaPregunta2">
+                                <input type="text" class="form-control" name="user_profile_telephone_other" value="{{ $user_profile[0]['telephone_other'] }}" placeholder="+5491159998888" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group row">
+                            <label class="col col-sm-3 col-form-label">Dirección</label>
+                            <div class="col col-sm-9">
+                                <input type="text" class="form-control" name="user_profile_address" value="{{ $user_profile[0]['address'] }}" placeholder="Av. Santa Fe 4321" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group row">
+                            <label class="col col-sm-3 col-form-label">Región</label>
+                            <div class="col col-sm-9">
+                                <select class="form-control" name="user_profile_id_region" required>
+                                    <option value="">Seleccionar...</option>
                                     @foreach($regions as $region)
-                                    <option value="{{ $region->id }}">{{ $region->name }}</option>
+                                    <option value="{{ $region->id }}" @if($region->id == $user_profile[0]['id_region']) selected="selected" @endif>{{ $region->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
                         </div>
+                        
+                        <div class="form-group row">
+                            <label class="col col-sm-3 col-form-label">Ciudad</label>
+                            <div class="col col-sm-9">
+                                <select class="form-control" name="user_profile_id_city" required>
+                                    <option value="">Seleccionar...</option>
+                                    @foreach($cities as $city)
+                                    <option value="{{ $city->id }}" @if($city->id == $user_profile[0]['id_city']) selected="selected" @endif>{{ $city->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        
                         <div class="form-group">
+                            <input type="hidden" name="user_id" value="{{ Auth::user()->id }}" />
+                            <input type="hidden" name="dni_id" value="{{ $dni[0]['id'] }}" />
+                            <input type="hidden" name="user_profile_id" value="{{ $user_profile[0]['id'] }}" />
                             <button class="btn btn-block" type="submit">Guardar</button>
                         </div>
                     </form>
