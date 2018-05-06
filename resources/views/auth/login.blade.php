@@ -26,6 +26,10 @@
                     @endif
                 </div>
                 
+                @if (session('message'))
+                    <div class="alert alert-info" role="alert">{{ session('message') }}</div>
+                @endif
+                
                 
                 <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                     <label class="form-label" for="email">Email</label>

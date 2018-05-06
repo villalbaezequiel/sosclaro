@@ -35,6 +35,7 @@ class AuthController extends Controller
 
                 $userProfile = new UsersProfile;
                 $userProfile->id_user = $user->id;
+                $userProfile->id_role = 2;
                 $userProfile->save();
                 
                 $dni = Dni::find($checkDni[0]['id']);
@@ -43,19 +44,24 @@ class AuthController extends Controller
                 $dni->last_name = $request->get('dni_last_name');  
                 $dni->save(); 
                 
-                $message = "Usuario Alias: ".$request->get('name')." creado con exito! DNI: ". $request->get('dni');
+                $message = "Usuario: creado con exito!";
             }
             
             if(empty($checkDni[0])){
                 $message = "DNI: ".$request->get('dni')." no se encontró en nuestro sistema. Verifique el mismo o Comuniquese con Atencion al Cliente. Gracias!";
+                return redirect('/registro')->with('message', $message);
+            
             } elseif($checkDni[0]['id_user'] != 0){
                 $message = "DNI: ".$request->get('dni')." ya se encuenta asociado a otro Usuario. Verifique el mismo o Comuniquese con Atencion al Cliente. Gracias!";
+                return redirect('/registro')->with('message', $message);
+                
             } elseif(!empty($checkEmail[0])){
                 $message = "Email: ".$request->get('email')." ya se encuenta asociado a otro Usuario. Verifique el mismo o Comuniquese con Atencion al Cliente. Gracias!";
+                return redirect('/registro')->with('message', $message);
+                
+            } else {
+                return redirect('/login')->with('message', $message);
             }
-             
-            
-            return redirect('/registro')->with('message', $message);
         
         } catch(\Exception $e) {
 
