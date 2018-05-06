@@ -32,7 +32,7 @@
                 <ul class="nav-social">
                     <li class="nav-item">
                         <div class="dropdown">
-                            <button class="btn btn-black dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->name }}</button>
+                            <button class="btn btn-black dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ \App\Dni::getNameShort(Auth::user()->id) }}</button>
                             <span class="badge badge-danger">{{ \App\Dni::getPuntos(Auth::user()->id) }} puntos</span>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
                                 <a class="dropdown-item" href="{{ url('/usuario/canjes') }}">Mis canjes</a>

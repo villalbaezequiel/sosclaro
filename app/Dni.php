@@ -30,6 +30,11 @@ class Dni extends Model
         return $user[0]->name." ".$user[0]->last_name;
     }
     
+    static function getNameShort($id_user) {
+        $user = Dni::where('id_user', '=', $id_user)->get();
+        return $user[0]->name;
+    }
+    
     static public function setIdUser($id) {
         $dniUser = Dni::find($id);
         $dniUser->id_user = 0;

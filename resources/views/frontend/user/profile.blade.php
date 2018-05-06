@@ -34,12 +34,6 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col col-sm-3 col-form-label">Alias</label>
-                            <div class="col col-sm-9">
-                                <input type="text" class="form-control" name="user_name" value="{{ Auth::user()->name }}" required>
-                            </div>
-                        </div>
-                        <div class="form-group row">
                             <label class="col col-sm-3 col-form-label">Nombre</label>
                             <div class="col col-sm-9">
                                 <input type="text" class="form-control" name="dni_name" value="{{ $dni[0]['name'] }}" required>
@@ -76,13 +70,13 @@
                         <div class="form-group row">
                             <label class="col col-sm-3 col-form-label">Nacimiento</label>
                             <div class="col col-sm-3">
-                                <input type="number" class="form-control" name="user_profile_date_year[]" value="" placeholder="DD" required>
+                                <input type="number" class="form-control" name="user_profile_date_year[]" @if(!empty($cumple)) value="{{ $cumple[0] }}" @endif placeholder="DD" required>
                             </div>
                             <div class="col col-sm-3">
-                                <input type="number" class="form-control" name="user_profile_date_year[]" value="" placeholder="MM" required>
+                                <input type="number" class="form-control" name="user_profile_date_year[]" @if(!empty($cumple)) value="{{ $cumple[1] }}" @endif placeholder="MM" required>
                             </div>
                             <div class="col col-sm-3">
-                                <input type="number" class="form-control" name="user_profile_date_year[]" value="" placeholder="YYYY" required>
+                                <input type="number" class="form-control" name="user_profile_date_year[]" @if(!empty($cumple)) value="{{ $cumple[2] }}" @endif placeholder="YYYY" required>
                             </div>
                         </div>
                         
@@ -119,7 +113,7 @@
                             </div>
                         </div>
                         
-                        <div class="form-group row">
+<!--                        <div class="form-group row">
                             <label class="col col-sm-3 col-form-label">Ciudad</label>
                             <div class="col col-sm-9">
                                 <select class="form-control" name="user_profile_id_city" required>
@@ -129,7 +123,7 @@
                                     @endforeach
                                 </select>
                             </div>
-                        </div>
+                        </div>-->
                         
                         <div class="form-group">
                             <input type="hidden" name="user_id" value="{{ Auth::user()->id }}" />
