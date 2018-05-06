@@ -18,6 +18,8 @@ class UsersProfile extends Migration
             $table->integer('id_city');
             $table->integer('id_region');
             $table->integer('id_role');
+            $table->enum('sexo', ['male', 'female']);
+            $table->timestamp('date_year');
             $table->string('avatar');
             $table->string('telephone');
             $table->string('telephone_other');
