@@ -21,7 +21,7 @@
                 </ul>
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right">
-                <a class="nav-link" href="{{ url('/admin/exchange') }}">
+                <a class="nav-link" href="{{ url('/admin/exchanges') }}">
                     <i class="fa fa-fw fa-cogs"></i>
                     <span class="nav-link-text">Canjes</span>
                 </a>

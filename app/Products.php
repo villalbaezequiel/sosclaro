@@ -3,8 +3,23 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Products;
 
 class Products extends Model
 {
     protected $table = 'products';
+    
+    static public function getName($id) {
+        $product = Products::where('id', '=', $id)->get();
+        if(!empty($product[0])){
+            return $product[0]->name;
+        }
+    }
+    
+    static public function getCodigo($id) {
+        $product = Products::where('id', '=', $id)->get();
+        if(!empty($product[0])){
+            return $product[0]->codigo;
+        }
+    }
 }
