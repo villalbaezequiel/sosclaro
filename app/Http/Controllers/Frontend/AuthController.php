@@ -48,15 +48,15 @@ class AuthController extends Controller
             }
             
             if(empty($checkDni[0])){
-                $message = "DNI: ".$request->get('dni')." no se encontró en nuestro sistema. Verifique el mismo o Comuniquese con Atencion al Cliente. Gracias!";
+                $message = "DNI: ".$request->get('dni')." no se encontró en nuestro sistema. ";
                 return redirect('/registro')->with('message', $message);
             
             } elseif($checkDni[0]['id_user'] != 0){
-                $message = "DNI: ".$request->get('dni')." ya se encuenta asociado a otro Usuario. Verifique el mismo o Comuniquese con Atencion al Cliente. Gracias!";
+                $message = "DNI: ".$request->get('dni')." ya se encuenta asociado a otro Usuario. ";
                 return redirect('/registro')->with('message', $message);
                 
             } elseif(!empty($checkEmail[0])){
-                $message = "Email: ".$request->get('email')." ya se encuenta asociado a otro Usuario. Verifique el mismo o Comuniquese con Atencion al Cliente. Gracias!";
+                $message = "Email: ".$request->get('email')." ya se encuenta asociado a otro Usuario. ";
                 return redirect('/registro')->with('message', $message);
                 
             } else {
