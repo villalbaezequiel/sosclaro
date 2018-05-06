@@ -31,9 +31,11 @@
         <tr>
             <td>{{ $exchange->id }}</td>
             <td>{{ \App\Dni::getName($exchange->id_user) }}</td>
-            <td>{{ \App\Product::getNameJson($exchange->indicador) }}</td>
-            <td>{{ $exchange->status }}</td>
+            <td>{{ \App\Products::getCodigo($exchange->id_product) }}</td>
+            <td>{{ \App\Products::getName($exchange->id_product) }}</td>
+            <td>{{ \App\Exchanges::getStatus($exchange->status) }}</td>
             <td>
+                <a href="{{ url('/admin/exchanges/'.$exchange->id.'/edit') }}" class="btn btn-outline-primary">Editar</a>
             </td>
         </tr>
         @endforeach

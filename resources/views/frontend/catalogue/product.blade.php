@@ -13,7 +13,7 @@
             <div class="row">
                 <div class="col-md-7">
                     <div class="card">
-                        <img class="card-img-top" src="{{ asset('') }}" alt="{{ $product->name }}">
+                        <img class="card-img-top" src="" alt="{{ $product->name }}">
                     </div>
                 </div>
                 <div class="col-md-5">
@@ -24,9 +24,17 @@
                             {{ $product->description }}
                         </p>
                     </div>
+                    
+                    @if(\App\Dni::getPuntos(Auth::user()->id) >= $product->price)
                     <div class="card-body">
                         <button class="btn" type="button" data-toggle="modal" data-target="#{{ $product->id }}">Canjear</button>
                     </div>
+                    @else
+                    <div class="card-body">
+                        <i>No tienes puntos suficientes para canjear este Producto.</i>
+                    </div>
+                    @endif
+                    
                     <div class="card-body">
                         <h6>Legales</h6>
                         <p>
@@ -39,7 +47,8 @@
         <!-- Modal-->
         <div class="modal fade" id="{{ $product->id }}" tabindex="-1" role="dialog" aria-labelledby="modalCanjeLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
+                <form action="{{ url('catalogo/producto') }}/{{ $product->id }}" method="POST" class="modal-content">
+                    {{ csrf_field() }}
                     <div class="modal-header">
                         <div class="modal-title text-center">Confirmar Canje</div>
                         <button class="close" type="button" data-dismiss="modal" aria-label="Close">
@@ -55,10 +64,16 @@
                         </p>
                     </div>
                     <div class="modal-footer">
+                        
+                        <input type="hidden" name="id_product" value="{{ $product->id }}">
+                        <input type="hidden" name="product_puntos" value="{{ $product->price }}">
+                        <input type="hidden" name="id_dni" value="{{ \App\Dni::getIdUser(Auth::user()->id) }}">
+                        <input type="hidden" name="id_user" value="{{ Auth::user()->id }}">
+                        
                         <button type="button" class="btn btn-outline" data-dismiss="modal">Cancelar</button>
-                        <a class="btn" href="{{ url('/catalogo/success') }}">Confirmar</a>
+                        <input class="btn" type="submit" value="Confirmar" />
                     </div>
-                </div>
+                </form>
             </div>
         </div>
         <div class="section-footer text-right">

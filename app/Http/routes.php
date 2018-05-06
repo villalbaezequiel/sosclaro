@@ -49,6 +49,7 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
         Route::resource('/locations', 'Backend\LocationsController');
         Route::resource('/categories', 'Backend\CategoriesController');
         Route::resource('/products', 'Backend\ProductsController');
+        Route::resource('/exchanges', 'Backend\ExchangesController');
         Route::resource('/tips/categories', 'Backend\TipsCategoriesController');
         Route::resource('/tips', 'Backend\TipsController');
         Route::resource('/guests/users', 'Backend\GuestUsersController');
@@ -79,9 +80,12 @@ Route::group(['middleware' => 'auth'], function () {
     
     //catalogue
     Route::get('/catalogo', 'Frontend\CatalogueController@index');
-    Route::get('/catalogo/producto/{id}', 'Frontend\CatalogueController@product');
-    Route::get('/catalogo/success', 'Frontend\CatalogueController@success');
-
+    Route::get('/catalogo/producto/success', 'Frontend\CatalogueController@productSuccess');
+    Route::get('/catalogo/producto/{id}', 'Frontend\CatalogueController@productShow');    
+    
+    //catalogue POST
+    Route::post('/catalogo/producto/{id}', 'Frontend\CatalogueController@productExchange');
+    
     //desempeño
     Route::get('/desempeno', 'Frontend\DesempenoController@index');
 

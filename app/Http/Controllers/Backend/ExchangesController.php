@@ -54,9 +54,7 @@ class ExchangesController extends Controller
      */
     public function show($id)
     {
-        return view('backend.exchanges.show', [
-            'exchange' => Exchanges::find($id)
-        ]);
+        //
     }
 
     /**
@@ -67,7 +65,9 @@ class ExchangesController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('backend.exchanges.edit', [
+            'exchange' => Exchanges::find($id)
+        ]);
     }
 
     /**
@@ -79,8 +79,30 @@ class ExchangesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-    }
+       $message;
+        try {
+            $canje = Exchanges::find($id);
+            $canje->status = $request->get('exchange_status');
+            $canje->save();
+            
+            $message = "Canje #".$id." editado con exito!";
+            
+            return redirect('/admin/exchanges')->with('message', $message);
+            
+        } catch(\Exception $e) {
+
+            if(\Config::get('app.debug'))
+                    $message = 'ERROR('.$e->getLine().'): '.$e->getMessage();
+            else
+                    $message = 'Se ha producido un error. Por favor intente nuevamente.';
+
+            $respuesta = array(
+                    'estado' => false,
+                    'mensaje' => $message
+            );
+
+            return \Response::json($respuesta);
+	}    }
 
     /**
      * Remove the specified resource from storage.
