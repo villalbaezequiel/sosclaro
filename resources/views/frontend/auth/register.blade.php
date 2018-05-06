@@ -8,45 +8,55 @@
             <h1>
                 <img src="{{ asset('assets/frontend/img/logo.png') }}" alt="SOS CLARO">
             </h1>
-        </hgroup>
+            </hgroup>
         <div class="content">
             <form id="form_register" role="form" method="POST" action="{{ url('/registro/store') }}">
                 {{ csrf_field() }}
-                
+
                 <h3 class="title text-center">Mi Cuenta</h3>
-                
-                
+
+
                 <div id="alert_register" class="" role="alert"></div>
-                                
+
                 @if (session('message'))
                     <div class="alert alert-danger" role="alert">{{ session('message') }}</div>
                 @endif
-                
-                <div class="form-group has-error">
-                    <label class="form-label" for="dni">DNI</label>
+
+                <div class="form-group">
+                    <label class="form-label" for="signup-dni">DNI</label>
                     <input class="form-control" type="number" name="dni" id="dni" placeholder="DNI" required>
                 </div>
-                
-                <div class="form-group has-error">
+<!--                
+                <div class="form-group">
                     <label class="form-label" for="name">Alias</label>
                     <input class="form-control" type="text" name="name" id="name" placeholder="Alias Usuario" required>
+                </div>-->
+
+                <div class="form-group">
+                    <label class="form-label" for="dni_name">Nombre</label>
+                    <input class="form-control" type="text" name="dni_name" id="dni_name" placeholder="Nombre" required>
                 </div>
-                
+
+                <div class="form-group">
+                    <label class="form-label" for="dni_last_name">Apellido</label>
+                    <input class="form-control" type="text" name="dni_last_name" id="dni_last_name" placeholder="Apellido" required>
+                </div>
+
                 <div class="form-group">
                     <label class="form-label" for="email">Email</label>
                     <input class="form-control" type="email" name="email" id="email" placeholder="Email" required>
                 </div>
-                
+
                 <div class="form-group">
                     <label class="form-label" for="password">Contraseña</label>
                     <input class="form-control" type="password" name="password" id="password" placeholder="Contraseña" required>
                 </div>
-                
+
                 <div class="form-group">
                     <label class="form-label" for="password2">Repetir Contraseña</label>
                     <input class="form-control" type="password" name="password2" id="password2" placeholder="Repetir Contraseña" required>
                 </div>
-                
+
                 <div class="form-group">
                     <input type="submit" class="btn btn-block" value="CREAR">
                 </div>
@@ -54,9 +64,9 @@
         </div>
         <div class="actions">
             <a href="{{ url('/') }}">Volver</a>
-        </div>
-    </section>
-</main>    
+                </div>
+        </section>
+</main>   
 @endsection
 @section('javascript')
 <script type="text/javascript">

@@ -27,7 +27,7 @@ class AuthController extends Controller
             
             if(!empty($checkDni[0]) && $checkDni[0]['id_user'] == 0 && empty($checkEmail[0])){
                 $user = new User;
-                $user->name = $request->get('name');    
+                $user->name = ' ';    
                 $user->email = $request->get('email');    
                 $user->password = bcrypt($request->get('password'));    
                 $user->active = 1;    
@@ -39,6 +39,8 @@ class AuthController extends Controller
                 
                 $dni = Dni::find($checkDni[0]['id']);
                 $dni->id_user = $user->id;  
+                $dni->name = $request->get('dni_name');  
+                $dni->last_name = $request->get('dni_last_name');  
                 $dni->save(); 
                 
                 $message = "Usuario Alias: ".$request->get('name')." creado con exito! DNI: ". $request->get('dni');
