@@ -110,9 +110,9 @@
                     <li>
                         <a href="{{ url('/admin/settings/social_networks') }}">Redes Sociales</a>
                     </li>
-                    <li>
+<!--                    <li>
                         <a href="{{ url('/admin/settings/emails') }}">Email</a>
-                    </li>
+                    </li>-->
                     <li>
                         <a href="{{ url('/admin/settings/politics_privacy') }}">Politica y Privacidad</a>
                     </li>
