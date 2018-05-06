@@ -10,7 +10,7 @@
     <div class="alert alert-info">
         <strong>Bienvenido</strong>. Sabías que completando tu perfil obtenés
         <strong>20 puntos</strong> de regalo?
-        <a href="#">Completar</a>
+        <a href="{{ url('/usuario/mi-cuenta') }}">Completar</a>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
