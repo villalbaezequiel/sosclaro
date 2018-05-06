@@ -13,9 +13,9 @@ class Exchanges extends Model
         if($status == 0){
             return "Pendiente";
         } elseif($status == 1){
-            return "En Transito";
+            return "En Transito (Envío realizado)";
         } elseif ($status == 2) {
-            return "Completo";
+            return "Completo (Recepción confirmada)";
         }
     }    
     

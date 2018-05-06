@@ -28,14 +28,18 @@
     </thead>
     <tbody>
         @foreach($exchanges as $exchange)
-        <tr>
+        <tr @if($exchange->status == 2) style="color:#007bff;" @endif>
             <td>{{ $exchange->id }}</td>
             <td>{{ \App\Dni::getName($exchange->id_user) }}</td>
             <td>{{ \App\Products::getCodigo($exchange->id_product) }}</td>
             <td>{{ \App\Products::getName($exchange->id_product) }}</td>
             <td>{{ \App\Exchanges::getStatus($exchange->status) }}</td>
             <td>
-                <a href="{{ url('/admin/exchanges/'.$exchange->id.'/edit') }}" class="btn btn-outline-primary">Editar</a>
+                @if($exchange->status == 2)
+                    <a href="{{ url('/admin/exchanges/'.$exchange->id) }}" class="btn btn-outline-primary">Ver</a>
+                @else
+                    <a href="{{ url('/admin/exchanges/'.$exchange->id.'/edit') }}" class="btn btn-outline-primary">Editar</a>
+                @endif
             </td>
         </tr>
         @endforeach

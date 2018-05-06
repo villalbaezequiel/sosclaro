@@ -54,7 +54,9 @@ class ExchangesController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('backend.exchanges.show', [
+            'exchange' => Exchanges::find($id)
+        ]);
     }
 
     /**

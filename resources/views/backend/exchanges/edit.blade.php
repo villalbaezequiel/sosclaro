@@ -1,6 +1,6 @@
 @extends('layouts.backend')
 
-@section('title', "Canjes/ Editar")
+@section('title', "Canjes / Editar")
 @section('content')
 {!! Form::open(['route' => ['admin.exchanges.update' , $exchange->id], 'method' => 'PUT']) !!}
     
@@ -28,8 +28,7 @@
         <label>Estado</label>
         <select class="form-control" name="exchange_status" required>
             <option value="1" @if($exchange->status == 0) selected="selected" @endif>Pendiente</option>
-            <option value="1" @if($exchange->status == 1) selected="selected" @endif>En Transito</option>
-            <option value="0" @if($exchange->status == 2) selected="selected" @endif>Completo</option>
+            <option value="1" @if($exchange->status == 1) selected="selected" @endif>En Transito (Envío realizado)</option>
         </select>
     </div>
     <button type="submit" class="btn btn-primary">Editar</button> 
