@@ -24,6 +24,7 @@ class UsersProfile extends Migration
             $table->string('telephone');
             $table->string('telephone_other');
             $table->string('address');
+            $table->enum('status', ['0', '1']);
             $table->timestamps();
         });
     }
