@@ -96,6 +96,12 @@
                 </ul>
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right">
+                <a class="nav-link" href="{{ url('/admin/modals') }}">
+                    <i class="fa fa-fw fa-cogs"></i>
+                    <span class="nav-link-text">Modals</span>
+                </a>
+            </li>
+            <li class="nav-item" data-toggle="tooltip" data-placement="right">
                 <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#nav_settings">
                     <i class="fa fa-fw fa-cogs"></i>
                     <span class="nav-link-text">Configuracion</span>
