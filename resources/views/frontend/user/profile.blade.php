@@ -60,7 +60,7 @@
                         
                         <!-- UserProfile -->
                         <div class="form-group row">
-                            <label class="col col-sm-3 col-form-label">Sexo</label>
+                            <label class="col col-sm-3 col-form-label">Genero</label>
                             <div class="col col-sm-9">
                                 <div class="custom-control custom-radio">
                                     <input class="custom-control-input" type="radio" name="user_profile_sexo" id="user_profile_sexo_male" value="male" @if($user_profile[0]['sexo'] == 'male') checked @endif>
