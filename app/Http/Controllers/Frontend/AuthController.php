@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Functions;
 use App\Dni;
 use App\User;
+use App\UsersProfile;
 
 class AuthController extends Controller
 {
@@ -32,6 +33,10 @@ class AuthController extends Controller
                 $user->active = 1;    
                 $user->save(); 
 
+                $userProfile = new UsersProfile;
+                $userProfile->id_user = $user->id;
+                $userProfile->save();
+                
                 $dni = Dni::find($checkDni[0]['id']);
                 $dni->id_user = $user->id;  
                 $dni->save(); 
