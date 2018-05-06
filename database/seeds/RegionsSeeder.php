@@ -11,13 +11,16 @@ class RegionsSeeder extends Seeder
      * @return void
      */
     
-    public $regions = array('Capital e Interior', 
-                            'AMBA Norte e Interior', 
-                            'AMBA Oeste e Interior', 
-                            'AMBA Sur e Interior', 
-                            'Litoral', 
-                            'Med - NOA', 
-                            'Sur'); 
+    public $regions = array('AMBA NORTE', 
+                            'AMBA SUR', 
+                            'BALP', 
+                            'CABA', 
+                            'CUYO', 
+                            'LINO', 
+                            'LISU', 
+                            'MEDI', 
+                            'NOA', 
+                            'PATAGONIA'); 
 
     public function run()
     {     
