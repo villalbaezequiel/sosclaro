@@ -4293,6 +4293,25 @@ body {
     display: block;
     clear: both; } }
 
+.badge-black {
+  background: #000000; }
+
+.banner {
+  background: black;
+  border-radius: 1em;
+  padding: 2em 2em 1em;
+  font-size: 1.1em;
+  text-align: center; }
+
+.text-white {
+  color: #fff; }
+
+.text-black {
+  color: #212121; }
+
+.section-logros {
+  padding: 1em; }
+
 /* Partials */
 /* Header */
 .header {
@@ -4460,3 +4479,13 @@ body {
     text-align: center; }
     .section-login .actions a {
       margin-bottom: 0.5em; }
+
+.main-pre {
+  max-width: 1024px;
+  margin-top: 3em; }
+
+.section-pre {
+  padding: 1em;
+  color: #fff; }
+  .section-pre .embed-responsive {
+    margin-bottom: 2em; }
