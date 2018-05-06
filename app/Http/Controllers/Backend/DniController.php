@@ -47,10 +47,31 @@ class DniController extends Controller
 
                             $insert = new Dni;
                             $insert->dni = $value->dni;
-                            $insert->name =$value->nombre ;
-                            $insert->last_name = $value->apellido;
-                            $insert->puntos = $value->puntos;
-                            $insert->indicador = json_encode($indicadores);
+                            
+                            if(isset($value->nombre) && !empty($value->nombre)){
+                                $insert->name = $value->nombre;
+                            } else {
+                                $insert->name = '';
+                            }
+                            
+                            if(isset($value->apellido) && !empty($value->apellido)){
+                                $insert->last_name = $value->apellido;
+                            } else {
+                                $insert->last_name = '';
+                            }
+                            
+                            if(isset($value->puntos) && !empty($value->puntos)){
+                                $insert->puntos = $value->puntos;
+                            } else {
+                                $insert->puntos = 0;
+                            }
+                            if(isset($value->indicador_1) && !empty($value->indicador_1)){
+                                $insert->indicador = json_encode($indicadores);
+                            } else {
+                                $indicadores[] = 1;
+                                $insert->indicador = json_encode($indicadores);
+                            }
+                            
                             $insert->id_user = 0;
                             $insert->save();
                             
