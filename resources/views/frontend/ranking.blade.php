@@ -14,21 +14,21 @@
             <div class="card text-center">
                 <div class="card-header">
                     <h4>Tienes acumulados
-                        <span class="badge badge-danger">320 puntos</span> históricos</h4>
+                        <span class="badge badge-danger">0 puntos</span> históricos</h4>
                 </div>
                 <div class="card-body">
                     <div class="row card-text">
                         <div class="col col-md-6">
                             <h3>
-                                <span class="badge badge-secondary">Puesto 37</span>
+                                <span class="badge badge-secondary">Puesto 0</span>
                             </h3>
                             <p>Posición para la región:
-                                <strong>Patagónica</strong>
+                                <strong>X</strong>
                             </p>
                         </div>
                         <div class="col col-md-6">
                             <h3>
-                                <span class="badge badge-secondary">Puesto 128</span>
+                                <span class="badge badge-secondary">Puesto 0</span>
                             </h3>
                             <p>Posición para la región:
                                 <strong>Nacional</strong>
@@ -44,6 +44,8 @@
                     <strong>Posiciones por región</strong>
                 </div>
                 <div class="card-body">
+                    <p class="text-center">Datos no cargados por el momento.</p>
+                    <!--
                     <form class="text-center">
                         <div class="form-group">
                             <select class="form-control" id="selectDesempenoRegion">
@@ -141,6 +143,7 @@
                             </tr>
                         </tbody>
                     </table>
+                    -->
                 </div>
             </div>
         </article>

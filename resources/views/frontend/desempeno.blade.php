@@ -14,14 +14,13 @@
             <div class="card text-center">
                 <div class="card-header">
                     <h4>Esta semana sumaste
-                        <span class="badge badge-danger">{{ \App\Dni::getPuntos(Auth::user()->id) }} puntos</span>
+                        <span class="badge badge-danger">0 puntos</span>
                     </h4>
                 </div>
                 <div class="card-body">
                     <div class="row card-text">
                         <div class="col-md-6">
                             <h1 class="mb-0">
-                            <!-- (indicador_1 + indicador_2)%2 -->    
                                 <i class="fa fa-arrow-circle-o-up" aria-hidden="true"></i> 0%</h1>
                         </div>
                         <div class="col-md-6 text-left">
@@ -32,7 +31,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="card-footer">Datos para la semana del {{ date('d/n/Y') }}</div>
+                <!--div class="card-footer">Datos para la semana del 14/03/2018</div-->
             </div>
         </article>
         <article class="section-content">
@@ -41,12 +40,18 @@
                     <strong>Ganadores</strong>
                 </div>
                 <div class="card-body">
+                    <p class="text-center">Datos no cargados por el momento.</p>
+                    <!--
                     <form class="row text-center">
                         <div class="col col-md-6">
                             <div class="form-group">
                                 <label for="selectDesempenoMes">Mes</label>
                                 <select class="form-control" id="selectDesempenoMes">
-                                    <option>Mayo</option>
+                                    <option>Diciembre</option>
+                                    <option>Noviembre</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
                                 </select>
                             </div>
                         </div>
@@ -54,9 +59,11 @@
                             <div class="form-group">
                                 <label for="selectDesempenoRegion">Región</label>
                                 <select class="form-control" id="selectDesempenoRegion">
-                                    @foreach($regions as $region)
-                                        <option value="{{ $region->id }}">{{ $region->name }}</option>
-                                    @endforeach
+                                    <option>Nacional</option>
+                                    <option>Patagónia</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
                                 </select>
                             </div>
                         </div>
@@ -147,6 +154,7 @@
                             </tr>
                         </tbody>
                     </table>
+                    -->
                 </div>
             </div>
         </article>
