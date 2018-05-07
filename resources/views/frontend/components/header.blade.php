@@ -13,9 +13,9 @@
             </div>
             <div class="nav-menu">
                 <ul class="nav-main">
-                    <li class="nav-item">
+<!--                    <li class="nav-item">
                         <a href="{{ url('/catalogo') }}">Catálogo</a>
-                    </li>
+                    </li>-->
                     <li class="nav-item">
                         <a href="{{ url('/desempeno') }}">Desempeño</a>
                     </li>
