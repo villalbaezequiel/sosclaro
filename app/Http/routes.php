@@ -120,14 +120,11 @@ Route::group(['middleware' => 'auth'], function () {
     //Consejos
     Route::get('/consejos', 'Frontend\TipsController@index');
     Route::get('/consejos/{id}', 'Frontend\TipsController@show');
-<<<<<<< HEAD
-=======
     
     //qué es
     Route::get('/que-es', function(){
         return view('frontend.quees');
     });
->>>>>>> 5c61a7f191f6d721a97688c020842410750ed8e1
 
 });
 
