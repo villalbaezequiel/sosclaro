@@ -44,6 +44,7 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
         Route::resource('/users', 'Backend\UsersController');
         Route::resource('/roles', 'Backend\RolesController');
         Route::resource('/dni', 'Backend\DniController');
+        Route::resource('/users_ganadores', 'Backend\UsersGanadoresController');
         Route::resource('/regions', 'Backend\RegionsController');
         Route::resource('/indicadores', 'Backend\IndicadoresController');
         Route::resource('/locations', 'Backend\LocationsController');
@@ -95,6 +96,11 @@ Route::group(['middleware' => 'auth'], function () {
 
     //dashboard
     Route::get('/dashboard', 'Frontend\DashboardController@index');
+
+    //Encuestas
+    Route::get('/encuestas', 'Frontend\GuestsController@index');
+    Route::get('/encuestas/{id}', 'Frontend\GuestsController@show');
+    Route::post('/encuestas/{id}', 'Frontend\GuestsController@store');
 
 });
 
