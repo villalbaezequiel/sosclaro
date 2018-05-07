@@ -4470,7 +4470,7 @@ body {
   padding: 1em; }
   .section-login .title {
     opacity: 0.3; }
-  .section-login label {
+  .section-login .form-label {
     display: none; }
   .section-login hgroup {
     padding: 1em;
@@ -4482,7 +4482,8 @@ body {
 
 .main-pre {
   max-width: 1024px;
-  margin-top: 3em; }
+  margin-top: 3em;
+  width: 100%; }
 
 .section-pre {
   padding: 1em;
