@@ -19,4 +19,9 @@ class Functions extends Model
             echo "No";
         }
     }
+    
+    static function getDate($param) {
+        $date = explode("-", substr("$param", 0, -9));
+        return $date[2]."/".$date[1]."/".$date[0];
+    }
 }

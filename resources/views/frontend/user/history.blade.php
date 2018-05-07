@@ -14,13 +14,14 @@
                 <div class="card-body text-center">
                     <div class="col col-md-6">
                         <h3>
-                            <span class="badge badge-secondary">0 puntos</span>
+                            <span class="badge badge-secondary">{{ \App\Dni::getPuntos(Auth::user()->id) }} puntos</span>
                         </h3>
                         <span>Puntos disponibles para canjes</span>
                     </div>
                     <div class="col col-md-6">
                         <h3>
-                            <span class="badge badge-secondary">0 históricos</span>
+<!--                            <span class="badge badge-secondary">{{ \App\UsersProfile::getPuntosHistory(Auth::user()->id) }} históricos</span>-->
+                            <span class="badge badge-secondary">{{ \App\Dni::getPuntos(Auth::user()->id) }} históricos</span>
                         </h3>
                         <span>Puntos obtenidos desde la registración</span>
                     </div>
@@ -32,9 +33,9 @@
                 <div class="card-header text-center">
                     <strong>Movimientos</strong>
                 </div>
+                @if($exchanges[0] || $user_profile[0] || $guests_user[0])
+
                 <div class="card-body">
-                    <p class="text-center">Aún no se han realizado movimientos.</p>
-                    <!--
                     <table class="table table-sm table-striped table-hover">
                         <thead>
                             <tr>
@@ -44,35 +45,39 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @if($exchanges[0])
+                                @foreach($exchanges as $canje)
+                                <tr>
+                                    <td>{{ \App\Functions::getDate($canje['updated_at']) }}</td>
+                                    <td>Canje {{ \App\Products::getName($canje['id_product']) }}</td>
+                                    <td>{{ \App\Products::getValuePuntos($canje['id_product']) }}</td>
+                                </tr>
+                                @endforeach
+                            @endif
+                            
+                            @if($guests_user[0])
+                                @foreach($guests_user as $guest)
+                                <tr>
+                                    <td>{{ \App\Functions::getDate($guest['updated_at']) }}</td>
+                                    <td>Puntos obtenidos por completar encuesta</td>
+                                    <td>{{ \App\Guest::getPuntos($guest['id_guest']) }}</td>
+                                </tr>
+                                @endforeach
+                            @endif
+                            
+                            @if($user_profile[0]['status'] == 1)
                             <tr>
-                                <td>03/06/2018</td>
-                                <td>Puntos obtenidos por completar encuesta</td>
-                                <td>150</td>
-                            </tr>
-                            <tr>
-                                <td>29/05/2018</td>
-                                <td>Canje Cafetera Nespresso</td>
-                                <td>(280)</td>
-                            </tr>
-                            <tr>
-                                <td>28/05/2018</td>
-                                <td>Puntos obtenidos por Ganador Mayo</td>
-                                <td>500</td>
-                            </tr>
-                            <tr>
-                                <td>13/05/2018</td>
-                                <td>Puntos obtenidos por completar encuesta</td>
-                                <td>150</td>
-                            </tr>
-                            <tr>
-                                <td>10/05/2018</td>
+                                <td>{{ \App\Functions::getDate($user_profile[0]['updated_at']) }}</td>
                                 <td>Puntos obtenidos por completar perfil</td>
-                                <td>150</td>
+                                <td>20</td>
                             </tr>
+                            @endif
                         </tbody>
                     </table>
-                    -->
                 </div>
+                @else
+                    <p class="text-center">Aún no se han realizado movimientos.</p>
+                @endif
             </div>
         </article>
     </section>

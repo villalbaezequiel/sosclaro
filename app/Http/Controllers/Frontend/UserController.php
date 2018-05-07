@@ -14,6 +14,7 @@ use App\Dni;
 use App\User;
 use App\UsersProfile;
 use App\Exchanges;
+use App\GuestUsers;
 
 class UserController extends Controller
 {
@@ -152,6 +153,10 @@ class UserController extends Controller
     
     public function history()
     {
-        return view('frontend.user.history');
+        return view('frontend.user.history', [
+            'exchanges' => Exchanges::where('id_user', '=', Auth::user()->id)->get()->toArray(),
+            'guests_user' => GuestUsers::where('id_user', '=', Auth::user()->id)->get()->toArray(),
+            'user_profile' => UsersProfile::where('id_user', '=', Auth::user()->id)->get()->toArray()
+        ]);
     }
 }

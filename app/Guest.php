@@ -12,7 +12,12 @@ class Guest extends Model
     
     static public function getNameGuest($id_guest) {
         $guest = Guest::find($id_guest);
-        return $guest->name ; 
+        return $guest->name; 
+    }
+    
+    static public function getPuntos($id_guest) {
+        $guest = Guest::find($id_guest);
+        return $guest->puntos; 
     }
     
     static public function getCountQuestions($id_guest) {
