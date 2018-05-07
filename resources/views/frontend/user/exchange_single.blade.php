@@ -13,24 +13,24 @@
             <div class="row">
                 <div class="col-md-7">
                     <div class="card">
-                        <img class="card-img-top" src="http://via.placeholder.com/640x480" alt="Card image cap">
+                        <img class="card-img-top" src="{{ asset(\App\Products::getUrlImage($product->id)) }}" alt="Card image cap">
                     </div>
                 </div>
                 <div class="col-md-5">
                     <div class="card-body">
-                        <span class="badge badge-danger badge-large">180 puntos</span>
-                        <h4 class="card-title">Nombre del Producto</h4>
-                        <p class="card-text">La elegante Inissia de Nespresso, caracterizada por su diseño compacto, su tamaño reducido, su ligereza y su asa ergonómica, le hará la vida más fácil. Inissia está disponible en una amplia variedad de colores para
-                            adaptarse a todos los gustos.</p>
+                        <span class="badge badge-danger badge-large">{{ $product->price }} puntos</span>
+                        <h4 class="card-title">{{ $product->name }}</h4>
+                        <p class="card-text">{{ $product->description }}</p>
                     </div>
-                    <div class="card-body">
-                        <a class="btn" href="">CONFIRMAR RECEPCIÓN</a>
-                    </div>
+                    <form class="card-body" action="{{ url('usuario/canjes').'/'.$exchange->id }}" method="POST">
+                        {{ csrf_field() }}
+                        <input type="hidden" name="id_exchange" value="{{ $exchange->id }}" />
+                        <input class="btn" type="submit" value="CONFIRMAR RECEPCIÓN" />
+                    </form>
                     <div class="card-body">
                         <h6>Legales</h6>
                         <p>
-                            <small>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam efficitur sollicitudin aliquam. Aenean lectus tellus, condimentum nec dui quis, efficitur accumsan est. Suspendisse arcu arcu, venenatis eget luctus
-                                et, sollicitudin quis nulla.</small>
+                            <small>{{ $product->politica_legal }}</small>
                         </p>
                     </div>
                 </div>

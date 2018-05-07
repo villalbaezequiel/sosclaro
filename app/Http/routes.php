@@ -89,11 +89,12 @@ Route::group(['middleware' => 'auth'], function () {
     //user
     Route::get('/usuario/mi-cuenta', 'Frontend\UserController@profileEdit');
     Route::get('/usuario/historial', 'Frontend\UserController@history');
-    Route::get('/usuario/canjes', 'Frontend\UserController@exchanges');
-    Route::get('/usuario/canjes/1', 'Frontend\UserController@singleExchange');
+    Route::get('/usuario/canjes', 'Frontend\UserController@indexExchanges');
+    Route::get('/usuario/canjes/{id}', 'Frontend\UserController@showExchanges');
 
     //user POST
     Route::post('/usuario/mi-cuenta', 'Frontend\UserController@profileUpdate');
+    Route::post('/usuario/canjes/{id}', 'Frontend\UserController@updateExchanges');
     
     //catalogue
     Route::get('/catalogo', 'Frontend\CatalogueController@index');

@@ -11,7 +11,7 @@ class Exchanges extends Model
     
     static public function getStatus($status) {
         if($status == 0){
-            return "Pendiente";
+            return "Pendiente (Envío Pendiente)";
         } elseif($status == 1){
             return "En Transito (Envío realizado)";
         } elseif ($status == 2) {

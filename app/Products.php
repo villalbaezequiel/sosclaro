@@ -22,4 +22,18 @@ class Products extends Model
             return $product[0]->codigo;
         }
     }
+    
+    static public function getValuePuntos($id) {
+        $product = Products::where('id', '=', $id)->get();
+        if(!empty($product[0])){
+            return $product[0]->price;
+        }
+    }
+    
+    static public function getUrlImage($id) {
+        $product = Products::where('id', '=', $id)->get();
+        if(!empty($product[0])){
+            return 'storage/app/public/products/'.$product[0]->id.'/'.$product[0]->image;
+        }
+    }
 }
