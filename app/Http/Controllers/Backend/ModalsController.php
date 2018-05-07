@@ -57,11 +57,11 @@ class ModalsController extends Controller
             $modal->save();
             
             if($request->hasFile('image_desktop_modal')){
-                Storage::disk('public')->put('modals/desktop/'.$modal->id.'/'.$image_desktop->getClientOriginalName(), true);
+                Storage::disk('public')->put('modals/desktop/'.$modal->id.'/'.$image_desktop->getClientOriginalName(), file_get_contents($image_desktop->getRealPath()));
             }
             
             if($request->hasFile('image_mobile_modal')){
-                Storage::disk('public')->put('modals/mobile/'.$modal->id.'/'.$image_mobile->getClientOriginalName(), true);
+                Storage::disk('public')->put('modals/mobile/'.$modal->id.'/'.$image_mobile->getClientOriginalName(), file_get_contents($image_mobile->getRealPath()));
             }
      
             $message = "Modals: ".$request->get('name_modal')." creado con exito!";

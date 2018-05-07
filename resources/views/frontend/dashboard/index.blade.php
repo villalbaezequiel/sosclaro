@@ -22,9 +22,9 @@
         <div class="slider slider-single">
             @foreach($modals as $modal)
                 <div class="slider-item">
-                    <a href="{{ $modal->url }}">
-                        <img class="visible-md-up" src="{{ asset('assets/frontend/img/header.png') }}">
-                        <img class="visible-xs visible-sm" src="{{ asset('assets/frontend/img/header.png') }}">
+                    <a href="{{ $modal->url }}" target="_blank">
+                        <img class="visible-md-up" src="{{ asset('storage/app/public/modals/desktop/') }}/{{ $modal->id.'/'.$modal->image_desktop }}">
+                        <img class="visible-xs visible-sm" src="{{ asset('storage/app/public/modals/mobile/') }}/{{ $modal->id.'/'.$modal->image_mobile }}">
                     </a>
                 </div>
             @endforeach
