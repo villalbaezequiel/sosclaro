@@ -3,7 +3,7 @@
 @section('title', "Qué es?")
 @section('content')
 
-@include('frontend.components.header_auth')
+@include('frontend.components.header')
 
 <main class="main main-pre">
     <section class="section section-pre">
