@@ -1,72 +1,81 @@
-@extends('layouts.frontend')
+extends('layouts.frontend')
 
 @section('title', "Crear mi cuenta")
 @section('content')
-<main class="main main-guest">
-    <section class="section section-login">
-        <hgroup>
-            <h1>
-                <img src="{{ asset('assets/frontend/img/logo.png') }}" alt="SOS CLARO">
-            </h1>
+@include('frontend.components.header_auth')
+
+<main class="main main-pre">
+    <section class="section section-pre">
+        <section class="section-wrapper">
+            <hgroup class="section-header">
+                <span class="title text-black">Ingresar</span>
             </hgroup>
-        <div class="content">
-            <form id="form_register" role="form" method="POST" action="{{ url('/registro/store') }}">
-                {{ csrf_field() }}
+            <article class="section-content">
+                <div class="article text-black">
+                    <div class="article-body">
+                        <form id="form_register" role="form" method="POST" action="{{ url('/registro/store') }}">
+                            {{ csrf_field() }}
 
-                <h3 class="title text-center">Mi Cuenta</h3>
+                            <div id="alert_register" class="" role="alert"></div>
 
+                            @if (session('message'))
+                                <div class="alert alert-danger" role="alert">{{ session('message') }}</div>
+                            @endif
 
-                <div id="alert_register" class="" role="alert"></div>
+                            <div class="form-group">
+                                <label class="form-label" for="signup-dni">DNI</label>
+                                <input class="form-control" type="number" name="dni" id="dni" placeholder="DNI" required>
+                            </div>
+                            <!--                
+                            <div class="form-group">
+                                <label class="form-label" for="name">Alias</label>
+                                <input class="form-control" type="text" name="name" id="name" placeholder="Alias Usuario" required>
+                            </div>-->
 
-                @if (session('message'))
-                    <div class="alert alert-danger" role="alert">{{ session('message') }}</div>
-                @endif
+                            <div class="form-group">
+                                <label class="form-label" for="dni_name">Nombre</label>
+                                <input class="form-control" type="text" name="dni_name" id="dni_name" placeholder="Nombre" required>
+                            </div>
 
-                <div class="form-group">
-                    <label class="form-label" for="signup-dni">DNI</label>
-                    <input class="form-control" type="number" name="dni" id="dni" placeholder="DNI" required>
+                            <div class="form-group">
+                                <label class="form-label" for="dni_last_name">Apellido</label>
+                                <input class="form-control" type="text" name="dni_last_name" id="dni_last_name" placeholder="Apellido" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label" for="email">Email</label>
+                                <input class="form-control" type="email" name="email" id="email" placeholder="Email" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label" for="password">Contraseña</label>
+                                <input class="form-control" type="password" name="password" id="password" placeholder="Contraseña" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label" for="password2">Repetir Contraseña</label>
+                                <input class="form-control" type="password" name="password2" id="password2" placeholder="Repetir Contraseña" required>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="signup-terminos" required>
+                                    <label class="form-check-label" for="signup-terminos">Acepto las
+                                        <a href="{{ url('/terminos') }}" target="_blank">bases y condiciones</a>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <input type="submit" class="btn btn-block" value="CREAR">
+                            </div>
+                        </form>
+                    </div>
                 </div>
-<!--                
-                <div class="form-group">
-                    <label class="form-label" for="name">Alias</label>
-                    <input class="form-control" type="text" name="name" id="name" placeholder="Alias Usuario" required>
-                </div>-->
-
-                <div class="form-group">
-                    <label class="form-label" for="dni_name">Nombre</label>
-                    <input class="form-control" type="text" name="dni_name" id="dni_name" placeholder="Nombre" required>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label" for="dni_last_name">Apellido</label>
-                    <input class="form-control" type="text" name="dni_last_name" id="dni_last_name" placeholder="Apellido" required>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label" for="email">Email</label>
-                    <input class="form-control" type="email" name="email" id="email" placeholder="Email" required>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label" for="password">Contraseña</label>
-                    <input class="form-control" type="password" name="password" id="password" placeholder="Contraseña" required>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label" for="password2">Repetir Contraseña</label>
-                    <input class="form-control" type="password" name="password2" id="password2" placeholder="Repetir Contraseña" required>
-                </div>
-
-                <div class="form-group">
-                    <input type="submit" class="btn btn-block" value="CREAR">
-                </div>
-            </form>
-        </div>
-        <div class="actions">
-            <a href="{{ url('/') }}">Volver</a>
-                </div>
+            </article>
         </section>
-</main>   
+    </section>
+</main>
 @endsection
 @section('javascript')
 <script type="text/javascript">

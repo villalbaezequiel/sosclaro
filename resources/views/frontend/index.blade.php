@@ -2,36 +2,30 @@
 
 @section('title', "Bienvenido")
 @section('content')
-<main class="main main-guest">
-    <section class="section section-login">
-        <hgroup>
-            <h1>
-                <img src="{{ asset('assets/frontend/img/logo.png') }}" alt="SOS CLARO">
-            </h1>
-        </hgroup>
-        <div class="content text-center">
-            <div class="slider slider-home">
-                <div class="slider-item">
-                    <h4>¡Bienvenido!</h4>
-                    <p>Conocé más sobre la plataforma de incentivos de Claro.</p>
+@include('frontend.components.header_auth')
+<main class="main main-pre">
+    <section class="section section-pre">
+        <div class="content">
+            <div class="row">
+                <div class="col col-md-7">
+                    <div class="embed-responsive">
+                        <video width="100%" controls preload autoplay>
+                            <source src="{{ asset('assets/frontend/media/video-intro.webm') }}" type="video/webm">
+                            <source src="{{ asset('assets/frontend/media/video-intro.mp4') }}" type="video/mp4">
+                            <source src="{{ asset('assets/frontend/media/video-intro.ogv') }}" type="video/ogg">
+                            <p>Your browser doesn't support HTML5 video tag.</p>
+                        </video>
+                    </div>
                 </div>
-                <div class="slider-item">
-                    <h4>Sumá puntos</h4>
-                    <p>Mejorando tu desempeño y según tus logros, vas a sumar puntos semanalmente.</p>
-                </div>
-                <div class="slider-item">
-                    <h4>Disfrutá de increíbles premios</h4>
-                    <p>Vas a poder canjear tus puntos por premios y recibirlos en tu base de operaciones.</p>
-                </div>
-                <div class="slider-item">
-                    <h4>Participás por un viaje</h4>
-                    <p>El mejor puntaje a nivel nacional y el de cada región serán parte de un viaje inolvidable.</p>
+                <div class="col col-md-5">
+                    <h4>¿Qué es el programa?</h4>
+                    <p>SOSClaro, es un programa de reconocimiento e incentivo dirigido a todos los vendedores de distribución del país, que tiene como objetivo brindar un espacio de comunicación y reconocimiento donde podremos compartir tus logros
+                        individuales y grupales entre todo el equipo.</p>
+                    <p>Porque SOSClaro, queremos conocerte, reconocerte y premiarte. Sumate al programa, sumá logros, suma premios.</p>
+                    <a href="{{ url('/login') }}" class="btn">INGRESAR</a>
+                    <a href="{{ url('/registro') }}" class="btn">CREAR MI CUENTA</a>
                 </div>
             </div>
-        </div>
-        <div class="actions">
-            <a href="{{ url('/login') }}" class="btn btn-block">INGRESAR</a>
-            <a href="{{ url('/registro') }}" class="btn btn-block">CREAR MI CUENTA</a>
         </div>
     </section>
 </main>
