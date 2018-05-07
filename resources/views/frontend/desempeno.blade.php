@@ -14,24 +14,25 @@
             <div class="card text-center">
                 <div class="card-header">
                     <h4>Esta semana sumaste
-                        <span class="badge badge-danger">180 puntos</span>
+                        <span class="badge badge-danger">{{ \App\Dni::getPuntos(Auth::user()->id) }} puntos</span>
                     </h4>
                 </div>
                 <div class="card-body">
                     <div class="row card-text">
                         <div class="col-md-6">
                             <h1 class="mb-0">
-                                <i class="fa fa-arrow-circle-o-up" aria-hidden="true"></i> 80%</h1>
+                            <!-- (indicador_1 + indicador_2)%2 -->    
+                                <i class="fa fa-arrow-circle-o-up" aria-hidden="true"></i> 0%</h1>
                         </div>
                         <div class="col-md-6 text-left">
                             <h6>
-                                <i class="fa fa-arrow-circle-o-up" aria-hidden="true"></i> 100% Indicador 1</h6>
+                                <i class="fa fa-arrow-circle-o-up" aria-hidden="true"></i> 0% Indicador 1</h6>
                             <h6>
-                                <i class="fa fa-arrow-circle-o-down" aria-hidden="true"></i> 60% Indicador 2</h6>
+                                <i class="fa fa-arrow-circle-o-down" aria-hidden="true"></i> 0% Indicador 2</h6>
                         </div>
                     </div>
                 </div>
-                <div class="card-footer">Datos para la semana del 14/03/2018</div>
+                <div class="card-footer">Datos para la semana del {{ date('d/n/Y') }}</div>
             </div>
         </article>
         <article class="section-content">
@@ -45,11 +46,7 @@
                             <div class="form-group">
                                 <label for="selectDesempenoMes">Mes</label>
                                 <select class="form-control" id="selectDesempenoMes">
-                                    <option>Diciembre</option>
-                                    <option>Noviembre</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
+                                    <option>Mayo</option>
                                 </select>
                             </div>
                         </div>
@@ -57,11 +54,9 @@
                             <div class="form-group">
                                 <label for="selectDesempenoRegion">Región</label>
                                 <select class="form-control" id="selectDesempenoRegion">
-                                    <option>Nacional</option>
-                                    <option>Patagónia</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
+                                    @foreach($regions as $region)
+                                        <option value="{{ $region->id }}">{{ $region->name }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
