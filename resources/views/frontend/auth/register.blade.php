@@ -1,4 +1,4 @@
-extends('layouts.frontend')
+@extends('layouts.frontend')
 
 @section('title', "Crear mi cuenta")
 @section('content')
