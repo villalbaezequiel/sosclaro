@@ -105,8 +105,12 @@ Route::group(['middleware' => 'auth'], function () {
     //Consejos
     Route::get('/consejos', 'Frontend\TipsController@index');
     Route::get('/consejos/{id}', 'Frontend\TipsController@show');
-
     
+    //logros
+    Route::get('/logros', function(){
+        return view('frontend.logros');
+    });
+
 });
 
 
