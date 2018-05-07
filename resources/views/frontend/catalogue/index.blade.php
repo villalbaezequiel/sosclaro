@@ -31,7 +31,7 @@
             @foreach($products as $product)
                 <div class="producto">
                     <a class="card" href="{{ url('/catalogo/producto/'.$product->id) }}">
-                        <img class="card-img-top" src="{{ asset('') }}" alt="{{ $product->name }}">
+                        <img class="card-img-top" src="{{ asset('storage/app/public/products/') }}/{{ $product->id.'/'.$product->image }}" alt="{{ $product->name }}">
                         <div class="card-body">
                             <h5 class="card-title">{{ $product->name }}</h5>
                             <h6 class="card-subtitle">

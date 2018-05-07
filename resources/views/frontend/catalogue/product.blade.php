@@ -13,7 +13,7 @@
             <div class="row">
                 <div class="col-md-7">
                     <div class="card">
-                        <img class="card-img-top" src="" alt="{{ $product->name }}">
+                        <img class="card-img-top" src="{{ asset('storage/app/public/products/') }}/{{ $product->id.'/'.$product->image }}" alt="{{ $product->name }}">
                     </div>
                 </div>
                 <div class="col-md-5">
