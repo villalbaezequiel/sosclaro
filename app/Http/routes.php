@@ -115,6 +115,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/logros', function(){
         return view('frontend.logros');
     });
+    
+    //qué es
+    Route::get('/que-es', function(){
+        return view('frontend.quees');
+    });
 
 });
 

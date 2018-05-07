@@ -17,14 +17,20 @@
                         <a href="{{ url('/catalogo') }}">Catálogo</a>
                     </li>-->
                     <li class="nav-item">
+                        <a href="{{ url('/') }}">Logros</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url('/') }}">Qué es?</a>
+                    </li>
+                    <li class="nav-item">
                         <a href="{{ url('/desempeno') }}">Desempeño</a>
                     </li>
                     <li class="nav-item">
                         <a href="{{ url('/ranking') }}">Ranking</a>
                     </li>
-                    <li class="nav-item">
+                    <!--li class="nav-item">
                         <a href="{{ url('/consejos') }}">Consejos</a>
-                    </li>
+                    </li-->
                     <li class="nav-item">
                         <a href="{{ url('/encuestas') }}">Encuestas</a>
                     </li>
@@ -38,6 +44,7 @@
                                 <a class="dropdown-item" href="{{ url('/usuario/canjes') }}">Mis canjes</a>
                                 <a class="dropdown-item" href="{{ url('/usuario/historial') }}">Historial de cuenta</a>
                                 <a class="dropdown-item" href="{{ url('/usuario/mi-cuenta') }}">Mi cuenta</a>
+                                <a class="dropdown-item" href="mailto:marketingoperativo@claro.com.ar">Contáctenos</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="{{ url('/logout') }}">Salir</a>
                             </div>
