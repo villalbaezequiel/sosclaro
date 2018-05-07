@@ -63,7 +63,7 @@ class ProductsController extends Controller
             $product->save();
      
             if($request->hasFile('imagen_product')){
-                Storage::disk('public')->put('products/'.$product->id.'/'.$imagen_product->getClientOriginalName(), true);
+                Storage::disk('public')->put('products/'.$product->id.'/'.$imagen_product->getClientOriginalName(), file_get_contents($imagen_product->getRealPath()));
             }
 
             $message = "Producto: ".$request->get('name_product')." creado con exito!";
@@ -128,7 +128,7 @@ class ProductsController extends Controller
                 Storage::delete('public/products/'.$id.'/'.$request->get('imagen_product_old'));
                 
                 $imagen_product = $request->file('imagen_product');
-                Storage::disk('public')->put('products/'.$id.'/'.$imagen_product->getClientOriginalName(), true);
+                Storage::disk('public')->put('products/'.$id.'/'.$imagen_product->getClientOriginalName(), file_get_contents($imagen_product->getRealPath()));
             }
                 
             $product = Products::find($id);

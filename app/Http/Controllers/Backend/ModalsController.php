@@ -125,14 +125,14 @@ class ModalsController extends Controller
                 Storage::delete('public/modals/desktop/'.$id.'/'.$request->get('image_desktop_modal_old'));
                 
                 $image_desktop_modal = $request->file('image_desktop_modal');
-                Storage::disk('public')->put('modals/desktop/'.$id.'/'.$image_desktop_modal->getClientOriginalName(), true);
+                Storage::disk('public')->put('modals/desktop/'.$id.'/'.$image_desktop_modal->getClientOriginalName(), file_get_contents($image_desktop_modal->getRealPath()));
             }     
             
             if($request->hasFile('image_mobile_modal')){
                 Storage::delete('public/modals/mobile/'.$id.'/'.$request->get('image_mobile_modal_old'));
                 
                 $image_mobile_modal = $request->file('image_mobile_modal');
-                Storage::disk('public')->put('modals/mobile/'.$id.'/'.$image_mobile_modal->getClientOriginalName(), true);
+                Storage::disk('public')->put('modals/mobile/'.$id.'/'.$image_mobile_modal->getClientOriginalName(), file_get_contents($image_mobile_modal->getRealPath()));
             }      
             
             $modal = Modals::find($id);
@@ -174,7 +174,10 @@ class ModalsController extends Controller
     {
         $modal = Modals::find($id);
         $modal->delete();
-     
+        
+        Storage::deleteDirectory('public/modals/desktop/'.$id);
+        Storage::deleteDirectory('public/modals/mobile/'.$id);
+
         return redirect('/admin/modals')->with('message', 'Modal eliminado con exito!');
     }
 }

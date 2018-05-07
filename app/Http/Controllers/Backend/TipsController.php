@@ -63,15 +63,14 @@ class TipsController extends Controller
             if(is_array($imagen_tip)):
                 foreach ($imagen_tip as $imagen) {
                     if($request->hasFile('imagen_tip')){
-                        Storage::disk('public')->put('tips/'.$tip->id.'/'.$imagen->getClientOriginalName(), true);
-                    
+                        Storage::disk('public')->put('tips/'.$tip->id.'/'.$imagen->getClientOriginalName(), file_get_contents($imagen->getRealPath()));
+                        
                         $name_imagen[] =  $imagen->getClientOriginalName();
                     }
                 }
             else:
                 if($request->hasFile('imagen_tip')){
-                    Storage::disk('public')->put('tips/'.$tip->id.'/'.$imagen_tip->getClientOriginalName(), true);
-                
+                    Storage::disk('public')->put('tips/'.$tip->id.'/'.$imagen_tip->getClientOriginalName(), file_get_contents($imagen_tip->getRealPath()));
                     $name_imagen[] =  $imagen_tip->getClientOriginalName();
                 }
             endif;
@@ -157,15 +156,15 @@ class TipsController extends Controller
                 if(is_array($imagen_tip)):
                     foreach ($imagen_tip as $imagen) {
                         if($request->hasFile('imagen_tip')){
-                            Storage::disk('public')->put('tips/'.$tip->id.'/'.$imagen->getClientOriginalName(), true);
+                            Storage::disk('public')->put('tips/'.$tip->id.'/'.$imagen->getClientOriginalName(), file_get_contents($imagen->getRealPath()));
 
                             $name_imagen[] =  $imagen->getClientOriginalName();
                         }
                     }
                 else:
                     if($request->hasFile('imagen_tip')){
-                        Storage::disk('public')->put('tips/'.$tip->id.'/'.$imagen_tip->getClientOriginalName(), true);
-
+                        Storage::disk('public')->put('tips/'.$tip->id.'/'.$imagen_tip->getClientOriginalName(), file_get_contents($imagen_tip->getRealPath()));
+                        
                         $name_imagen[] =  $imagen_tip->getClientOriginalName();
                     }
                 endif;
