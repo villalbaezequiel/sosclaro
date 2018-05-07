@@ -20,7 +20,7 @@
                         <a href="{{ url('/') }}">Logros</a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ url('/') }}">Qué es?</a>
+                        <a href="{{ url('/que-es') }}">Qué es?</a>
                     </li>
                     <li class="nav-item">
                         <a href="{{ url('/desempeno') }}">Desempeño</a>
