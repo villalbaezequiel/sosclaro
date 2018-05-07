@@ -20,6 +20,11 @@ Route::get('/', 'Frontend\HomeController@index');
 Route::get('/registro', 'Frontend\AuthController@indexRegister');
 Route::post('/registro/store', 'Frontend\AuthController@storeRegister');
 
+//terminos y condiciones
+Route::get('/terminos', function(){
+    return view('frontend.terminos');
+});
+
 //BACKEND
 Route::group(['middleware' => ['auth', 'admin']], function () {
     
