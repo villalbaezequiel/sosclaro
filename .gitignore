@@ -7,3 +7,5 @@ Homestead.json
 /nbproject/private/
 /nbproject
 /maquetado
+.DS_Store
+.vscode/
