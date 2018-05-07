@@ -102,6 +102,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/encuestas/{id}', 'Frontend\GuestsController@show');
     Route::post('/encuestas/{id}', 'Frontend\GuestsController@store');
 
+    //Consejos
+    Route::get('/consejos', 'Frontend\TipsController@index');
+    Route::get('/consejos/{id}', 'Frontend\TipsController@show');
+
+    
 });
 
 

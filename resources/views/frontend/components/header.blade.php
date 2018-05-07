@@ -23,10 +23,10 @@
                         <a href="{{ url('/ranking') }}">Ranking</a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ url('/') }}">Consejos</a>
+                        <a href="{{ url('/consejos') }}">Consejos</a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ url('/') }}">Encuestas</a>
+                        <a href="{{ url('/encuestas') }}">Encuestas</a>
                     </li>
                 </ul>
                 <ul class="nav-social">
