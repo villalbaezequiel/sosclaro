@@ -9,7 +9,7 @@
     <meta name="description" content="SosClaro Backend">
     <meta name="author" content="Ezequiel Villalba">
     <meta name="robots" content="index, follow">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/frontend/css/font-awesome.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
     <link rel="stylesheet" href="{{ asset('assets/frontend/css/plugins.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/frontend/css/main.min.css') }}">
     <script src="{{ asset('assets/frontend/js/vendor/modernizr-min.js') }}"></script>

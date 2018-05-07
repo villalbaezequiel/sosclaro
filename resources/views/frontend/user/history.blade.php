@@ -14,13 +14,13 @@
                 <div class="card-body text-center">
                     <div class="col col-md-6">
                         <h3>
-                            <span class="badge badge-secondary">50 puntos</span>
+                            <span class="badge badge-secondary">0 puntos</span>
                         </h3>
                         <span>Puntos disponibles para canjes</span>
                     </div>
                     <div class="col col-md-6">
                         <h3>
-                            <span class="badge badge-secondary">128 históricos</span>
+                            <span class="badge badge-secondary">0 históricos</span>
                         </h3>
                         <span>Puntos obtenidos desde la registración</span>
                     </div>
@@ -33,6 +33,8 @@
                     <strong>Movimientos</strong>
                 </div>
                 <div class="card-body">
+                    <p class="text-center">Aún no se han realizado movimientos.</p>
+                    <!--
                     <table class="table table-sm table-striped table-hover">
                         <thead>
                             <tr>
@@ -69,6 +71,7 @@
                             </tr>
                         </tbody>
                     </table>
+                    -->
                 </div>
             </div>
         </article>
