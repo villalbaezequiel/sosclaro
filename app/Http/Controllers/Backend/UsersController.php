@@ -120,7 +120,7 @@ class UsersController extends Controller
                 $user_profile->save();    
             }
                        
-            $message = "Usuario Alias: ".$request->get('name_user')." editado con exito! DNI: ". $request->get('dni');
+            $message = "Usuario: ".$request->get('name_user')." editado con exito! DNI: ". $request->get('dni');
             
             return redirect('/admin/users')->with('message', $message);
         

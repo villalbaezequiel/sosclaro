@@ -57,7 +57,7 @@ class UserController extends Controller
                 $user_profile->status = 1;
                 $user_profile->save();
 
-                $message = "Usuario Alias: ".$request->get('user_name')." editado con exito!";    
+                $message = "Usuario: ".$request->get('user_name')." editado con exito!";    
             } else {
                 $user = User::find($request->get('user_id'));
                 $user->name = $request->get('user_name');
@@ -80,7 +80,7 @@ class UserController extends Controller
                 $user_profile->status = 1;
                 $user_profile->save();
 
-                $message = "Usuario Alias: ".$request->get('user_name')." editado con exito!";  
+                $message = "Usuario: ".$request->get('user_name')." editado con exito!";  
             }
             
             return redirect('/usuario/mi-cuenta')->with('message', $message);
