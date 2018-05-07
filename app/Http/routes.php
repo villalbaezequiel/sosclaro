@@ -20,6 +20,11 @@ Route::get('/', 'Frontend\HomeController@index');
 Route::get('/registro', 'Frontend\AuthController@indexRegister');
 Route::post('/registro/store', 'Frontend\AuthController@storeRegister');
 
+//logros
+Route::get('/logros', function(){
+    return view('frontend.logros');
+});
+
 //terminos y condiciones
 Route::get('/terminos', function(){
     return view('frontend.terminos');
@@ -110,11 +115,6 @@ Route::group(['middleware' => 'auth'], function () {
     //Consejos
     Route::get('/consejos', 'Frontend\TipsController@index');
     Route::get('/consejos/{id}', 'Frontend\TipsController@show');
-    
-    //logros
-    Route::get('/logros', function(){
-        return view('frontend.logros');
-    });
 
 });
 
