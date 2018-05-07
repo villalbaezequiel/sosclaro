@@ -14,13 +14,16 @@
             <div class="nav-menu">
                 <ul class="nav-main" style="justify-content: flex-end;">
                     <li class="nav-item">
-                        <a href="{{ url('/que_es_claro') }}">Qué es Sos Claro</a>
+                        <a href="{{ url('/') }}">Qué es?</a>
                     </li>
                     <li class="nav-item">
                         <a href="{{ url('/logros') }}">Logros</a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ url('/registro') }}">Registro</a>
+                        <a href="{{ url('/login') }}">Ingresar</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url('/registro') }}">Registrarse</a>
                     </li>
                 </ul>
             </div>
