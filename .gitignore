@@ -6,3 +6,6 @@ Homestead.json
 .env
 /nbproject/private/
 /nbproject
+/maquetado
+.DS_Store
+.vscode/
