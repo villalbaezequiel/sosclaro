@@ -1,29 +1,16 @@
 @extends('layouts.backend')
 
-@section('title', "Usuarios Ganadores / Importar")
+@section('title', "Usuarios / Desempeño (Usuarios Ganadores) / Importar")
+
+@section('nav-button')
+<a class="btn btn-primary mb-3" href="{{ asset('assets/backend/docs/ejemplo_desempeno.xlsx') }}">Descargar Ejemplo Excel</a>
+@endsection
+
 @section('content')
-{!! Form::open(['route' => 'admin.users_ganadores.store', 'method' => 'POST', 'enctype' => 'multipart/form-data' ]) !!}
-    <div class="form-group">
-        <label for="active_tip">Region:</label>
-        <select class="form-control" name="id_region_user_g" required>
-            @foreach($regions as $region)
-                <option value="{{ $region->id }}">{{ $region->name }}</option>
-            @endforeach
-        </select>
-    </div>
-
-    <div class="form-group">
-        <label for="active_tip">Mes:</label>
-        <select class="form-control" name="mes_user_g" required>
-            @foreach($meses as $mes)
-                <option value="{{ $mes }}">{{ $mes }}</option>
-            @endforeach
-        </select>
-    </div>
-
+{!! Form::open(['route' => 'admin.desempeno.store', 'method' => 'POST', 'enctype' => 'multipart/form-data' ]) !!}
     <div class="custom-file">
-        <input type="file" class="custom-file-input" id="import_dni" name="import_dni" required>
-        <label class="custom-file-label" for="xls_user_g">Excel</label>
+        <input type="file" class="custom-file-input" id="file_desempeno" name="file_desempeno" required>
+        <label class="custom-file-label" for="file_desempeno">Excel Desempeno</label>
     </div>
 
     <div class="form-group"></div>
@@ -34,5 +21,7 @@
 @endsection
 
 @section('content-footer')
-<i>* Al Importar una Nueva Lista de números DNI, si el Numero DNI ya existe, se renovaran los puntos y indicador. Si un Numero DNI ya cargado no se encuentra en la Nueva Lista a Importar, se eliminara de la Base de Datos y si a la vez esta relacionada a un Usuario Activo, el mismo se dara de Baja automaticamente.</i>
+<i>*El Nombre del Excel no debe tener espacion ni caracteres especiales.</i><br/>
+<i>*El 'id_region' se puede visualizar en la seccion de <a href="{{ url('/admin/regions') }}">Regiones</a>.</i><br/>
+<i>*Los 'dni' se puede visualizar en la seccion de <a href="{{ url('/admin/dni') }}">DNI</a>.</i>
 @endsection

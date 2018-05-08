@@ -20,7 +20,6 @@
         <tr>
             <th>#</th>
             <th>DNI</th>
-            <th>Indicador</th>
             <th>Puntos</th>
             <th>Usuario Relacionado</th>
         </tr>
@@ -30,7 +29,6 @@
         <tr>
             <td>{{ $dni->id }}</td>
             <td>{{ $dni->dni }}</td>
-            <td>{{ \App\Indicadores::getNameJson($dni->indicador) }}</td>
             <td>{{ $dni->puntos }}</td>
             <td>
                 @if($dni->id_user == 0) 

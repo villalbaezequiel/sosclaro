@@ -52,4 +52,11 @@ class UsersProfile extends Model
         }
     }
     
+    static public function setPuntosHistory($id_user, $puntos) {
+        $id = UsersProfile::where('id_user', '=', $id_user)->get();
+        $puntos_history = UsersProfile::find($id[0]->id);
+        $puntos_history->puntos_history = ($puntos_history->puntos_history + $puntos);
+        $puntos_history->save();
+    }
+    
 }

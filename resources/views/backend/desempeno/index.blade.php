@@ -1,6 +1,6 @@
 @extends('layouts.backend')
 
-@section('title', "Usuarios / Listado DNI")
+@section('title', "Usuarios / Desempeño (Usuarios Ganadores)")
 
 @section('message')
     @if (session('message'))
@@ -11,48 +11,39 @@
 @endsection
 
 @section('nav-button')
-<a class="btn btn-primary mb-3" href="{{ url('/admin/dni/create') }}">Importar Lista DNI</a>
+<a class="btn btn-primary mb-3" href="{{ url('/admin/desempeno/create') }}">Importar Desempeño</a>
+<a class="btn btn-primary mb-3" href="{{ asset('assets/backend/docs/ejemplo_desempeno.xlsx') }}">Descargar Ejemplo Excel</a>
 @endsection
 
 @section('content')
-<table class="table table-bordered" id="list_dni" width="100%" cellspacing="0">
+<table class="table table-bordered" id="list_desempeno" width="100%" cellspacing="0">
     <thead>
         <tr>
-            <th>#</th>
             <th>DNI</th>
-            <th>Indicador</th>
+            <th>Region</th>
             <th>Puntos</th>
-            <th>Usuario Relacionado</th>
+            <th>Indicador 1</th>
+            <th>Indicador 2</th>
         </tr>
     </thead>
     <tbody>
-        @foreach($dnis as $dni)
+        @foreach($desempenos as $desempeno)
         <tr>
-            <td>{{ $dni->id }}</td>
-            <td>{{ $dni->dni }}</td>
-            <td>{{ \App\Indicadores::getNameJson($dni->indicador) }}</td>
-            <td>{{ $dni->puntos }}</td>
-            <td>
-                @if($dni->id_user == 0) 
-                    No hay usuario relacionado/registrado 
-                @else
-                    {{ \App\Dni::getName($dni->id_user) }}
-                @endif
-            </td>
+            <td>{{ $desempeno->dni }}</td>
+            <td>{{ \App\Regions::getName($desempeno->id_region) }}</td>
+            <td>{{ $desempeno->puntos }}</td>
+            <td>{{ $desempeno->indicador_1 }}</td>
+            <td>{{ $desempeno->indicador_2 }}</td>
         </tr>
         @endforeach
     </tbody>
 </table>
 @endsection
 
-@section('content-footer')
-<i>* Al Importar una Nueva Lista de números DNI, si el Numero DNI ya existe, se renovaran los puntos y indicador. Si un Numero DNI ya cargado no se encuentra en la Nueva Lista a Importar, se eliminara de la Base de Datos y si a la vez esta relacionada a un Usuario Activo, el mismo se dara de Baja automaticamente.</i>
-@endsection
-
 @section('javascript')
 <script type="text/javascript">
 $(document).ready(function(){
-    $("#list_dni").DataTable({
+    $("#list_desempeno").DataTable({
         "language": {
             "url": "https://cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
         }

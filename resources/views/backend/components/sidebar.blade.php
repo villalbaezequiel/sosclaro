@@ -88,7 +88,7 @@
                         <a href="{{ url('/admin/indicadores') }}">Indicadores</a>
                     </li>
                     <li>
-                        <a href="{{ url('/admin/users') }}">Usuarios Ganadores</a>
+                        <a href="{{ url('/admin/desempeno') }}">Desempeño</a>
                     </li>
                     <li>
                         <a href="{{ url('/admin/users') }}">Historial Usuarios</a>

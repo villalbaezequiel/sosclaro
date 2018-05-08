@@ -20,6 +20,11 @@ class Dni extends Model
         return $dni[0]->dni;
     }
     
+    static public function getIdDni($dni) {
+        $dni_id = Dni::where('dni', '=', $dni)->get();
+        return $dni_id[0]->id;
+    }
+    
     static public function getIdUser($id_user) {
         $dni = Dni::where('id_user', '=', $id_user)->get();
         return $dni[0]->id;

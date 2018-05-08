@@ -57,6 +57,7 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
 
         //ABM
         Route::resource('/users', 'Backend\UsersController');
+        Route::resource('/desempeno', 'Backend\UsersGanadoresController');
         Route::resource('/roles', 'Backend\RolesController');
         Route::resource('/dni', 'Backend\DniController');
         Route::resource('/users_ganadores', 'Backend\UsersGanadoresController');

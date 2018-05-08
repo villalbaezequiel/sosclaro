@@ -6,8 +6,12 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Maatwebsite\Excel\Facades\Excel;
 use App\Regions;
 use App\UsersGanadores;
+use App\UsersProfile;
+use App\Dni;
+use App\Indicadores;
 
 class UsersGanadoresController extends Controller
 {
@@ -18,7 +22,9 @@ class UsersGanadoresController extends Controller
      */
     public function index()
     {
-        //
+        return view('backend.desempeno.index', [
+            'desempenos' => UsersGanadores::all()
+        ]);
     }
 
     /**
@@ -27,7 +33,7 @@ class UsersGanadoresController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create(){
-        return view('backend.users_ganadores.create', [
+        return view('backend.desempeno.create', [
             'regions' => Regions::all(),
             'meses' => array('Mayo')
         ]);
@@ -44,8 +50,8 @@ class UsersGanadoresController extends Controller
         $message;
         try {
                 
-            if($request->hasFile('xls_user_g')){
-                $path = $request->file('xls_user_g')->getRealPath();
+            if($request->hasFile('file_desempeno')){
+                $path = $request->file('file_desempeno')->getRealPath();
                 $data = Excel::load($path, function($reader) {})->get();
 
                 if(!empty($data) && $data->count()){
@@ -53,21 +59,44 @@ class UsersGanadoresController extends Controller
                     foreach ($data as $key => $value) {
                             
                         $insert = new UsersGanadores;
-                        $insert->id_region = $request->get('id_region_user_g');
-                        $insert->mes = $request->get('id_region_user_g');
-                        $insert->puesto = $value->puesto;
-                        $insert->nombre = $value->nombre;
+                        $insert->dni = $value->dni;
+                        $insert->name_lastname = $value->nombre_apellido;
+                        $insert->id_region = $value->id_region;
                         $insert->puntos = $value->puntos;
+                        $insert->indicador_1 = $value->indicador_1;
+                        $insert->indicador_2 = $value->indicador_2;
+                        $insert->promedio = (($value->indicador_1 + $value->indicador_2) / 2);
+                        $insert->especification = 'cata';
                         $insert->save();
+                        
+                        //cargo los indicadores
+                        $indicador_1 = new Indicadores;
+                        $indicador_1->name = $value->indicador_1;
+                        $indicador_1->active = 1;
+                        $indicador_1->save();
+                        
+                        $indicador_2 = new Indicadores;
+                        $indicador_2->name = $value->indicador_2;
+                        $indicador_2->active = 1;
+                        $indicador_2->save();
+
+                        //sumo los puntos al usuario
+                        $user_dni = Dni::find(Dni::getIdDni($value->dni));
+                        $user_dni->puntos = ($user_dni->puntos + $value->puntos);
+                        $user_dni->indicador = json_encode(array($indicador_1->id, $indicador_2->id));
+                        $user_dni->save();
+                        
+                        //sumo los puntos historicos
+                        //UsersProfile::setPuntosHistory($user_dni->id_user, $value->puntos);                        
                         
                     }
                     
                 }
             }
             
-            $message = "Excel de Usuarios Ganadores: importado con exito!";
+            $message = "Excel de Desempeño importado con exito!";
             
-            return redirect('/admin/users_ganadores')->with('message', $message);
+            return redirect('/admin/desempeno')->with('message', $message);
         
         } catch(\Exception $e) {
 
