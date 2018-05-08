@@ -127,6 +127,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/que-es', function(){
         return view('frontend.quees');
     });
+    
+    //ajax
+    Route::get('/desempeno_name/{name}', 'Frontend\DesempenoController@desempenosForName');
+
 
 });
 

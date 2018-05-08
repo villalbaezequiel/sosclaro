@@ -14,24 +14,25 @@
             <div class="card text-center">
                 <div class="card-header">
                     <h4>Esta semana sumaste
-                        <span class="badge badge-danger">0 puntos</span>
+                        <span class="badge badge-danger">{{ $desempeno_user['puntos'] }} puntos</span>
                     </h4>
                 </div>
+                                
                 <div class="card-body">
                     <div class="row card-text">
                         <div class="col-md-6">
                             <h1 class="mb-0">
-                                <i class="fa fa-arrow-circle-o-up" aria-hidden="true"></i> 0%</h1>
+                                <i class="fa fa-arrow-circle-o-up" aria-hidden="true"></i> {{ $desempeno_user['promedio'] }}%</h1>
                         </div>
                         <div class="col-md-6 text-left">
                             <h6>
-                                <i class="fa fa-arrow-circle-o-up" aria-hidden="true"></i> 0% Indicador 1</h6>
+                                <i class="fa fa-arrow-circle-o-up" aria-hidden="true"></i> {{ $desempeno_user['indicador_1'] }}% Indicador 1</h6>
                             <h6>
-                                <i class="fa fa-arrow-circle-o-down" aria-hidden="true"></i> 0% Indicador 2</h6>
+                                <i class="fa fa-arrow-circle-o-down" aria-hidden="true"></i> {{ $desempeno_user['indicador_2'] }}% Indicador 2</h6>
                         </div>
                     </div>
                 </div>
-                <!--div class="card-footer">Datos para la semana del 14/03/2018</div-->
+                <div class="card-footer">Datos para la semana del {{ \App\Functions::getDate($desempeno_user['created_at']) }}</div
             </div>
         </article>
         <article class="section-content">
@@ -40,34 +41,31 @@
                     <strong>Ganadores</strong>
                 </div>
                 <div class="card-body">
-                    <p class="text-center">Datos no cargados por el momento.</p>
-                    <!--
-                    <form class="row text-center">
-                        <div class="col col-md-6">
+                    
+                    @if($desempenos_name[0])
+                    <div class="row text-center">
+                        <form class="col col-md-6" id="form_desempenos">
                             <div class="form-group">
-                                <label for="selectDesempenoMes">Mes</label>
-                                <select class="form-control" id="selectDesempenoMes">
-                                    <option>Diciembre</option>
-                                    <option>Noviembre</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
+                                <label for="desempenos_name">Mes</label>
+                                <select class="form-control" id="desempenos_name" name="desempenos_name">
+                                    <option>Seleccionar...</option>
+                                    @foreach($desempenos_name as $desemp_name)
+                                    <option value="{{ $desemp_name['name'] }}">{{ $desemp_name['name'] }}</option>
+                                    @endforeach
                                 </select>
                             </div>
-                        </div>
+                        </form>
                         <div class="col col-md-6">
                             <div class="form-group">
                                 <label for="selectDesempenoRegion">Región</label>
                                 <select class="form-control" id="selectDesempenoRegion">
-                                    <option>Nacional</option>
-                                    <option>Patagónia</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
+                                    @foreach($regions as $region)
+                                    <option value="{{ $region['id'] }}">{{ $region['name'] }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
-                    </form>
+                    </div>
                     <table class="table table-sm table-hover">
                         <thead>
                             <tr>
@@ -76,88 +74,51 @@
                                 <th scope="col">Puntos</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Guido Kilback</td>
-                                <td>90034</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Cassandra Kohler</td>
-                                <td>79240</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td>Ethyl Skiles</td>
-                                <td>61176</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">4</th>
-                                <td>Ashlynn Senger</td>
-                                <td>90034</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">5</th>
-                                <td>Ramona VonRueden</td>
-                                <td>79240</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">6</th>
-                                <td>Ashlee Powlowski</td>
-                                <td>61176</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">7</th>
-                                <td>Mayra Pfannerstill</td>
-                                <td>90034</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">8</th>
-                                <td>Jean Schultz</td>
-                                <td>79240</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">9</th>
-                                <td>Lou Collier</td>
-                                <td>61176</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">10</th>
-                                <td>Bridie Senger</td>
-                                <td>90034</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">11</th>
-                                <td>Josiane Fisher</td>
-                                <td>90034</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">12</th>
-                                <td>Cole Davis</td>
-                                <td>79240</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">13</th>
-                                <td>Floy Fadel</td>
-                                <td>61176</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">...</th>
-                                <td>Shaun Bergnaum</td>
-                                <td>61176</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">20</th>
-                                <td>Laurel Ziemann</td>
-                                <td>61176</td>
-                            </tr>
+                        <tbody id="content_desempeno">
+                            
                         </tbody>
                     </table>
-                    -->
+                    @else
+                        <p class="text-center">Datos no cargados por el momento.</p>
+                    @endif
                 </div>
             </div>
         </article>
     </section>
 </main>
+@endsection
+
+@section('javascript')
+<script type="text/javascript">
+$(document).ready(function(){
+    
+    $("#selectDesempenoRegion").change(function(){
+        
+    });
+    
+    $("#desempenos_name").change(function(){
+        
+        $.ajax({
+            type: 'GET',
+            url: '/desempeno_name/'+$(this).val(),
+            dataType: 'json',
+            success: function(data){
+                $("#content_desempeno").empty();
+                $.each(data, function(key, value){
+                    var count = 1;
+                    $.each(value, function(k, v){
+                        console.log(v);
+                        $("#content_desempeno").append('<tr class="'+v.id_region+'"><th scope="row">'+k+'</th><td>'+v.name_lastname+'</td><td>'+v.puntos+'</td></tr>');
+                    })
+                })
+            },
+            error: function(xhr, status){
+                console.log('Error: '+xhr);
+            }
+        });
+    
+    });
+    
+});
+</script>
 @endsection
