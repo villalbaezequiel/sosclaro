@@ -42,7 +42,7 @@
                 </div>
                 <div class="card-body">
                     
-                    @if($desempenos_name[0])
+                    @if($desempenos_name)
                     <div class="row text-center">
                         <form class="col col-md-6" id="form_desempenos">
                             <div class="form-group">
