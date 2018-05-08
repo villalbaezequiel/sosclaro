@@ -14,7 +14,7 @@
             <div class="card text-center">
                 <div class="card-header">
                     <h4>Tienes acumulados
-                        <span class="badge badge-danger">0 puntos</span> históricos</h4>
+                        <span class="badge badge-danger">{{ \App\UsersProfile::getPuntosHistory(Auth::user()->id) }} puntos</span> históricos</h4>
                 </div>
                 <div class="card-body">
                     <div class="row card-text">
@@ -44,16 +44,14 @@
                     <strong>Posiciones por región</strong>
                 </div>
                 <div class="card-body">
-                    <p class="text-center">Datos no cargados por el momento.</p>
-                    <!--
+                    <p id="sin_data" class="text-center">Datos no cargados por el momento.</p>
+                    
                     <form class="text-center">
                         <div class="form-group">
                             <select class="form-control" id="selectDesempenoRegion">
-                                <option>Nacional</option>
-                                <option>Patagónia</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
+                                @foreach($regions as $region)
+                                    <option value="{{ $region['id'] }}">{{ $region['name'] }}</option>
+                                @endforeach
                             </select>
                         </div>
                     </form>
@@ -65,88 +63,47 @@
                                 <th scope="col">Puntos</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Guido Kilback</td>
-                                <td>90034</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Cassandra Kohler</td>
-                                <td>79240</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td>Ethyl Skiles</td>
-                                <td>61176</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">4</th>
-                                <td>Ashlynn Senger</td>
-                                <td>90034</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">5</th>
-                                <td>Ramona VonRueden</td>
-                                <td>79240</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">6</th>
-                                <td>Ashlee Powlowski</td>
-                                <td>61176</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">7</th>
-                                <td>Mayra Pfannerstill</td>
-                                <td>90034</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">8</th>
-                                <td>Jean Schultz</td>
-                                <td>79240</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">9</th>
-                                <td>Lou Collier</td>
-                                <td>61176</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">10</th>
-                                <td>Bridie Senger</td>
-                                <td>90034</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">11</th>
-                                <td>Josiane Fisher</td>
-                                <td>90034</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">12</th>
-                                <td>Cole Davis</td>
-                                <td>79240</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">13</th>
-                                <td>Floy Fadel</td>
-                                <td>61176</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">...</th>
-                                <td>Shaun Bergnaum</td>
-                                <td>61176</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">50</th>
-                                <td>Laurel Ziemann</td>
-                                <td>61176</td>
-                            </tr>
+                        <tbody id="content_ranking">
                         </tbody>
                     </table>
-                    -->
+                    
                 </div>
             </div>
         </article>
     </section>
 </main>
+@endsection
+
+@section('javascript')
+<script type="text/javascript">
+$(document).ready(function(){
+    
+    $("#selectDesempenoRegion").change(function(){
+        
+        $.ajax({
+            type: 'GET',
+            url: '/ranking/'+$(this).val(),
+            dataType: 'json',
+            success: function(data){
+                
+                $("#sin_data").hide();
+                $("#content_ranking").empty();
+                
+                $.each(data, function(key, value){
+                    var count = 1;
+                    $.each(value, function(k, v){
+                        console.log(v);
+                        $("#content_ranking").append('<tr><th scope="row">'+v.puesto+'</th><td>'+v.name+'</td><td>'+v.puntos+'</td></tr>');
+                    })
+                })
+            },
+            error: function(xhr, status){
+                console.log('Error: '+xhr);
+            }
+        });
+    
+    });
+    
+});
+</script>
 @endsection

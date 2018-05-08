@@ -130,6 +130,7 @@ Route::group(['middleware' => 'auth'], function () {
     
     //ajax
     Route::get('/desempeno_name/{name}', 'Frontend\DesempenoController@desempenosForName');
+    Route::get('/ranking/{id_region}', 'Frontend\RankingController@ajax');
 
 
 });
