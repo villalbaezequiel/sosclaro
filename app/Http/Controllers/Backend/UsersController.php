@@ -14,6 +14,7 @@ use App\Dni;
 use App\Cities;
 use App\Regions;
 use App\Indicadores;
+use Illuminate\Support\Facades\DB;
 
 class UsersController extends Controller
 {
@@ -48,15 +49,17 @@ class UsersController extends Controller
     public function store(Request $request)
     {
         $timestamp = date('Y_m_d_h_i_s');
-        $active = $request->get('active_users');
-        Excel::create('export_users_'.$timestamp, function($excel) {
+        Excel::create('export_users_'.$timestamp, function($excel) use ($request){
  
-            $excel->sheet('Usuarios', function($sheet) {
+            $excel->sheet('Usuarios', function($sheet) use($request) {
  
-                //hacer join con datos de model DNI y UsersProfile
-                //$users = User::where('active', '=',$active)->get();
-                $users = User::all();
-                $sheet->fromArray($users);
+                $users = DB::table('users')->select('dni.dni', 'dni.name', 'dni.last_name', 'users.email', 'dni.puntos', 'users_profile.id_region', 'users_profile.sexo as gender', 'users_profile.date_year', 'users_profile.telephone', 'users_profile.telephone_other', 'users_profile.address', 'users_profile.status as full_profile', 'users.active', 'users.created_at', 'dni.updated_at')
+                        ->join('dni', 'dni.id_user', '=', 'users.id')
+                        ->join('users_profile', 'users_profile.id_user', '=', 'users.id')
+                        ->where('users.active', $request->get('active_users'))
+                        ->get();
+                
+                $sheet->fromArray(json_decode( json_encode($users), true));
  
             });
             
