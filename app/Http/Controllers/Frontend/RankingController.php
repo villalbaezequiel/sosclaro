@@ -10,7 +10,6 @@ use App\Regions;
 use App\UsersProfile;
 use App\Dni;
 
-
 class RankingController extends Controller
 {
     public function index() {
@@ -25,7 +24,7 @@ class RankingController extends Controller
         $users_region = UsersProfile::where('id_region', '=', $id_region)->orderBy('puntos_history', 'DESC')->get();
         
         foreach ($users_region as $key => $value) {
-            $users[] = array('puesto' => ($key+1), 'name' => Dni::getName($value['id_user']),'puntos' => $value['puntos_history']);
+            $users[] = array('puesto' => ($key+1), 'name' => Dni::getName($value['id_user']),'puntos' => Dni::getPuntos($value['id_user']));
         }
         return response()->json(['usuarios' => $users]);
     }

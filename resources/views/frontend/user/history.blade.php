@@ -33,7 +33,7 @@
                 <div class="card-header text-center">
                     <strong>Movimientos</strong>
                 </div>
-                @if($exchanges[0] || $user_profile[0] || $guests_user[0])
+                @if($exchanges || $user_profile || $guests_user)
 
                 <div class="card-body">
                     <table class="table table-sm table-striped table-hover">
@@ -45,7 +45,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @if($exchanges[0])
+                            @if(!empty($exchanges[0]))
                                 @foreach($exchanges as $canje)
                                 <tr>
                                     <td>{{ \App\Functions::getDate($canje['updated_at']) }}</td>
@@ -55,7 +55,7 @@
                                 @endforeach
                             @endif
                             
-                            @if($guests_user[0])
+                            @if(!empty($guests_user[0]))
                                 @foreach($guests_user as $guest)
                                 <tr>
                                     <td>{{ \App\Functions::getDate($guest['updated_at']) }}</td>

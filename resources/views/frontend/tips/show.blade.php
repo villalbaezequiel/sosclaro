@@ -18,7 +18,8 @@
                 </div>
                 <div class="article-media">
                     <div class="embed-responsive">
-                        <iframe width="560" height="315" src="{{ $tip['url_youtube'] }}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                        <!--<iframe width="560" height="315" src="{{ $tip['url_youtube'] }}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>-->
+                        <iframe width="560" height="315" src="{{ $tip['url_youtube'] }}" frameborder="0" allowfullscreen></iframe>
                     </div>
                 </div>
                 <div class="article-body">
