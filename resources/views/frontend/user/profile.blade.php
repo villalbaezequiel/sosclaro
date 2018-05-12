@@ -17,6 +17,10 @@
             {{ session('message') }}
         </div>
     @endif
+
+    <div class="alert alert-info">
+        <a href="{{ url('/encuestas/1') }}">Completá muestra de Encuesta y <strong>sumá puntos</strong> adicionales a tu cuenta ahora!</a>
+    </div>
     
     <section class="section-wrapper">
         <hgroup class="section-header">

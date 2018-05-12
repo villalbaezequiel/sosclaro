@@ -10,6 +10,7 @@ use App\Guest;
 use App\GuestQuestions;
 use App\GuestUsers;
 use App\Dni;
+use App\UsersProfile;
 use Illuminate\Support\Facades\Auth;
 
 class GuestsController extends Controller
@@ -25,6 +26,7 @@ class GuestsController extends Controller
         return view('frontend.guests.encuesta_single', [
             'guest' => Guest::where('id', '=', $id)->get()->toArray(),
             'guest_questions' => GuestQuestions::where('id_guest', '=', $id)->get()->toArray(),
+            'user_profile' => UsersProfile::where('id_user', '=', Auth::user()->id)->get()->toArray()
         ]);
     }
     

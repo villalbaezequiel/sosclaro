@@ -5,8 +5,13 @@
 
 @include('frontend.components.header')
 <main class="main main-user">
-    <div class="alert alert-info">Sabías que completando esta encuesta obtenés
-        <strong>{{ $guest[0]['puntos'] }} puntos</strong> de regalo?</div>
+    
+    @if($user_profile[0]['status'] == 0)
+        <div class="alert alert-info">Sabías que completando tu perfil tenes
+            <strong>20 puntos</strong> de regalo?
+        </div>
+    @endif
+    
     <section class="section-wrapper">
         <hgroup class="section-header">
             <span class="title">Encuesta</span>
