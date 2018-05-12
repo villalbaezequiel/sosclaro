@@ -95,14 +95,14 @@
                         </div>
                         
                         <div class="form-group row">
-                            <label class="col col-sm-3 col-form-label">Dirección</label>
+                            <label class="col col-sm-3 col-form-label">Domicilio Personal</label>
                             <div class="col col-sm-9">
                                 <input type="text" class="form-control" name="user_profile_address" value="{{ $user_profile[0]['address'] }}" placeholder="Av. Santa Fe 4321" required>
                             </div>
                         </div>
                         
                         <div class="form-group row">
-                            <label class="col col-sm-3 col-form-label">Región</label>
+                            <label class="col col-sm-3 col-form-label">Región Comercial</label>
                             <div class="col col-sm-9">
                                 <select class="form-control" name="user_profile_id_region" required>
                                     <option value="">Seleccionar...</option>
