@@ -100,7 +100,7 @@ $(document).ready(function(){
         
         $.ajax({
             type: 'GET',
-            url: '/public/desempeno_name/'+$(this).val(),
+            url: '/desempeno_name/'+$(this).val(),
             dataType: 'json',
             success: function(data){
                 $("#content_desempeno").empty();

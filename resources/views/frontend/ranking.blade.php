@@ -84,7 +84,7 @@ $(document).ready(function(){
         
         $.ajax({
             type: 'GET',
-            url: '/public/ranking/'+$(this).val(),
+            url: '/ranking/'+$(this).val(),
             dataType: 'json',
             success: function(data){
                 
