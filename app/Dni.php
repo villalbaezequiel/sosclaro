@@ -12,12 +12,16 @@ class Dni extends Model
     
     static public function getPuntos($id) {
         $puntos = Dni::where('id_user', '=', $id)->get();
-        return $puntos[0]->puntos;
+        if(isset($puntos[0])){ 
+            return $puntos[0]->puntos;
+        }
     }
     
     static public function getDni($id) {
         $dni = Dni::where('id_user', '=', $id)->get();
-        return $dni[0]->dni;
+        if(isset($dni[0])){
+            return $dni[0]->dni;
+        }
     }
     
     static public function getIdDni($dni) {
@@ -32,7 +36,9 @@ class Dni extends Model
     
     static function getName($id_user) {
         $user = Dni::where('id_user', '=', $id_user)->get();
-        return $user[0]->name." ".$user[0]->last_name;
+        if(isset($user[0])){
+            return $user[0]->name." ".$user[0]->last_name;
+        }
     }
     
     static function getNameShort($id_user) {
