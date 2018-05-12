@@ -20,6 +20,9 @@
                         <a href="{{ url('/logros') }}">Logros</a>
                     </li>
                     <li class="nav-item">
+                        <a href="{{ url('/contactanos') }}">Contactanos</a>
+                    </li>
+                    <li class="nav-item">
                         <a href="{{ url('/login') }}">Ingresar</a>
                     </li>
                     <li class="nav-item">

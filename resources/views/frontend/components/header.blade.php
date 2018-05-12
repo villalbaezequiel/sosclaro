@@ -44,7 +44,7 @@
                                 <a class="dropdown-item" href="{{ url('/usuario/canjes') }}">Mis canjes</a>
                                 <a class="dropdown-item" href="{{ url('/usuario/historial') }}">Historial de cuenta</a>
                                 <a class="dropdown-item" href="{{ url('/usuario/mi-cuenta') }}">Mi cuenta</a>
-                                <a class="dropdown-item" href="mailto:marketingoperativo@claro.com.ar">Contáctenos</a>
+                                <a class="dropdown-item" href="{{ url('/contactanos') }}">Contactanos</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="{{ url('/logout') }}">Salir</a>
                             </div>

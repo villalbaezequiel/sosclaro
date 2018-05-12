@@ -35,6 +35,11 @@ Route::get('/logros', function(){
     return view('frontend.logros');
 });
 
+//contactanos
+Route::get('/contactanos', function(){
+    return view('frontend.contactanos');
+});
+
 //BACKEND
 Route::group(['middleware' => ['auth', 'admin']], function () {
     
