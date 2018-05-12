@@ -48,11 +48,11 @@ class AuthController extends Controller
             }
             
             if(empty($checkDni[0])){
-                $message = "DNI: ".$request->get('dni')." no se encontró en nuestro sistema. ";
+                $message = "El DNI no se encuentra en nuestro sistema. Contactá a tu superior o mandanos un mail con tus datos a marketingoperativo@claro.com.ar";
                 return redirect('/registro')->with('message', $message);
             
             } elseif($checkDni[0]['id_user'] != 0){
-                $message = "DNI: ".$request->get('dni')." ya se encuenta asociado a otro Usuario. ";
+                $message = "Este DNI ya se encuentra registrado";
                 return redirect('/registro')->with('message', $message);
                 
             } elseif(!empty($checkEmail[0])){
