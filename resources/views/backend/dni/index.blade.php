@@ -44,7 +44,7 @@
 @endsection
 
 @section('content-footer')
-<i>* Al Importar una Nueva Lista de números DNI, si el Numero DNI ya existe, se renovaran los puntos y indicador. Si un Numero DNI ya cargado no se encuentra en la Nueva Lista a Importar, se eliminara de la Base de Datos y si a la vez esta relacionada a un Usuario Activo, el mismo se dara de Baja automaticamente.</i>
+<i>* Al Importar una Nueva Lista de números DNI, si el Numero DNI ya existe, se renovaran los puntos y indicador.</i>
 @endsection
 
 @section('javascript')
