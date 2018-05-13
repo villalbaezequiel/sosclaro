@@ -18,6 +18,7 @@ class GuestQuestions extends Migration
             $table->string('question');
             $table->string('options', 5000);
             $table->integer('order');
+            $table->string('type_input');
             $table->enum('active', ['0', '1']);
             $table->timestamps();
         });
