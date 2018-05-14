@@ -24,6 +24,7 @@
             <option value="0">Radio</option>
             <option value="1">Texto</option>
             <option value="2">Checkbox</option>
+            <option value="3">TextArea</option>
         </select>
     </div>
 

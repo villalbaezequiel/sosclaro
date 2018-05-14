@@ -27,15 +27,34 @@
                         @foreach($guest_questions as $question)
                             <div class="form-group">
                                 <label for="encuestaPreguntaRadios">{{ $question['question'] }}</label>
-                                <?php 
-                                    $options = json_decode($question['options']);
-                                ?>
-                                @foreach($options as $option)
-                                    <div class="custom-control custom-radio">
-                                        <input class="custom-control-input" type="radio" name="questions[][{{ $question['id'] }}]" id="{{ $question['id'] }}_{{ $option }}" value="{{ $option }}">
-                                        <label class="custom-control-label" for="{{ $question['id'] }}_{{ $option }}">{{ $option }}</label>
-                                    </div>
-                                @endforeach
+                                @if($question['type_input'] == 0)
+                                    <?php 
+                                        $options = json_decode($question['options']);
+                                    ?>
+                                    @foreach($options as $option)
+                                        <div class="custom-control custom-radio">
+                                            <input class="custom-control-input" type="radio" name="questions[][{{ $question['id'] }}]" id="{{ $question['id'] }}_{{ $option }}" value="{{ $option }}">
+                                            <label class="custom-control-label" for="{{ $question['id'] }}_{{ $option }}">{{ $option }}</label>
+                                        </div>
+                                    @endforeach
+                                @endif
+                                @if($question['type_input'] == 2)
+                                    <?php 
+                                        $options = json_decode($question['options']);
+                                    ?>
+                                    @foreach($options as $option)
+                                        <div class="custom-control custom-checkbox">
+                                            <input class="custom-control-input" type="checkbox" name="questions[][{{ $question['id'] }}]" id="{{ $question['id'] }}_{{ $option }}" value="{{ $option }}">
+                                            <label class="custom-control-label" for="{{ $question['id'] }}_{{ $option }}">{{ $option }}</label>
+                                        </div>
+                                    @endforeach
+                                @endif
+                                @if($question['type_input'] == 1)
+                                    <input type="text" class="form-control" name="questions[][{{ $question['id'] }}]" id="{{ $question['id'] }}_{{ $option }}">
+                                @endif
+                                @if($question['type_input'] == 3)
+                                    <textarea class="form-control" name="questions[][{{ $question['id'] }}]" id="{{ $question['id'] }}_{{ $option }}"></textarea>
+                                @endif
                             </div>
                         @endforeach
                         <div class="form-group">

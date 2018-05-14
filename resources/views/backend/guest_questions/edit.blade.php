@@ -24,6 +24,7 @@
             <option value="0" @if($question->type_input == 0) selected="selected"  @endif>Radio</option>
             <option value="1" @if($question->type_input == 1) selected="selected"  @endif>Texto</option>
             <option value="2" @if($question->type_input == 2) selected="selected"  @endif>Checkbox</option>
+            <option value="3" @if($question->type_input == 3) selected="selected"  @endif>TextArea</option>
         </select>
     </div>
 
