@@ -49,12 +49,12 @@ class GuestsApiController extends Controller
 	}        
     }
     
-    public function showGuest($id_user ,$id_guest)
+    public function showGuest($id_guest)
     {
         $message;
         try {
             
-            return response()->json(['guest' => Guest::where('id', '=', $id_guest)->get()->toArray(),
+            return response()->json(['status' => 1, 'guest' => Guest::where('id', '=', $id_guest)->get()->toArray(),
                 'guest_questions' => GuestQuestions::where('id_guest', '=', $id_guest)->get()->toArray()]);
             
         } catch(\Exception $e) {

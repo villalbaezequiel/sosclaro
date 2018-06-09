@@ -170,7 +170,7 @@ Route::group(['prefix' => 'api'], function() {
     
     // Encuestas
     Route::get('/user/encuestas/{id_user}', 'Api\GuestsApiController@allGuests');
-    Route::get('/user/encuestas/{id_user}/{id_guest}', 'Api\GuestsApiController@showGuest');
+    Route::get('/user/encuestas/{id_guest}/show', 'Api\GuestsApiController@showGuest');
     Route::get('/user/encuestas/{id_user}/{id_guest}/store', 'Api\GuestsApiController@storeGuest');
  
    // Catalogo 
