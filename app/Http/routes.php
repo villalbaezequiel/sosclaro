@@ -167,6 +167,8 @@ Route::group(['prefix' => 'api'], function() {
     Route::get('/user/canjes/single/{id_canje}', 'Api\UserApiController@singleCanje');
     Route::get('/user/canjes/single/confirmar/{id_canje}', 'Api\UserApiController@singleCanjeConfirmar');
     
+    // home
+   Route::get('/home/banners', 'Api\HomeApiController@index');
     
     // Encuestas
     Route::get('/user/encuestas/{id_user}', 'Api\GuestsApiController@allGuests');
