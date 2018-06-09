@@ -108,7 +108,7 @@
                         <div class="form-group row">
                             <label class="col col-sm-3 col-form-label">Región Comercial</label>
                             <div class="col col-sm-9">
-                                <select class="form-control" name="user_profile_id_region" required>
+                                <select class="form-control" name="user_profile_id_region" disabled="disabled">
                                     <option value="">Seleccionar...</option>
                                     @foreach($regions as $region)
                                     <option value="{{ $region->id }}" @if($region->id == $user_profile[0]['id_region']) selected="selected" @endif>{{ $region->name }}</option>

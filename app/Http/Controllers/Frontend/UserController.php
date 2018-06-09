@@ -56,7 +56,7 @@ class UserController extends Controller
                 $user_profile->telephone_other = $request->get('user_profile_telephone_other');
                 $user_profile->address = $request->get('user_profile_address');
                 $user_profile->id_city = $request->get('user_profile_id_city');
-                $user_profile->id_region = $request->get('user_profile_id_region');
+                //$user_profile->id_region = $request->get('user_profile_id_region');
                 $user_profile->status = 1;
                 $user_profile->save();
 
@@ -79,7 +79,7 @@ class UserController extends Controller
                 $user_profile->telephone_other = $request->get('user_profile_telephone_other');
                 $user_profile->address = $request->get('user_profile_address');
                 $user_profile->id_city = $request->get('user_profile_id_city');
-                $user_profile->id_region = $request->get('user_profile_id_region');
+                //$user_profile->id_region = $request->get('user_profile_id_region');
                 $user_profile->status = 1;
                 $user_profile->save();
 
