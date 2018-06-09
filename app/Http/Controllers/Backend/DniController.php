@@ -73,6 +73,7 @@ class DniController extends Controller
                             }
                             
                             $insert->id_user = 0;
+                            $insert->id_region = $value->id_region;
                             $insert->save();
                             
                         } else {

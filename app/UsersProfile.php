@@ -59,4 +59,11 @@ class UsersProfile extends Model
         $puntos_history->save();
     }
     
+    static public function getIdRegion($id_user) {
+        $status = UsersProfile::where('id_user', '=', $id_user)->get();
+        if(!empty($status[0])){
+            return $status[0]->id_region;
+        }
+    }
+    
 }

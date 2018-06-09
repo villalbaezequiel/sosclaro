@@ -20,7 +20,7 @@
 <table class="table table-bordered" id="list_dni" width="100%" cellspacing="0">
     <thead>
         <tr>
-            <th>#</th>
+            <th>ID_REGION</th>
             <th>DNI</th>
             <th>Puntos</th>
             <th>Usuario Relacionado</th>
@@ -29,7 +29,15 @@
     <tbody>
         @foreach($dnis as $dni)
         <tr>
-            <td>{{ $dni->id }}</td>
+            
+            @if($dni->id_region != 0)
+                <td>{{ $dni->id_region }}</td>
+            @elseif($dni->id_user != 0)
+                <td>{{ \App\UsersProfile::getIdRegion($dni->id_user) }}</td>
+            @else
+                <td>No hay region asociada.</td>
+            @endif
+            
             <td>{{ $dni->dni }}</td>
             <td>{{ $dni->puntos }}</td>
             <td>
