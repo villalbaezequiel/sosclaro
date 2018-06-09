@@ -51,14 +51,25 @@ class UsersController extends Controller
         $timestamp = date('Y_m_d_h_i_s');
         Excel::create('export_users_'.$timestamp, function($excel) use ($request){
  
-            $excel->sheet('Usuarios', function($sheet) use($request) {
+            $excel->sheet('Usuarios registrado', function($sheet) use($request) {
  
-                $users = DB::table('users')->select('dni.dni', 'dni.name', 'dni.last_name', 'users.email', 'dni.puntos', 'users_profile.id_region', 'users_profile.sexo as gender', 'users_profile.date_year', 'users_profile.telephone', 'users_profile.telephone_other', 'users_profile.address', 'users_profile.status as full_profile', 'users.active', 'users.created_at', 'dni.updated_at')
-                        ->join('dni', 'dni.id_user', '=', 'users.id')
-                        ->join('users_profile', 'users_profile.id_user', '=', 'users.id')
-                        ->where('users.active', $request->get('active_users'))
-                        ->get();
+//                $users = DB::table('users')->select('dni.dni', 'dni.name', 'dni.last_name', 'users.email', 'dni.puntos', 'users_profile.id_region', 'users_profile.sexo as gender', 'users_profile.date_year', 'users_profile.telephone', 'users_profile.telephone_other', 'users_profile.address', 'users_profile.status as full_profile', 'users.active', 'users.created_at', 'dni.updated_at')
+//                        ->join('dni', 'dni.id_user', '=', 'users.id')
+//                        ->join('users_profile', 'users_profile.id_user', '=', 'users.id')
+//                        ->where('users.active', $request->get('active_users'))
+//                        ->get();
                 
+                $users = DB::table('users')->select('users.id', 'users.email', 'users.active', 'users_profile.id_region', 'users_profile.sexo as gender', 'users_profile.date_year', 'users_profile.telephone', 'users_profile.telephone_other', 'users_profile.address', 'users_profile.status as full_profile', 'users.created_at')
+                        ->join('users_profile', 'users_profile.id_user', '=', 'users.id')
+                        ->get();
+
+//echo "<pre>"; print_r($users); echo "</pre>"; die();
+                
+		foreach($users as &$user){
+			$user->dni = Dni::getDni($user->id);
+			$user->nombre_completo = Dni::getName($user->id);
+		}
+
                 $sheet->fromArray(json_decode( json_encode($users), true));
  
             });

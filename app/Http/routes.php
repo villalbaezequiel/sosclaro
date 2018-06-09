@@ -92,6 +92,10 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
 //FRONTEND
 Route::group(['middleware' => 'auth'], function () {    
     
+    //auth
+    Route::get('/validar-dni', 'Frontend\AuthController@showValidarDni');
+    Route::post('/validar-dni', 'Frontend\AuthController@updateValidarDni');
+    
     //user
     Route::get('/usuario/mi-cuenta', 'Frontend\UserController@profileEdit');
     Route::get('/usuario/historial', 'Frontend\UserController@history');
@@ -143,15 +147,32 @@ Route::group(['middleware' => 'auth'], function () {
 
 //API
 Route::group(['prefix' => 'api'], function() {
-    Route::group(['namespace' => 'Api'], function() {
+    
+    //USER
 
-        Route::resource('employees', 'EmployeesController');
-        Route::resource('users', 'UsersController');
-
-        Route::get(
-            'employees/{employee_id}/orders', [
-            'as' => 'employees.orders',
-            'uses' => 'EmployeesController@getOrdersByEmployee'
-        ]);
-    });
+    //auth
+    Route::get('/user/login', 'Api\UserApiController@login');
+    Route::get('/user/logout', 'Api\UserApiController@logout');
+    
+    //alta modificacion
+    Route::get('/user/create', 'Api\UserApiController@store');
+    Route::get('/user/edit', 'Api\UserApiController@update');
+    
+    //info user
+     
+    // user show, con estos datos el form se envia a /api/user/edit para ser editado
+    Route::get('/user/mi-cuenta/{id_user}', 'Api\UserApiController@miCuenta');//edit -> update    
+    Route::get('/user/historial/{id_user}', 'Api\UserApiController@history'); 
+    Route::get('/user/canjes/{id_user}', 'Api\UserApiController@allCanjes');
+    Route::get('/user/canjes/single/{id_canje}', 'Api\UserApiController@singleCanje');
+    Route::get('/user/canjes/single/confirmar/{id_canje}', 'Api\UserApiController@singleCanjeConfirmar');
+    
+    
+    // Encuestas
+    Route::get('/user/encuestas/{id_user}', 'Api\GuestsApiController@allGuests');
+    Route::get('/user/encuestas/{id_user}/{id_guest}', 'Api\GuestsApiController@showGuest');
+    Route::get('/user/encuestas/{id_user}/{id_guest}/store', 'Api\GuestsApiController@storeGuest');
+ 
+   // Catalogo 
+   
 });
