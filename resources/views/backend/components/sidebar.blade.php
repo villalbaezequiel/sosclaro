@@ -7,6 +7,32 @@
         <ul class="navbar-nav navbar-sidenav" style="overflow: auto;">
             
             <li class="nav-item" data-toggle="tooltip" data-placement="right">
+                <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#nav_users">
+                    <i class="fa fa-fw fa-users"></i>
+                    <span class="nav-link-text">Usuarios</span>
+                </a>
+                <ul class="sidenav-second-level collapse" id="nav_users">
+                    <li>
+                        <a href="{{ url('/admin/dni') }}">DNI</a>
+                    </li>
+                    <li>
+                        <a href="{{ url('/admin/users') }}">Usuarios</a>
+                    </li>
+<!--                    <li>
+                        <a href="{{ url('/admin/indicadores') }}">Indicadores</a>
+                    </li>-->
+                    <li>
+                        <a href="{{ url('/admin/desempeno') }}">Desempeño</a>
+                    </li>
+                    <li>
+                        <a href="{{ url('/admin/roles') }}">Roles</a>
+                    </li>
+<!--                    <li>
+                        <a href="{{ url('/admin/users') }}">Historial Usuarios</a>
+                    </li>-->
+                </ul>
+            </li>
+            <li class="nav-item" data-toggle="tooltip" data-placement="right">
                 <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#nav_products">
                     <i class="fa fa-fw fa-cogs"></i>
                     <span class="nav-link-text">Productos</span>
@@ -63,42 +89,16 @@
                     <span class="nav-link-text">Regiones</span>
                 </a>
             </li>
-            <li class="nav-item" data-toggle="tooltip" data-placement="right">
+<!--            <li class="nav-item" data-toggle="tooltip" data-placement="right">
                 <a class="nav-link" href="{{ url('/admin/locations') }}">
                     <i class="fa fa-fw fa-cogs"></i>
                     <span class="nav-link-text">Ubicaciones</span>
                 </a>
-            </li>
-            <li class="nav-item" data-toggle="tooltip" data-placement="right">
-                <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#nav_users">
-                    <i class="fa fa-fw fa-users"></i>
-                    <span class="nav-link-text">Usuarios</span>
-                </a>
-                <ul class="sidenav-second-level collapse" id="nav_users">
-                    <li>
-                        <a href="{{ url('/admin/dni') }}">DNI</a>
-                    </li>
-                    <li>
-                        <a href="{{ url('/admin/users') }}">Usuarios</a>
-                    </li>
-                    <li>
-                        <a href="{{ url('/admin/roles') }}">Roles</a>
-                    </li>
-                    <li>
-                        <a href="{{ url('/admin/indicadores') }}">Indicadores</a>
-                    </li>
-                    <li>
-                        <a href="{{ url('/admin/desempeno') }}">Desempeño</a>
-                    </li>
-                    <li>
-                        <a href="{{ url('/admin/users') }}">Historial Usuarios</a>
-                    </li>
-                </ul>
-            </li>
+            </li>-->
             <li class="nav-item" data-toggle="tooltip" data-placement="right">
                 <a class="nav-link" href="{{ url('/admin/modals') }}">
                     <i class="fa fa-fw fa-cogs"></i>
-                    <span class="nav-link-text">Modals</span>
+                    <span class="nav-link-text">Banners</span>
                 </a>
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right">
