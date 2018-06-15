@@ -12,7 +12,7 @@
 
 @section('nav-button')
 <a class="btn btn-primary mb-3" href="{{ url('/admin/desempeno/create') }}">Importar Desempeño</a>
-<a class="btn btn-primary mb-3" href="{{ asset('assets/backend/docs/ejemplo_desempeno.xlsx') }}">Descargar Ejemplo Excel</a>
+<a class="btn btn-primary mb-3" href="{{ url('/admin/desempeno/export') }}">Descargar Excel a completar</a>
 @endsection
 
 @section('content')

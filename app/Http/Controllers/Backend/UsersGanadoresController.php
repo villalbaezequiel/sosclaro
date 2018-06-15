@@ -12,6 +12,7 @@ use App\UsersGanadores;
 use App\UsersProfile;
 use App\Dni;
 use App\Indicadores;
+use Illuminate\Support\Facades\DB;
 
 class UsersGanadoresController extends Controller
 {
@@ -157,5 +158,32 @@ class UsersGanadoresController extends Controller
     public function destroy($id)
     {
         //
+    }
+    
+    public function export()
+    {
+        $timestamp = date('Y_m_d_h_i_s');
+        Excel::create('desempeno_users_'.$timestamp, function($excel) {
+ 
+            $excel->sheet('Desempeno Usuarios', function($sheet) {
+                
+                $users = DB::table('users')->select('users.id', 'users_profile.id_region')
+                        ->join('users_profile', 'users_profile.id_user', '=', 'users.id')
+                        ->get();
+
+                
+		foreach($users as &$user){
+			$user->dni = Dni::getDni($user->id);
+			$user->nombre_apellido = Dni::getName($user->id);
+			$user->puntos = "";
+			$user->indicador_1 = "";
+			$user->indicador_2 = "";
+		}
+
+                $sheet->fromArray(json_decode( json_encode($users), true));
+ 
+            });
+            
+        })->export('xls');
     }
 }
