@@ -16,9 +16,23 @@ use Illuminate\Support\Facades\Auth;
 class GuestsController extends Controller
 {
     public function index() {
+        
+        $id_user = Auth::user()->id;
+        $guests = Guest::where('active', '=', 1)->get()->toArray();
+        $guests_complete = array();
+        $guests_incomplete = array();
+        
+        foreach($guests as $guest){
+            if(GuestUsers::getCheckGuest($id_user, $guest['id'])){
+                $guests_complete[] = $guest; 
+            } else {
+                $guests_incomplete[] = $guest;
+            }
+        }            
         return view('frontend.guests.encuestas', [
-            'guests' => Guest::where('active', '=', 1)->get()->toArray(),
-            'id_user' => Auth::user()->id,
+            'guests_complete' => $guests_complete,
+            'guests_incomplete' => $guests_incomplete,
+            'id_user' => $id_user,
         ]);
     }
     
