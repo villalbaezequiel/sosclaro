@@ -119,8 +119,8 @@ Route::group(['middleware' => 'auth'], function () {
     //desempeño
     Route::get('/desempeno', 'Frontend\DesempenoController@index');
 
-    //ranking
-    Route::get('/ranking', 'Frontend\RankingController@index');
+    //resultados
+    Route::get('/resultados', 'Frontend\RankingController@index');
 
     //dashboard
     Route::get('/dashboard', 'Frontend\DashboardController@index');
@@ -141,7 +141,7 @@ Route::group(['middleware' => 'auth'], function () {
     
     //ajax
     Route::get('/desempeno_name/{name}', 'Frontend\DesempenoController@desempenosForName');
-    Route::get('/ranking/{id_region}', 'Frontend\RankingController@ajax');
+    Route::get('/resultados/{id_region}', 'Frontend\RankingController@ajax');
 
 
 });
@@ -181,5 +181,20 @@ Route::group(['prefix' => 'api'], function() {
     Route::get('/catalogo', 'Frontend\CatalogueApiController@index');
     Route::get('/catalogo/producto/{id_product}', 'Frontend\CatalogueApiController@productShow');   
     Route::get('/catalogo/producto/{$id_user}/{id_product}/store', 'Frontend\CatalogueApiController@productExchange');
+    
+});
+
+
+Route::get('/updateRegion', function(){
+    $usersProfiles = \Illuminate\Support\Facades\DB::table('users_profile')
+            ->select('id_user', 'id_region')
+            ->where('id_region', '!=', 0)
+            ->get();
+    
+    foreach($usersProfiles as $user){
+        \Illuminate\Support\Facades\DB::table('dni')
+            ->where('id_user', $user->id_user)
+            ->update(['id_region' => $user->id_region]);
+    }
     
 });

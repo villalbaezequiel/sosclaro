@@ -12,7 +12,9 @@ class Regions extends Model
     
     static public function getName($id) {
         $name = Regions::find($id);
-        return $name->name; 
+        if(isset($name)){ 
+            return $name->name;
+        }
     }
     
 }

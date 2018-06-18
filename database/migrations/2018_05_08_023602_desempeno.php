@@ -14,14 +14,10 @@ class Desempeno extends Migration
     {
         Schema::create('desempeno', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('dni');
-            $table->string('name_lastname');
-            $table->integer('id_region');
-            $table->string('puntos');
-            $table->string('indicador_1');
-            $table->string('indicador_2');
-            $table->string('promedio');
-            $table->string('especification');
+            $table->integer('id_user');
+            $table->integer('indicador_1');
+            $table->integer('indicador_2');
+            $table->integer('promedio');
             $table->timestamps();
         });
     }

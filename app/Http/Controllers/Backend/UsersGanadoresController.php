@@ -34,10 +34,7 @@ class UsersGanadoresController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create(){
-        return view('backend.desempeno.create', [
-            'regions' => Regions::all(),
-            'meses' => array('Mayo')
-        ]);
+        return view('backend.desempeno.create');
     }
 
     /**
@@ -59,36 +56,25 @@ class UsersGanadoresController extends Controller
                     
                     foreach ($data as $key => $value) {
                             
-                        $insert = new UsersGanadores;
-                        $insert->dni = $value->dni;
-                        $insert->name_lastname = $value->nombre_apellido;
-                        $insert->id_region = $value->id_region;
-                        $insert->puntos = $value->puntos;
-                        $insert->indicador_1 = $value->indicador_1;
-                        $insert->indicador_2 = $value->indicador_2;
-                        $insert->promedio = (($value->indicador_1 + $value->indicador_2) / 2);
-                        $insert->especification = 'cata';
-                        $insert->save();
-                        
-                        //cargo los indicadores
-                        $indicador_1 = new Indicadores;
-                        $indicador_1->name = $value->indicador_1;
-                        $indicador_1->active = 1;
-                        $indicador_1->save();
-                        
-                        $indicador_2 = new Indicadores;
-                        $indicador_2->name = $value->indicador_2;
-                        $indicador_2->active = 1;
-                        $indicador_2->save();
-
-                        //sumo los puntos al usuario
-                        $user_dni = Dni::find(Dni::getIdDni($value->dni));
-                        $user_dni->puntos = ($user_dni->puntos + $value->puntos);
-                        $user_dni->indicador = json_encode(array($indicador_1->id, $indicador_2->id));
-                        $user_dni->save();
-                        
-                        //sumo los puntos historicos
-                        //UsersProfile::setPuntosHistory($user_dni->id_user, $value->puntos);                        
+                        if(!empty($value->indicador_1) && !empty($value->indicador_2)){
+                            
+                            $promedio = (($value->indicador_1 + $value->indicador_2) / 2);
+                            
+                            $insert = new UsersGanadores;
+                            $insert->id_user = $value->id;
+                            $insert->indicador_1 = $value->indicador_1;
+                            $insert->indicador_2 = $value->indicador_2;
+                            $insert->promedio = $promedio;
+                            $insert->save();
+                            
+                            //actualizo DESEMPENO HISTORICO DEL USER
+                            $historical_performance = Dni::find(Dni::getIdUser($value->id));
+                            $historical_performance->puntos = ($historical_performance->puntos + $value->puntos);
+                            $historical_performance->historical_puntos = ($historical_performance->historical_puntos + $value->puntos);
+                            $historical_performance->historical_performance = ($historical_performance->historical_performance + $promedio);
+                            $historical_performance->save();
+                            
+                        }
                         
                     }
                     

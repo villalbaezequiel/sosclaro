@@ -24,6 +24,13 @@ class Dni extends Model
         }
     }
     
+    static public function getRegion($id_user) {
+        $dni = Dni::where('id_user', '=', $id_user)->get();
+        if(isset($dni[0])){
+            return $dni[0]->id_region;
+        }
+    }
+    
     static public function getIdDni($dni) {
         $dni_id = Dni::where('dni', '=', $dni)->get();
         return $dni_id[0]->id;
@@ -50,5 +57,12 @@ class Dni extends Model
         $dniUser = Dni::find($id);
         $dniUser->id_user = 0;
         $dniUser->save();
+    }
+    
+    static function getHistoricalPerformance($id_user){
+        $historical_performance = Dni::where('id_user', '=', $id_user)->get();
+        if(isset($historical_performance[0])){ 
+            return $historical_performance[0]->historical_performance;
+        }
     }
 }

@@ -19,21 +19,19 @@
 <table class="table table-bordered" id="list_desempeno" width="100%" cellspacing="0">
     <thead>
         <tr>
-            <th>DNI</th>
-            <th>Region</th>
-            <th>Puntos</th>
+            <th>ID_USER</th>
             <th>Indicador 1</th>
             <th>Indicador 2</th>
+            <th>Promedio</th>
         </tr>
     </thead>
     <tbody>
         @foreach($desempenos as $desempeno)
         <tr>
-            <td>{{ $desempeno->dni }}</td>
-            <td>{{ \App\Regions::getName($desempeno->id_region) }}</td>
-            <td>{{ $desempeno->puntos }}</td>
+            <td>{{ $desempeno->id_user }}</td>
             <td>{{ $desempeno->indicador_1 }}</td>
             <td>{{ $desempeno->indicador_2 }}</td>
+            <td>{{ $desempeno->promedio }}</td>
         </tr>
         @endforeach
     </tbody>
