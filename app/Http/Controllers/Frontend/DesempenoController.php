@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -17,20 +17,24 @@ class DesempenoController extends Controller
 {
     public function index() {
         
-        $desempeno_user = UsersGanadores::where('dni', '=', Dni::getDni(Auth::user()->id))->orderBy('id', 'DESC')->get()->toArray();
+        $allDesempeno= DB::table('desempeno')
+                                ->where('id_user', '=', Auth::user()->id)
+                                ->orderBy('id', 'DESC')
+                                ->get();
         
-        if(empty($desempeno_user[0])){
-            $desempeno_user[0] = array('puntos' => 0,
-                                        'promedio' => 0,
-                                        'indicador_1' => 0,
-                                        'indicador_2' => 0,
-                                        'created_at' => '2018-01-01 00:00:00');
-        }
+        $ultimoDesempeno = DB::table('desempeno')
+                                ->where('id_user', '=', Auth::user()->id)
+                                ->orderBy('id', 'DESC')
+                                ->limit(1)
+                                ->get();
+        
         
         return view('frontend.desempeno', [
-            'desempenos_name' => DesempenoName::all(),
-            'desempeno_user' => $desempeno_user[0],
-            'regions' => Regions::all()
+            //'desempenos_name' => DesempenoName::all(),
+            //'desempeno_user' => $desempeno_user[0],
+            //'regions' => Regions::all()
+            'all_desempeno' => $allDesempeno,
+            'ultimo_desempeno' => $ultimoDesempeno
         ]);
     }
     

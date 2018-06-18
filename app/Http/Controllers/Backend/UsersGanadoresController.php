@@ -64,6 +64,7 @@ class UsersGanadoresController extends Controller
                             $insert->id_user = $value->id;
                             $insert->indicador_1 = $value->indicador_1;
                             $insert->indicador_2 = $value->indicador_2;
+                            $insert->puntos = $value->puntos;
                             $insert->promedio = $promedio;
                             $insert->save();
                             

@@ -14,7 +14,13 @@
             <div class="card text-center">
                 <div class="card-header">
                     <h4>Esta semana sumaste
-                        <span class="badge badge-danger">{{ $desempeno_user['puntos'] }} puntos</span>
+                        <span class="badge badge-danger">
+                            @if(isset($ultimo_desempeno[0]) && !empty($ultimo_desempeno[0]))
+                                {{ $ultimo_desempeno[0]->puntos }}
+                            @else
+                            0
+                            @endif
+                            puntos</span>
                     </h4>
                 </div>
                                 
@@ -22,103 +28,80 @@
                     <div class="row card-text">
                         <div class="col-md-6">
                             <h1 class="mb-0">
-                                <i class="fa fa-arrow-circle-o-up" aria-hidden="true"></i> {{ $desempeno_user['promedio'] }}%</h1>
+                                <i class="fa fa-arrow-circle-o-up" aria-hidden="true"></i>
+                                @if(isset($ultimo_desempeno[0]) && !empty($ultimo_desempeno[0]))
+                                    {{ $ultimo_desempeno[0]->promedio }}
+                                @else
+                                    0
+                                @endif
+                            %</h1>
                         </div>
                         <div class="col-md-6 text-left">
                             <h6>
-                                <i class="fa fa-arrow-circle-o-up" aria-hidden="true"></i> {{ $desempeno_user['indicador_1'] }}% Indicador 1</h6>
+                                <i class="fa fa-arrow-circle-o-up" aria-hidden="true"></i>
+                                @if(isset($ultimo_desempeno[0]) && !empty($ultimo_desempeno[0]))
+                                    {{ $ultimo_desempeno[0]->indicador_1."% Indicador 1" }}
+                                @else
+                                    0% Indicador 1
+                                @endif
+                            </h6>
                             <h6>
-                                <i class="fa fa-arrow-circle-o-down" aria-hidden="true"></i> {{ $desempeno_user['indicador_2'] }}% Indicador 2</h6>
+                                <i class="fa fa-arrow-circle-o-down" aria-hidden="true"></i>
+                                @if(isset($ultimo_desempeno[0]) && !empty($ultimo_desempeno[0]))
+                                    {{ $ultimo_desempeno[0]->indicador_2."% Indicador 2" }}
+                                @else
+                                    0% Indicador 2
+                                @endif
+                            </h6>
                         </div>
                     </div>
                 </div>
-                <div class="card-footer">Datos para la semana del {{ \App\Functions::getDate($desempeno_user['created_at']) }}</div
+                @if(isset($ultimo_desempeno[0]) && !empty($ultimo_desempeno[0]))
+                    <div class="card-footer">Datos para la semana del {{ \App\Functions::getDate($ultimo_desempeno[0]->created_at) }}</div>
+                @endif
             </div>
         </article>
-        <article class="section-content">
-            <div class="card">
-                <div class="card-header text-center">
-                    <strong>Ganadores</strong>
-                </div>
-                <div class="card-body">
-                    
-                    @if($desempenos_name)
-                    <div class="row text-center">
-                        <form class="col col-md-6" id="form_desempenos">
-                            <div class="form-group">
-                                <label for="desempenos_name">Mes</label>
-                                <select class="form-control" id="desempenos_name" name="desempenos_name">
-                                    <option>Seleccionar...</option>
-                                    @foreach($desempenos_name as $desemp_name)
-                                    <option value="{{ $desemp_name['name'] }}">{{ $desemp_name['name'] }}</option>
-                                    @endforeach
-                                </select>
+                    <article class="section-content">
+                        <div class="card">
+                            <div class="card-header text-center">
+                                <strong>Historial</strong>
                             </div>
-                        </form>
-                        <div class="col col-md-6">
-                            <div class="form-group">
-                                <label for="selectDesempenoRegion">Región</label>
-                                <select class="form-control" id="selectDesempenoRegion">
-                                    @foreach($regions as $region)
-                                    <option value="{{ $region['id'] }}">{{ $region['name'] }}</option>
-                                    @endforeach
-                                </select>
+                            <div class="card-body">
+                                
+                                <!-- Esto va a estar más adelante pero dinámico (tienen que aprobar el presupuesto)-->
+<!--                                <p class="text-center">
+                                    <img src="http://mejoresvendedores.com.ar/dev/maquetado/img/grafico-lineas.png" alt="">
+                                </p>-->
+                                
+                                @if(isset($all_desempeno[0]) && !empty($all_desempeno[0]))
+                                <table class="table table-sm table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Fecha</th>
+                                            <th scope="col">Indicador 1</th>
+                                            <th scope="col">Indicador 2</th>
+                                            <th scope="col">Promedio</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach($all_desempeno as $desempenos)
+                                            <tr>
+                                                <td>{{ \App\Functions::getDate($desempenos->created_at) }}</td>
+                                                <td>{{ $desempenos->indicador_1 }}</td>
+                                                <td>{{ $desempenos->indicador_2 }}</td>
+                                                <td>{{ $desempenos->promedio }}</td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                                @else
+                                <p class="text-center">Datos no cargados por el momento.</p>
+                                @endif
                             </div>
                         </div>
-                    </div>
-                    <table class="table table-sm table-hover">
-                        <thead>
-                            <tr>
-                                <th scope="col">Puesto</th>
-                                <th scope="col">Nombre</th>
-                                <th scope="col">Puntos</th>
-                            </tr>
-                        </thead>
-                        <tbody id="content_desempeno">
-                            
-                        </tbody>
-                    </table>
-                    @else
-                        <p class="text-center">Datos no cargados por el momento.</p>
-                    @endif
-                </div>
-            </div>
-        </article>
+                    </article>
+        
+
     </section>
 </main>
-@endsection
-
-@section('javascript')
-<script type="text/javascript">
-$(document).ready(function(){
-    
-    $("#selectDesempenoRegion").change(function(){
-        
-    });
-    
-    $("#desempenos_name").change(function(){
-        
-        $.ajax({
-            type: 'GET',
-            url: '/desempeno_name/'+$(this).val(),
-            dataType: 'json',
-            success: function(data){
-                $("#content_desempeno").empty();
-                $.each(data, function(key, value){
-                    var count = 1;
-                    $.each(value, function(k, v){
-                        console.log(v);
-                        $("#content_desempeno").append('<tr class="'+v.id_region+'"><th scope="row">'+k+'</th><td>'+v.name_lastname+'</td><td>'+v.puntos+'</td></tr>');
-                    })
-                })
-            },
-            error: function(xhr, status){
-                console.log('Error: '+xhr);
-            }
-        });
-    
-    });
-    
-});
-</script>
 @endsection
