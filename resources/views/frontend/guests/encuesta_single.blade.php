@@ -22,6 +22,9 @@
                     <h3>{{ $guest[0]['name'] }}</h3>
                 </div>
                 <div class="article-body">
+                @if(\App\GuestUsers::getCheckGuest(Auth::user()->id, $guest[0]['id']))
+                <p>Encuesta Realizada!</p>
+                @else    
                     <form class="encuesta was-validated" action="{{ url('encuestas').'/'.$guest[0]['id'] }}" method="POST">
                         {{ csrf_field() }} 
                         @foreach($guest_questions as $question)
@@ -64,7 +67,9 @@
                             <button type="submit" class="btn btn-block">Enviar</button>
                         </div>
                     </form>
+                @endif    
                 </div>
+                
                 <div class="article-footer">
                     <p>
                         <a href="{{ url('/encuestas') }}">Volver</a>

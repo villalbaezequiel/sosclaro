@@ -198,3 +198,17 @@ Route::get('/updateRegion', function(){
     }
     
 });
+
+Route::get('/updatePuntosHistoricos', function(){
+    $usersProfiles = \Illuminate\Support\Facades\DB::table('users_profile')
+            ->select('id_user', 'id_region')
+            ->where('id_region', '!=', 0)
+            ->get();
+    
+    foreach($usersProfiles as $user){
+        \Illuminate\Support\Facades\DB::table('dni')
+            ->where('id_user', $user->id_user)
+            ->update(['id_region' => $user->id_region]);
+    }
+    
+});
