@@ -55,7 +55,7 @@ return [
     |
     */
 
-    'from' => ['address' => 'no-reply@mejoresvendedores.com.ar', 'name' => 'SosClaroVendedores'],
+    'from' => ['address' => 'no-reply@mejoresvendedores.com.ar', 'name' => 'MejoresVendedores'],
 
     /*
     |--------------------------------------------------------------------------
