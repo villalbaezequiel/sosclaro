@@ -30,7 +30,7 @@
                             <h1 class="mb-0">
                                 <i class="fa fa-arrow-circle-o-up" aria-hidden="true"></i>
                                 @if(isset($ultimo_desempeno[0]) && !empty($ultimo_desempeno[0]))
-                                    {{ $ultimo_desempeno[0]->promedio }}
+                                    {{ $ultimo_desempeno[0]->total }}
                                 @else
                                     0
                                 @endif
@@ -80,7 +80,7 @@
                                             <th scope="col">Fecha</th>
                                             <th scope="col">Indicador 1</th>
                                             <th scope="col">Indicador 2</th>
-                                            <th scope="col">Promedio</th>
+                                            <th scope="col">Total</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -89,7 +89,7 @@
                                                 <td>{{ \App\Functions::getDate($desempenos->created_at) }}</td>
                                                 <td>{{ $desempenos->indicador_1 }}</td>
                                                 <td>{{ $desempenos->indicador_2 }}</td>
-                                                <td>{{ $desempenos->promedio }}</td>
+                                                <td>{{ $desempenos->total }}</td>
                                             </tr>
                                         @endforeach
                                     </tbody>

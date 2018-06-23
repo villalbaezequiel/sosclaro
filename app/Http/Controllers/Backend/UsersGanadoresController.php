@@ -67,6 +67,7 @@ class UsersGanadoresController extends Controller
                             $insert->indicador_2 = $value->indicador_2;
                             $insert->puntos = $value->puntos;
                             $insert->promedio = $promedio;
+                            $insert->total = $value->total;
                             $insert->save();
                             
                             //actualizo DESEMPENO HISTORICO DEL USER
@@ -179,6 +180,7 @@ class UsersGanadoresController extends Controller
 			$user->puntos = "";
 			$user->indicador_1 = "";
 			$user->indicador_2 = "";
+			$user->total = "";
 		}
 
                 $sheet->fromArray(json_decode( json_encode($users), true));
