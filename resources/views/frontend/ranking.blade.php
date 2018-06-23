@@ -14,15 +14,20 @@
             <div class="card text-center">
                 <div class="card-header">
                     <h4>Tienes acumulados
-                        <!--<span class="badge badge-danger">{{ \App\UsersProfile::getPuntosHistory(Auth::user()->id) }} puntos</span> históricos</h4>-->
-                        <span class="badge badge-danger">{{ \App\Dni::getPuntos(Auth::user()->id) }} puntos</span> históricos</h4>
+                        <span class="badge badge-danger">{{ \App\Dni::getPuntosHistorical(Auth::user()->id) }} puntos</span> históricos</h4>
                         
                 </div>
                 <div class="card-body">
                     <div class="row card-text">
                         <div class="col col-md-6">
                             <h3>
-                                <span class="badge badge-secondary">Puesto {{ $historical_region }}</span>
+                                <span class="badge badge-secondary">
+                                @if($historical_region == "")
+                                        Sin puesto aún
+                                    @else
+                                        Puesto {{ $historical_region }}
+                                    @endif
+                                </span>
                             </h3>
                             <p>Posición para la región:
                                 <strong>{{ $region_name }}</strong>
