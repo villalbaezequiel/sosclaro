@@ -191,7 +191,7 @@ Route::group(['prefix' => 'api'], function() {
     Route::get('/tips/{id_tips}', 'Api\TipsApiController@showTips');
     
     // Desempeno
-    Route::get('/desempeno', 'Api\DesempenoApiController@index');
+    Route::get('/desempeno/{id_user}', 'Api\DesempenoApiController@index');
     
 });
 

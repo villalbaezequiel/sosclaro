@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
 use App\Regions;
 use App\UsersGanadores;
 use App\Dni;
@@ -17,17 +16,17 @@ use App\DesempenoName;
 class DesempenoApiController extends Controller
 {
     
-    public function index()
+    public function index($id_user)
     {
         $message;
         try {
             $allDesempeno= DB::table('desempeno')
-                                    ->where('id_user', '=', Auth::user()->id)
+                                    ->where('id_user', '=', $id_user)
                                     ->orderBy('id', 'DESC')
                                     ->get();
 
             $ultimoDesempeno = DB::table('desempeno')
-                                    ->where('id_user', '=', Auth::user()->id)
+                                    ->where('id_user', '=', $id_user)
                                     ->orderBy('id', 'DESC')
                                     ->limit(1)
                                     ->get();
