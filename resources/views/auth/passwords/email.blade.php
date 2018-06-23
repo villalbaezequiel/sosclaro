@@ -16,7 +16,6 @@
                 <i class="fa fa-envelope-open icon-large" aria-hidden="true"></i>
                 <h3>Enviada</h3>
             </div>
-            <p>Te enviamos un email con tu nueva contraseña. Una vez que ingreses, desde "Mi cuenta" vas a poder cambiarla por una que recuerdes.</p>
             <p>{{ session('status') }}</p>
             <a href="{{ url('/') }}" class="btn btn-block">Volver</a>
         </div>
