@@ -182,9 +182,9 @@ Route::group(['prefix' => 'api'], function() {
     Route::get('/user/encuestas/{id_user}/{id_guest}/store', 'Api\GuestsApiController@storeGuest');
  
    // Catalogo 
-    Route::get('/catalogo', 'Frontend\CatalogueApiController@index');
-    Route::get('/catalogo/producto/{id_product}', 'Frontend\CatalogueApiController@productShow');   
-    Route::get('/catalogo/producto/{$id_user}/{id_product}/store', 'Frontend\CatalogueApiController@productExchange');
+    Route::get('/catalogo', 'Api\CatalogueApiController@index');
+    Route::get('/catalogo/producto/{id_product}', 'Api\CatalogueApiController@productShow');   
+    Route::get('/catalogo/producto/{$id_user}/{id_product}/store', 'Api\CatalogueApiController@productExchange');
     
 });
 
