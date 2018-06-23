@@ -47,7 +47,7 @@
                         <tbody>
                             @if(!empty($exchanges[0]))
                                 @foreach($exchanges as $canje)
-                                <tr>
+                                <tr class="order-date" data-date="{{ \App\Functions::getDate($canje['updated_at']) }}">
                                     <td>{{ \App\Functions::getDate($canje['updated_at']) }}</td>
                                     <td>Canje {{ \App\Products::getName($canje['id_product']) }}</td>
                                     <td>{{ \App\Products::getValuePuntos($canje['id_product']) }}</td>
@@ -57,7 +57,7 @@
                             
                             @if(!empty($guests_user[0]))
                                 @foreach($guests_user as $guest)
-                                <tr>
+                                <tr class="order-date" data-date="{{ \App\Functions::getDate($guest['updated_at']) }}">
                                     <td>{{ \App\Functions::getDate($guest['updated_at']) }}</td>
                                     <td>Puntos obtenidos por completar encuesta</td>
                                     <td>{{ \App\Guest::getPuntos($guest['id_guest']) }}</td>
@@ -66,7 +66,7 @@
                             @endif
                             
                             @if($user_profile[0]['status'] == 1)
-                            <tr>
+                            <tr class="order-date" data-date="{{ \App\Functions::getDate($user_profile[0]['updated_at']) }}">
                                 <td>{{ \App\Functions::getDate($user_profile[0]['updated_at']) }}</td>
                                 <td>Puntos obtenidos por completar perfil</td>
                                 <td>20</td>
@@ -75,7 +75,7 @@
                             
                             @if(!empty($desempenos[0]))
                                 @foreach($desempenos as $desemp)
-                                <tr>
+                                <tr class="order-date" data-date="{{ \App\Functions::getDate($desemp['updated_at']) }}">
                                     <td>{{ \App\Functions::getDate($desemp['updated_at']) }}</td>
                                     <td>{{ $desemp['asunto'] }}</td>
                                     <td>{{ $desemp['puntos'] }}</td>
@@ -92,4 +92,16 @@
         </article>
     </section>
 </main>
+@endsection
+
+@section('javascript')
+<script type="text/javascript">
+    $(document).ready(function(){
+        $(".order-date").sort(function(a,b){
+            return new Date($(a).attr("data-date")) > new Date($(b).attr("data-date"));
+        }).each(function(){
+            $("tbody").prepend(this);
+        });
+    });
+</script>
 @endsection
