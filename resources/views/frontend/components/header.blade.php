@@ -29,7 +29,7 @@
                         <a href="{{ url('/resultados') }}">Resultados</a>
                     </li>
                     <!--li class="nav-item">
-                        <a href="{{ url('/consejos') }}">Consejos</a>
+                        <a href="{{ url('/novedades') }}">Novedades</a>
                     </li-->
                     <li class="nav-item">
                         <a href="{{ url('/encuestas') }}">Encuestas</a>

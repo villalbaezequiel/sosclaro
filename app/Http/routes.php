@@ -131,8 +131,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/encuestas/{id}', 'Frontend\GuestsController@store');
 
     //Consejos
-    Route::get('/consejos', 'Frontend\TipsController@index');
-    Route::get('/consejos/{id}', 'Frontend\TipsController@show');
+    Route::get('/novedades', 'Frontend\TipsController@index');
+    Route::get('/novedades/{id}', 'Frontend\TipsController@show');
     
     //qué es
     Route::get('/que-es', function(){

@@ -1,13 +1,13 @@
 @extends('layouts.frontend')
 
-@section('title', "Consejo")
+@section('title', "Novedad")
 @section('content')
 
 @include('frontend.components.header')
 <main class="main main-user">
     <section class="section-wrapper">
         <hgroup class="section-header">
-            <span class="title">Consejo</span>
+            <span class="title">Novedad</span>
         </hgroup>
         <article class="section-content">
             <div class="article">
@@ -27,7 +27,7 @@
                 </div>
                 <div class="article-footer">
                     <p>
-                        <a href="{{ url('/consejos') }}">Volver</a>
+                        <a href="{{ url('/novedades') }}">Volver</a>
                     </p>
                 </div>
             </div>
