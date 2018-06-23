@@ -36,11 +36,15 @@
                 <td>{{ \App\Dni::getPuntos($user->id) }}</td>
                 <td>{{ \App\Functions::getActive($user->active) }}</td>
                 <td>
+                @if(\App\Dni::getDni($user->id))
                     {!! Form::open(['route' => ['admin.users.destroy', $user->id], 'method' => 'DELETE']) !!}
                         <a href="{{ url('/admin/users/'.$user->id.'/edit') }}" class="btn btn-outline-primary">Editar</a>
                         <input type="hidden" name="id_user_profile" value="{{  \App\UsersProfile::getIdUser($user->id) }}">
                         <button type="submit" class="btn btn-outline-danger">Eliminar</button>
                     {!! Form::close() !!}
+                @else
+                    <span>No disponible</span>
+                @endif
                 </td>
             </tr>
             @endif

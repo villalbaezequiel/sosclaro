@@ -51,7 +51,8 @@ class UsersGanadoresController extends Controller
             if($request->hasFile('file_desempeno')){
                 $path = $request->file('file_desempeno')->getRealPath();
                 $data = Excel::load($path, function($reader) {})->get();
-
+                $status_message = true;
+                
                 if(!empty($data) && $data->count()){
                     
                     foreach ($data as $key => $value) {
@@ -75,14 +76,22 @@ class UsersGanadoresController extends Controller
                             $historical_performance->historical_performance = ($historical_performance->historical_performance + $promedio);
                             $historical_performance->save();
                             
+                        } else {
+                            $status_message = false;
                         }
                         
                     }
                     
-                }
+                    if($status_message == true){
+                        $message = "Excel de Desempeño importado con exito!";
+                    } else {
+                        $message = "Error al importar Desempeño. Asegurese que este subiendo el archivo correcto."
+                        . " Con los datos correspondientes. Tenga en cuenta 'Descargar Excel a completar'. Todos los campos tienen que estar completos.";
+                    }
+                } 
+            } else {
+                $message = "No seleccionaste ningun archivo Excel de Desempeño para importar!";
             }
-            
-            $message = "Excel de Desempeño importado con exito!";
             
             return redirect('/admin/desempeno')->with('message', $message);
         
@@ -98,7 +107,12 @@ class UsersGanadoresController extends Controller
                     'mensaje' => $message
             );
 
-            return \Response::json($respuesta);
+            //return \Response::json($respuesta);
+            
+            $message = "Error al importar Desempeño. Asegurese que este subiendo el archivo correcto."
+                    . " Con los datos correspondientes. Tenga en cuenta 'Descargar Excel a completar'. Todos los campos tienen que estar completos.";
+            return redirect('/admin/desempeno')->with('message', $message);
+            
 	}
     }
 

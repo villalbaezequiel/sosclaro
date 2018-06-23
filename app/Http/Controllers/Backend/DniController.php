@@ -73,7 +73,11 @@ class DniController extends Controller
                     'mensaje' => $message
             );
 
-            return \Response::json($respuesta);
+            //return \Response::json($respuesta);
+            
+            $message = "Error al importar DNI. Asegurese que este subiendo el archivo correcto."
+                    . " Con los datos correspondientes. Tenga en cuenta la PLANTILLA EXCEL. Todos los campos tienen que estar completos.";
+            return redirect('/admin/dni')->with('message', $message);
 	} 
     }
     
