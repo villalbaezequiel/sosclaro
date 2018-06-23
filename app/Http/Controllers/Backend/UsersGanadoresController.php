@@ -51,6 +51,7 @@ class UsersGanadoresController extends Controller
             if($request->hasFile('file_desempeno')){
                 $path = $request->file('file_desempeno')->getRealPath();
                 $data = Excel::load($path, function($reader) {})->get();
+                $count = 0;
                 $status_message = true;
                 
                 if(!empty($data) && $data->count()){
@@ -65,7 +66,14 @@ class UsersGanadoresController extends Controller
                             $insert->id_user = $value->id;
                             $insert->indicador_1 = $value->indicador_1;
                             $insert->indicador_2 = $value->indicador_2;
-                            $insert->puntos = $value->puntos;
+                            
+                            //si existe puntos
+                            if(isset($value->puntos) && !empty($value->puntos)){
+                                $insert->puntos = $value->puntos;
+                            } else {
+                                $insert->puntos = 0;
+                            }
+                            
                             $insert->promedio = $promedio;
                             $insert->total = $value->total;
                             $insert->save();
@@ -77,6 +85,8 @@ class UsersGanadoresController extends Controller
                             $historical_performance->historical_performance = ($historical_performance->historical_performance + $promedio);
                             $historical_performance->save();
                             
+                            $count += 1;
+                            
                         } else {
                             $status_message = false;
                         }
@@ -85,6 +95,8 @@ class UsersGanadoresController extends Controller
                     
                     if($status_message == true){
                         $message = "Excel de Desempeño importado con exito!";
+                    } elseif ($count >= 1 && $status_message == false) {
+                        $message = "Excel de Desempeño importado con exito! Existen algunos usuarios en el Excel que se encuentran Incompletos y no se pudieron Importar con Exito.";
                     } else {
                         $message = "Error al importar Desempeño. Asegurese que este subiendo el archivo correcto."
                         . " Con los datos correspondientes. Tenga en cuenta 'Descargar Excel a completar'. Todos los campos tienen que estar completos.";

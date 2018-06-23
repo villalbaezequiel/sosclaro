@@ -22,7 +22,8 @@
             <th>ID_USER</th>
             <th>Indicador 1</th>
             <th>Indicador 2</th>
-            <th>Promedio</th>
+<!--            <th>Promedio</th>-->
+            <th>Total</th>
         </tr>
     </thead>
     <tbody>
@@ -31,7 +32,8 @@
             <td>{{ $desempeno->id_user }}</td>
             <td>{{ $desempeno->indicador_1 }}</td>
             <td>{{ $desempeno->indicador_2 }}</td>
-            <td>{{ $desempeno->promedio }}</td>
+<!--            <td>{{ $desempeno->promedio }}</td>-->
+            <td>{{ $desempeno->total }}</td>
         </tr>
         @endforeach
     </tbody>
