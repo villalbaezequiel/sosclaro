@@ -65,6 +65,7 @@ class RankingController extends Controller
             $users_region = DB::table('dni')
                             ->where('id_region', '=', $id_region_auth_user)
                             ->where('historical_puntos', '!=', 0)
+                            ->where('id_user', '!=', 1)
                             ->orderBy('historical_puntos', 'DESC')
                             ->limit(10)
                             ->get();
@@ -72,6 +73,7 @@ class RankingController extends Controller
             $users_region = DB::table('dni')
                             ->where('id_region', '=', $id_region)
                             ->where('historical_puntos', '!=', 0)
+                            ->where('id_user', '!=', 1)
                             ->orderBy('historical_puntos', 'DESC')
                             ->limit(10)
                             ->get();    
