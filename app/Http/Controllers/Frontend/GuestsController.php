@@ -59,6 +59,7 @@ class GuestsController extends Controller
             //sumo los puntos
             $user_dni = Dni::find($dni_id);
             $user_dni->puntos = ($user_dni->puntos + $request->get('puntos_guest'));
+            $user_dni->historical_puntos = ($user_dni->historical_puntos + $request->get('puntos_guest'));
             $user_dni->save();
             
             $message = $request->get('puntos_guest');

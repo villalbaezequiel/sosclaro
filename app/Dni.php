@@ -17,6 +17,13 @@ class Dni extends Model
         }
     }
     
+    static public function getPuntosHistorical($id) {
+        $puntos = Dni::where('id_user', '=', $id)->get();
+        if(isset($puntos[0])){ 
+            return $puntos[0]->historical_puntos;
+        }
+    }
+    
     static public function getDni($id) {
         $dni = Dni::where('id_user', '=', $id)->get();
         if(isset($dni[0])){

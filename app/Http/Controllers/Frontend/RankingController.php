@@ -34,19 +34,12 @@ class RankingController extends Controller
         $id_region = Dni::getRegion(Auth::user()->id);
         
         $posicionRegion = DB::table('dni')
-                        ->select('id', 'id_region', 'id_user', 'puntos')
+                        ->select('id', 'id_region', 'id_user', 'historical_puntos')
                         ->where('id_region', '=', $id_region)
                         ->where('id_user', '!=', 0)
-                        ->where('puntos', '!=', 0)
-                        ->orderBy('puntos', 'desc')
+                        ->where('historical_puntos', '!=', 0)
+                        ->orderBy('historical_puntos', 'desc')
                         ->get();
-//        $posicionRegion = DB::table('dni')
-//                        ->select('id', 'id_region', 'id_user', 'historical_puntos')
-//                        ->where('id_region', '=', $id_region)
-//                        ->where('id_user', '!=', 0)
-//                        ->where('historical_puntos', '!=', 0)
-//                        ->orderBy('historical_puntos', 'desc')
-//                        ->get();
         
         $historical_region = "";
         
@@ -71,22 +64,22 @@ class RankingController extends Controller
             $id_region_auth_user = Dni::getRegion(Auth::user()->id);
             $users_region = DB::table('dni')
                             ->where('id_region', '=', $id_region_auth_user)
-                            ->where('puntos', '!=', 0)
-                            ->orderBy('puntos', 'DESC')
+                            ->where('historical_puntos', '!=', 0)
+                            ->orderBy('historical_puntos', 'DESC')
                             ->limit(10)
                             ->get();
         } else {
             $users_region = DB::table('dni')
                             ->where('id_region', '=', $id_region)
-                            ->where('puntos', '!=', 0)
-                            ->orderBy('puntos', 'DESC')
+                            ->where('historical_puntos', '!=', 0)
+                            ->orderBy('historical_puntos', 'DESC')
                             ->limit(10)
                             ->get();    
         }
         
         
         foreach ($users_region as $key => $value) {
-            $users[] = array('puesto' => ($key+1), 'name' => Dni::getName($value->id_user),'puntos' => Dni::getPuntos($value->id_user));
+            $users[] = array('puesto' => ($key+1), 'name' => Dni::getName($value->id_user),'puntos' => Dni::getPuntosHistorical($value->id_user));
         }
         return response()->json(['usuarios' => $users]);
     }
