@@ -81,7 +81,7 @@ class RankingController extends Controller
         
         
         foreach ($users_region as $key => $value) {
-            $users[] = array('puesto' => ($key+1), 'name' => Dni::getName($value->id_user),'puntos' => Dni::getPuntosHistorical($value->id_user));
+            $users[] = array('id_user' => $value->id_user, 'puesto' => ($key+1), 'name' => Dni::getName($value->id_user),'puntos' => Dni::getPuntosHistorical($value->id_user));
         }
         return response()->json(['usuarios' => $users]);
     }

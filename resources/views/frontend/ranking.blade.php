@@ -25,7 +25,7 @@
                                 @if($historical_region == "")
                                         Sin puesto aún
                                     @else
-                                        Puesto {{ $historical_region }}
+                                        Puesto <span id="puesto_region">{{ $historical_region }}</span>
                                     @endif
                                 </span>
                             </h3>
@@ -67,6 +67,7 @@
                                 @endforeach
                             </select>
                         </div>
+                        <input type="hidden" name="id_user" id="id_user" value="{{ Auth::user()->id }}">
                     </form>
                     <table class="table table-sm table-hover">
                         <thead>
@@ -101,10 +102,18 @@ $(document).ready(function(){
 
             $("#content_resultados").empty();
 
+            var id_user = $("#id_user").val();
+            var puesto_region = $("#puesto_region").text();
+            
             $.each(data, function(key, value){
                 var count = 1;
                 $.each(value, function(k, v){
-                    console.log(v);
+                    if(id_user == v.id_user){
+                        if(puesto_region && puesto_region != v.puesto){
+                            $("#puesto_region").empty();
+                            $("#puesto_region").text(v.puesto);
+                        }
+                    }
                     $("#content_resultados").append('<tr><th scope="row">'+v.puesto+'</th><td>'+v.name+'</td><td>'+v.puntos+'</td></tr>');
                 })
             })
