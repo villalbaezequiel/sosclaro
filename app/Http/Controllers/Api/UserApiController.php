@@ -52,18 +52,18 @@ class UserApiController extends Controller
             
             if(empty($checkDni[0])){
                 $message = "El DNI no se encuentra en nuestro sistema. Contacta a tu superior o mandanos un mail con tus datos a marketingoperativo@claro.com.ar";
-                return response()->json(['status' => 0, 'message' => $message]);
+                return response()->json(['status' => 0, 'message' => $message], 200, [], JSON_UNESCAPED_UNICODE);
             
             } elseif($checkDni[0]['id_user'] != 0){
                 $message = "Este DNI ya se encuentra registrado";
-                return response()->json(['status' => 0, 'message' => $message]);
+                return response()->json(['status' => 0, 'message' => $message], 200, [], JSON_UNESCAPED_UNICODE);
                 
             } elseif(!empty($checkEmail[0])){
                 $message = "Email: ".$request->get('email')." ya se encuenta asociado a otro Usuario. ";
-                return response()->json(['status' => 0, 'message' => $message]);
+                return response()->json(['status' => 0, 'message' => $message], 200, [], JSON_UNESCAPED_UNICODE);
 
             } else {
-                return response()->json(['status' => 1, 'message' => $message]);
+                return response()->json(['status' => 1, 'message' => $message], 200, [], JSON_UNESCAPED_UNICODE);
             }
         
         } catch(\Exception $e) {
@@ -89,11 +89,11 @@ class UserApiController extends Controller
 
                 $user = Auth::user()->toArray();
                 $data = array_merge($user, array("dni" => Dni::getDni(Auth::user()->id), "short_name" => Dni::getNameShort(Auth::user()->id), "full_name" => Dni::getName(Auth::user()->id), "puntos" => Dni::getPuntos(Auth::user()->id), "full_profile" => UsersProfile::getStatus(Auth::user()->id)));
-                return response()->json(['status' => 1, 'user' => $data]);
+                return response()->json(['status' => 1, 'user' => $data], 200, [], JSON_UNESCAPED_UNICODE);
 
             } else {
 
-                return response()->json(['status' => 0, 'user' => " "]);
+                return response()->json(['status' => 0, 'user' => " "], 200, [], JSON_UNESCAPED_UNICODE);
 
             }
         
@@ -120,7 +120,7 @@ class UserApiController extends Controller
         try {
             Auth::logout();
             $message = "Seccion cerrada";
-            return response()->json(['status' => 1, 'message' => $message]);
+            return response()->json(['status' => 1, 'message' => $message], 200, [], JSON_UNESCAPED_UNICODE);
         
         } catch (Exception $ex) {
             if(\Config::get('app.debug'))
@@ -148,7 +148,7 @@ class UserApiController extends Controller
             $year_user = json_decode($usersProfile[0]['date_year']);
             $regions = Regions::where('active', '=', 1)->get()->toArray();
             
-            return response()->json(['status' => 1, 'user' => $user, 'users_profile' => $usersProfile, 'dni' => $dni, 'year_user' => $year_user, 'regions' => $regions]);
+            return response()->json(['status' => 1, 'user' => $user, 'users_profile' => $usersProfile, 'dni' => $dni, 'year_user' => $year_user, 'regions' => $regions], 200, [], JSON_UNESCAPED_UNICODE);
             
             
         } catch (Exception $ex) {
@@ -222,7 +222,7 @@ class UserApiController extends Controller
                 $message = "Usuario: ".$request->get('user_name')." editado con exito!";  
             }
             
-            return response()->json(['status' => 1, 'message' => $message]);
+            return response()->json(['status' => 1, 'message' => $message], 200, [], JSON_UNESCAPED_UNICODE);
         
         } catch(\Exception $e) {
 
@@ -278,7 +278,7 @@ class UserApiController extends Controller
                 $value['value_product'] = Products::getValuePuntos($value['id_product']);
             }
             
-            return response()->json(['status' => 1, 'exchanges' => $exchanges]);
+            return response()->json(['status' => 1, 'exchanges' => $exchanges], 200, [], JSON_UNESCAPED_UNICODE);
             
         } catch(\Exception $e) {
 
@@ -308,7 +308,7 @@ class UserApiController extends Controller
                 $value['image'] = asset(Products::getUrlImage($value['id']));
             }
             
-            return response()->json(['status' => 1, 'exchange_id' => $exchange->id, 'product' => $product[0]]);
+            return response()->json(['status' => 1, 'exchange_id' => $exchange->id, 'product' => $product[0]], 200, [], JSON_UNESCAPED_UNICODE);
             
         } catch(\Exception $e) {
 
@@ -337,7 +337,7 @@ class UserApiController extends Controller
             
             $message = "Recepcion de Canje Confirmada con exito!";
             
-            return response()->json(['status' => 1, 'message' => $message]);
+            return response()->json(['status' => 1, 'message' => $message], 200, [], JSON_UNESCAPED_UNICODE);
         
         } catch(\Exception $e) {
 

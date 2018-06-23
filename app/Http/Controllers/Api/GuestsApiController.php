@@ -31,7 +31,7 @@ class GuestsApiController extends Controller
                 }
             }
             
-            return response()->json(['status' => 1, 'encuestas_completas' => $encuestas_completas, 'encuestas_incompletas' => $encuestas_incompletas]);
+            return response()->json(['status' => 1, 'encuestas_completas' => $encuestas_completas, 'encuestas_incompletas' => $encuestas_incompletas], 200, [], JSON_UNESCAPED_UNICODE);
         
         } catch(\Exception $e) {
 
@@ -55,7 +55,7 @@ class GuestsApiController extends Controller
         try {
             
             return response()->json(['status' => 1, 'guest' => Guest::where('id', '=', $id_guest)->get()->toArray(),
-                'guest_questions' => GuestQuestions::where('id_guest', '=', $id_guest)->get()->toArray()]);
+                'guest_questions' => GuestQuestions::where('id_guest', '=', $id_guest)->get()->toArray()], 200, [], JSON_UNESCAPED_UNICODE);
             
         } catch(\Exception $e) {
 
@@ -92,7 +92,7 @@ class GuestsApiController extends Controller
             
             $message = $request->get('puntos_guest');
             
-            return response()->json(['status' => 1, 'message' => $message]);
+            return response()->json(['status' => 1, 'message' => $message], 200, [], JSON_UNESCAPED_UNICODE);
         
         } catch(\Exception $e) {
 
