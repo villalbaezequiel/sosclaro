@@ -76,6 +76,7 @@ class UsersGanadoresController extends Controller
                             
                             $insert->promedio = $promedio;
                             $insert->total = $value->total;
+                            $insert->asunto = $request->get('desempeno_asunto');
                             $insert->save();
                             
                             //actualizo DESEMPENO HISTORICO DEL USER

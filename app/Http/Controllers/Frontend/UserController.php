@@ -13,6 +13,7 @@ use App\Products;
 use App\Dni;
 use App\User;
 use App\UsersProfile;
+use App\UsersGanadores;
 use App\Exchanges;
 use App\GuestUsers;
 
@@ -156,7 +157,8 @@ class UserController extends Controller
         return view('frontend.user.history', [
             'exchanges' => Exchanges::where('id_user', '=', Auth::user()->id)->get()->toArray(),
             'guests_user' => GuestUsers::where('id_user', '=', Auth::user()->id)->get()->toArray(),
-            'user_profile' => UsersProfile::where('id_user', '=', Auth::user()->id)->get()->toArray()
+            'user_profile' => UsersProfile::where('id_user', '=', Auth::user()->id)->get()->toArray(),
+            'desempenos' => UsersGanadores::where('id_user', '=', Auth::user()->id)->get()->toArray()
         ]);
     }
 }
