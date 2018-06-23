@@ -28,7 +28,6 @@
     </thead>
     <tbody>
         @foreach($users as $user)
-            @if(\App\UsersProfile::getRole($user->id) == 2)
             <tr>
                 <td>{{ \App\Dni::getDni($user->id) }}</td>
                 <td>{{ \App\Dni::getName($user->id) }}</td>
@@ -47,7 +46,6 @@
                 @endif
                 </td>
             </tr>
-            @endif
         @endforeach
     </tbody>
 </table>
