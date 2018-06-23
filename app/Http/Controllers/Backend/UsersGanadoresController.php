@@ -76,6 +76,7 @@ class UsersGanadoresController extends Controller
                             
                             $insert->promedio = $promedio;
                             $insert->total = $value->total;
+                            $insert->asunto = $request->get('desempeno_asunto');
                             $insert->save();
                             
                             //actualizo DESEMPENO HISTORICO DEL USER
@@ -181,8 +182,9 @@ class UsersGanadoresController extends Controller
  
             $excel->sheet('Desempeno Usuarios', function($sheet) {
                 
-                $users = DB::table('users')->select('users.id', 'users_profile.id_region')
-                        ->join('users_profile', 'users_profile.id_user', '=', 'users.id')
+                $users = DB::table('users')->select('users.id', 'dni.id_region')
+                        ->join('dni', 'dni.id_user', '=', 'users.id')
+                        ->orderBy('users.id', 'asc')
                         ->get();
 
                 

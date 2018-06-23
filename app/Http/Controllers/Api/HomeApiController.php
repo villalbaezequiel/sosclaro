@@ -24,7 +24,7 @@ class HomeApiController extends Controller
                 
             }
 
-            return response()->json(['status' => 0, 'modals' => $modals]);
+            return response()->json(['status' => 0, 'modals' => $modals], 200, [], JSON_UNESCAPED_UNICODE);
 
         } catch(\Exception $e) {
 

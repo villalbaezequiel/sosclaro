@@ -19,7 +19,7 @@ class CatalogueApiController extends Controller
         $message;
         try {
             
-            return response()->json(['status' => 1, 'products' => Products::where('active', '=', 1)->get()]);
+            return response()->json(['status' => 1, 'products' => Products::where('active', '=', 1)->get()], 200, [], JSON_UNESCAPED_UNICODE);
             
         } catch(\Exception $e) {
 
@@ -42,7 +42,7 @@ class CatalogueApiController extends Controller
         $message;
         try {
             
-            return response()->json(['status' => 1, 'product' => Products::find($id)]);
+            return response()->json(['status' => 1, 'product' => Products::find($id)], 200, [], JSON_UNESCAPED_UNICODE);
             
         } catch(\Exception $e) {
 
@@ -85,7 +85,7 @@ class CatalogueApiController extends Controller
             
             $message = "Felicitaciones! Su canje se realizo con exito!";
             
-            return response()->json(['status' => 1, 'message' => $message]);
+            return response()->json(['status' => 1, 'message' => $message], 200, [], JSON_UNESCAPED_UNICODE);
             
         } catch(\Exception $e) {
 

@@ -72,6 +72,16 @@
                                 <td>20</td>
                             </tr>
                             @endif
+                            
+                            @if(!empty($desempenos[0]))
+                                @foreach($desempenos as $desemp)
+                                <tr>
+                                    <td>{{ \App\Functions::getDate($desemp['updated_at']) }}</td>
+                                    <td>{{ $desemp['asunto'] }}</td>
+                                    <td>{{ $desemp['puntos'] }}</td>
+                                </tr>
+                                @endforeach
+                            @endif
                         </tbody>
                     </table>
                 </div>

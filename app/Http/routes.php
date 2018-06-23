@@ -186,6 +186,9 @@ Route::group(['prefix' => 'api'], function() {
     Route::get('/catalogo/producto/{id_product}', 'Api\CatalogueApiController@productShow');   
     Route::get('/catalogo/producto/{$id_user}/{id_product}/store', 'Api\CatalogueApiController@productExchange');
     
+    Route::get('/tips', 'Api\TipsApiController@allTips');
+    Route::get('/tips/{id_tips}', 'Api\TipsApiController@showTips');
+    
 });
 
 

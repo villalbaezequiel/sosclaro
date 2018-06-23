@@ -8,6 +8,11 @@
 
 @section('content')
 {!! Form::open(['route' => 'admin.desempeno.store', 'method' => 'POST', 'enctype' => 'multipart/form-data' ]) !!}
+    <div class="form-group">
+        <label>Asunto:</label>
+        <textarea class="form-control" name="desempeno_asunto" rows="2" maxlength="500" required></textarea>
+    </div>
+
     <div class="custom-file">
         <input type="file" class="custom-file-input" id="file_desempeno" name="file_desempeno" required>
         <label class="custom-file-label" for="file_desempeno">Excel Desempeno</label>
