@@ -27,6 +27,7 @@ class PasswordController extends Controller
      */
     public function __construct()
     {
+        $this->subject = 'Recuperación de contraseña';
         $this->middleware('guest');
     }
 }

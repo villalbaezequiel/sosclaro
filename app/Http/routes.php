@@ -13,6 +13,10 @@
 
 Route::auth();
 
+Route::get('/home',function(){
+    return redirect('/');
+}); 
+
 //home
 Route::get('/', 'Frontend\HomeController@index');
 
