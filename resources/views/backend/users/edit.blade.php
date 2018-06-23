@@ -19,11 +19,6 @@
     </div>
 
     <div class="form-group">
-        <label>Indicador</label>
-        <input type="text" class="form-control" value="{{ \App\Indicadores::getNameJson($user_dni[0]->indicador) }}" disabled>
-    </div>
-
-    <div class="form-group">
         <label>Puntos</label>
         <input type="number" class="form-control" name="puntos_dni" placeholder="Puntos Usuario" value="{{ $user_dni[0]->puntos }}" disabled>
     </div>
@@ -32,14 +27,14 @@
 
     @if($user_profile && !empty($user_profile[0]))
     
-    <div class="form-group">
+<!--    <div class="form-group">
         <label>Ubicacion</label>
         <select class="form-control" name="city_user_profile" required>
             @foreach($cities as $city)
                 <option value="{{ $city->id }}" @if($city->id == $user_profile[0]->id_city) selected="selected" @endif>{{ $city->name }}</option>
             @endforeach
         </select>
-    </div>
+    </div>-->
 
     <div class="form-group">
         <label>Region</label>
@@ -72,7 +67,7 @@
     
     <div class="form-group">
         <label>Alias</label>
-        <input type="text" class="form-control" name="name_user" placeholder="Alias Usuario" value="{{ $user->name }}" required>
+        <input type="text" class="form-control" name="name_user" placeholder="Alias Usuario" value="{{ $user->name }}">
     </div>
     
     <div class="form-group">
