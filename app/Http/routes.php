@@ -192,6 +192,10 @@ Route::group(['prefix' => 'api'], function() {
     
     // Desempeno
     Route::get('/desempeno/{id_user}', 'Api\DesempenoApiController@index');
+
+    // Resultados
+    Route::get('/resultados/{id_user}', 'Api\ResultadosApiController@index');
+    Route::get('/resultados/posicion_region/{id_region}/{id_user?}', 'Api\ResultadosApiController@ajax');
     
 });
 
