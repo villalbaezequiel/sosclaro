@@ -166,7 +166,7 @@ class UserApiController extends Controller
         }
     }
     
-    public function update(Request $request)
+    public function update($id_user, Request $request)
     {    
         $message;
         try {
@@ -174,7 +174,7 @@ class UserApiController extends Controller
             $user_profile = UsersProfile::find($request->get('user_profile_id'));
             
             if($user_profile->status != 1){
-                $user = User::find($request->get('user_id'));
+                $user = User::find($id_user);
                 $user->name = $request->get('user_name');
                 $user->email = $request->get('user_email');
                 $user->save();
@@ -198,7 +198,7 @@ class UserApiController extends Controller
 
                 $message = "Usuario: ".$request->get('user_name')." editado con exito!";    
             } else {
-                $user = User::find($request->get('user_id'));
+                $user = User::find($id_user);
                 $user->name = $request->get('user_name');
                 $user->email = $request->get('user_email');
                 $user->save();

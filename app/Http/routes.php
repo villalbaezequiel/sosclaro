@@ -162,7 +162,7 @@ Route::group(['prefix' => 'api'], function() {
     
     //alta modificacion
     Route::get('/user/create', 'Api\UserApiController@store');
-    Route::get('/user/edit', 'Api\UserApiController@update');
+    Route::get('/user/edit/{id_user}', 'Api\UserApiController@update');
     
     //info user
      
