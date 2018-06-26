@@ -27,7 +27,7 @@ class GuestsApiController extends Controller
                 if(GuestUsers::getCheckGuest($id_user, $guest['id'])){
                     $encuestas_completas[] = $guest;
                 } else {
-                    $encuestas_completas[] = $guest;
+                    $encuestas_incompletas[] = $guest;
                 }
             }
             
