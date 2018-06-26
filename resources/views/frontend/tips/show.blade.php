@@ -17,10 +17,15 @@
                     <h3>{{ $tip['title'] }}</h3>
                 </div>
                 <div class="article-media">
-                    <div class="embed-responsive">
-                        <!--<iframe width="560" height="315" src="{{ $tip['url_youtube'] }}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>-->
-                        <iframe width="560" height="315" src="{{ $tip['url_youtube'] }}" frameborder="0" allowfullscreen></iframe>
-                    </div>
+                    @if($tip['url_youtube'])
+                        <div class="embed-responsive">
+                            <!--<iframe width="560" height="315" src="{{ $tip['url_youtube'] }}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>-->
+                            <iframe width="560" height="315" src="{{ $tip['url_youtube'] }}" frameborder="0" allowfullscreen></iframe>
+                        </div>
+                    @endif
+                    @if($tip['image'])
+                        <img class="card-img-top" src="{{ asset('storage/app/public/tips/') }}/{{ $tip['id'] }}/{{ $tip['image'] }}" />
+                    @endif
                 </div>
                 <div class="article-body">
                     <p>{{ $tip['description'] }}</p>

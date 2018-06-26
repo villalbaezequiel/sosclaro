@@ -55,14 +55,14 @@
             <li class="nav-item" data-toggle="tooltip" data-placement="right">
                 <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#nav_tips">
                     <i class="fa fa-fw fa-cogs"></i>
-                    <span class="nav-link-text">Consejos</span>
+                    <span class="nav-link-text">Novedades</span>
                 </a>
                 <ul class="sidenav-second-level collapse" id="nav_tips">
                     <li>
                         <a href="{{ url('/admin/tips/categories') }}">Categorias</a>
                     </li>
                     <li>
-                        <a href="{{ url('/admin/tips') }}">Consejos</a>
+                        <a href="{{ url('/admin/tips') }}">Novedades</a>
                     </li>
                 </ul>
             </li>

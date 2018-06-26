@@ -1,11 +1,11 @@
 @extends('layouts.backend')
 
-@section('title', "Consejos / Editar")
+@section('title', "Novedades / Editar")
 @section('content')
 {!! Form::open(['route' => ['admin.tips.update', $tip->id], 'method' => 'PUT', 'enctype' => 'multipart/form-data' ]) !!}
     <div class="form-group">
-        <label>Titulo Consejo:</label>
-        <input type="text" class="form-control" name="title_tip" placeholder="Nombre Consejo" required value="{{ $tip->title }}">
+        <label>Titulo Novedad:</label>
+        <input type="text" class="form-control" name="title_tip" placeholder="Nombre Novedad" required value="{{ $tip->title }}">
     </div>
 
     <div class="form-group">
@@ -29,7 +29,7 @@
     </div>
 
     <div class="custom-file">
-        <input type="file" class="custom-file-input" id="imagen_tip" name="imagen_tip[]" multiple="multiple">
+        <input type="file" class="custom-file-input" id="imagen_tip" name="imagen_tip">
         <input type="hidden" name="imagen_tip_old" value="{{ $tip->image }}">
         <label class="custom-file-label" for="imagen_tip">Imagén</label>
     </div>

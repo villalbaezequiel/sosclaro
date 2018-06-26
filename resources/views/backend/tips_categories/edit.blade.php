@@ -1,10 +1,10 @@
 @extends('layouts.backend')
 
-@section('title', "Consejos / Categorias / Editar")
+@section('title', "Novedades / Categorias / Editar")
 @section('content')
 {!! Form::open(['route' => ['admin.tips.categories.update', $tip_category->id], 'method' => 'PUT']) !!}
     <div class="form-group">
-        <label>Nombre Categoria de Consejos:</label>
+        <label>Nombre Categoria de Novedades:</label>
         <input type="text" class="form-control" name="name_tip_category" value="{{ $tip_category->name }}" placeholder="Nombre Categoria" required>
     </div>
 

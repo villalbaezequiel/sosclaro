@@ -1,11 +1,11 @@
 @extends('layouts.backend')
 
-@section('title', "Consejos / Alta")
+@section('title', "Novedades / Alta")
 @section('content')
 {!! Form::open(['route' => 'admin.tips.store', 'method' => 'POST', 'enctype' => 'multipart/form-data' ]) !!}
     <div class="form-group">
-        <label>Titulo Consejo:</label>
-        <input type="text" class="form-control" name="title_tip" placeholder="Nombre Consejo" required>
+        <label>Titulo Novedad:</label>
+        <input type="text" class="form-control" name="title_tip" placeholder="Nombre Novedad" required>
     </div>
 
     <div class="form-group">
@@ -29,7 +29,7 @@
     </div>
 
     <div class="custom-file">
-        <input type="file" class="custom-file-input" id="imagen_tip" name="imagen_tip[]" multiple="multiple">
+        <input type="file" class="custom-file-input" id="imagen_tip" name="imagen_tip">
         <label class="custom-file-label" for="imagen_tip">Imagén</label>
     </div>
 

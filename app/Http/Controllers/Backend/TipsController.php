@@ -54,30 +54,13 @@ class TipsController extends Controller
             $tip->title = $request->get('title_tip');
             $tip->description = $request->get('description_tip');
             $tip->url_youtube = $request->get('url_youtube_tip');
-            $tip->image = "";
+            $tip->image = $imagen_tip->getClientOriginalName();
             $tip->active = $request->get('active_tip');
             $tip->save();
-     
-            $name_imagen = array();
-            
-            if(is_array($imagen_tip)):
-                foreach ($imagen_tip as $imagen) {
-                    if($request->hasFile('imagen_tip')){
-                        Storage::disk('public')->put('tips/'.$tip->id.'/'.$imagen->getClientOriginalName(), file_get_contents($imagen->getRealPath()));
-                        
-                        $name_imagen[] =  $imagen->getClientOriginalName();
-                    }
-                }
-            else:
-                if($request->hasFile('imagen_tip')){
-                    Storage::disk('public')->put('tips/'.$tip->id.'/'.$imagen_tip->getClientOriginalName(), file_get_contents($imagen_tip->getRealPath()));
-                    $name_imagen[] =  $imagen_tip->getClientOriginalName();
-                }
-            endif;
-            
-            $tip_image = Tips::find($tip->id);
-            $tip_image->image = json_encode($name_imagen);
-            $tip_image->save();
+                 
+            if($request->hasFile('imagen_tip')){
+                Storage::disk('public')->put('tips/'.$tip->id.'/'.$imagen_tip->getClientOriginalName(), file_get_contents($imagen_tip->getRealPath()));
+            }
             
             $message = "Consejo: ".$request->get('title_tip')." creado con exito!";
             
@@ -137,45 +120,29 @@ class TipsController extends Controller
         $message;
         try {
             $imagen_tip = $request->file('imagen_tip');
+            
+            $name_imagen = "";
+            
+            if(isset($imagen_tip) && !empty($imagen_tip)){
+                
+                Storage::deleteDirectory('public/tips/'.$tip->id);
+                if($request->hasFile('imagen_tip')){
+                    Storage::disk('public')->put('tips/'.$tip->id.'/'.$imagen_tip->getClientOriginalName(), file_get_contents($imagen_tip->getRealPath()));
+                    $name_imagen =  $imagen_tip->getClientOriginalName();
+                }
+            
+            } else {
+                $name_imagen = $request->get('imagen_tip_old');
+            } 
                 
             $tip = Tips::find($id);
             $tip->id_category = $request->get('id_category');
             $tip->title = $request->get('title_tip');
             $tip->description = $request->get('description_tip');
             $tip->url_youtube = $request->get('url_youtube_tip');
-            $tip->image = "";
+            $tip->image = $name_imagen;
             $tip->active = $request->get('active_tip');
             $tip->save();
-            
-            $name_imagen = array();
-            
-            if(isset($imagen_tip) && !empty($imagen_tip)):
-                
-                Storage::deleteDirectory('public/tips/'.$tip->id);
-            
-                if(is_array($imagen_tip)):
-                    foreach ($imagen_tip as $imagen) {
-                        if($request->hasFile('imagen_tip')){
-                            Storage::disk('public')->put('tips/'.$tip->id.'/'.$imagen->getClientOriginalName(), file_get_contents($imagen->getRealPath()));
-
-                            $name_imagen[] =  $imagen->getClientOriginalName();
-                        }
-                    }
-                else:
-                    if($request->hasFile('imagen_tip')){
-                        Storage::disk('public')->put('tips/'.$tip->id.'/'.$imagen_tip->getClientOriginalName(), file_get_contents($imagen_tip->getRealPath()));
-                        
-                        $name_imagen[] =  $imagen_tip->getClientOriginalName();
-                    }
-                endif;
-            
-            else:
-                $name_imagen[] = $request->get('imagen_tip_old');
-            endif;    
-
-            $tip_image = Tips::find($tip->id);
-            $tip_image->image = json_encode($name_imagen);
-            $tip_image->save();
      
             $message = "Consejo: ".$request->get('title_tip')." editado con exito!";
             

@@ -1,6 +1,6 @@
 @extends('layouts.backend')
 
-@section('title', "Consejos")
+@section('title', "Novedades")
 
 @section('message')
     @if (session('message'))
@@ -11,7 +11,7 @@
 @endsection
 
 @section('nav-button')
-<a class="btn btn-primary mb-3" href="{{ url('/admin/tips/create') }}">Nuevo Consejo</a>
+<a class="btn btn-primary mb-3" href="{{ url('/admin/tips/create') }}">Nuevo Novedad</a>
 @endsection
 
 @section('content')
