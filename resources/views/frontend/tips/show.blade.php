@@ -24,7 +24,9 @@
                         </div>
                     @endif
                     @if($tip['image'])
-                        <img class="card-img-top" src="{{ asset('storage/app/public/tips/') }}/{{ $tip['id'] }}/{{ $tip['image'] }}" />
+                        <div>
+                            <img class="card-img-top" src="{{ asset('storage/app/public/tips/') }}/{{ $tip['id'] }}/{{ $tip['image'] }}" />
+                        </div>
                     @endif
                 </div>
                 <div class="article-body">

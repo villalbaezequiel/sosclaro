@@ -12,6 +12,7 @@ class Tips extends Model
     static public function getTips($id_tip_category) {
         $tips = Tips::where('id_category', '=', $id_tip_category)
                     ->where('active', '=', 1)
+                    ->orderBy('id', 'desc')
                     ->get()
                     ->toArray();
         return $tips;

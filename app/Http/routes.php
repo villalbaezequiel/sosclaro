@@ -64,6 +64,7 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
         Route::get('/categories/export', 'Backend\CategoriesController@export');
         Route::get('/guests/users/export', 'Backend\GuestUsersController@export');
         Route::get('/desempeno/export', 'Backend\UsersGanadoresController@export');
+        Route::get('/exchanges/export', 'Backend\ExchangesController@export');
        
         
         //ABM

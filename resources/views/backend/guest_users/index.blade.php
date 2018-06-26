@@ -21,7 +21,7 @@
             <th>#</th>
             <th>Encuesta</th>
             <th>Usuario</th>
-            <th>Ver</th>
+<!--            <th>Ver</th>-->
         </tr>
     </thead>
     <tbody>
@@ -30,9 +30,9 @@
             <td>{{ $guest_user->id }}</td>
             <td>{{ \App\Guest::getNameGuest($guest_user->id_guest) }}</td>
             <td>{{ \App\Dni::getName($guest_user->id_user) }}</td>
-            <td>
+<!--            <td>
                 <a href="{{ url('/admin/guests/users/'.$guest_user->id ) }}" class="btn btn-outline-primary" style="width: 100%">Ver</a>
-            </td>
+            </td>-->
         </tr>
         @endforeach
     </tbody>

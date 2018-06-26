@@ -13,7 +13,7 @@ class TipsController extends Controller
 {
     public function index() {
         return view('frontend.tips.index', [
-            'tips_categories' => TipsCategories::where('active', '=', 1)->get()->toArray()
+            'tips_categories' => TipsCategories::where('active', 1)->orderBy('id', 'desc')->get()->toArray()
         ]);
     }
     
