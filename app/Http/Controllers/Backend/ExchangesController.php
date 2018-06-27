@@ -6,10 +6,13 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Maatwebsite\Excel\Facades\Excel;
 use App\Functions;
+use App\Dni;
 use App\Exchanges;
 use App\Products;
 use App\User;
+use Illuminate\Support\Facades\DB;
 
 class ExchangesController extends Controller
 {
@@ -116,4 +119,29 @@ class ExchangesController extends Controller
     {
         //
     }
+    
+    public function export()
+    {
+        $timestamp = date('Y_m_d_h_i_s');
+        Excel::create('canjes_users_'.$timestamp, function($excel) {
+ 
+            $excel->sheet('Canjes Usuarios', function($sheet) {
+                
+                $canjes = DB::table('exchanges')
+                        ->select('exchanges.id_user', 'exchanges.id_product', 'products.name as name_product', 'products.codigo as codigo_product', 'exchanges.status', 'exchanges.created_at')
+                        ->join('products', 'products.id', '=', 'exchanges.id_product')
+                        ->orderBy('exchanges.id', 'desc')
+                        ->get();
+                
+		foreach($canjes as &$canje){
+                    $canje->dni_user = Dni::getDni($canje->id_user);
+		}
+           
+                $sheet->fromArray(json_decode( json_encode($canjes), true));
+ 
+            });
+            
+        })->export('xls');
+    }
+    
 }
