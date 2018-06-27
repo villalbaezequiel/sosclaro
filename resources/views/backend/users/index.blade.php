@@ -18,6 +18,7 @@
 <table class="table table-bordered" id="list_users" width="100%" cellspacing="0">
     <thead>
         <tr>
+            <th>#ID</th>
             <th>#DNI</th>
             <th>Nombre</th>
             <th>Email</th>
@@ -29,6 +30,7 @@
     <tbody>
         @foreach($users as $user)
             <tr>
+                <td>{{ $user->id }}</td>
                 <td>{{ \App\Dni::getDni($user->id) }}</td>
                 <td>{{ \App\Dni::getName($user->id) }}</td>
                 <td>{{ $user->email }}</td>
