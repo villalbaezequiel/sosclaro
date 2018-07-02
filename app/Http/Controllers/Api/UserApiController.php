@@ -169,6 +169,7 @@ class UserApiController extends Controller
     public function update($id_user, Request $request)
     {    
         $message;
+
         try {
             
             $user_profile = UsersProfile::find($request->get('user_profile_id'));
@@ -187,7 +188,8 @@ class UserApiController extends Controller
 
 
                 $user_profile->sexo = $request->get('user_profile_sexo');
-                $user_profile->date_year = json_encode($request->get('user_profile_date_year'));
+                //$user_profile->date_year = json_encode($request->get('user_profile_date_year'));
+                $user_profile->date_year = $request->get('user_profile_date_year');
                 $user_profile->telephone = $request->get('user_profile_telephone');
                 $user_profile->telephone_other = $request->get('user_profile_telephone_other');
                 $user_profile->address = $request->get('user_profile_address');
@@ -210,7 +212,8 @@ class UserApiController extends Controller
 
 
                 $user_profile->sexo = $request->get('user_profile_sexo');
-                $user_profile->date_year = json_encode($request->get('user_profile_date_year'));
+                //$user_profile->date_year = json_encode($request->get('user_profile_date_year'));
+                $user_profile->date_year = $request->get('user_profile_date_year');
                 $user_profile->telephone = $request->get('user_profile_telephone');
                 $user_profile->telephone_other = $request->get('user_profile_telephone_other');
                 $user_profile->address = $request->get('user_profile_address');
