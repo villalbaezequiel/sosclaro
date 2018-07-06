@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use App\Functions;
 use App\Dni;
 use App\User;
@@ -16,6 +17,7 @@ use App\Exchanges;
 use App\GuestUsers;
 use App\Products;
 use App\Guest;
+use App\DesempenoName;
 
 class UserApiController extends Controller
 {
@@ -246,12 +248,34 @@ class UserApiController extends Controller
     public function history($id_user)
     { 
         $message;
-        try { 
+        try {
             
-            return \Response::json(['status' => 1, 'exchanges' => Exchanges::where('id_user', '=', $id_user)->get()->toArray(), 
-                                                   'guests_user' => GuestUsers::where('id_user', '=', $id_user)->get()->toArray(),
+            $guests = Guest::where('active', '=', 1)->get()->toArray();
+            $encuestas_completas = array();
+            foreach($guests as $guest){
+                if(GuestUsers::getCheckGuest($id_user, $guest['id'])){
+                    $encuestas_completas[] = $guest;
+                }
+            }
+
+            $exchanges = Exchanges::where('id_user', '=', $id_user)->get()->toArray();
+            foreach ($exchanges as &$value) {
+                $value['name_product'] = Products::getName($value['id_product']);
+                $value['value_product'] = Products::getValuePuntos($value['id_product']);
+            }
+
+            $allDesempeno= DB::table('desempeno')
+                                    ->where('id_user', '=', $id_user)
+                                    ->orderBy('id', 'DESC')
+                                    ->get();
+                        
+            return \Response::json(['status' => 1, 'exchanges' => $exchanges, 
+                                                   'encuestas_completas' => $encuestas_completas,
+                                                   'desempenos' => $allDesempeno,
                                                    'user_profile' => UsersProfile::where('id_user', '=', $id_user)->get()->toArray(),
-                                                   'puntos' => Dni::getPuntos($id_user)]);
+                                                   'puntos' => Dni::getPuntos($id_user),
+                                                   'puntos_historicos' => Dni::getPuntosHistorical($id_user)
+                                    ]);
             
         } catch(\Exception $e) {
 
