@@ -20,8 +20,7 @@
                     </div>
                     <div class="col col-md-6">
                         <h3>
-<!--                            <span class="badge badge-secondary">{{ \App\UsersProfile::getPuntosHistory(Auth::user()->id) }} históricos</span>-->
-                            <span class="badge badge-secondary">{{ \App\Dni::getPuntos(Auth::user()->id) }} históricos</span>
+                            <span class="badge badge-secondary">{{ \App\Dni::getPuntosHistorical(Auth::user()->id) }} históricos</span>
                         </h3>
                         <span>Puntos obtenidos desde la registración</span>
                     </div>
@@ -44,20 +43,20 @@
                                 <th scope="col">Puntos</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="order-date">
                             @if(!empty($exchanges[0]))
                                 @foreach($exchanges as $canje)
-                                <tr class="order-date" data-date="{{ \App\Functions::getDate($canje['updated_at']) }}">
+                                <tr data-date="{{ $canje['updated_at'] }}">
                                     <td>{{ \App\Functions::getDate($canje['updated_at']) }}</td>
                                     <td>Canje {{ \App\Products::getName($canje['id_product']) }}</td>
-                                    <td>{{ \App\Products::getValuePuntos($canje['id_product']) }}</td>
+                                    <td>-{{ \App\Products::getValuePuntos($canje['id_product']) }}</td>
                                 </tr>
                                 @endforeach
                             @endif
                             
                             @if(!empty($guests_user[0]))
                                 @foreach($guests_user as $guest)
-                                <tr class="order-date" data-date="{{ \App\Functions::getDate($guest['updated_at']) }}">
+                                <tr data-date="{{ $guest['updated_at'] }}">
                                     <td>{{ \App\Functions::getDate($guest['updated_at']) }}</td>
                                     <td>Puntos obtenidos por completar encuesta</td>
                                     <td>{{ \App\Guest::getPuntos($guest['id_guest']) }}</td>
@@ -66,7 +65,7 @@
                             @endif
                             
                             @if($user_profile[0]['status'] == 1)
-                            <tr class="order-date" data-date="{{ \App\Functions::getDate($user_profile[0]['updated_at']) }}">
+                            <tr data-date="{{ $user_profile[0]['updated_at'] }}">
                                 <td>{{ \App\Functions::getDate($user_profile[0]['updated_at']) }}</td>
                                 <td>Puntos obtenidos por completar perfil</td>
                                 <td>20</td>
@@ -75,7 +74,7 @@
                             
                             @if(!empty($desempenos[0]))
                                 @foreach($desempenos as $desemp)
-                                <tr class="order-date" data-date="{{ \App\Functions::getDate($desemp['updated_at']) }}">
+                                <tr data-date="{{ $desemp['updated_at'] }}">
                                     <td>{{ \App\Functions::getDate($desemp['updated_at']) }}</td>
                                     <td>{{ $desemp['asunto'] }}</td>
                                     <td>{{ $desemp['puntos'] }}</td>
@@ -97,11 +96,14 @@
 @section('javascript')
 <script type="text/javascript">
     $(document).ready(function(){
-        $(".order-date").sort(function(a,b){
-            return new Date($(a).attr("data-date")) > new Date($(b).attr("data-date"));
-        }).each(function(){
-            $("tbody").prepend(this);
+        
+        $(function() {
+            $(".order-date tr").sort(sort_li).appendTo('.order-date');
+            function sort_li(a, b) {
+              return ($(b).data('date')) > ($(a).data('date')) ? 1 : -1;
+            }
         });
+        
     });
 </script>
 @endsection
