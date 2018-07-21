@@ -184,6 +184,7 @@ class UsersGanadoresController extends Controller
                 
                 $users = DB::table('users')->select('users.id', 'dni.id_region')
                         ->join('dni', 'dni.id_user', '=', 'users.id')
+                        ->where('users.active', '=', 1)
                         ->orderBy('users.id', 'asc')
                         ->get();
 
