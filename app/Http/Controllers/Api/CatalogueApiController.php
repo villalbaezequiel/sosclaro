@@ -71,8 +71,10 @@ class CatalogueApiController extends Controller
             $product->stock = ($product->stock - 1);
             $product->save();
             
+            $id_dni = Dni::getIdDni($request->get('id_dni')); 
+            
             //actualizo puntos del usuarios
-            $dni = Dni::find($request->get('id_dni'));
+            $dni = Dni::find($id_dni);
             $dni->puntos = ($dni->puntos - $request->get('product_puntos'));
             $dni->save();
             
