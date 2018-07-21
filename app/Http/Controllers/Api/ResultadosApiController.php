@@ -57,6 +57,7 @@ class ResultadosApiController extends Controller
                 'regions' => Regions::all(),
                 'historical_region' => $historical_region,
                 'region_name' => Regions::getName($id_region),
+                'puntos_historicos' => Dni::getPuntosHistorical($id_user),
                 'historical_performance' => $historical_performance], 200, [], JSON_UNESCAPED_UNICODE);
 
         } catch(\Exception $e) {

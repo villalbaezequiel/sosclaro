@@ -80,7 +80,9 @@ class GuestsApiController extends Controller
             $guest_user = new GuestUsers;
             $guest_user->id_guest = $id_guest;
             $guest_user->id_user = $id_user;
-            $guest_user->results = json_encode($request->get('questions'));
+            //$guest_user->results = json_encode($request->get('questions'));
+            //Saque el encode porque no estaba respetando el formato
+            $guest_user->results = $request->get('questions');
             $guest_user->save();
             
             $dni_id = Dni::getIdUser($id_user);
