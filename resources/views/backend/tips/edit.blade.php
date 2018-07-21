@@ -25,7 +25,7 @@
 
     <div class="form-group">
         <label>Descripción:</label>
-        <textarea class="form-control" name="description_tip" rows="5" required>{{ $tip->description }}</textarea>
+        <textarea name="description_tip">{{ $tip->description }}</textarea>
     </div>
 
     <div class="custom-file">
@@ -47,4 +47,14 @@
     <button type="submit" class="btn btn-primary">Editar</button>
     <a href="" onclick="window.history.go(-1); return false;" class="btn btn-danger">Cancelar</a>
 {!! Form::close() !!}
+@endsection
+@section('javascript')
+    <script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=riuoruyg909exdyi8li3fpio2hio09etiaznrcuqv3e7xs4a"></script>
+    <script>
+        tinymce.init({ 
+        selector:'textarea',
+        menubar: false,
+        toolbar: 'undo redo |  formatselect | bold italic backcolor  | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat'
+    });
+    </script>
 @endsection

@@ -29,9 +29,12 @@
                         </div>
                     @endif
                 </div>
-                <div class="article-body">
-                    <p>{{ $tip['description'] }}</p>
-                </div>
+<div class="article-body">
+<?php echo <<< EOT
+{$tip['description']}
+EOT;
+?>
+</div>
                 <div class="article-footer">
                     <p>
                         <a href="{{ url('/novedades') }}">Volver</a>
