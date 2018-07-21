@@ -4,6 +4,7 @@ var myApp = {
     myApp.responsiveMenu();
     myApp.sliders();
     myApp.sortCatalog();
+    myApp.drawChart();
   },
 
   // Responsive burguer menu for mobile
@@ -98,6 +99,30 @@ var myApp = {
       }
       e.preventDefault();
     });
+  },
+
+  drawChart: function() {
+    // Any of the following formats may be used
+    var ctx = document.getElementById('myChart');
+    if (ctx) {
+      console.log(ctx);
+      var myChart = new Chart(ctx, {
+        type: 'line',
+        // usar sólo los ultimos 12 registros
+        data: historialUsuario,
+        options: {
+          scales: {
+            yAxes: [
+              {
+                ticks: {
+                  beginAtZero: true
+                }
+              }
+            ]
+          }
+        }
+      });
+    }
   }
 };
 
