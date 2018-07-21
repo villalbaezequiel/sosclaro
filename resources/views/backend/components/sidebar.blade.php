@@ -108,6 +108,9 @@
                 </a>
                 <ul class="sidenav-second-level collapse" id="nav_settings">
                     <li>
+                        <a href="{{ url('/admin/settings/api') }}">API</a>
+                    </li>
+                    <li>
                         <a href="{{ url('/admin/settings/social_networks') }}">Redes Sociales</a>
                     </li>
 <!--                    <li>

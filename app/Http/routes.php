@@ -91,6 +91,7 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
         Route::resource('/settings/legal_products', 'Backend\LegalProductsController');
         Route::resource('/settings/social_networks', 'Backend\SocialNetworksController');
         Route::resource('/settings/emails', 'Backend\EmailsController');
+        Route::resource('/settings/api', 'Backend\ApiController');
 
     });
     
@@ -146,6 +147,7 @@ Route::group(['middleware' => 'auth'], function () {
     
     //ajax
     Route::get('/desempeno_name/{name}', 'Frontend\DesempenoController@desempenosForName');
+    Route::get('/desempeno_grafico', 'Frontend\DesempenoController@grafico');
     Route::get('/resultados/{id_region}', 'Frontend\RankingController@ajax');
 
 
@@ -185,7 +187,7 @@ Route::group(['prefix' => 'api'], function() {
    // Catalogo 
     Route::get('/catalogo', 'Api\CatalogueApiController@index');
     Route::get('/catalogo/producto/{id_product}', 'Api\CatalogueApiController@productShow');   
-    Route::get('/catalogo/producto/{$id_user}/{id_product}/store', 'Api\CatalogueApiController@productExchange');
+    Route::get('/catalogo/producto/{id_user}/{id_product}/store', 'Api\CatalogueApiController@productExchange');
     
     // Novedades
     Route::get('/tips', 'Api\TipsApiController@allTips');
@@ -197,6 +199,9 @@ Route::group(['prefix' => 'api'], function() {
     // Resultados
     Route::get('/resultados/{id_user}', 'Api\ResultadosApiController@index');
     Route::get('/resultados/posicion_region/{id_region}/{id_user?}', 'Api\ResultadosApiController@ajax');
+    
+    //configuracion api version
+     Route::get('/settings/api', 'Backend\ApiController@endpointVersion');
     
 });
 
