@@ -42,4 +42,13 @@ class DesempenoController extends Controller
         return response()->json(['desempenos' => UsersGanadores::where('especification', '=', $name)->orderBy('puntos', 'DESC')->get()]);
     }
     
+    public function grafico() {
+        $allDesempeno= DB::table('desempeno')
+                                ->where('id_user', '=', Auth::user()->id)
+                                ->orderBy('id', 'DESC')
+                                ->get();
+        
+        return response()->json(['allDesempeno' => $allDesempeno]);
+    }
+    
 }

@@ -61,47 +61,134 @@
                 @endif
             </div>
         </article>
-                    <article class="section-content">
-                        <div class="card">
-                            <div class="card-header text-center">
-                                <strong>Historial</strong>
-                            </div>
-                            <div class="card-body">
-                                
-                                <!-- Esto va a estar más adelante pero dinámico (tienen que aprobar el presupuesto)-->
-<!--                                <p class="text-center">
-                                    <img src="http://mejoresvendedores.com.ar/dev/maquetado/img/grafico-lineas.png" alt="">
-                                </p>-->
-                                
-                                @if(isset($all_desempeno[0]) && !empty($all_desempeno[0]))
-                                <table class="table table-sm table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Fecha</th>
-                                            <th scope="col">Indicador 1</th>
-                                            <th scope="col">Indicador 2</th>
-                                            <th scope="col">Total</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach($all_desempeno as $desempenos)
-                                            <tr>
-                                                <td>{{ \App\Functions::getDate($desempenos->created_at) }}</td>
-                                                <td>{{ $desempenos->indicador_1 }}</td>
-                                                <td>{{ $desempenos->indicador_2 }}</td>
-                                                <td>{{ $desempenos->total }}</td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                                @else
-                                <p class="text-center">Datos no cargados por el momento.</p>
-                                @endif
-                            </div>
-                        </div>
-                    </article>
-        
+        <!-- Aca esta el chart -->
+        <article class="section-chart">
+            <div class="chart-container">
+                <canvas id="graphCanvas"></canvas>
+            </div>
+            <div class="text-center">
+                <small>Gráfico basado en los últimos 12 registros máximo.</small>
+            </div>
+        </article>
+        <article class="section-content">
+            <div class="card">
+                <div class="card-header text-center">
+                    <strong>Historial</strong>
+                </div>
+                <div class="card-body">
 
+                    <!-- Esto va a estar más adelante pero dinámico (tienen que aprobar el presupuesto)-->
+<!--                                <p class="text-center">
+                        <img src="http://mejoresvendedores.com.ar/dev/maquetado/img/grafico-lineas.png" alt="">
+                    </p>-->
+
+                    @if(isset($all_desempeno[0]) && !empty($all_desempeno[0]))
+                    <table class="table table-sm table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">Fecha</th>
+                                <th scope="col">Indicador 1</th>
+                                <th scope="col">Indicador 2</th>
+                                <th scope="col">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($all_desempeno as $desempenos)
+                                <tr>
+                                    <td>{{ \App\Functions::getDate($desempenos->created_at) }}</td>
+                                    <td>{{ $desempenos->indicador_1 }}</td>
+                                    <td>{{ $desempenos->indicador_2 }}</td>
+                                    <td>{{ $desempenos->total }}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                    @else
+                    <p class="text-center">Datos no cargados por el momento.</p>
+                    @endif
+                </div>
+            </div>
+        </article>
     </section>
 </main>
+@endsection
+@section('javascript')
+<script>
+$(document).ready(function () {
+    showGraph();
+});
+    
+    function showGraph(){
+        $.ajax({
+            type: 'GET',
+            url: '/desempeno_grafico',
+            dataType: 'json',
+            success: function(data){
+                
+                var labels = [];
+                var indicador1 = [];
+                var indicador2 = [];
+                var total = [];
+
+                $.each(data, function(key, value){
+                    $.each(value, function(i, v){
+                        labels.push(v.created_at);
+                        indicador1.push(v.indicador_1);
+                        indicador2.push(v.indicador_2);
+                        total.push(v.total);
+                    });
+                });
+                
+                var historialUsuario = {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Indicador 1',
+                            data: indicador1,
+                            fill: false,
+                            borderColor: 'rgb(0, 165, 142)',
+                            lineTension: 0.1
+                        },
+                        {
+                            label: 'Indicador 2',
+                            data: indicador2,
+                            fill: false,
+                            borderColor: 'rgb(43, 116, 172)',
+                            lineTension: 0.1
+                        },
+                        {
+                            label: 'Total',
+                            data: total,
+                            fill: false,
+                            borderColor: 'rgb(245, 71, 83)',
+                            lineTension: 0.1
+                        }
+                    ]
+                };
+ 
+                    var graphTarget = $("#graphCanvas");
+
+                    var myChart = new Chart(graphTarget, {
+                        type: 'line',
+                        data: historialUsuario,
+                        options: {
+                          scales: {
+                            yAxes: [
+                              {
+                                ticks: {
+                                  beginAtZero: true
+                                }
+                              }
+                            ]
+                          }
+                        }
+                    });
+                    
+            },
+            error: function(xhr, status){
+                console.log('Error: '+xhr);
+            }
+        });
+    }        
+</script>
 @endsection
