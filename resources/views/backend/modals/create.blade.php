@@ -45,3 +45,7 @@
     <a href="" onclick="window.history.go(-1); return false;" class="btn btn-danger">Cancelar</a>
 {!! Form::close() !!}
 @endsection
+
+@section('content-footer')
+<i>* La URL a Definir debe tener http:// o https:// al comienzo de la misma.</i>
+@endsection
