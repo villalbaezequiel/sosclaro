@@ -16,18 +16,18 @@
                     <li class="nav-item">
                         <a href="{{ url('/que-es') }}">Qué es?</a>
                     </li>
-                    <li class="nav-item">
+<!--                    <li class="nav-item">
                         <a href="{{ url('/') }}">Logros</a>
-                    </li>
+                    </li>-->
                     <li class="nav-item">
                         <a href="{{ url('/catalogo') }}">Catálogo</a>
                     </li>
-                    <li class="nav-item">
+<!--                    <li class="nav-item">
                         <a href="{{ url('/desempeno') }}">Desempeño</a>
                     </li>
                     <li class="nav-item">
                         <a href="{{ url('/resultados') }}">Resultados</a>
-                    </li>
+                    </li>-->
                     <!--li class="nav-item">
                         <a href="{{ url('/novedades') }}">Novedades</a>
                     </li-->

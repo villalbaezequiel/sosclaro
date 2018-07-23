@@ -13,7 +13,7 @@
             </div>
             <div class="nav-menu">
                 <ul class="nav-main" style="justify-content: flex-end;">
-                    <li class="nav-item">
+<!--                    <li class="nav-item">
                         <a href="{{ url('/') }}">Qué es?</a>
                     </li>
                     <li class="nav-item">
@@ -21,7 +21,7 @@
                     </li>
                     <li class="nav-item">
                         <a href="{{ url('/contactanos') }}">Contactanos</a>
-                    </li>
+                    </li>-->
                     <li class="nav-item">
                         <a href="{{ url('/login') }}">Ingresar</a>
                     </li>

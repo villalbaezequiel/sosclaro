@@ -12,9 +12,10 @@ class HomeController extends Controller
 {
     public function index() {
         if (Auth::check()){
-            return redirect('/dashboard');
+            return redirect('/resultados');
         } else {
-            return view('frontend.index');
+            //return view('frontend.index');
+            return redirect('/login');
         }
     }
 }

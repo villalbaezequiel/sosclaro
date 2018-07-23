@@ -3,7 +3,11 @@
 @section('title', "Bases y Condiciones")
 @section('content')
 
-@include('frontend.components.header_auth')
+@if(Auth::check())
+    @include('frontend.components.header')
+@else
+    @include('frontend.components.header_auth')
+@endif
 
 <main class="main main-pre">
   <section class="section section-pre">

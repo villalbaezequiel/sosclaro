@@ -13,38 +13,7 @@
 
 Route::auth();
 
-Route::get('/home',function(){
-    return redirect('/');
-}); 
-
-//home
-Route::get('/', 'Frontend\HomeController@index');
-
-//auth
-Route::get('/registro', 'Frontend\AuthController@indexRegister');
-Route::post('/registro/store', 'Frontend\AuthController@storeRegister');
-
-//logros
-Route::get('/logros', function(){
-    return view('frontend.logros');
-});
-
-//terminos y condiciones
-Route::get('/terminos', function(){
-    return view('frontend.terminos');
-});
-
-//logros
-Route::get('/logros', function(){
-    return view('frontend.logros');
-});
-
-//contactanos
-Route::get('/contactanos', function(){
-    return view('frontend.contactanos');
-});
-
-//BACKEND
+// ------------- BACKEND -------------
 Route::group(['middleware' => ['auth', 'admin']], function () {
     
     Route::group(['prefix' => 'admin'], function() {
@@ -97,7 +66,23 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
     
 });    
     
-//FRONTEND
+// ------------- FRONTEND -------------
+Route::get('/home',function(){
+    return redirect('/');
+}); 
+
+//home
+Route::get('/', 'Frontend\HomeController@index');
+
+//auth
+Route::get('/registro', 'Frontend\AuthController@indexRegister');
+Route::post('/registro/store', 'Frontend\AuthController@storeRegister');
+
+//terminos y condiciones
+Route::get('/terminos', function(){
+    return view('frontend.terminos');
+});
+
 Route::group(['middleware' => 'auth'], function () {    
     
     //auth
@@ -150,6 +135,15 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/desempeno_grafico', 'Frontend\DesempenoController@grafico');
     Route::get('/resultados/{id_region}', 'Frontend\RankingController@ajax');
 
+    //logros
+    Route::get('/logros', function(){
+        return view('frontend.logros');
+    });
+
+    //contactanos
+    Route::get('/contactanos', function(){
+        return view('frontend.contactanos');
+    });
 
 });
 
