@@ -131,6 +131,9 @@ Route::group(['middleware' => 'auth'], function () {
         return view('frontend.quees');
     });
     
+    //preguntas frecuentes
+    Route::get('/preguntas-frecuentes', 'Frontend\PreguntasFrecuentesController@index');
+    
     //ajax
     Route::get('/desempeno_name/{name}', 'Frontend\DesempenoController@desempenosForName');
     Route::get('/desempeno_grafico', 'Frontend\DesempenoController@grafico');
