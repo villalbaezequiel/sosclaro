@@ -12,7 +12,7 @@ class HomeController extends Controller
 {
     public function index() {
         if (Auth::check()){
-            return redirect('/resultados');
+            return redirect('/dashboard');
         } else {
             //return view('frontend.index');
             return redirect('/login');
