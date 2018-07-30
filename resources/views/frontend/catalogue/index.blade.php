@@ -30,13 +30,18 @@
         <article class="section-content" id="catalogo">
             @foreach($products as $product)
                 <div class="producto">
-                    <a class="card" href="{{ url('/catalogo/producto/'.$product->id) }}">
+                    <a class="card <?php if($product->stock == 0){ echo 'not-stock'; } ?>" href="{{ url('/catalogo/producto/'.$product->id) }}">
                         <img class="card-img-top" src="{{ asset('storage/app/public/products/') }}/{{ $product->id.'/'.$product->image }}" alt="{{ $product->name }}">
                         <div class="card-body">
                             <h5 class="card-title">{{ $product->name }}</h5>
                             <h6 class="card-subtitle">
                                 <span class="badge badge-danger">
-                                    <span class="puntos">{{ $product->price }}</puntos> puntos</span>
+                                    @if($product->stock == 0)
+                                    <span class="puntos">sin stock</span>
+                                    @else
+                                    <span class="puntos">{{ $product->price }} puntos</span>
+                                    @endif
+                                </span>    
                             </h6>
                         </div>
                     </a>
@@ -45,4 +50,12 @@
         </article>
     </section>
 </main>
+@endsection
+@section("css")
+<style>
+.not-stock  {
+    background-color: rgba(211, 211, 211, 1) !important;
+    opacity: 0.5;
+  }
+</style>
 @endsection

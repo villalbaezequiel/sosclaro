@@ -33,6 +33,7 @@
         <textarea class="form-control" name="politica_legal_product" rows="3" required></textarea>
     </div>
 
+    <label>Multimedia <a href="#card-footer-info">(*1)</a>:</label>
     <div class="custom-file">
         <input type="file" class="custom-file-input" id="imagen_product" name="imagen_product" required>
         <label class="custom-file-label" for="imagen_product">Imagén</label>
@@ -46,8 +47,14 @@
     </div>
 
     <div class="form-group">
-        <label>Stock:</label>
-        <input type="number" class="form-control" name="stock_product" required>
+        
+        <label>Stock Inicial:</label>
+        <input type="number" class="form-control" name="stock_initial_product" required>
+    </div>
+
+    <div class="form-group">
+        <label>Notificar por Mail, cuando el STOCK del Producto, este igual a:</label>
+        <input type="number" class="form-control" name="stock_notification_product" required>
     </div>
     
     <div class="form-group">

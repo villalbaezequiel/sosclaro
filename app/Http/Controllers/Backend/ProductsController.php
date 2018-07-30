@@ -10,6 +10,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Storage;
 use App\Functions;
 use App\Products;
+use App\ProductsHistoryStock;
 use App\Categories;
 
 class ProductsController extends Controller
@@ -58,9 +59,16 @@ class ProductsController extends Controller
             $product->politica_legal = $request->get('politica_legal_product');
             $product->image = $imagen_product->getClientOriginalName();
             $product->price = $request->get('price_product');
-            $product->stock = $request->get('stock_product');
+            $product->stock = $request->get('stock_initial_product');
+            $product->notification = $request->get('stock_notification_product');
             $product->active = $request->get('active_product');
             $product->save();
+            
+            // add stock initial to Product
+            $stock_initial_product = new ProductsHistoryStock;
+            $stock_initial_product->id_product = $product->id;
+            $stock_initial_product->stock = $request->get('stock_initial_product');
+            $stock_initial_product->save();
      
             if($request->hasFile('imagen_product')){
                 Storage::disk('public')->put('products/'.$product->id.'/'.$imagen_product->getClientOriginalName(), file_get_contents($imagen_product->getRealPath()));
@@ -108,7 +116,9 @@ class ProductsController extends Controller
     {
         return view('backend.products.edit', [
             'product' => Products::find($id),
-            'categories' => Categories::all()
+            'categories' => Categories::all(),
+            'stocks_initial' => ProductsHistoryStock::getStocksToProduct($id),
+            'stocks_total' => ProductsHistoryStock::getStocksTotalToProduct($id)
         ]);
     }
 
@@ -139,10 +149,19 @@ class ProductsController extends Controller
             $product->politica_legal = $request->get('politica_legal_product');
             $product->image = ($request->hasFile('imagen_product') ? $imagen_product->getClientOriginalName() : $request->get('imagen_product_old'));
             $product->price = $request->get('price_product');
-            $product->stock = $request->get('stock_product');
+            $product->stock = (!empty($request->get('stock_initial_product')) ? ($request->get('stock_product')+$request->get('stock_initial_product')) : $request->get('stock_product'));
+            $product->notification = $request->get('stock_notification_product');
             $product->active = $request->get('active_product');
             $product->save();
-     
+            
+            if(!empty($request->get('stock_initial_product'))){
+                // add stock initial to Product
+                $stock_initial_product = new ProductsHistoryStock;
+                $stock_initial_product->id_product = $product->id;
+                $stock_initial_product->stock = $request->get('stock_initial_product');
+                $stock_initial_product->save();    
+            }
+            
             $message = "Producto: ".$request->get('name_product')." editado con exito!";
             
             return redirect('/admin/products')->with('message', $message);

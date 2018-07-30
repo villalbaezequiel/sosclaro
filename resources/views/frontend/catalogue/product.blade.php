@@ -25,15 +25,17 @@
                         </p>
                     </div>
                     
+                    <div class="card-body">
                     @if(\App\Dni::getPuntos(Auth::user()->id) >= $product->price)
-                    <div class="card-body">
+                      @if($product->stock == 0)
+                        <i>Producto Sin Stock.</i>
+                      @else
                         <button class="btn" type="button" data-toggle="modal" data-target="#{{ $product->id }}">Canjear</button>
-                    </div>
+                      @endif
                     @else
-                    <div class="card-body">
-                        <i>No tienes puntos suficientes para canjear este Producto.</i>
-                    </div>
+                      <i>No tienes puntos suficientes para canjear este Producto.</i>
                     @endif
+                    </div>
                     
                     <div class="card-body">
                         <h6>Legales</h6>

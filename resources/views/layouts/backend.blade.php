@@ -39,7 +39,7 @@
             <div class="card mb-3">
                 <div class="card-header">@yield('title')</div>
                 <div class="card-body">@yield('content')</div>
-                <div class="card-footer small text-muted">@yield('content-footer')</div>
+                <div id="card-footer-info" class="card-footer small text-muted">@yield('content-footer')</div>
             </div>
 
         </div>
