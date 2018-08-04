@@ -34,19 +34,19 @@
                         <div class="form-group row">
                             <label class="col col-sm-3 col-form-label">DNI</label>
                             <div class="col col-sm-9">
-                                <input type="text" class="form-control" value="{{ $dni[0]['dni'] }}" disabled>
+                                <input type="text" class="form-control" name="dni" value="{{ $dni[0]['dni'] }}" disabled>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col col-sm-3 col-form-label">Nombre</label>
                             <div class="col col-sm-9">
-                                <input type="text" class="form-control" name="dni_name" value="{{ $dni[0]['name'] }}" required>
+                                <input type="text" class="form-control" name="dni_name" value="{{ $dni[0]['name'] }}" readonly>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col col-sm-3 col-form-label">Apellido</label>
                             <div class="col col-sm-9">
-                                <input type="text" class="form-control" name="dni_last_name" value="{{ $dni[0]['last_name'] }}" required>
+                                <input type="text" class="form-control" name="dni_last_name" value="{{ $dni[0]['last_name'] }}" readonly>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -85,6 +85,13 @@
                         </div>
                         
                         <div class="form-group row">
+                            <label class="col col-sm-3 col-form-label">Fecha de Ingreso</label>
+                            <div class="col col-sm-9">
+                                <input type="text" class="form-control" name="user_profile_admission_date" value="{{ ($user_profile[0]['admission_date'] ? $user_profile[0]['admission_date'] : "No estás asignado a ninguna Fecha de Ingreso") }}" readonly>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group row">
                             <label class="col col-sm-3 col-form-label">Teléfono</label>
                             <div class="col col-sm-9">
                                 <input type="text" class="form-control" name="user_profile_telephone" value="{{ $user_profile[0]['telephone'] }}" placeholder="+5491159998888" required>
@@ -101,33 +108,59 @@
                         <div class="form-group row">
                             <label class="col col-sm-3 col-form-label">Domicilio Personal</label>
                             <div class="col col-sm-9">
-                                <input type="text" class="form-control" name="user_profile_address" value="{{ $user_profile[0]['address'] }}" placeholder="Av. Santa Fe 4321" required>
+                                <input type="text" class="form-control" name="user_profile_address" value="{{ ($user_profile[0]['address'] ? $user_profile[0]['address'] : "No estás asignado a ninguna Dirección") }}" readonly>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group row">
+                            <label class="col col-sm-3 col-form-label">Codigo Postal</label>
+                            <div class="col col-sm-9">
+                                <input type="text" class="form-control" name="user_profile_cp" value="{{ ($user_profile[0]['cp'] ? $user_profile[0]['cp'] : "No estás asignado a ningun CP") }}" readonly>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group row">
+                            <label class="col col-sm-3 col-form-label">Ciudad/Localidad</label>
+                            <div class="col col-sm-9">
+                                <select class="form-control" name="user_profile_id_city" readonly>
+                                    <option value="{{ $user_profile[0]['id_city'] }}">{{ \App\Cities::getName($dni[0]['id_region']) }}</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group row">
+                            <label class="col col-sm-3 col-form-label">Provincia</label>
+                            <div class="col col-sm-9">
+                                <select class="form-control" name="user_profile_id_province" readonly>
+                                    <option value="{{ $user_profile[0]['id_province'] }}">{{ \App\Provinces::getName($user_profile[0]['id_province']) }}</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group row">
+                            <label class="col col-sm-3 col-form-label">Agente</label>
+                            <div class="col col-sm-9">
+                                <select class="form-control" name="user_profile_id_agente" readonly>
+                                    <option value="{{ $user_profile[0]['id_agente'] }}">{{ \App\Agentes::getName($user_profile[0]['id_agente']) }}</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group row">
+                            <label class="col col-sm-3 col-form-label">Categorización de Usuario</label>
+                            <div class="col col-sm-9">
+                                <input type="text" class="form-control" name="user_profile_type_user" value="{{ ($user_profile[0]['type_user'] ? $user_profile[0]['type_user'] : "Vendedor") }}" readonly>
                             </div>
                         </div>
                         
                         <div class="form-group row">
                             <label class="col col-sm-3 col-form-label">Región Comercial</label>
                             <div class="col col-sm-9">
-                                <select class="form-control" name="user_profile_id_region" disabled="disabled">
-                                    <option value="">Seleccionar...</option>
-                                    @foreach($regions as $region)
-                                    <option value="{{ $region->id }}" @if($region->id == $user_profile[0]['id_region']) selected="selected" @endif>{{ $region->name }}</option>
-                                    @endforeach
+                                <select class="form-control" name="dni_id_region" readonly>
+                                    <option value="{{ $dni[0]['id_region'] }}">{{ \App\Regions::getName($dni[0]['id_region']) }}</option>
                                 </select>
                             </div>
                         </div>
-                        
-<!--                        <div class="form-group row">
-                            <label class="col col-sm-3 col-form-label">Ciudad</label>
-                            <div class="col col-sm-9">
-                                <select class="form-control" name="user_profile_id_city" required>
-                                    <option value="">Seleccionar...</option>
-                                    @foreach($cities as $city)
-                                    <option value="{{ $city->id }}" @if($city->id == $user_profile[0]['id_city']) selected="selected" @endif>{{ $city->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>-->
                         
                         <div class="form-group">
                             <input type="hidden" name="user_id" value="{{ Auth::user()->id }}" />

@@ -45,24 +45,17 @@ class UsersProfile extends Model
         }
     }
     
-    static public function getPuntosHistory($id_user) {
-        $status = UsersProfile::where('id_user', '=', $id_user)->get();
-        if(!empty($status[0])){
-            return $status[0]->puntos_history;
-        }
-    }
-    
-    static public function setPuntosHistory($id_user, $puntos) {
-        $id = UsersProfile::where('id_user', '=', $id_user)->get();
-        $puntos_history = UsersProfile::find($id[0]->id);
-        $puntos_history->puntos_history = ($puntos_history->puntos_history + $puntos);
-        $puntos_history->save();
-    }
-    
     static public function getIdRegion($id_user) {
         $status = UsersProfile::where('id_user', '=', $id_user)->get();
         if(!empty($status[0])){
             return $status[0]->id_region;
+        }
+    }
+    
+    static public function getIdForIdDni($id_dni) {
+        $id = UsersProfile::where('id_dni', '=', $id_dni)->get();
+        if(!empty($id[0])){
+            return $id[0]->id;
         }
     }
     

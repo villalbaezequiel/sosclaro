@@ -14,6 +14,8 @@ class Regions extends Model
         $name = Regions::find($id);
         if(isset($name)){ 
             return $name->name;
+        } else {
+            return "No estás asignado a ninguna Región";
         }
     }
     

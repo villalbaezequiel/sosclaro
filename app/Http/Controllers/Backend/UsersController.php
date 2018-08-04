@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\DB;
 use App\Functions;
 use App\User;
 use App\UsersProfile;
@@ -14,7 +15,8 @@ use App\Dni;
 use App\Cities;
 use App\Regions;
 use App\Indicadores;
-use Illuminate\Support\Facades\DB;
+use App\Provinces;
+use App\Agentes;
 
 class UsersController extends Controller
 {
@@ -100,9 +102,10 @@ class UsersController extends Controller
             'user' => User::find($id),
             'user_profile' => UsersProfile::where('id_user', '=', $id)->get(),
             'user_dni' => Dni::where('id_user', '=', $id)->get(),
+            'agentes' => Agentes::all(),
+            'provinces' => Provinces::all(),
             'cities' => Cities::all(),
-            'regions' => Regions::all(),
-            'indicadores' => Indicadores::all()
+            'regions' => Regions::all()
         ]);
     }
 
@@ -118,21 +121,30 @@ class UsersController extends Controller
         $message;
         try {
             
+                $dni = Dni::find($request->get('id_dni'));
+                $dni->name = $request->get('name_dni');
+                $dni->last_name = $request->get('last_name_dni');
+                $dni->id_region = $request->get('region_dni');
+                $dni->save();
+            
             $user = User::find($id);
-            $user->name = $request->get('name_user');    
             $user->email = $request->get('email_user');    
             $user->active = $request->get('active_user');    
             $user->save();    
             
             if($request->get('id_user_profile')){
                 $user_profile = UsersProfile::find($request->get('id_user_profile'));
-                $user_profile->id_city = $request->get('city_user_profile');    
-                $user_profile->id_region = $request->get('region_user_profile');    
-                $user_profile->telephone = $request->get('telephone_user_profile');    
-                $user_profile->telephone_other = $request->get('telephone_other_user_profile');    
+                $user_profile->admission_date = $request->get('admission_date_user_profile');    
                 $user_profile->address = $request->get('address_user_profile');    
+                $user_profile->cp = $request->get('cp_user_profile');    
+                $user_profile->id_city = $request->get('city_user_profile');    
+                $user_profile->id_province = $request->get('province_user_profile');    
+                $user_profile->id_agente = $request->get('agente_user_profile');    
+                $user_profile->type_user = $request->get('type_user_user_profile');    
                 $user_profile->save();    
             }
+            
+            
                        
             $message = "Usuario: ".$request->get('name_user')." editado con exito! DNI: ". $request->get('dni');
             

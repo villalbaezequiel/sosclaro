@@ -34,7 +34,8 @@ class AuthController extends Controller
                 $user->active = 1;    
                 $user->save(); 
 
-                $userProfile = new UsersProfile;
+                //actualizar esto, el UsersProfile se crea cuando cargo los dni desde el BACKEND
+                $userProfile = UsersProfile::find(UsersProfile::getIdForIdDni($checkDni[0]['id']));
                 $userProfile->id_user = $user->id;
                 $userProfile->id_role = 2;
                 $userProfile->save();

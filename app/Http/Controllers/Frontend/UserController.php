@@ -36,56 +36,27 @@ class UserController extends Controller
         $message;
         try {
             
+            $user = User::find($request->get('user_id'));
+            $user->email = $request->get('user_email');
+            $user->save();
+                
             $user_profile = UsersProfile::find($request->get('user_profile_id'));
             
             if($user_profile->status != 1){
-                $user = User::find($request->get('user_id'));
-                $user->name = $request->get('user_name');
-                $user->email = $request->get('user_email');
-                $user->save();
-
                 $dni = Dni::find($request->get('dni_id'));
-                $dni->name = $request->get('dni_name');
-                $dni->last_name = $request->get('dni_last_name');
-                $dni->puntos = ($dni->puntos + 20);
+                $dni->puntos = ($dni->puntos + 20); // SI COMPLETA EL PERFIL POR PRIMERA VEZ, SE LE ASIGNAN 20 PUNTOS
+                $dni->historical_puntos = ($dni->historical_puntos + 20);
                 $dni->save();
-
-
-                $user_profile->sexo = $request->get('user_profile_sexo');
-                $user_profile->date_year = json_encode($request->get('user_profile_date_year'));
-                $user_profile->telephone = $request->get('user_profile_telephone');
-                $user_profile->telephone_other = $request->get('user_profile_telephone_other');
-                $user_profile->address = $request->get('user_profile_address');
-                $user_profile->id_city = $request->get('user_profile_id_city');
-                //$user_profile->id_region = $request->get('user_profile_id_region');
-                $user_profile->status = 1;
-                $user_profile->save();
-
-                $message = "Usuario: ".$request->get('user_name')." editado con exito!";    
-            } else {
-                $user = User::find($request->get('user_id'));
-                $user->name = $request->get('user_name');
-                $user->email = $request->get('user_email');
-                $user->save();
-
-                $dni = Dni::find($request->get('dni_id'));
-                $dni->name = $request->get('dni_name');
-                $dni->last_name = $request->get('dni_last_name');
-                $dni->save();
-
-
-                $user_profile->sexo = $request->get('user_profile_sexo');
-                $user_profile->date_year = json_encode($request->get('user_profile_date_year'));
-                $user_profile->telephone = $request->get('user_profile_telephone');
-                $user_profile->telephone_other = $request->get('user_profile_telephone_other');
-                $user_profile->address = $request->get('user_profile_address');
-                $user_profile->id_city = $request->get('user_profile_id_city');
-                //$user_profile->id_region = $request->get('user_profile_id_region');
-                $user_profile->status = 1;
-                $user_profile->save();
-
-                $message = "Usuario: ".$request->get('user_name')." editado con exito!";  
             }
+            
+            $user_profile->sexo = $request->get('user_profile_sexo');
+            $user_profile->date_year = json_encode($request->get('user_profile_date_year'));
+            $user_profile->telephone = $request->get('user_profile_telephone');
+            $user_profile->telephone_other = $request->get('user_profile_telephone_other');
+            $user_profile->status = 1;
+            $user_profile->save();
+            
+            $message = "Usuario editado con exito!";  
             
             return redirect('/usuario/mi-cuenta')->with('message', $message);
         
