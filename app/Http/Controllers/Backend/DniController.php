@@ -36,76 +36,37 @@ class DniController extends Controller
             if($request->hasFile('import_dni')){
                 $path = $request->file('import_dni')->getRealPath();
                 $data = Excel::load($path, function($reader) {})->get();
-
+                $values = array();
+                
                 if(!empty($data) && $data->count()){
-                    foreach ($data as $key => $value) {
-                      if($value->dni && $value->id_region){
+                  foreach ($data as $key => $value) {
+                    if($value->dni && $value->id_region){
                           
-                        $searchDni = Dni::where('dni', '=', $value->dni)->get();
-                        
-                        if(!$searchDni->count()){
-                            
-                            $insert = new Dni;
-                            $insert->dni = $value->dni;       
-                            $insert->name = $value->nombres;
-                            $insert->last_name = $value->apellidos;
-                            $insert->id_region = $value->id_region;
-                            $insert->save();
-                           
-                            if(Dni::getIdDni($value->dni)){
-                                
-                                //insert agente
-                                if(Agentes::checkAgente($value->agente) == FALSE){
-                                    $agente = new Agentes;
-                                    $agente->name = $value->agente;
-                                    $agente->description = '';
-                                    $agente->active = 1;
-                                    $agente->save();
-                                }
-                                
-                                //insert city
-                                if(Cities::checkCitie($value->localidad) == FALSE){
-                                    $citie = new Cities;
-                                    $citie->id_province = 0;
-                                    $citie->name = $value->localidad;
-                                    $citie->active = 1;
-                                    $citie->save();
-                                }
-                                
-                                //insert province
-                                if(Provinces::checkProvince($value->provincia) == FALSE){
-                                    $prov = new Provinces;
-                                    $prov->name = $value->provincia;
-                                    $prov->save();
-                                }
-                                
-                                $userProfile = new UsersProfile;
-                                $userProfile->id_user = 0;
-                                $userProfile->id_dni= Dni::getIdDni($value->dni);
-                                $userProfile->id_agente = Agentes::getIdForName($value->agente);
-                                $userProfile->id_province = Provinces::getIdForName($value->provincia);
-                                $userProfile->id_city = Cities::getIdForName($value->localidad);
-                                $userProfile->type_user = $value->tipo_usuario; // tipo de usuario
-                                $userProfile->admission_date = $value->fecha_ingreso->toDateTimeString(); // fecha ingreso
-                                $userProfile->address = $value->direccion;
-                                $userProfile->cp = $value->cp;
-                                $userProfile->save();
-                            }
-                        } 
-                      }
+                      $values[] = 
+                        array('id_region' => $value->id_region,
+                          'dni' => $value->dni,
+                          'nombres' => $value->nombres,
+                          'apellidos' => $value->apellidos,
+                          'agente' => $value->agente,
+                          'direccion' => $value->direccion,
+                          'cp' => $value->cp,
+                          'localidad' => $value->localidad,
+                          'provincia' => $value->provincia,
+                          'fecha_ingreso' => $value->fecha_ingreso->toDateTimeString(),
+                          'tipo_usuario' => $value->tipo_usuario);
                     }
-                    
+                  }
+                        
+                 //view preview
+                 return view('backend.dni.create', ['preview' => $values]);
+                  
                 } else {
-                    
+                  $message = "Error al Importar Lista de DNI. Asegurese que este subiendo el archivo correcto.
+                            Con los datos correspondientes. Tenga en cuenta 'Descargar Plantilla Excel'.
+                            Todos los campos tienen que estar completos.";
                 }
             }
      
-            //Manipular EXCEL e insertarlo en la DB
-            
-            $message = "Excel de DNI: ".$request->get('name_guest')." importado con exito!";
-            
-            return redirect('/admin/dni')->with('message', $message);
-        
         } catch(\Exception $e) {
 
             if(\Config::get('app.debug'))
@@ -130,5 +91,103 @@ class DniController extends Controller
         return view('backend.dni.show', [
             'dni' => Dni::find($id)
         ]);
+    }
+    
+    public function import($values)
+    {
+        $message;
+        try {
+            $data = unserialize($values);
+            $status_message = true;
+                
+            if(!empty($data)){
+                foreach ($data as $value) {
+
+                  //convert array to object
+                  $value = (object)$value;
+                
+                  $searchDni = Dni::where('dni', '=', $value->dni)->get();
+                  if(!$searchDni->count()){
+
+                        $insert = new Dni;
+                        $insert->dni = $value->dni;       
+                        $insert->name = $value->nombres;
+                        $insert->last_name = $value->apellidos;
+                        $insert->id_region = $value->id_region;
+                        $insert->save();
+
+                        if(Dni::getIdDni($value->dni)){
+
+                            //insert agente
+                            if(Agentes::checkAgente($value->agente) == FALSE){
+                                $agente = new Agentes;
+                                $agente->name = $value->agente;
+                                $agente->description = '';
+                                $agente->active = 1;
+                                $agente->save();
+                            }
+
+                            //insert city
+                            if(Cities::checkCitie($value->localidad) == FALSE){
+                                $citie = new Cities;
+                                $citie->id_province = 0;
+                                $citie->name = $value->localidad;
+                                $citie->active = 1;
+                                $citie->save();
+                            }
+
+                            //insert province
+                            if(Provinces::checkProvince($value->provincia) == FALSE){
+                                $prov = new Provinces;
+                                $prov->name = $value->provincia;
+                                $prov->save();
+                            }
+
+                            $userProfile = new UsersProfile;
+                            $userProfile->id_user = 0;
+                            $userProfile->id_dni= Dni::getIdDni($value->dni);
+                            $userProfile->id_agente = Agentes::getIdForName($value->agente);
+                            $userProfile->id_province = Provinces::getIdForName($value->provincia);
+                            $userProfile->id_city = Cities::getIdForName($value->localidad);
+                            $userProfile->type_user = $value->tipo_usuario; // tipo de usuario
+                            $userProfile->admission_date = $value->fecha_ingreso->toDateTimeString(); // fecha ingreso
+                            $userProfile->address = $value->direccion;
+                            $userProfile->cp = $value->cp;
+                            $userProfile->save();
+                        }
+                    }
+
+                }
+            } else {
+                $status_message = false;
+            }
+                    
+            if($status_message == true){
+                $message = "Excel de Lista de DNI importado con exito!";
+            } else {
+                $message = "Error al importar Lista de DNI. Asegurese que este subiendo el archivo correcto."
+                . " Con los datos correspondientes. Tenga en cuenta 'Descargar Excel a completar'. Todos los campos tienen que estar completos.";
+            }
+                    
+            return redirect('/admin/dni')->with('message', $message);
+        
+        } catch(\Exception $e) {
+
+            if(\Config::get('app.debug'))
+                    $message = 'ERROR('.$e->getLine().'): '.$e->getMessage();
+            else
+                    $message = 'Se ha producido un error. Por favor intente nuevamente.';
+
+            $respuesta = array(
+                    'estado' => false,
+                    'mensaje' => $message
+            );
+
+            //return \Response::json($respuesta);
+            
+            $message = "Error Técnico. Comuníquese con Soporte Técnico.";
+            return redirect('/admin/dni')->with('message', $message);
+            
+	}
     }
 }

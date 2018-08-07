@@ -32,19 +32,22 @@ class AuthController extends Controller
                 $user->email = $request->get('email');    
                 $user->password = bcrypt($request->get('password'));    
                 $user->active = 1;    
-                $user->save(); 
-
-                //actualizar esto, el UsersProfile se crea cuando cargo los dni desde el BACKEND
-                $userProfile = UsersProfile::find(UsersProfile::getIdForIdDni($checkDni[0]['id']));
-                $userProfile->id_user = $user->id;
-                $userProfile->id_role = 2;
-                $userProfile->save();
+                $user->save();
                 
                 $dni = Dni::find($checkDni[0]['id']);
-                $dni->id_user = $user->id;  
-                $dni->name = $request->get('dni_name');  
-                $dni->last_name = $request->get('dni_last_name');  
+                $dni->id_user = $user->id; 
                 $dni->save(); 
+
+                if(UsersProfile::getIdForIdDni($checkDni[0]['id']) != 0){
+                    $userProfile = UsersProfile::find(UsersProfile::getIdForIdDni($checkDni[0]['id']));
+                    $userProfile->id_user = $user->id;
+                    $userProfile->save();
+                } else {
+                    $userProfile = new UsersProfile;
+                    $userProfile->id_user = $user->id;
+                    $userProfile->id_dni = $dni->id;
+                    $userProfile->save();
+                }
                 
                 $message = "Usuario: creado con exito!";
             }

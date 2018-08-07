@@ -34,7 +34,10 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
         Route::get('/guests/users/export', 'Backend\GuestUsersController@export');
         Route::get('/desempeno/export', 'Backend\UsersGanadoresController@export');
         Route::get('/exchanges/export', 'Backend\ExchangesController@export');
-       
+
+        //Import
+        Route::get('/desempeno/import/{values}', 'Backend\UsersGanadoresController@import');     
+        Route::get('/dni/import/{values}', 'Backend\DniController@import');
         
         //ABM
         Route::resource('/users', 'Backend\UsersController');
@@ -62,7 +65,6 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
         Route::resource('/settings/social_networks', 'Backend\SocialNetworksController');
         Route::resource('/settings/emails', 'Backend\EmailsController');
         Route::resource('/settings/api', 'Backend\ApiController');
-
     });
     
 });    
