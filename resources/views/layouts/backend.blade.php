@@ -54,6 +54,9 @@
         <!-- Logout Modal-->
         @yield('modal')
 
+        <!-- loading -->
+        <div class="loading" style="display: none"></div>
+        
         <!-- Bootstrap core JavaScript-->
         <script src="{{ asset('assets/backend/js/jquery.min.js') }}"></script>
         <script src="{{ asset('assets/backend/js/bootstrap.bundle.min.js') }}"></script>

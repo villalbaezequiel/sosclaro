@@ -29,10 +29,10 @@ class DniController extends Controller
         return view('backend.dni.create');
     }
     
-    public function store(Request $request){
+    public function store(Request $request)
+    {
        $message;
         try {
-                
             if($request->hasFile('import_dni')){
                 $path = $request->file('import_dni')->getRealPath();
                 $data = Excel::load($path, function($reader) {})->get();
@@ -56,34 +56,25 @@ class DniController extends Controller
                           'tipo_usuario' => $value->tipo_usuario);
                     }
                   }
-                        
-                 //view preview
-                 return view('backend.dni.create', ['preview' => $values]);
+                 return response()->json(['preview' => $values]);
                   
                 } else {
-                  $message = "Error al Importar Lista de DNI. Asegurese que este subiendo el archivo correcto.
-                            Con los datos correspondientes. Tenga en cuenta 'Descargar Plantilla Excel'.
-                            Todos los campos tienen que estar completos.";
+                  return response()->json(['estado' => false]);
                 }
             }
      
         } catch(\Exception $e) {
 
             if(\Config::get('app.debug'))
-                    $message = 'ERROR('.$e->getLine().'): '.$e->getMessage();
+              $message = 'ERROR('.$e->getLine().'): '.$e->getMessage();
             else
-                    $message = 'Se ha producido un error. Por favor intente nuevamente.';
+              $message = 'Se ha producido un error. Por favor intente nuevamente.';
 
             $respuesta = array(
                     'estado' => false,
                     'mensaje' => $message
             );
-
-            //return \Response::json($respuesta);
-            
-            $message = "Error al importar DNI. Asegurese que este subiendo el archivo correcto."
-                    . " Con los datos correspondientes. Tenga en cuenta la PLANTILLA EXCEL. Todos los campos tienen que estar completos.";
-            return redirect('/admin/dni')->with('message', $message);
+            return \Response::json($respuesta);
 	} 
     }
     
@@ -97,15 +88,12 @@ class DniController extends Controller
     {
         $message;
         try {
-            $data = unserialize($values);
+            $data = json_decode($values);
             $status_message = true;
-                
+            
             if(!empty($data)){
                 foreach ($data as $value) {
 
-                  //convert array to object
-                  $value = (object)$value;
-                
                   $searchDni = Dni::where('dni', '=', $value->dni)->get();
                   if(!$searchDni->count()){
 
@@ -150,7 +138,7 @@ class DniController extends Controller
                             $userProfile->id_province = Provinces::getIdForName($value->provincia);
                             $userProfile->id_city = Cities::getIdForName($value->localidad);
                             $userProfile->type_user = $value->tipo_usuario; // tipo de usuario
-                            $userProfile->admission_date = $value->fecha_ingreso->toDateTimeString(); // fecha ingreso
+                            $userProfile->admission_date = $value->fecha_ingreso; // fecha ingreso
                             $userProfile->address = $value->direccion;
                             $userProfile->cp = $value->cp;
                             $userProfile->save();
@@ -159,35 +147,22 @@ class DniController extends Controller
 
                 }
             } else {
-                $status_message = false;
+              $status_message = false;
             }
-                    
-            if($status_message == true){
-                $message = "Excel de Lista de DNI importado con exito!";
-            } else {
-                $message = "Error al importar Lista de DNI. Asegurese que este subiendo el archivo correcto."
-                . " Con los datos correspondientes. Tenga en cuenta 'Descargar Excel a completar'. Todos los campos tienen que estar completos.";
-            }
-                    
-            return redirect('/admin/dni')->with('message', $message);
+            return response()->json(['estado' => $status_message]);
         
         } catch(\Exception $e) {
 
             if(\Config::get('app.debug'))
-                    $message = 'ERROR('.$e->getLine().'): '.$e->getMessage();
+              $message = 'ERROR('.$e->getLine().'): '.$e->getMessage();
             else
-                    $message = 'Se ha producido un error. Por favor intente nuevamente.';
+              $message = 'Se ha producido un error. Por favor intente nuevamente.';
 
             $respuesta = array(
                     'estado' => false,
                     'mensaje' => $message
             );
-
-            //return \Response::json($respuesta);
-            
-            $message = "Error Técnico. Comuníquese con Soporte Técnico.";
-            return redirect('/admin/dni')->with('message', $message);
-            
+            return \Response::json($respuesta);
 	}
     }
 }

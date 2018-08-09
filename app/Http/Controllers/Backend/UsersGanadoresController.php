@@ -47,53 +47,46 @@ class UsersGanadoresController extends Controller
     {   
         $message;
         try {
-        
           if($request->hasFile('file_desempeno')){
-                $path = $request->file('file_desempeno')->getRealPath();
-                $data = Excel::load($path, function($reader) {})->get();
-                $values = array();
-                
-                if(!empty($data) && $data->count()){
-                    
-                  foreach ($data as $key => $value) {
-                    if(!empty($value->indicador_1) && !empty($value->indicador_2)){
-                      $values[] = 
-                            array('id' => $value->id,
-                                  'id_region' => $value->id_region,
-                                  'dni' => $value->dni,
-                                  'nombre_apellido' => $value->nombre_apellido,
-                                  'puntos' => $value->puntos,
-                                  'indicador_1' => $value->indicador_1,
-                                  'indicador_2' => $value->indicador_2,
-                                  'total' => $value->total,
-                                  'asunto' => $request->get('desempeno_asunto'));
-                    }
-                  }
-                  //view preview
-                  return view('backend.desempeno.create', ['preview' => $values]);
-                  
-                } else {
-                  $message = "Error al Importar Desempeño. Asegurese que este subiendo el archivo correcto."
-                    . " Con los datos correspondientes. Tenga en cuenta 'Descargar Excel a completar'. Todos los campos tienen que estar completos.";
-                  return redirect('/admin/desempeno/create')->with('message', $message);
+            $path = $request->file('file_desempeno')->getRealPath();
+            $data = Excel::load($path, function($reader) {})->get();
+            $values = array();
+
+            if(!empty($data) && $data->count()){
+
+              foreach ($data as $key => $value) {
+                if(!empty($value->indicador_1) && !empty($value->indicador_2)){
+                  $values[] = 
+                        array('id' => $value->id,
+                              'id_region' => $value->id_region,
+                              'dni' => $value->dni,
+                              'nombre_apellido' => $value->nombre_apellido,
+                              'puntos' => $value->puntos,
+                              'indicador_1' => $value->indicador_1,
+                              'indicador_2' => $value->indicador_2,
+                              'total' => $value->total,
+                              'asunto' => $request->get('desempeno_asunto'));
                 }
+              }
+              return response()->json(['preview' => $values]);
+
+            } else {
+              return response()->json(['estado' => false]);
+            }
           }
         
         } catch(\Exception $e) {
 
             if(\Config::get('app.debug'))
-                    $message = 'ERROR('.$e->getLine().'): '.$e->getMessage();
+              $message = 'ERROR('.$e->getLine().'): '.$e->getMessage();
             else
-                    $message = 'Se ha producido un error. Por favor intente nuevamente.';
+              $message = 'Se ha producido un error. Por favor intente nuevamente.';
 
             $respuesta = array(
                     'estado' => false,
                     'mensaje' => $message
             );
-
-            $message = "Error Técnico. Comuníquese con Soporte Técnico.";
-            return redirect('/admin/desempeno')->with('message', $message);
-            
+            return \Response::json($respuesta);
 	}
     }
 
@@ -176,73 +169,56 @@ class UsersGanadoresController extends Controller
     {
         $message;
         try {
-            $data = unserialize($values);
-            $status_message = true;
+          $data = json_decode($values);
+          $status_message = true;
                 
-            if(!empty($data)){
-                foreach ($data as $value) {
-
-                    //convert array to object
-                    $value = (object)$value;
+          if(!empty($data)){
+            foreach($data as $value) {
                 
-                    //calculate average
-                    $promedio = (($value->indicador_1 + $value->indicador_2) / 2);
+              //calculate average
+              $promedio = (($value->indicador_1 + $value->indicador_2) / 2);
 
-                    //insert new performance
-                    $insert = new UsersGanadores;
-                    $insert->id_user = $value->id;
-                    $insert->indicador_1 = $value->indicador_1;
-                    $insert->indicador_2 = $value->indicador_2;
+              //insert new performance
+              $insert = new UsersGanadores;
+              $insert->id_user = $value->id;
+              $insert->indicador_1 = $value->indicador_1;
+              $insert->indicador_2 = $value->indicador_2;
 
-                    // if !empty puntos
-                    if(isset($value->puntos) && !empty($value->puntos)){
-                        $insert->puntos = $value->puntos;
-                    } else {
-                        $insert->puntos = 0;
-                    }
+              // if !empty puntos
+              if(isset($value->puntos) && !empty($value->puntos)){
+                $insert->puntos = $value->puntos;
+              } else {
+                $insert->puntos = 0;
+              }
 
-                    $insert->promedio = $promedio;
-                    $insert->total = $value->total;
-                    $insert->asunto = $value->asunto;
-                    $insert->save();
+              $insert->promedio = $promedio;
+              $insert->total = $value->total;
+              $insert->asunto = $value->asunto;
+              $insert->save();
 
-                    //actualizo DESEMPENO HISTORICO DEL USER
-                    $historical_performance = Dni::find(Dni::getIdUser($value->id));
-                    $historical_performance->puntos = ($historical_performance->puntos + $value->puntos);
-                    $historical_performance->historical_puntos = ($historical_performance->historical_puntos + $value->puntos);
-                    $historical_performance->historical_performance = ($historical_performance->historical_performance + $promedio);
-                    $historical_performance->save();
-                }
-            } else {
-                $status_message = false;
+              //actualizo DESEMPENO HISTORICO DEL USER
+              $historical_performance = Dni::find(Dni::getIdUser($value->id));
+              $historical_performance->puntos = ($historical_performance->puntos + $value->puntos);
+              $historical_performance->historical_puntos = ($historical_performance->historical_puntos + $value->puntos);
+              $historical_performance->historical_performance = ($historical_performance->historical_performance + $promedio);
+              $historical_performance->save();
             }
-                    
-            if($status_message == true){
-                $message = "Excel de Desempeño importado con exito!";
-            } else {
-                $message = "Error al importar Desempeño. Asegurese que este subiendo el archivo correcto."
-                . " Con los datos correspondientes. Tenga en cuenta 'Descargar Excel a completar'. Todos los campos tienen que estar completos.";
-            }
-                    
-            return redirect('/admin/desempeno')->with('message', $message);
+          } else {
+            $status_message = false;
+          }
+          return response()->json(['estado' => $status_message]);
         
         } catch(\Exception $e) {
-
             if(\Config::get('app.debug'))
-                    $message = 'ERROR('.$e->getLine().'): '.$e->getMessage();
+              $message = 'ERROR('.$e->getLine().'): '.$e->getMessage();
             else
-                    $message = 'Se ha producido un error. Por favor intente nuevamente.';
+              $message = 'Se ha producido un error. Por favor intente nuevamente.';
 
             $respuesta = array(
                     'estado' => false,
                     'mensaje' => $message
             );
-
-            //return \Response::json($respuesta);
-            
-            $message = "Error Técnico. Comuníquese con Soporte Técnico.";
-            return redirect('/admin/desempeno')->with('message', $message);
-            
+            return \Response::json($respuesta);
 	}
     }
 }
