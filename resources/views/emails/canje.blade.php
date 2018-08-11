@@ -115,7 +115,6 @@
           margin-left: 5px; }
 
       a {
-        color: #3498db;
         text-decoration: underline; }
 
       /* -------------------------------------
@@ -123,16 +122,11 @@
       ------------------------------------- */
       .btn {
         box-sizing: border-box;
-        width: 100%;
         padding-bottom: 15px;
         width: auto;
-        background-color: #ffffff;
-        border-radius: 5px;
         text-align: center;
-        background-color: #ffffff;
         border: solid 1px #3498db;
         border-radius: 5px;
-        box-sizing: border-box;
         cursor: pointer;
         display: inline-block;
         font-size: 14px;
@@ -145,8 +139,8 @@
 
       .btn-primary {
         background-color: #3498db;
-        border-color: #3498db;
-        color: #ffffff; }
+        color: #ffffff!important;
+      }
 
       /* -------------------------------------
           OTHER STYLES THAT MIGHT BE USEFUL
@@ -243,7 +237,6 @@
       .mail > a{
         color: #3498db!important;
       }
-
     </style>
   </head>
   <body class="">
