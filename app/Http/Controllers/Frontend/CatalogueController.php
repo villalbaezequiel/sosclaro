@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use App\Functions;
+use App\User;
 use App\Products;
 use App\Exchanges;
 use App\Dni;
@@ -48,8 +51,17 @@ class CatalogueController extends Controller
             $canje->status = 0;
             $canje->save();
             
-            $message = "Felicitaciones!";
+            // send mail to Admin
+            $user = User::find($request->get('id_user'));
+            $mailTo = array('email' => 'villalbaezequiel64@gmail.com', 'name' => 'EV'); //SET MAIL ADMIN         
+            $callback = function ($m) use ($mailTo) {
+              $m->from('no-reply@mejoresvendedores.com.ar', 'Admin MejoresVendedores');
+              $m->to($mailTo['email'], $mailTo['name'])->subject('¡Nuevo Canje!');
+            };
+            Functions::sendMail('emails.canje', ['url' => config('app.url'), 'canje' => $canje, 'product' => $product, 'dni' => $dni, 'user' => $user], $callback);
             
+            $message = "Felicitaciones!";
+
             return redirect('/catalogo/producto/success')->with('message', $message);
             
         } catch(\Exception $e) {
