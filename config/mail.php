@@ -55,7 +55,10 @@ return [
     |
     */
 
-    'from' => ['address' => 'no-reply@mejoresvendedores.com.ar', 'name' => 'MejoresVendedores'],
+    'from' => [
+        'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
+        'name' => env('MAIL_FROM_NAME', 'Example'),
+    ],
 
     /*
     |--------------------------------------------------------------------------
