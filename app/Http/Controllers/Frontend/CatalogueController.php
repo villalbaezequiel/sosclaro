@@ -51,7 +51,7 @@ class CatalogueController extends Controller
             $canje->status = 0;
             $canje->save();
             
-            // send mail to Admin
+            // send mail to Admin new Canje
             $user = User::find($request->get('id_user'));
             $mailTo = array('email' => 'villalbaezequiel64@gmail.com', 'name' => 'EV'); //SET MAIL ADMIN         
             $callback = function ($m) use ($mailTo) {
@@ -59,6 +59,16 @@ class CatalogueController extends Controller
               $m->to($mailTo['email'], $mailTo['name'])->subject('¡Nuevo Canje!');
             };
             Functions::sendMail('emails.canje', ['url' => config('app.url'), 'canje' => $canje, 'product' => $product, 'dni' => $dni, 'user' => $user], $callback);
+            
+          // send mail alerta de STOCK de Producto
+          if($product->stock <= $product->notification){
+            $callback = function ($m) use ($mailTo) {
+              $m->from('no-reply@mejoresvendedores.com.ar', 'Admin MejoresVendedores');
+              $m->to($mailTo['email'], $mailTo['name'])->subject('¡Alerta de Stock de Producto!');
+            };
+            Functions::sendMail('emails.stock_product', ['url' => config('app.url'), 'product' => $product], $callback);   
+          }
+            
             
             $message = "Felicitaciones!";
 
