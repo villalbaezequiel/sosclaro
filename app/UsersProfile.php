@@ -59,4 +59,9 @@ class UsersProfile extends Model
         }
     }
     
+    static public function getDateYear($date_year) {
+      $date = json_decode($date_year);
+      return $date[0]."/".$date[1]."/".$date[2];
+    }
+    
 }

@@ -59,4 +59,12 @@ class Functions extends Model
       
       dd($results);
     }
+    
+    static public function getGender($gender) {
+      if($gender == "male"){
+        echo "masculino";
+      } elseif($gender == "female"){
+        echo "femenino";
+      }
+    }
 }

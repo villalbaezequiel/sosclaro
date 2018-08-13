@@ -58,6 +58,7 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
         Route::resource('/guests', 'Backend\GuestsController');
         Route::resource('/modals', 'Backend\ModalsController');
         Route::resource('/preguntas-frecuentes', 'Backend\PreguntasFrecuentesController');
+        Route::resource('/reports', 'Backend\ReportsController');
 
         //Settings
         Route::resource('/settings/politics_privacy', 'Backend\PoliticsPrivacyController');

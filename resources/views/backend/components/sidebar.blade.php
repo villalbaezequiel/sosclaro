@@ -107,6 +107,13 @@
                     <span class="nav-link-text">Preguntas Frecuentes</span>
                 </a>
             </li>
+            </li>
+            <li class="nav-item" data-toggle="tooltip" data-placement="right">
+                <a class="nav-link" href="{{ url('/admin/reports') }}">
+                    <i class="fa fa-fw fa-cogs"></i>
+                    <span class="nav-link-text">Reportes</span>
+                </a>
+            </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right">
                 <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#nav_settings">
                     <i class="fa fa-fw fa-cogs"></i>
