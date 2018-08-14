@@ -64,4 +64,11 @@ class UsersProfile extends Model
       return $date[0]."/".$date[1]."/".$date[2];
     }
     
+    static public function getIdAgente($id_user) {
+      $id_agente = UsersProfile::where('id_user', '=', $id_user)->get();
+      if(!empty($id_agente[0])){
+        return $id_agente[0]->id_agente;
+      }
+    }
+    
 }

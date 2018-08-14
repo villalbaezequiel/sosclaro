@@ -33,6 +33,20 @@
                 </ul>
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right">
+                <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#nav_results">
+                    <i class="fa fa-fw fa-cogs"></i>
+                    <span class="nav-link-text">Resultados</span>
+                </a>
+                <ul class="sidenav-second-level collapse" id="nav_results">
+                    <li>
+                        <a href="{{ url('/admin/results_categories') }}">Categorias de Resultados</a>
+                    </li>
+                    <li>
+                        <a href="{{ url('/admin/results') }}">Resultados</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item" data-toggle="tooltip" data-placement="right">
                 <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#nav_products">
                     <i class="fa fa-fw fa-cogs"></i>
                     <span class="nav-link-text">Productos</span>

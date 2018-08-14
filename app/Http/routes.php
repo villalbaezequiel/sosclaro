@@ -34,6 +34,7 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
         Route::get('/guests/users/export', 'Backend\GuestUsersController@export');
         Route::get('/desempeno/export', 'Backend\UsersGanadoresController@export');
         Route::get('/exchanges/export', 'Backend\ExchangesController@export');
+        Route::get('/results/export', 'Backend\ResultsController@export');
 
         //Import
         Route::get('/desempeno/import/{values}', 'Backend\UsersGanadoresController@import');     
@@ -59,6 +60,8 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
         Route::resource('/modals', 'Backend\ModalsController');
         Route::resource('/preguntas-frecuentes', 'Backend\PreguntasFrecuentesController');
         Route::resource('/reports', 'Backend\ReportsController');
+        Route::resource('/results_categories', 'Backend\ResultsCategoriesController');
+        Route::resource('/results', 'Backend\ResultsController');
 
         //Settings
         Route::resource('/settings/politics_privacy', 'Backend\PoliticsPrivacyController');
