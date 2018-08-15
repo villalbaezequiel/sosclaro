@@ -18,6 +18,11 @@
         <label>Seccion:</label>
         <select class="form-control" name="section_modal" required>
             <option value="1" @if($modal->section == 1) selected="selected" @endif>Home</option>
+            <option value="2" @if($modal->section == 2) selected="selected" @endif>Resultados</option>
+            <option value="3" @if($modal->section == 3) selected="selected" @endif>Resultados - Mejores Vendedores</option>
+            <option value="4" @if($modal->section == 4) selected="selected" @endif>Resultados - Bonus Track</option>
+            <option value="5" @if($modal->section == 5) selected="selected" @endif>Resultados - Vendedor Destacado</option>
+            <option value="6" @if($modal->section == 6) selected="selected" @endif>Resultados - Mejor Equipo</option>
         </select>
     </div>
 
