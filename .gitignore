@@ -9,3 +9,4 @@ Homestead.json
 /maquetado
 .DS_Store
 .vscode/
+/public/exports
