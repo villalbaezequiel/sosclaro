@@ -8,6 +8,7 @@
 .section-results {
   padding: 10px;
   margin: 1px;
+  margin-top: 10px;
 }
 .card-results {
   background-color: inherit;
