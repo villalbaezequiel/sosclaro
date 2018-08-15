@@ -32,7 +32,21 @@
             <td>{{ $guest->id }}</td>
             <td>{{ $guest->name }}</td>
             <td>{{ $guest->url }}</td>
-            <td>@if($guest->section == 1) Home @endif</td>
+            <td>
+              @if($guest->section == 1)
+                Home 
+              @elseif($guest->section == 2)
+                Resultados
+              @elseif($guest->section == 3)
+                Resultados - Mejores Vendedores
+              @elseif($guest->section == 4)
+                Resultados - Bonus Track
+              @elseif($guest->section == 5)
+                Resultados - Vendedor Destacado
+              @elseif($guest->section == 6)
+                Resultados - Mejor Equipo
+              @endif
+            </td>
             <td>{{ \App\Functions::getActive($guest->active) }}</td>
             <td>
                 {!! Form::open(['route' => ['admin.modals.destroy', $guest->id], 'method' => 'DELETE']) !!}

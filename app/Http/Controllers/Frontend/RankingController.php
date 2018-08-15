@@ -8,53 +8,18 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Functions;
-use App\Regions;
-use App\UsersProfile;
-use App\Dni;
+use App\ResultsCategories;
+use App\Results;
+use App\Modals;
 
 class RankingController extends Controller
 {
-    public function index() {
-        
-        $posicionNacional= DB::table('dni')
-                        ->select('id', 'id_user', 'historical_performance')
-                        ->where('id_user', '!=', 0)
-                        ->where('historical_performance', '!=', 0)
-                        ->orderBy('historical_performance', 'desc')
-                        ->get();
-        
-        $historical_performance = "";
-                
-        foreach($posicionNacional as $key => $value){
-            if($value->id_user == Auth::user()->id){
-                $historical_performance = ($key+1);
-            }
-        }
-        
-        $id_region = Dni::getRegion(Auth::user()->id);
-        
-        $posicionRegion = DB::table('dni')
-                        ->select('id', 'id_region', 'id_user', 'historical_puntos')
-                        ->where('id_region', '=', $id_region)
-                        ->where('id_user', '!=', 0)
-                        ->where('historical_puntos', '!=', 0)
-                        ->orderBy('historical_puntos', 'desc')
-                        ->get();
-        
-        $historical_region = "";
-        
-        foreach($posicionRegion as $key => $value){
-            if($value->id_user == Auth::user()->id){
-                $historical_region = ($key+1);
-            }
-        }
-        
-        return view('frontend.ranking', [
-            'regions' => Regions::all(),
-            'historical_region' => $historical_region,
-            'region_name' => Regions::getName($id_region),
-            'historical_performance' => $historical_performance
-        ]);
+    public function index()
+    {
+      return view('frontend.results', [
+        'results_categories' => ResultsCategories::all(),
+        'modals' => Modals::where('active', '=', 1)->get()
+      ]);
     }
     
     public function ajax($id_region) {
