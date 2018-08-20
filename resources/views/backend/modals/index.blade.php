@@ -40,9 +40,9 @@
               @elseif($guest->section == 1)
                 Resultados - Mejores Vendedores
               @elseif($guest->section == 2)
-                Resultados - Bonus Track
-              @elseif($guest->section == 3)
                 Resultados - Vendedor Destacado
+              @elseif($guest->section == 3)
+                Resultados - Bonus Track
               @elseif($guest->section == 4)
                 Resultados - Mejor Equipo
               @endif

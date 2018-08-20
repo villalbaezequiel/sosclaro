@@ -20,8 +20,8 @@
             <option value="999" @if($modal->section == 999) selected="selected" @endif>Home</option>
             <option value="666" @if($modal->section == 666) selected="selected" @endif>Resultados</option>
             <option value="1" @if($modal->section == 1) selected="selected" @endif>Resultados - Mejores Vendedores</option>
-            <option value="2" @if($modal->section == 2) selected="selected" @endif>Resultados - Bonus Track</option>
-            <option value="3" @if($modal->section == 3) selected="selected" @endif>Resultados - Vendedor Destacado</option>
+            <option value="2" @if($modal->section == 2) selected="selected" @endif>Resultados - Vendedor Destacado</option>
+            <option value="3" @if($modal->section == 3) selected="selected" @endif>Resultados - Bonus Track</option>
             <option value="4" @if($modal->section == 4) selected="selected" @endif>Resultados - Mejor Equipo</option>
         </select>
     </div>
