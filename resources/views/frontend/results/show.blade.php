@@ -41,7 +41,7 @@
         @if(!empty($results[0]))
           <div class="col-md-2 margin-center">
             <div class="card">
-              <img class="card-img-top" src="http://localhost/frandresgo-clarothml-09075f920518/assets/images/2.png">
+              <img class="card-img-top" src="http://localhost/frandresgo-clarothml-09075f920518/assets/images/2.png" style="width: 90%!important;">
             </div>
           </div>
           <div class="col-md-6 margin-center">

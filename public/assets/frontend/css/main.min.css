@@ -27,8 +27,6 @@
   opacity: inherit; }
 .text-uppercase {
   text-transform: uppercase !important; }
-.card-img-top {
-  width: 90%!important; }
 .vertical-center {
   display: flex;
   align-items: center; }
