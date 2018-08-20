@@ -16,12 +16,12 @@
     <div class="form-group">
         <label>Seccion:</label>
         <select class="form-control" name="section_modal" required>
-            <option value="1">Home</option>
-            <option value="2">Resultados</option>
-            <option value="3">Resultados - Mejores Vendedores</option>
-            <option value="4">Resultados - Bonus Track</option>
-            <option value="5">Resultados - Vendedor Destacado</option>
-            <option value="6">Resultados - Mejor Equipo</option>
+            <option value="999">Home</option>
+            <option value="666">Resultados</option>
+            <option value="1">Resultados - Mejores Vendedores</option>
+            <option value="2">Resultados - Bonus Track</option>
+            <option value="3">Resultados - Vendedor Destacado</option>
+            <option value="4">Resultados - Mejor Equipo</option>
         </select>
     </div>
 

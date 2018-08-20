@@ -33,17 +33,17 @@
             <td>{{ $guest->name }}</td>
             <td>{{ $guest->url }}</td>
             <td>
-              @if($guest->section == 1)
+              @if($guest->section == 999)
                 Home 
-              @elseif($guest->section == 2)
+              @elseif($guest->section == 666)
                 Resultados
-              @elseif($guest->section == 3)
+              @elseif($guest->section == 1)
                 Resultados - Mejores Vendedores
-              @elseif($guest->section == 4)
+              @elseif($guest->section == 2)
                 Resultados - Bonus Track
-              @elseif($guest->section == 5)
+              @elseif($guest->section == 3)
                 Resultados - Vendedor Destacado
-              @elseif($guest->section == 6)
+              @elseif($guest->section == 4)
                 Resultados - Mejor Equipo
               @endif
             </td>

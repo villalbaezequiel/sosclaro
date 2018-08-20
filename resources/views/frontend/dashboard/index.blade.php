@@ -21,7 +21,7 @@
     <section class="section section-dashboard">
         <div class="slider slider-single">
             @foreach($modals as $modal)
-              @if($modal->section == 1)
+              @if($modal->section == 999)
                 <div class="slider-item">
                     <a href="{{ $modal->url }}" target="_blank">
                         <img class="visible-md-up" src="{{ asset('storage/app/public/modals/desktop/') }}/{{ $modal->id.'/'.$modal->image_desktop }}">
