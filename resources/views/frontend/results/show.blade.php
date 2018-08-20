@@ -43,7 +43,7 @@
         ?>
           <div class="col-md-2 margin-center {{$checkResults}}">
             <div class="card">
-              <img class="card-img-top" src="http://localhost/frandresgo-clarothml-09075f920518/assets/images/2.png" style="width: 90%!important;">
+              <img class="card-img-top" src="{{ config('app.url') }}/assets/frontend/img/single-result.png" style="width: 90%!important;">
             </div>
           </div>
           <div class="col-md-6 margin-center {{$checkResults}}">
