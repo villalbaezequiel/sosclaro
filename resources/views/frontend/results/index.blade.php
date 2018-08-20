@@ -31,7 +31,7 @@
       <div class="row">
         @foreach($results_categories as $category)
             <div class="col-sm-6 col-xl-3 mb-md-0">
-              <a href="{{ url('/resultados/'.$category->id) }}" class="card card-results">
+              <a href="{{ url('/resultados/'.$category->id) }}" class="card card-results" style="text-decoration: none;">
                 <img class="card-img-top card-img-top-results" src="{{ asset('storage/app/public/results_categories/') }}/{{ $category->id.'/'.$category->image }}">
                 <div class="card-body card-body-results btn-black text-white text-center">
                   <?php $name_category = explode(" ", $category->name); ?>

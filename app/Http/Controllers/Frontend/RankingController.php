@@ -11,15 +11,47 @@ use App\Functions;
 use App\ResultsCategories;
 use App\Results;
 use App\Modals;
+use App\Dni;
+use App\Agentes;
+use App\Regions;
+use App\UsersProfile;
 
 class RankingController extends Controller
 {
     public function index()
     {
-      return view('frontend.results', [
+      return view('frontend.results.index', [
         'results_categories' => ResultsCategories::all(),
         'modals' => Modals::where('active', '=', 1)->get()
       ]);
+    }
+
+    public function show($id_category)
+    {
+      $results = Results::where('id_category', '=', $id_category)->where('month', '=', date('n'))->orderby('puesto', 'ASC')->orderby('puntos', 'DESC')->limit(15)->get()->toArray();
+      foreach ($results as &$result) {
+        $result['user_name'] = Dni::getName($result['id_user']);
+        $result['region_name'] = Regions::getName($result['id_region']);
+        $result['agente_name'] = Agentes::getName(UsersProfile::getIdAgente($result['id_user']));
+      }
+        
+      return view('frontend.results.show', [
+        'months' => Functions::getMonthShortcuts(),
+        'name_category' => ResultsCategories::find($id_category)->toArray(),
+        'results' => $results,
+        'modals' => Modals::where('active', '=', 1)->where('section', '=', $id_category)->get()
+      ]);
+    }
+    
+    public function resultsForMonth($id_category, $month)
+    {
+      $results = Results::where('id_category', '=', $id_category)->where('month', '=', $month)->orderby('puesto', 'ASC')->orderby('puntos', 'DESC')->limit(15)->get()->toArray();
+      foreach ($results as &$result) {
+        $result['user_name'] = Dni::getName($result['id_user']);
+        $result['region_name'] = Regions::getName($result['id_region']);
+        $result['agente_name'] = Agentes::getName(UsersProfile::getIdAgente($result['id_user']));
+      }
+      return response()->json(['results' => $results]);
     }
     
     public function ajax($id_region) {

@@ -119,6 +119,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     //resultados
     Route::get('/resultados', 'Frontend\RankingController@index');
+    Route::get('/resultados/{id_category}', 'Frontend\RankingController@show');
 
     //dashboard
     Route::get('/dashboard', 'Frontend\DashboardController@index');
@@ -143,7 +144,7 @@ Route::group(['middleware' => 'auth'], function () {
     //ajax
     Route::get('/desempeno_name/{name}', 'Frontend\DesempenoController@desempenosForName');
     Route::get('/desempeno_grafico', 'Frontend\DesempenoController@grafico');
-    Route::get('/resultados/{id_region}', 'Frontend\RankingController@ajax');
+    Route::get('/resultados/{id_category}/{month}', 'Frontend\RankingController@resultsForMonth');
 
     //logros
     Route::get('/logros', function(){
