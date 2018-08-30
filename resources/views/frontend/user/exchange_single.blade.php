@@ -22,7 +22,7 @@
                         <h4 class="card-title">{{ $product->name }}</h4>
                         <p class="card-text">{{ $product->description }}</p>
                     </div>
-                    <form class="card-body" action="{{ url('usuario/canjes').'/'.$exchange->id }}" method="POST">
+                    <form id="confirm_exchange_user" class="card-body" action="{{ url('usuario/canjes').'/'.$exchange->id }}" method="POST">
                         {{ csrf_field() }}
                         <input type="hidden" name="id_exchange" value="{{ $exchange->id }}" />
                         <input class="btn" type="submit" value="CONFIRMAR RECEPCIÓN" />
@@ -46,4 +46,18 @@
         </div>
     </section>
 </main>
+@endsection
+@section('javascript')
+<script type="text/javascript">
+$(document).ready(function(){
+    $("#confirm_exchange_user").submit(function( event ) {
+      if (confirm("!Enhorabuena! Estás por cambiar el Estado de su Canje a 'Recepción confirmada', desea continuar?") === false) {
+        return false ;
+      } else {
+        return true ;
+      }
+      event.preventDefault();
+    });
+});
+</script>
 @endsection
