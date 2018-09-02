@@ -17,9 +17,6 @@
                         <a href="{{ url('/') }}">Qué es?</a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ url('/logros') }}">Logros</a>
-                    </li>
-                    <li class="nav-item">
                         <a href="{{ url('/contactanos') }}">Contactanos</a>
                     </li>-->
                     <li class="nav-item">

@@ -1,6 +1,6 @@
 @extends('layouts.frontend')
 
-@section('title', "Dashboard")
+@section('title', "Inicio")
 @section('content')
 
 @include('frontend.components.header')

@@ -1,7 +1,7 @@
 <header class="header">
     <div class="container">
         <hgroup class="brand">
-            <a class="brand-link" href="{{ url('/dashboard') }}">
+            <a class="brand-link" href="{{ url('/inicio') }}">
                 <img class="brand-logo" src="{{ asset('assets/frontend/img/logo-black.png') }}" alt="SOS CLARO">
             </a>
         </hgroup>
@@ -14,20 +14,17 @@
             <div class="nav-menu">
                 <ul class="nav-main">
                     <li class="nav-item">
-                        <a href="{{ url('/dashboard') }}">Inicio</a>
+                        <a href="{{ url('/inicio') }}">Inicio</a>
                     </li>
                     <li class="nav-item">
                         <a href="{{ url('/que-es') }}">Qué es?</a>
                     </li>
-<!--                    <li class="nav-item">
-                        <a href="{{ url('/') }}">Logros</a>
-                    </li>-->
+                    <li class="nav-item">
+                        <a href="{{ url('/mis-logros') }}">Logros</a>
+                    </li>
                     <li class="nav-item">
                         <a href="{{ url('/catalogo') }}">Catálogo</a>
                     </li>
-<!--                    <li class="nav-item">
-                        <a href="{{ url('/desempeno') }}">Desempeño</a>
-                    </li>-->
                     <li class="nav-item">
                         <a href="{{ url('/resultados') }}">Resultados</a>
                     </li>

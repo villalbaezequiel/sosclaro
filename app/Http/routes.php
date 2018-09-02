@@ -76,7 +76,7 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
 // ------------- FRONTEND -------------
 Route::get('/home',function(){
     return redirect('/');
-}); 
+});
 
 //home
 Route::get('/', 'Frontend\HomeController@index');
@@ -91,6 +91,10 @@ Route::get('/terminos', function(){
 });
 
 Route::group(['middleware' => 'auth'], function () {    
+
+    Route::get('/dashboard',function(){
+      return redirect('/inicio');
+    });
     
     //auth
     Route::get('/validar-dni', 'Frontend\AuthController@showValidarDni');
@@ -114,15 +118,15 @@ Route::group(['middleware' => 'auth'], function () {
     //catalogue POST
     Route::post('/catalogo/producto/{id}', 'Frontend\CatalogueController@productExchange');
     
-    //desempeño
-    Route::get('/desempeno', 'Frontend\DesempenoController@index');
+    //desempeño / mis-logros
+    Route::get('/mis-logros', 'Frontend\DesempenoController@index');
 
     //resultados
     Route::get('/resultados', 'Frontend\RankingController@index');
     Route::get('/resultados/{id_category}', 'Frontend\RankingController@show');
 
-    //dashboard
-    Route::get('/dashboard', 'Frontend\DashboardController@index');
+    //inicio
+    Route::get('/inicio', 'Frontend\DashboardController@index');
 
     //Encuestas
     Route::get('/encuestas', 'Frontend\GuestsController@index');
@@ -145,11 +149,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/desempeno_name/{name}', 'Frontend\DesempenoController@desempenosForName');
     Route::get('/desempeno_grafico', 'Frontend\DesempenoController@grafico');
     Route::get('/resultados/{id_category}/{month}', 'Frontend\RankingController@resultsForMonth');
-
-    //logros
-    Route::get('/logros', function(){
-        return view('frontend.logros');
-    });
 
     //contactanos
     Route::get('/contactanos', function(){
