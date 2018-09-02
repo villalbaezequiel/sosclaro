@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\DB;
 use App\Functions;
+use App\Guest;
+use App\GuestQuestions;
 use App\Dni;
 use App\UsersProfile;
 use App\Regions;
@@ -206,7 +208,11 @@ class Report extends Model
     }
     
     static public function guestsExport($excel) {
-        $excel->sheet('encuestas', function($sheet){
+        
+      $allGuests = Guest::all();
+      foreach($allGuests as $guest){
+          
+        $excel->sheet('encuesta_'.$guest->name, function($sheet) use ($guest){
                 
           $users = DB::table('users')
                 ->select('users.id',
@@ -221,6 +227,7 @@ class Report extends Model
                   'users.created_at as fecha_registro',
                   'users.active as activo',
                         
+                  'guest.id as encuesta_id',
                   'guest.name as encuesta_nombre',
                   'guest.description as encuesta_descripcion',
                   'guest.puntos as encuesta_puntos',
@@ -230,6 +237,7 @@ class Report extends Model
                 ->join('users_profile', 'users_profile.id_user', '=', 'users.id')
                 ->join('guest_users', 'guest_users.id_user', '=', 'users.id')
                 ->join('guest', 'guest.id', '=', 'guest_users.id_guest')
+                ->where('guest.id', '=', $guest->id)
                 ->get();
                 
 	  foreach($users as &$user){
@@ -239,6 +247,24 @@ class Report extends Model
             $user->agente = Agentes::getName($user->agente);
             $user->fecha_registro = Functions::getDate($user->fecha_registro);
             $user->activo = ($user->activo == 0 ? 'No' : 'Si');
+            
+            $questions_guest = GuestQuestions::where('id_guest', '=', $user->encuesta_id)->get();
+            $resultados = json_decode($user->encuesta_resultados, 1);
+            
+            if(!empty($questions_guest)){
+              foreach($questions_guest as $key => $question){
+                if(isset($resultados[$key])){
+                  $questionName = $question->question;
+                  $result = $resultados[$key];
+                  $value = '';
+                  foreach($result as $resultKey => $resultVal){
+                    $value = $resultVal; 
+                  }
+                  $user->$questionName = $value;
+                }
+              }
+            }
+            
             $user->encuesta_activo = ($user->encuesta_activo == 0 ? 'No' : 'Si');
             $user->encuesta_fecha_registro = Functions::getDate($user->encuesta_fecha_registro);
             
@@ -246,10 +272,15 @@ class Report extends Model
             $user->nombre_completo = Dni::getName($user->id);
             $user->puntos_historicos = Dni::getPuntosHistorical($user->id);
             $user->puntos_actuales = Dni::getPuntos($user->id);
+            
+            //delete results in format json and "encuesta_id"
+            unset($user->encuesta_resultados);
+            unset($user->encuesta_id);
 	  }
           
           $sheet->fromArray(json_decode( json_encode($users), true));
  
         });
+      }
     }
 }
