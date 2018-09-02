@@ -7,12 +7,13 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\DB;
 use App\Functions;
 use App\Dni;
 use App\Exchanges;
 use App\Products;
 use App\User;
-use Illuminate\Support\Facades\DB;
 
 class ExchangesController extends Controller
 {
@@ -86,13 +87,23 @@ class ExchangesController extends Controller
     {
        $message;
         try {
-            $canje = Exchanges::find($id);
-            $canje->status = $request->get('exchange_status');
-            $canje->save();
+          $canje = Exchanges::find($id);
+          $canje->status = $request->get('exchange_status');
+          $canje->save();
             
-            $message = "Canje #".$id." editado con exito!";
+          if($request->get('exchange_status') == 1){
+              
+            $mailTo = array('email' => User::getEmail($canje->id_user), 'name' => Dni::getName($canje->id_user));
+            $callback = function ($m) use ($mailTo) {
+              $m->from('no-reply@mejoresvendedores.com.ar', 'Admin MejoresVendedores');
+              $m->to($mailTo['email'], $mailTo['name'])->subject('¡Canje en Transito!');
+            };
+            Functions::sendMail('emails.canje_change_status', ['url' => config('app.url'), 'canje' => $canje], $callback);
+          }
             
-            return redirect('/admin/exchanges')->with('message', $message);
+          $message = "Canje #".$id." editado con exito!";
+            
+          return redirect('/admin/exchanges')->with('message', $message);
             
         } catch(\Exception $e) {
 
