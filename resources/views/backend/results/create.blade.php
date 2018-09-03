@@ -41,7 +41,14 @@
     </div>
 
     <div class="form-group"></div>
+    
+    <div class="custom-file">
+        <input type="file" class="custom-file-input" id="image_owner" name="image_owner">
+        <label class="custom-file-label" for="image_owner">Imagén Destacada/Ganador</label>
+    </div>
 
+    <div class="form-group"></div>
+    
     <input type="hidden" name="_token" value="{{ csrf_token() }}">
     <button type="submit" class="btn btn-primary">Importar</button>
     <a href="" onclick="window.history.go(-1); return false;" class="btn btn-danger">Cancelar</a>

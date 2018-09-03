@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use App\Functions;
 use App\ResultsCategories;
 use App\Results;
@@ -16,6 +17,7 @@ use App\Regions;
 use App\Agentes;
 use App\UsersProfile;
 use App\UsersGanadores;
+use App\ResultsMedia;
 
 class ResultsController extends Controller
 {
@@ -64,8 +66,7 @@ class ResultsController extends Controller
               foreach ($data as $key => $value) {
                 if(!empty($value->id_region)
                         && !empty($value->puntos)
-                        && !empty($value->desempeno) 
-                        && !empty($value->puesto)
+                        && !empty($value->desempeno)
                         && !empty($request->get('category_results'))
                         && !empty($request->get('month_results')) ){
                   
@@ -83,8 +84,22 @@ class ResultsController extends Controller
                       'puntos' => $value->puntos,
                       'desempeno' => $value->desempeno,
                       'puesto' => $value->puesto);
-                }
+                } 
               }
+              
+              //if isset image owner
+              $image_owner = $request->file('image_owner');
+              if($request->hasFile('image_owner')){
+              
+                $month_results = new ResultsMedia;
+                $month_results->id_category = $request->get('category_results');
+                $month_results->month = $request->get('month_results');
+                $month_results->image = $image_owner->getClientOriginalName();
+                $month_results->save();
+              
+                Storage::disk('public')->put('results_media/'.$request->get('category_results').'/'.$request->get('month_results').'/'.$image_owner->getClientOriginalName(), file_get_contents($image_owner->getRealPath()));
+              }
+              
               return response()->json(['preview' => $values]);
 
             } else {
