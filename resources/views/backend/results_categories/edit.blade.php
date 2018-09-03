@@ -1,6 +1,6 @@
 @extends('layouts.backend')
 
-@section('title', "Categorias de Resultados / Editar")
+@section('title', "Categorias de Resultados/Desempeños / Editar")
 @section('content')
 {!! Form::open(['route' => ['admin.results_categories.update' , $results_category->id], 'method' => 'PUT', 'enctype' => 'multipart/form-data' ]) !!}
     <div class="form-group">

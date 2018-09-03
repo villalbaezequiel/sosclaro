@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Maatwebsite\Excel\Facades\Excel;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 use App\Functions;
 use App\ResultsCategories;
@@ -16,6 +15,7 @@ use App\Dni;
 use App\Regions;
 use App\Agentes;
 use App\UsersProfile;
+use App\UsersGanadores;
 
 class ResultsController extends Controller
 {
@@ -57,7 +57,8 @@ class ResultsController extends Controller
           if($request->hasFile('file_results')){
             $path = $request->file('file_results')->getRealPath();
             $data = Excel::load($path, function($reader) {})->get();
-
+            $values = array();
+            
             if(!empty($data) && $data->count()){
 
               foreach ($data as $key => $value) {
@@ -68,18 +69,23 @@ class ResultsController extends Controller
                         && !empty($request->get('category_results'))
                         && !empty($request->get('month_results')) ){
                   
-                    $results = new Results;
-                    $results->id_category = $request->get('category_results');
-                    $results->month = $request->get('month_results');
-                    $results->id_user = $value->id_user;
-                    $results->id_region = $value->id_region;
-                    $results->puntos = $value->puntos;
-                    $results->desempeno = $value->desempeno;
-                    $results->puesto = $value->puesto;
-                    $results->save();
+                  $asunto = (!empty($request->get('asunto')) ? $request->get('asunto')." (Mes ".$request->get('month_results').")" : ResultsCategories::getNameCategory($request->get('category_results'))." (Mes ".$request->get('month_results').")" );
+                    
+                  $values[] = 
+                    array(
+                      'id_user' => $value->id_user,
+                      'id_region' => $value->id_region,
+                      'id_category' => $request->get('category_results'),
+                      'dni' => $value->dni,
+                      'nombre_apellido' => $value->nombre_apellido,
+                      'asunto' => $asunto,
+                      'month' => $request->get('month_results'),
+                      'puntos' => $value->puntos,
+                      'desempeno' => $value->desempeno,
+                      'puesto' => $value->puesto);
                 }
               }
-              return response()->json(['estado' => true]);
+              return response()->json(['preview' => $values]);
 
             } else {
               return response()->json(['estado' => false]);
@@ -174,5 +180,64 @@ class ResultsController extends Controller
             });
             
         })->export('xls');
+    }
+    
+    public function import($values)
+    {
+        $message;
+        try {
+          $data = json_decode($values);
+          $status_message = true;
+                
+          if(!empty($data)){
+            foreach($data as $value) {
+                
+              //insert new performance
+              $insert = new UsersGanadores;
+              $insert->id_user = $value->id_user;
+              $insert->indicador_1 = 0;
+              $insert->indicador_2 = 0;
+              $insert->promedio = 0;
+              $insert->total = 0;
+              
+              $insert->puntos = $value->puntos;
+              $insert->asunto = $value->asunto;
+              $insert->save();
+
+              //actualizo DESEMPENO HISTORICO DEL USER
+              $historical_performance = Dni::find(Dni::getIdUser($value->id_user));
+              $historical_performance->puntos = ($historical_performance->puntos + $value->puntos);
+              $historical_performance->historical_puntos = ($historical_performance->historical_puntos + $value->puntos);
+              $historical_performance->save();
+              
+              
+              $results = new Results;
+              $results->id_category = $value->id_category;
+              $results->month = $value->month;
+              $results->id_user = $value->id_user;
+              $results->id_region = $value->id_region;
+              $results->puntos = $value->puntos;
+              $results->desempeno = $value->desempeno;
+              $results->puesto = $value->puesto;
+              $results->save();
+              
+            }
+          } else {
+            $status_message = false;
+          }
+          return response()->json(['estado' => $status_message]);
+        
+        } catch(\Exception $e) {
+            if(\Config::get('app.debug'))
+              $message = 'ERROR('.$e->getLine().'): '.$e->getMessage();
+            else
+              $message = 'Se ha producido un error. Por favor intente nuevamente.';
+
+            $respuesta = array(
+                    'estado' => false,
+                    'mensaje' => $message
+            );
+            return \Response::json($respuesta);
+	}
     }
 }

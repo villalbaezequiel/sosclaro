@@ -1,6 +1,6 @@
 @extends('layouts.backend')
 
-@section('title', "Resultados")
+@section('title', "Resultados/Desempeños")
 
 @section('message')
     @if (session('message'))
@@ -11,8 +11,8 @@
 @endsection
 
 @section('nav-button')
-<a class="btn btn-primary mb-3" href="{{ url('/admin/results/create') }}">Importar Resultados</a>
-<a class="btn btn-primary mb-3" href="{{ url('/admin/results') }}">Exportar Resultados</a>
+<a class="btn btn-primary mb-3" href="{{ url('/admin/results/create') }}">Importar</a>
+<a class="btn btn-primary mb-3" href="{{ url('/admin/results') }}">Exportar</a>
 @endsection
 
 @section('content')

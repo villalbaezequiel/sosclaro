@@ -20,10 +20,10 @@
                     </li>
 <!--                    <li>
                         <a href="{{ url('/admin/indicadores') }}">Indicadores</a>
-                    </li>-->
+                    </li>
                     <li>
                         <a href="{{ url('/admin/desempeno') }}">Desempeño</a>
-                    </li>
+                    </li>-->
                     <li>
                         <a href="{{ url('/admin/roles') }}">Roles</a>
                     </li>
@@ -35,14 +35,14 @@
             <li class="nav-item" data-toggle="tooltip" data-placement="right">
                 <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#nav_results">
                     <i class="fa fa-fw fa-cogs"></i>
-                    <span class="nav-link-text">Resultados</span>
+                    <span class="nav-link-text">Resultados/Desempeños</span>
                 </a>
                 <ul class="sidenav-second-level collapse" id="nav_results">
                     <li>
-                        <a href="{{ url('/admin/results_categories') }}">Categorias de Resultados</a>
+                        <a href="{{ url('/admin/results_categories') }}">Categorias de Resultados/Desempeños</a>
                     </li>
                     <li>
-                        <a href="{{ url('/admin/results') }}">Resultados</a>
+                        <a href="{{ url('/admin/results') }}">Resultados/Desempeños</a>
                     </li>
                 </ul>
             </li>

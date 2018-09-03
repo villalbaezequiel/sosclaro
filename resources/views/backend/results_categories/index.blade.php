@@ -1,6 +1,6 @@
 @extends('layouts.backend')
 
-@section('title', "Categorias de Resultados")
+@section('title', "Categorias de Resultados/Desempeños")
 
 @section('message')
     @if (session('message'))
@@ -11,8 +11,8 @@
 @endsection
 
 @section('nav-button')
-<a class="btn btn-primary mb-3" href="{{ url('/admin/results_categories/create') }}">Nueva Categoría de Resultados</a>
-<a class="btn btn-primary mb-3" href="{{ url('/admin/results_categories/export') }}">Exportar Categorías de Resultados</a>
+<a class="btn btn-primary mb-3" href="{{ url('/admin/results_categories/create') }}">Nueva Categoría</a>
+<a class="btn btn-primary mb-3" href="{{ url('/admin/results_categories/export') }}">Exportar Categorías</a>
 @endsection
 
 @section('content')

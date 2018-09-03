@@ -37,6 +37,7 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
         Route::get('/results/export', 'Backend\ResultsController@export');
 
         //Import
+        Route::get('/results/import/{values}', 'Backend\ResultsController@import');     
         Route::get('/desempeno/import/{values}', 'Backend\UsersGanadoresController@import');     
         Route::get('/dni/import/{values}', 'Backend\DniController@import');
         
