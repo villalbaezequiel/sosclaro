@@ -43,5 +43,32 @@
         @endforeach
       </div>
     </section>
+    
+    <section class="section section-results btn-black">
+      <div class="col-md-12">
+        <div class="text-white text-center">Bonus Track</div>
+      </div>
+    </section>
+    
+    <section class="section">
+      <div class="row">
+        @foreach($bonus_track_categories as $category)
+            <div class="col-sm-6 col-xl-3 mb-md-0">
+              <a href="{{ url('/bonus-track/'.$category->id) }}" class="card card-results" style="text-decoration: none;">
+                <img class="card-img-top card-img-top-results" src="{{ asset('storage/app/public/bonus_track_categories/') }}/{{ $category->id.'/'.$category->image }}">
+                <div class="card-body card-body-results btn-black text-white text-center">
+                  <?php $name_category = explode(" ", $category->name); ?>
+                  @if(isset($name_category[0]))
+                    <span>{{ $name_category[0] }}</span>
+                  @endif
+                  @if(isset($name_category[1]))
+                  <p class="h4">{{ $name_category[1] }}</p>
+                  @endif
+                </div>
+              </a>
+            </div>
+        @endforeach
+      </div>
+    </section>
 </main>
 @endsection

@@ -35,9 +35,11 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
         Route::get('/desempeno/export', 'Backend\UsersGanadoresController@export');
         Route::get('/exchanges/export', 'Backend\ExchangesController@export');
         Route::get('/results/export', 'Backend\ResultsController@export');
+        Route::get('/bonus_track/export', 'Backend\BonusTrackController@export');
 
         //Import
         Route::get('/results/import/{values}', 'Backend\ResultsController@import');     
+        Route::get('/bonus_track/import/{values}', 'Backend\BonusTrackController@import');     
         Route::get('/desempeno/import/{values}', 'Backend\UsersGanadoresController@import');     
         Route::get('/dni/import/{values}', 'Backend\DniController@import');
         
@@ -63,6 +65,8 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
         Route::resource('/reports', 'Backend\ReportsController');
         Route::resource('/results_categories', 'Backend\ResultsCategoriesController');
         Route::resource('/results', 'Backend\ResultsController');
+        Route::resource('/bonus_track_categories', 'Backend\BonusTrackCategoriesController');
+        Route::resource('/bonus_track', 'Backend\BonusTrackController');
 
         //Settings
         Route::resource('/settings/politics_privacy', 'Backend\PoliticsPrivacyController');
@@ -125,6 +129,8 @@ Route::group(['middleware' => 'auth'], function () {
     //resultados
     Route::get('/resultados', 'Frontend\RankingController@index');
     Route::get('/resultados/{id_category}', 'Frontend\RankingController@show');
+    //Bonus Track
+    Route::get('/bonus-track/{id_category}', 'Frontend\BonusTrackController@show');
 
     //inicio
     Route::get('/inicio', 'Frontend\DashboardController@index');
@@ -150,6 +156,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/desempeno_name/{name}', 'Frontend\DesempenoController@desempenosForName');
     Route::get('/desempeno_grafico', 'Frontend\DesempenoController@grafico');
     Route::get('/resultados/{id_category}/{month}', 'Frontend\RankingController@resultsForMonth');
+    Route::get('/bonus-track/{id_category}/{month}', 'Frontend\BonusTrackController@resultsForMonth');
 
     //contactanos
     Route::get('/contactanos', function(){

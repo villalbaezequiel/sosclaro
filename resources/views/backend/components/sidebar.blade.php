@@ -47,6 +47,20 @@
                 </ul>
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right">
+                <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#nav_bonus_track">
+                    <i class="fa fa-fw fa-cogs"></i>
+                    <span class="nav-link-text">Resultados/Bonus Track</span>
+                </a>
+                <ul class="sidenav-second-level collapse" id="nav_bonus_track">
+                    <li>
+                        <a href="{{ url('/admin/bonus_track_categories') }}">Categorias de Resultados/Bonus Track</a>
+                    </li>
+                    <li>
+                        <a href="{{ url('/admin/bonus_track') }}">Resultados/Bonus Track</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item" data-toggle="tooltip" data-placement="right">
                 <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#nav_products">
                     <i class="fa fa-fw fa-cogs"></i>
                     <span class="nav-link-text">Productos</span>

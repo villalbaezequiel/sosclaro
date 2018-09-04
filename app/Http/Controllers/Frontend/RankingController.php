@@ -9,6 +9,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Functions;
 use App\ResultsCategories;
+use App\BonusTrackCategories;
 use App\Results;
 use App\Modals;
 use App\Dni;
@@ -22,6 +23,7 @@ class RankingController extends Controller
     {
       return view('frontend.results.index', [
         'results_categories' => ResultsCategories::all(),
+        'bonus_track_categories' => BonusTrackCategories::all(),
         'modals' => Modals::where('active', '=', 1)->get()
       ]);
     }
