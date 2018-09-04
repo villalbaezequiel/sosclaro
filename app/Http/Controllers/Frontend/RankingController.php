@@ -51,7 +51,7 @@ class RankingController extends Controller
         $result['region_name'] = Regions::getName($result['id_region']);
         $result['agente_name'] = Agentes::getName(UsersProfile::getIdAgente($result['id_user']));
       }
-      return response()->json(['results' => $results]);
+      return response()->json(['results' => $results, 'id_category' => $id_category]);
     }
     
     public function ajax($id_region) {

@@ -76,7 +76,9 @@
               <thead class="thead-dark text-uppercase">
                 <tr>
                   <th scope="col" class="head-menu-start">Region</th>
+                  @if($name_category['id'] == 1)
                   <th scope="col">Puesto</th>
+                  @endif
                   <th scope="col">Nombre <!-- <span class="d-none d-md-inline-block">y Apellido</span> --></th>
                   <th scope="col">Agencia</th>
                   <th scope="col">Puntos</th>
@@ -91,7 +93,9 @@
                     <td>{{ $result['puesto'] }}</td>
                     <td>{{ $result['user_name'] }}</td>
                     <td>{{ $result['agente_name'] }}</td>
+                    @if($name_category['id'] == 1)
                     <td>{{ $result['puntos'] }}</td>
+                    @endif
                     <td>{{ $result['desempeno'] }}%</td>
                   </tr>
                 @endforeach
@@ -121,6 +125,8 @@ $(document).ready(function(){
             dataType: 'json',
             success: function(data){
                 var results = data.results;
+                var idCategory = data.id_category;
+                
                 if(results.length === 0){
                     alert('No se encontró Resultados para el Mes seleccionado.');
                     $(".list-months-results").removeClass('font-weight-bold');
@@ -139,11 +145,19 @@ $(document).ready(function(){
                     $(".puntos-result-best").empty().text(results[0]['puntos']);
                     $(".desempeno-result-best").empty().text(results[0]['desempeno']);
                     
+                    console.log(data);
+                    
                     //list results table
                     $(".list-results-table").empty();
-                    $.each(results, function(i,v){
-                      $(".list-results-table").append("<tr><th scope='row'>"+v['region_name']+"</th><td>"+v['puesto']+"</td><td>"+v['user_name']+"</td><td>"+v['agente_name']+"</td><td>"+v['puntos']+"</td><td>"+v['desempeno']+"%</td></tr>");
-                    });
+                    if(idCategory === 1){
+                      $.each(results, function(i,v){
+                        $(".list-results-table").append("<tr><th scope='row'>"+v['region_name']+"</th><td>"+v['puesto']+"</td><td>"+v['user_name']+"</td><td>"+v['agente_name']+"</td><td>"+v['puntos']+"</td><td>"+v['desempeno']+"%</td></tr>");
+                      });   
+                    } else {
+                      $.each(results, function(i,v){
+                        $(".list-results-table").append("<tr><th scope='row'>"+v['region_name']+"</th><td>"+v['user_name']+"</td><td>"+v['agente_name']+"</td><td>"+v['puntos']+"</td><td>"+v['desempeno']+"%</td></tr>");
+                      });  
+                    }
                 }
             },
             error: function(xhr, status){
