@@ -45,7 +45,13 @@ class RankingController extends Controller
     
     public function resultsForMonth($id_category, $month)
     {
-      $results = Results::where('id_category', '=', $id_category)->where('month', '=', $month)->orderby('puesto', 'ASC')->orderby('puntos', 'DESC')->limit(15)->get()->toArray();
+      if($month == "1_semestre"){
+        $results = Results::where('id_category', '=', $id_category)->where('month', '<=', 6)->orderby('puesto', 'ASC')->orderby('puntos', 'DESC')->limit(15)->get()->toArray();
+      } else if($month == "2_semestre"){
+        $results = Results::where('id_category', '=', $id_category)->where('month', '>=', 7)->orderby('puesto', 'ASC')->orderby('puntos', 'DESC')->limit(15)->get()->toArray();
+      } else {  
+        $results = Results::where('id_category', '=', $id_category)->where('month', '=', $month)->orderby('puesto', 'ASC')->orderby('puntos', 'DESC')->limit(15)->get()->toArray();
+      }
       foreach ($results as &$result) {
         $result['user_name'] = Dni::getName($result['id_user']);
         $result['region_name'] = Regions::getName($result['id_region']);

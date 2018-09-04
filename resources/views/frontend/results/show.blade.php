@@ -25,13 +25,18 @@
       <div class="col-md-12">
         <input type="hidden" id="id_category_result" value="{{ $name_category['id'] }}" />
         <ul class="text-white list-inline">
-          @foreach($months as $key => $value)
-            <?php
-              $checkMonth = (date('n') == $key ? 'font-weight-bold' : '');
-              $checkMonthSpan = (date('n') == $key ? 'circle-white' : '');
-            ?>
-          <li class="list-months-results list-inline-item text-center c-poniter {{$checkMonth}}" data-key="{{$key}}">{{$value}} <p class="{{$checkMonthSpan}}"></p></li>
-          @endforeach
+            @if($name_category['id'] == 4)
+              <li class="list-months-results list-inline-item text-center c-poniter" data-key="1_semestre" style="width: 50%!important;">PRIMER SEMESTRE <p class=""></p></li>
+              <li class="list-months-results list-inline-item text-center c-poniter" data-key="2_semestre" style="width: 50%!important;">SEGUNDO SEMESTRE <p class=""></p></li>
+            @else
+              @foreach($months as $key => $value)
+                <?php
+                  $checkMonth = (date('n') == $key ? 'font-weight-bold' : '');
+                  $checkMonthSpan = (date('n') == $key ? 'circle-white' : '');
+                ?>
+              <li class="list-months-results list-inline-item text-center c-poniter {{$checkMonth}}" data-key="{{$key}}">{{$value}} <p class="{{$checkMonthSpan}}"></p></li>
+              @endforeach
+            @endif
         </ul>
       </div>
     </section>
