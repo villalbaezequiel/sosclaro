@@ -11,7 +11,6 @@ use App\Http\Controllers\Controller;
 use App\Functions;
 use App\BonusTrackCategories;
 use App\BonusTrack;
-use App\Modals;
 use App\Dni;
 use App\Agentes;
 use App\Regions;
@@ -68,8 +67,7 @@ class BonusTrackController extends Controller
       return view('frontend.bonus_track.show', [
         'months' => Functions::getMonthShortcuts(),
         'name_category' => BonusTrackCategories::find($id_category)->toArray(),
-        'results' => $results,
-        'modals' => Modals::where('active', '=', 1)->where('section', '=', $id_category)->get()
+        'results' => $results
       ]);
     }
     

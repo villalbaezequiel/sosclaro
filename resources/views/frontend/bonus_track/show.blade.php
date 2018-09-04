@@ -6,21 +6,6 @@
 @include('frontend.components.header')
 
 <main class="main main-user">
-    <section class="section section-dashboard">
-        <div class="slider slider-single">
-          @if(!empty($modals))
-            @foreach($modals as $modal)
-                <div class="slider-item">
-                    <a href="{{ $modal->url }}" target="_blank">
-                        <img class="visible-md-up" src="{{ asset('storage/app/public/modals/desktop/') }}/{{ $modal->id.'/'.$modal->image_desktop }}">
-                        <img class="visible-xs visible-sm" src="{{ asset('storage/app/public/modals/mobile/') }}/{{ $modal->id.'/'.$modal->image_mobile }}">
-                    </a>
-                </div>
-            @endforeach
-          @endif
-        </div>
-    </section>
-    
     <section class="section" id="section-results-month">
       <div class="col-md-12">
         <input type="hidden" id="id_category_result" value="{{ $name_category['id'] }}" />
