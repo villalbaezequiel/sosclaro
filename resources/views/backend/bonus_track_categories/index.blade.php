@@ -12,7 +12,7 @@
 
 @section('nav-button')
 <a class="btn btn-primary mb-3" href="{{ url('/admin/bonus_track_categories/create') }}">Nueva Categoría</a>
-<a class="btn btn-primary mb-3" href="{{ url('/admin/bonus_track_categories/export') }}">Exportar Categorías</a>
+<!--<a class="btn btn-primary mb-3" href="{{ url('/admin/bonus_track_categories/export') }}">Exportar Categorías</a>-->
 @endsection
 
 @section('content')

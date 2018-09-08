@@ -12,7 +12,7 @@
 
 @section('nav-button')
 <a class="btn btn-primary mb-3" href="{{ url('/admin/bonus_track/create') }}">Importar</a>
-<a class="btn btn-primary mb-3" href="{{ url('/admin/bonus_track') }}">Exportar</a>
+<!--<a class="btn btn-primary mb-3" href="{{ url('/admin/bonus_track') }}">Exportar</a>-->
 @endsection
 
 @section('content')
