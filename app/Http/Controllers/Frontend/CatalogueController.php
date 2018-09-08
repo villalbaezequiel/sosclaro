@@ -53,22 +53,29 @@ class CatalogueController extends Controller
             
             // send mail to Admin new Canje
             $user = User::find($request->get('id_user'));
-            $mailTo = array('email' => 'villalbaezequiel64@gmail.com', 'name' => 'EV'); //SET MAIL ADMIN         
-            $callback = function ($m) use ($mailTo) {
+            
+            // List Emails sending
+            $mailTo = array('email' => 'marketingoperativo@claro.com.ar', 'name' => 'Marketing Operativo');
+            $mailCc = array('email' => 'lucas.marozzi@claro.com.ar', 'name' => 'Lucas Marozzi');
+            
+            $callback = function ($m) use ($mailTo, $mailCc) {
               $m->from('no-reply@mejoresvendedores.com.ar', 'Admin MejoresVendedores');
-              $m->to($mailTo['email'], $mailTo['name'])->subject('¡Nuevo Canje!');
+              $m->subject('¡Nuevo Canje!');
+              $m->to($mailTo['email'], $mailTo['name']);
+              $m->cc($mailCc['email'], $mailCc['name']);
             };
             Functions::sendMail('emails.canje', ['url' => config('app.url'), 'canje' => $canje, 'product' => $product, 'dni' => $dni, 'user' => $user], $callback);
             
-          // send mail alerta de STOCK de Producto
-          if($product->stock <= $product->notification){
-            $callback = function ($m) use ($mailTo) {
-              $m->from('no-reply@mejoresvendedores.com.ar', 'Admin MejoresVendedores');
-              $m->to($mailTo['email'], $mailTo['name'])->subject('¡Alerta de Stock de Producto!');
-            };
-            Functions::sendMail('emails.stock_product', ['url' => config('app.url'), 'product' => $product], $callback);   
-          }
-            
+            // send mail alerta de STOCK de Producto
+            if($product->stock <= $product->notification){
+              $callbackASP = function ($m) use ($mailTo, $mailCc) {
+                $m->from('no-reply@mejoresvendedores.com.ar', 'Admin MejoresVendedores');
+                $m->subject('¡Alerta de Stock de Producto!');
+                $m->to($mailTo['email'], $mailTo['name']);
+                $m->cc($mailCc['email'], $mailCc['name']);
+              };
+              Functions::sendMail('emails.stock_product', ['url' => config('app.url'), 'product' => $product], $callbackASP);   
+            }
             
             $message = "Felicitaciones!";
 
