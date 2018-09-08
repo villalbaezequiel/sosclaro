@@ -81,6 +81,11 @@
                 </a>
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right">
+                <a class="nav-link" href="{{ url('/admin/reports') }}">
+                    <i class="fa fa-fw fa-cogs"></i>
+                    <span class="nav-link-text">Reportes</span>
+                </a>
+            </li>            <li class="nav-item" data-toggle="tooltip" data-placement="right">
                 <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#nav_tips">
                     <i class="fa fa-fw fa-cogs"></i>
                     <span class="nav-link-text">Novedades</span>
@@ -135,14 +140,7 @@
                     <span class="nav-link-text">Preguntas Frecuentes</span>
                 </a>
             </li>
-            </li>
-            <li class="nav-item" data-toggle="tooltip" data-placement="right">
-                <a class="nav-link" href="{{ url('/admin/reports') }}">
-                    <i class="fa fa-fw fa-cogs"></i>
-                    <span class="nav-link-text">Reportes</span>
-                </a>
-            </li>
-            <li class="nav-item" data-toggle="tooltip" data-placement="right">
+<!--            <li class="nav-item" data-toggle="tooltip" data-placement="right">
                 <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#nav_settings">
                     <i class="fa fa-fw fa-cogs"></i>
                     <span class="nav-link-text">Configuracion</span>
@@ -154,20 +152,20 @@
                     <li>
                         <a href="{{ url('/admin/settings/social_networks') }}">Redes Sociales</a>
                     </li>
-<!--                    <li>
+                    <li>
                         <a href="{{ url('/admin/settings/emails') }}">Email</a>
-                    </li>-->
+                    </li>
                     <li>
                         <a href="{{ url('/admin/settings/politics_privacy') }}">Politica y Privacidad</a>
                     </li>
-<!--                    <li>
+                    <li>
                         <a href="{{ url('/admin/settings/legal_products') }}">Legales de Productos</a>
                     </li>
                     <li>
                         <a href="cards.html">Modals</a>
-                    </li>-->
+                    </li>
                 </ul>
-            </li>
+            </li>-->
         </ul>
 
         <ul class="navbar-nav sidenav-toggler">
