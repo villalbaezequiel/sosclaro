@@ -30,7 +30,7 @@
     <section class="section">
       <div class="row">
         @foreach($results_categories as $category)
-            <div class="col-sm-6 col-xl-3 mb-md-0">
+            <div class="col-sm-6 col-xl-3 mb-md-0" style="margin: 0 auto;">
               <a href="{{ url('/resultados/'.$category->id) }}" class="card card-results" style="text-decoration: none;">
                 <img class="card-img-top card-img-top-results" src="{{ asset('storage/app/public/results_categories/') }}/{{ $category->id.'/'.$category->image }}">
                 <div class="card-body card-body-results btn-black text-white text-center">
@@ -53,7 +53,7 @@
     <section class="section">
       <div class="row">
         @foreach($bonus_track_categories as $category)
-            <div class="col-sm-6 col-xl-3 mb-md-0">
+            <div class="col-sm-6 col-xl-3 mb-md-0" style="margin: 0 auto;">
               <a href="{{ url('/bonus-track/'.$category->id) }}" class="card card-results" style="text-decoration: none;">
                 <img class="card-img-top card-img-top-results" src="{{ asset('storage/app/public/bonus_track_categories/') }}/{{ $category->id.'/'.$category->image }}">
                 <div class="card-body card-body-results btn-black text-white text-center">
