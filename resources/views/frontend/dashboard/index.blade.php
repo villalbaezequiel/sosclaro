@@ -19,7 +19,7 @@
     
     
     <section class="section section-dashboard">
-        <div class="slider slider-single">
+        <div class="slider slider-single2">
             @foreach($modals as $modal)
               @if($modal->section == 999)
                 <div class="slider-item">
@@ -38,7 +38,7 @@
 @section('javascript')
 <script type="text/javascript">
 $(document).ready(function(){
-    $('.slider-single').slick({
+    $('.slider-single2').slick({
       slidesToShow: 1,
       slidesToScroll: 1,
       arrows: true,
