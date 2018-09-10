@@ -40,8 +40,11 @@
                     <strong>1) Cantidad de tus PSRs asignados con compra:</strong>
                     <br />Este indicador va a medir el porcentaje de PSRs con compra de recarga de $200 o más, sobre el total de PSRs asigndos por vendedor.</p>
                 <p>
-                    <strong>2) Cantidad de sus PSRs asignados con ICB.:</strong>
+                    <strong>2) Cantidad de sus PSRs asignados con ICB:</strong>
                     <br /> Este indicador va a medir el porcentaje de PSRs con ICB (primera recarga) sobre el total de PSRs asignados por vendedor.</p>
+                <p>
+                    <strong>3) Crecimiento de ICB de tu agencia:</strong>
+                    <br /> Este indicador va a medir el porcentaje de crecimiento de tu Agencia de ICB (primera recarga).</p>
                 <p>
                     <small>
                         <strong>IMPORTANTE:</strong> participan todos los vendedores que tengan al menos 100 PSRs asignados.</small>
@@ -61,7 +64,7 @@
                 <hr>
                 <h3>
                     <span class="badge badge-black">3</span> Mejor vendedor anual</h3>
-                <p>Se reconocerá el mejor vendedor del año de cada región!</p>
+                <p>¡Se reconocerá el mejor vendedor del año de cada región!</p>
                 <hr>
                 <h3>
                     <span class="badge badge-black">4</span> Vendedores Destacados</h3>
@@ -80,7 +83,7 @@
                     <h4>
                         <img src="{{ asset('assets/frontend/img/bonus-track.png') }}" alt="Bonus Track" />
                     </h4>
-                    <p>Son logros espontáneos con variados objetivos y puntos extra.
+                    <p>Son logros espontáneos con variados objetivos y puntos.
                         <br />
                         <strong>¡Seguí de cerca el programa y sumá puntos extra!</strong>
                     </p>
