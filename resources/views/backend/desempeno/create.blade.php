@@ -18,11 +18,13 @@
     </div>
 
     <div class="custom-file">
-        <input type="file" class="custom-file-input" id="file_desempeno" name="file_desempeno" required>
+        <input type="file" class="custom-file-input" id="file_desempeno" name="file_desempeno" onchange="$('#upload-file-info').val($(this).val());" required>
         <label class="custom-file-label" for="file_desempeno">Excel Desempeno</label>
     </div>
 
     <div class="form-group"></div>
+    
+    <div class="form-group"><input type="text" class="form-control" id="upload-file-info" placeholder="Nombre Archivo Seleccionado" readonly></div>
 
     <input type="hidden" name="_token" value="{{ csrf_token() }}">
     <button type="submit" class="btn btn-primary">Importar</button>

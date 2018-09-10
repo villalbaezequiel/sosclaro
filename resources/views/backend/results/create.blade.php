@@ -43,11 +43,13 @@
     <div class="form-group"></div>
     
     <div class="custom-file">
-        <input type="file" class="custom-file-input" id="image_owner" name="image_owner">
+        <input type="file" class="custom-file-input" id="image_owner" name="image_owner" onchange="$('#upload-file-info').val($(this).val());">
         <label class="custom-file-label" for="image_owner">Imagén Destacada/Ganador</label>
     </div>
 
     <div class="form-group"></div>
+    
+    <div class="form-group"><input type="text" class="form-control" id="upload-file-info" placeholder="Nombre Archivo Seleccionado" readonly></div>
     
     <input type="hidden" name="_token" value="{{ csrf_token() }}">
     <button type="submit" class="btn btn-primary">Importar</button>

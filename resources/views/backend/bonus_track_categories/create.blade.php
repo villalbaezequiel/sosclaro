@@ -14,11 +14,13 @@
     </div>
 
     <div class="custom-file">
-        <input type="file" class="custom-file-input" id="imagen_bonus_track_category" name="imagen_bonus_track_category" required>
+        <input type="file" class="custom-file-input" id="imagen_bonus_track_category" name="imagen_bonus_track_category" onchange="$('#upload-file-info').val($(this).val());" required>
         <label class="custom-file-label" for="imagen_bonus_track_category">Imagén</label>
     </div>
 
     <div class="form-group"></div>
+    
+    <div class="form-group"><input type="text" class="form-control" id="upload-file-info" placeholder="Nombre Archivo Seleccionado" readonly></div>
 
     <div class="form-group">
         <label for="active_bonus_track_category">Activo:</label>

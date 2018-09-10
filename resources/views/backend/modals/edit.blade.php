@@ -29,20 +29,24 @@
     <div class="custom-file">
         <input type="hidden" class="custom-file-input" name="image_desktop_modal_old" value="{{ $modal->image_desktop }}">
         
-        <input type="file" class="custom-file-input" id="image_desktop_modal" name="image_desktop_modal">
+        <input type="file" class="custom-file-input" id="image_desktop_modal" name="image_desktop_modal" onchange="$('#upload-file-info1').val($(this).val());">
         <label class="custom-file-label" for="image_desktop_modal">Imagén Desktop</label>
     </div>
 
     <div class="form-group"></div>
+    
+    <div class="form-group"><input type="text" class="form-control" id="upload-file-info1" value="{{ $modal->image_desktop }}" placeholder="Nombre Archivo Seleccionado" readonly></div>
 
     <div class="custom-file">
         <input type="hidden" class="custom-file-input" name="image_mobile_modal_old" value="{{ $modal->image_mobile }}">
         
-        <input type="file" class="custom-file-input" id="image_mobile_modal" name="image_mobile_modal">
+        <input type="file" class="custom-file-input" id="image_mobile_modal" name="image_mobile_modal" onchange="$('#upload-file-info2').val($(this).val());">
         <label class="custom-file-label" for="image_mobile_modal">Imagén Mobile</label>
     </div>
 
     <div class="form-group"></div>
+    
+    <div class="form-group"><input type="text" class="form-control" id="upload-file-info2" value="{{ $modal->image_mobile }}" placeholder="Nombre Archivo Seleccionado" readonly></div>
 
     <div class="form-group">
         <label>Activo:</label>
