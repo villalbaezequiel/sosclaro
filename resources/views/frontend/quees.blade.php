@@ -62,6 +62,17 @@
                 <h3>
                     <span class="badge badge-black">3</span> Mejor vendedor anual</h3>
                 <p>Se reconocerá el mejor vendedor del año de cada región!</p>
+                <hr>
+                <h3>
+                    <span class="badge badge-black">4</span> Vendedores Destacados</h3>
+                <p>Reconoceremos mensualmente a los vendedores que logren <strong>mejores promedios de venta de sims con carga inicial</strong> en su cartera de PSRs.</p>
+                
+            </div>
+            <hr>
+            <div class="col col-md-12">
+                <div class="banner" style="background: none;padding:  2em 0em 1em;">
+                    <img src="http://mejoresvendedores.com.ar/assets/frontend/img/image_que_es.png" />
+                </div>
             </div>
             <hr>
             <div class="col col-md-12">
