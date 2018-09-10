@@ -26,18 +26,22 @@
     </div>
 
     <div class="custom-file">
-        <input type="file" class="custom-file-input" id="image_desktop_modal" name="image_desktop_modal" required>
+        <input type="file" class="custom-file-input" id="image_desktop_modal" name="image_desktop_modal" onchange="$('#upload-file-info1').val($(this).val());" required>
         <label class="custom-file-label" for="image_desktop_modal">Imagén Desktop</label>
     </div>
 
     <div class="form-group"></div>
+    
+    <div class="form-group"><input type="text" class="form-control" id="upload-file-info1" placeholder="Nombre Archivo Seleccionado" readonly></div>
 
     <div class="custom-file">
-        <input type="file" class="custom-file-input" id="image_mobile_modal" name="image_mobile_modal" required>
+        <input type="file" class="custom-file-input" id="image_mobile_modal" name="image_mobile_modal" onchange="$('#upload-file-info2').val($(this).val());" required>
         <label class="custom-file-label" for="image_mobile_modal">Imagén Mobile</label>
     </div>
 
     <div class="form-group"></div>
+    
+    <div class="form-group"><input type="text" class="form-control" id="upload-file-info2" placeholder="Nombre Archivo Seleccionado" readonly></div>
 
     <div class="form-group">
         <label>Activo:</label>

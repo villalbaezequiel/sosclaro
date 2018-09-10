@@ -11,6 +11,7 @@ use App\Functions;
 use App\ResultsCategories;
 use App\BonusTrackCategories;
 use App\Results;
+use App\ResultsMedia;
 use App\Modals;
 use App\Dni;
 use App\Agentes;
@@ -37,11 +38,14 @@ class RankingController extends Controller
         $result['agente_name'] = Agentes::getName(UsersProfile::getIdAgente($result['id_user']));
       }
         
+      $imagen_destacada = ResultsMedia::where('id_category', '=',$id_category )->where('month', '=', date('n'))->orderby('id', 'DESC')->limit(1)->get();
+      
       return view('frontend.results.show', [
         'months' => Functions::getMonthShortcuts(),
         'name_category' => ResultsCategories::find($id_category)->toArray(),
         'results' => $results,
-        'modals' => Modals::where('active', '=', 1)->where('section', '=', $id_category)->get()
+        'modals' => Modals::where('active', '=', 1)->where('section', '=', $id_category)->get(),
+        'imagen_destacada' => $imagen_destacada[0]
       ]);
     }
     
@@ -59,35 +63,10 @@ class RankingController extends Controller
         $result['region_name'] = Regions::getName($result['id_region']);
         $result['agente_name'] = Agentes::getName(UsersProfile::getIdAgente($result['id_user']));
       }
-      return response()->json(['results' => $results, 'id_category' => $id_category]);
+      
+      $imagen_destacada = ResultsMedia::where('id_category', '=',$id_category )->where('month', '=', $month)->orderby('id', 'DESC')->limit(1)->get();
+
+      return response()->json(['results' => $results, 'id_category' => $id_category, 'imagen_destacada' => $imagen_destacada]);
     }
     
-    public function ajax($id_region) {
-        $users = array();
-        
-        if($id_region == 69696){
-            $id_region_auth_user = Dni::getRegion(Auth::user()->id);
-            $users_region = DB::table('dni')
-                            ->where('id_region', '=', $id_region_auth_user)
-                            ->where('historical_puntos', '!=', 0)
-                            ->where('id_user', '!=', 1)
-                            ->orderBy('historical_puntos', 'DESC')
-                            ->limit(10)
-                            ->get();
-        } else {
-            $users_region = DB::table('dni')
-                            ->where('id_region', '=', $id_region)
-                            ->where('historical_puntos', '!=', 0)
-                            ->where('id_user', '!=', 1)
-                            ->orderBy('historical_puntos', 'DESC')
-                            ->limit(10)
-                            ->get();    
-        }
-        
-        
-        foreach ($users_region as $key => $value) {
-            $users[] = array('id_user' => $value->id_user, 'puesto' => ($key+1), 'name' => Dni::getName($value->id_user),'puntos' => Dni::getPuntosHistorical($value->id_user));
-        }
-        return response()->json(['usuarios' => $users]);
-    }
 }

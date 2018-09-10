@@ -16,11 +16,13 @@
     <div class="custom-file">
         <input type="hidden" class="custom-file-input" id="imagen_results_category_old" name="imagen_results_category_old" value="{{ $results_category->image }}">
 
-        <input type="file" class="custom-file-input" id="imagen_results_category" name="imagen_results_category">
+        <input type="file" class="custom-file-input" id="imagen_results_category" name="imagen_results_category" onchange="$('#upload-file-info').val($(this).val());">
         <label class="custom-file-label" for="imagen_results_category">Imagén</label>
     </div>
 
     <div class="form-group"></div>
+    
+    <div class="form-group"><input type="text" class="form-control" id="upload-file-info" value="{{ $results_category->image }}" placeholder="Nombre Archivo Seleccionado" readonly></div>
 
     <div class="form-group">
         <label for="active_results_category">Activo:</label>

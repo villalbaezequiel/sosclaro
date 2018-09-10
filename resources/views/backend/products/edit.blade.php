@@ -37,11 +37,13 @@
     <div class="custom-file">
         <input type="hidden" class="custom-file-input" name="imagen_product_old" value="{{ $product->image }}">
         
-        <input type="file" class="custom-file-input" id="imagen_product" name="imagen_product">
+        <input type="file" class="custom-file-input" id="imagen_product" name="imagen_product" onchange="$('#upload-file-info').val($(this).val());">
         <label class="custom-file-label" for="imagen_product">Imagén</label>
     </div>
 
     <div class="form-group"></div>
+    
+    <div class="form-group"><input type="text" class="form-control" id="upload-file-info" value="{{ $product->image }}" placeholder="Nombre Archivo Seleccionado" readonly></div>
 
     <div class="form-group">
         <label>Precio:</label>

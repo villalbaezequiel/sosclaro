@@ -29,12 +29,14 @@
     </div>
 
     <div class="custom-file">
-        <input type="file" class="custom-file-input" id="imagen_tip" name="imagen_tip">
+        <input type="file" class="custom-file-input" id="imagen_tip" name="imagen_tip" onchange="$('#upload-file-info').val($(this).val());">
         <input type="hidden" name="imagen_tip_old" value="{{ $tip->image }}">
         <label class="custom-file-label" for="imagen_tip">Imagén</label>
     </div>
 
     <div class="form-group"></div>
+    
+    <div class="form-group"><input type="text" class="form-control" id="upload-file-info" value="{{ $tip->image }}" placeholder="Nombre Archivo Seleccionado" readonly></div>
     
     <div class="form-group">
         <label for="active_tip">Activo:</label>

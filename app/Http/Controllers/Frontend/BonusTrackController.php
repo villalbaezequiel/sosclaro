@@ -11,6 +11,7 @@ use App\Http\Controllers\Controller;
 use App\Functions;
 use App\BonusTrackCategories;
 use App\BonusTrack;
+use App\BonusTrackMedia;
 use App\Dni;
 use App\Agentes;
 use App\Regions;
@@ -63,11 +64,14 @@ class BonusTrackController extends Controller
         $result['region_name'] = Regions::getName($result['id_region']);
         $result['agente_name'] = Agentes::getName(UsersProfile::getIdAgente($result['id_user']));
       }
+      
+      $imagen_destacada = BonusTrackMedia::where('id_category', '=',$id_category )->where('month', '=', date('n'))->orderby('id', 'DESC')->limit(1)->get()->toArray();
         
       return view('frontend.bonus_track.show', [
         'months' => Functions::getMonthShortcuts(),
         'name_category' => BonusTrackCategories::find($id_category)->toArray(),
-        'results' => $results
+        'results' => $results,
+        'imagen_destacada' => $imagen_destacada  
       ]);
     }
     
@@ -114,6 +118,9 @@ class BonusTrackController extends Controller
         $result['region_name'] = Regions::getName($result['id_region']);
         $result['agente_name'] = Agentes::getName(UsersProfile::getIdAgente($result['id_user']));
       }
-      return response()->json(['results' => $results]);
+      
+      $imagen_destacada = BonusTrackMedia::where('id_category', '=',$id_category )->where('month', '=', $month)->orderby('id', 'DESC')->limit(1)->get();
+      
+      return response()->json(['results' => $results, 'imagen_destacada' => $imagen_destacada]);
     }
 }

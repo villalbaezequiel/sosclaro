@@ -70,10 +70,6 @@ class Functions extends Model
     
     static public function getMonths() {
       $months = array(
-        '1' => 'Enero',
-        '2' => 'Febrero',
-        '3' => 'Marzo',
-        '4' => 'Abril',
         '5' => 'Mayo',
         '6' => 'Junio',
         '7' => 'Julio',
@@ -81,17 +77,17 @@ class Functions extends Model
         '9' => 'Septiembre',
         '10' => 'Octubre',
         '11' => 'Noviembre',
-        '12' => 'Diciembre'
+        '12' => 'Diciembre',
+        '1' => 'Enero',
+        '2' => 'Febrero',
+        '3' => 'Marzo',
+        '4' => 'Abril'          
       );
       return $months;
     }
     
     static public function getMonthShortcuts() {
       $months = array(
-        '1' => 'ENE',
-        '2' => 'FEB',
-        '3' => 'MAR',
-        '4' => 'ABR',
         '5' => 'MAY',
         '6' => 'JUN',
         '7' => 'JUL',
@@ -99,7 +95,11 @@ class Functions extends Model
         '9' => 'SEP',
         '10' => 'OCT',
         '11' => 'NOV',
-        '12' => 'DIC'
+        '12' => 'DIC',
+        '1' => 'ENE',
+        '2' => 'FEB',
+        '3' => 'MAR',
+        '4' => 'ABR'
       );
       return $months;
     }

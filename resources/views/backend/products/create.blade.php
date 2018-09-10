@@ -35,11 +35,13 @@
 
     <label>Multimedia <a href="#card-footer-info">(*1)</a>:</label>
     <div class="custom-file">
-        <input type="file" class="custom-file-input" id="imagen_product" name="imagen_product" required>
+        <input type="file" class="custom-file-input" id="imagen_product" name="imagen_product" onchange="$('#upload-file-info').val($(this).val());" required>
         <label class="custom-file-label" for="imagen_product">Imagén</label>
     </div>
 
     <div class="form-group"></div>
+    
+    <div class="form-group"><input type="text" class="form-control" id="upload-file-info" placeholder="Nombre Archivo Seleccionado" readonly></div>
 
     <div class="form-group">
         <label>Precio:</label>
