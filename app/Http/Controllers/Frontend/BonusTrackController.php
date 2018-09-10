@@ -71,7 +71,7 @@ class BonusTrackController extends Controller
         'months' => Functions::getMonthShortcuts(),
         'name_category' => BonusTrackCategories::find($id_category)->toArray(),
         'results' => $results,
-        'imagen_destacada' => $imagen_destacada  
+        'imagen_destacada' => ($imagen_destacada && !empty($imagen_destacada[0]) ? $imagen_destacada[0] : '')  
       ]);
     }
     

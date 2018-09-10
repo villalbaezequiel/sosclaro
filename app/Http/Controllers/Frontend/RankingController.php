@@ -45,7 +45,7 @@ class RankingController extends Controller
         'name_category' => ResultsCategories::find($id_category)->toArray(),
         'results' => $results,
         'modals' => Modals::where('active', '=', 1)->where('section', '=', $id_category)->get(),
-        'imagen_destacada' => $imagen_destacada[0]
+        'imagen_destacada' => ($imagen_destacada && !empty($imagen_destacada[0]) ? $imagen_destacada[0] : '')
       ]);
     }
     
