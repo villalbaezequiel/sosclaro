@@ -35,3 +35,21 @@
     
 </main>
 @endsection
+@section('javascript')
+<script type="text/javascript">
+$(document).ready(function(){
+    $('.slider-single').slick({
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      arrows: true,
+      dots: true,
+      fade: false,
+      adaptiveHeight: true,
+      prevArrow:
+        '<button type="button" class="slick-prev"><i class="fa fa-chevron-left" aria-hidden="true"></i></button>',
+      nextArrow:
+        '<button type="button" class="slick-next"><i class="fa fa-chevron-right" aria-hidden="true"></i></button>'
+    }); 
+});
+</script>
+@endsection
