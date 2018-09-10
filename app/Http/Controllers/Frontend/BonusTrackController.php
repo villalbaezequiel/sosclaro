@@ -121,6 +121,6 @@ class BonusTrackController extends Controller
       
       $imagen_destacada = BonusTrackMedia::where('id_category', '=',$id_category )->where('month', '=', $month)->orderby('id', 'DESC')->limit(1)->get();
       
-      return response()->json(['results' => $results, 'imagen_destacada' => $imagen_destacada]);
+      return response()->json(['results' => $results, 'imagen_destacada' => $imagen_destacada, 'month' => $month]);
     }
 }

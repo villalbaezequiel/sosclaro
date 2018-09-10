@@ -26,13 +26,14 @@
         <div class="slider-item">
           <a target="_blank">
             @if(isset($imagen_destacada) && !empty($imagen_destacada))
-              <img id="imagen_destacada" class="visible-md-up" src="{{ asset('storage/app/public/bonus_track_media') }}/{{ $name_category['id'] }}/{{ $imagen_destacada->image }}" style="margin: 0 auto;">
+              <img id="imagen_destacada" class="visible-md-up" src="{{ asset('storage/app/public/bonus_track_media') }}/{{ $name_category['id'] }}/{{ date('n') }}/{{ $imagen_destacada->image }}" style="margin: 0 auto;">
             @else
               <img id="imagen_destacada" class="visible-md-up" src="" style="margin: 0 auto;">
             @endif
           </a>
         </div>
       </div>
+      <input type="hidden" id="get-url-imagen-destacada" value="{{ asset('storage/app/public/results_media') }}/{{ $name_category['id'] }}/">
     </section>
     
     <section class="section" id="section-results-table">
@@ -105,7 +106,7 @@ $(document).ready(function(){
                     
                     //imagen destacada 
                     if(imagenDestacada[0]){
-                      $("#imagen_destacada").attr("src", imagenDestacada[0].image);
+                      $("#imagen_destacada").attr("src", $("#get-url-imagen-destacada").val()+month+"/"+imagenDestacada[0].image);
                     }
                 }
             },
