@@ -45,7 +45,7 @@
       <div class="slider slider-single">
         <div class="slider-item">
           <a target="_blank">
-            @if($imagen_destacada)
+            @if(isset($imagen_destacada) && !empty($imagen_destacada))
               <img id="imagen_destacada" class="visible-md-up" src="{{ asset('storage/app/public/results_media') }}/{{ $name_category['id'] }}/{{ $imagen_destacada->image }}" style="margin: 0 auto;">
             @else
               <img id="imagen_destacada" class="visible-md-up" src="" style="margin: 0 auto;">
