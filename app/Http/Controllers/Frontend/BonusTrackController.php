@@ -65,7 +65,7 @@ class BonusTrackController extends Controller
         $result['agente_name'] = Agentes::getName(UsersProfile::getIdAgente($result['id_user']));
       }
       
-      $imagen_destacada = BonusTrackMedia::where('id_category', '=',$id_category )->where('month', '=', date('n'))->orderby('id', 'DESC')->limit(1)->get()->toArray();
+      $imagen_destacada = BonusTrackMedia::where('id_category', '=',$id_category )->where('month', '=', date('n'))->orderby('id', 'DESC')->limit(1)->get();
         
       return view('frontend.bonus_track.show', [
         'months' => Functions::getMonthShortcuts(),
