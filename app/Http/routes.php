@@ -155,6 +155,7 @@ Route::group(['middleware' => 'auth'], function () {
     //ajax
     Route::get('/desempeno_name/{name}', 'Frontend\DesempenoController@desempenosForName');
     Route::get('/desempeno_grafico', 'Frontend\DesempenoController@grafico');
+    Route::get('/desempeno_for_month/{month}', 'Frontend\DesempenoController@desempenosForMonth');
     Route::get('/resultados/{id_category}/{month}', 'Frontend\RankingController@resultsForMonth');
     Route::get('/bonus-track/{id_category}/{month}', 'Frontend\BonusTrackController@resultsForMonth');
 
