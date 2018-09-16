@@ -22,19 +22,28 @@ class DesempenoController extends Controller
                     ->whereMonth('created_at', '=', date('n'))
                     ->orderBy('id', 'DESC')
                     ->get();
-        
+      
       $ultimoDesempeno = DB::table('desempeno')
                         ->where('id_user', '=', Auth::user()->id)
                         ->orderBy('id', 'DESC')
-                        ->limit(1)
+                        ->whereMonth('created_at', '=', date('n'))
                         ->get();
-        
+      
+      $puntos = 0;
+      $total = 0;
+      foreach($ultimoDesempeno as $val){
+        $puntos += $val->puntos;
+        $total += $val->total;
+      }  
+      
+      $last_perfomance = array(
+        'puntos' => $puntos,
+        'total' => $total
+      );
+      
       return view('frontend.desempeno', [
-        //'desempenos_name' => DesempenoName::all(),
-        //'desempeno_user' => $desempeno_user[0],
-        //'regions' => Regions::all()
         'all_desempeno' => $allDesempeno,
-        'ultimo_desempeno' => $ultimoDesempeno
+        'ultimo_desempeno' => $last_perfomance
       ]);
     }
     
@@ -42,13 +51,22 @@ class DesempenoController extends Controller
         return response()->json(['desempenos' => UsersGanadores::where('especification', '=', $name)->orderBy('puntos', 'DESC')->get()]);
     }
     
-    public function grafico() {
-        $allDesempeno= DB::table('desempeno')
-                                ->where('id_user', '=', Auth::user()->id)
-                                ->orderBy('id', 'DESC')
-                                ->get();
-        
-        return response()->json(['allDesempeno' => $allDesempeno]);
+    public function grafico()
+    {    
+      $data = array();
+      foreach(Functions::getMonths() as $key => $value){
+        $month = DB::table('desempeno')
+                    ->where('id_user', '=', Auth::user()->id)
+                    ->whereMonth('created_at', '=', $key)
+                    ->orderBy('id', 'DESC')
+                    ->get(); 
+        $puntos = 0;
+        foreach($month as $v){
+          $puntos += $v->puntos;
+        }
+        $data[$value] = $puntos;
+      }
+      return response()->json(['allDesempeno' => $data]);
     }
     
     public function desempenosForMonth($month)

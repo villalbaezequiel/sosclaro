@@ -6,73 +6,43 @@
 @include('frontend.components.header')
 
 <main class="main main-user">
-    <section class="section-wrapper">
-        <hgroup class="section-header">
-            <span class="title">Mis Logros</span>
-        </hgroup>
-        <article class="section-content">
+    <section class="section">
+        <article class="section-content" style="margin-bottom: -3.5rem;">
             <div class="card text-center">
-                <div class="card-header">
-                    <h4>Esta semana sumaste
-                        <span class="badge badge-danger">
-                            @if(isset($ultimo_desempeno[0]) && !empty($ultimo_desempeno[0]))
-                                {{ $ultimo_desempeno[0]->puntos }}
-                            @else
-                            0
+                <div class="card-body background-black-color-white">
+                    <div class="row card-text">  
+                        <div class="col-md-4">
+                          @foreach(\App\Functions::getMonths() as $key => $value)
+                            @if($key == date('n'))
+                              <h4>{{ $value }}</h4>
                             @endif
-                            puntos</span>
-                    </h4>
-                </div>
-                                
-                <div class="card-body">
-                    <div class="row card-text">
-                        <div class="col-md-6">
-                            <h1 class="mb-0">
-                                <i class="fa fa-arrow-circle-o-up" aria-hidden="true"></i>
-                                @if(isset($ultimo_desempeno[0]) && !empty($ultimo_desempeno[0]))
-                                    {{ $ultimo_desempeno[0]->total }}
-                                @else
-                                    0
-                                @endif
-                            %</h1>
+                          @endforeach
+                          <h5>{{ date('Y') }}</h5>
                         </div>
-                        <div class="col-md-6 text-left">
-                            <h6>
-                                <i class="fa fa-arrow-circle-o-up" aria-hidden="true"></i>
-                                @if(isset($ultimo_desempeno[0]) && !empty($ultimo_desempeno[0]))
-                                    {{ $ultimo_desempeno[0]->indicador_1."% Indicador 1" }}
-                                @else
-                                    0% Indicador 1
-                                @endif
-                            </h6>
-                            <h6>
-                                <i class="fa fa-arrow-circle-o-down" aria-hidden="true"></i>
-                                @if(isset($ultimo_desempeno[0]) && !empty($ultimo_desempeno[0]))
-                                    {{ $ultimo_desempeno[0]->indicador_2."% Indicador 2" }}
-                                @else
-                                    0% Indicador 2
-                                @endif
-                            </h6>
+                        <div class="col-md-4 background-red"> 
+                          <h5 class="nav-month-result">{{ $ultimo_desempeno['puntos'] }}</h5>
+                          <div class="nav-month-description"><strong>PUNTOS</strong></div>
+                        </div>
+                        <div class="col-md-4 background-red">
+                          <h5 class="nav-month-result">{{ $ultimo_desempeno['total'] }}</h5>
+                          <div class="nav-month-description"><strong>TOTAL</strong></div>
                         </div>
                     </div>
                 </div>
-                @if(isset($ultimo_desempeno[0]) && !empty($ultimo_desempeno[0]))
-                    <div class="card-footer">Datos para la semana del {{ \App\Functions::getDate($ultimo_desempeno[0]->created_at) }}</div>
-                @endif
             </div>
         </article>
         <!-- Aca esta el chart -->
-        <article class="section-chart">
-            <div class="chart-container">
-                <canvas id="graphCanvas"></canvas>
+        <article class="section-content">
+          <div class="card">
+            <canvas id="graphCanvas"></canvas>
+            <div class="text-center background-black-color-white" style="padding: 5px;">
+              <strong>2018</strong>
             </div>
-            <div class="text-center">
-                <small>Gráfico basado en los últimos 12 registros máximo.</small>
-            </div>
+          </div>
         </article>
         <article class="section-content">
             <div class="card">
-                <div class="card-header text-center">
+                <div class="card-header text-center background-black-color-white" style="padding: 5px;">
                     <strong>Historial</strong>
                 </div>
                 <div class="card-body">
@@ -158,15 +128,13 @@ $(document).ready(function () {
             url: '/desempeno_grafico',
             dataType: 'json',
             success: function(data){
-                
+                var allDesempeno = data.allDesempeno;
                 var labels = [];
                 var puntos = [];
 
-                $.each(data, function(key, value){
-                    $.each(value, function(i, v){
-                        labels.push(v.created_at);
-                        puntos.push(v.puntos);
-                    });
+                $.each(allDesempeno, function(key, value){
+                  labels.push(key);
+                  puntos.push(value);
                 });
                 
                 var historialUsuario = {
@@ -177,6 +145,7 @@ $(document).ready(function () {
                             data: puntos,
                             fill: false,
                             borderColor: 'rgb(0, 165, 142)',
+                            backgroundColor: "rgba(159,170,174,0.8)",
                             lineTension: 0.1
                         }
                     ]
@@ -205,6 +174,30 @@ $(document).ready(function () {
                 console.log('Error: '+xhr);
             }
         });
-    }        
+    }
 </script>
+<style>
+.card {
+  border: 1px solid #000!important;        
+}
+.background-red {
+  background-color: red;
+}
+.background-white {
+  background-color: #ffffff;
+}
+.background-black-color-white {
+  background-color: black;
+  color: #ffffff;
+}
+.nav-month-description {
+  background-color: rgba(159,170,174,0.8);
+  width: 70%;
+  margin: 0 auto;
+  padding: 5px;
+}
+.nav-month-result {
+  margin-top: 1.5%!important;
+}
+</style>
 @endsection

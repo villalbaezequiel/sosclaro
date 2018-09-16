@@ -213,7 +213,7 @@ class ResultsController extends Controller
               $insert->indicador_1 = 0;
               $insert->indicador_2 = 0;
               $insert->promedio = 0;
-              $insert->total = 0;
+              $insert->total = $value->desempeno;
               
               $insert->puntos = $value->puntos;
               $insert->asunto = $value->asunto;
