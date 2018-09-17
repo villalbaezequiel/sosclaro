@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-    <a class="navbar-brand" href="{{ url('/') }}">SosClaro</a>
+    <a class="navbar-brand" href="{{ url('/') }}">SosClaro <i>v2.1.0</i></a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -27,6 +27,9 @@
                     <li>
                         <a href="{{ url('/admin/roles') }}">Roles</a>
                     </li>
+                    <li>
+                        <a href="{{ url('/admin/users_update') }}">Actualizar Puntos/Agencia</a>
+                    </li>
 <!--                    <li>
                         <a href="{{ url('/admin/users') }}">Historial Usuarios</a>
                     </li>-->
@@ -34,7 +37,7 @@
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right">
                 <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#nav_results">
-                    <i class="fa fa-fw fa-cogs"></i>
+                    <i class="fa fa-fw fa-circle-o-notch"></i>
                     <span class="nav-link-text">Resultados/Desempeños</span>
                 </a>
                 <ul class="sidenav-second-level collapse" id="nav_results">
@@ -48,7 +51,7 @@
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right">
                 <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#nav_bonus_track">
-                    <i class="fa fa-fw fa-cogs"></i>
+                    <i class="fa fa-fw fa-circle-o-notch"></i>
                     <span class="nav-link-text">Resultados/Bonus Track</span>
                 </a>
                 <ul class="sidenav-second-level collapse" id="nav_bonus_track">
@@ -62,7 +65,7 @@
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right">
                 <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#nav_products">
-                    <i class="fa fa-fw fa-cogs"></i>
+                    <i class="fa fa-fw fa-shopping-bag"></i>
                     <span class="nav-link-text">Productos</span>
                 </a>
                 <ul class="sidenav-second-level collapse" id="nav_products">
@@ -76,18 +79,18 @@
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right">
                 <a class="nav-link" href="{{ url('/admin/exchanges') }}">
-                    <i class="fa fa-fw fa-cogs"></i>
+                    <i class="fa fa-fw fa-shopping-cart"></i>
                     <span class="nav-link-text">Canjes</span>
                 </a>
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right">
                 <a class="nav-link" href="{{ url('/admin/reports') }}">
-                    <i class="fa fa-fw fa-cogs"></i>
+                    <i class="fa fa-fw fa-sliders"></i>
                     <span class="nav-link-text">Reportes</span>
                 </a>
             </li>            <li class="nav-item" data-toggle="tooltip" data-placement="right">
                 <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#nav_tips">
-                    <i class="fa fa-fw fa-cogs"></i>
+                    <i class="fa fa-fw fa-gittip"></i>
                     <span class="nav-link-text">Novedades</span>
                 </a>
                 <ul class="sidenav-second-level collapse" id="nav_tips">
@@ -101,7 +104,7 @@
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right">
                 <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#nav_guests">
-                    <i class="fa fa-fw fa-cogs"></i>
+                    <i class="fa fa-fw fa-commenting"></i>
                     <span class="nav-link-text">Encuestas</span>
                 </a>
                 <ul class="sidenav-second-level collapse" id="nav_guests">
@@ -118,31 +121,31 @@
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right">
                 <a class="nav-link" href="{{ url('/admin/regions') }}">
-                    <i class="fa fa-fw fa-cogs"></i>
+                    <i class="fa fa-fw fa-location-arrow"></i>
                     <span class="nav-link-text">Regiones</span>
                 </a>
             </li>
 <!--            <li class="nav-item" data-toggle="tooltip" data-placement="right">
                 <a class="nav-link" href="{{ url('/admin/locations') }}">
-                    <i class="fa fa-fw fa-cogs"></i>
+                    <i class="fa fa-fw fa-circle-o-notch"></i>
                     <span class="nav-link-text">Ubicaciones</span>
                 </a>
             </li>-->
             <li class="nav-item" data-toggle="tooltip" data-placement="right">
                 <a class="nav-link" href="{{ url('/admin/modals') }}">
-                    <i class="fa fa-fw fa-cogs"></i>
+                    <i class="fa fa-fw fa-image"></i>
                     <span class="nav-link-text">Banners</span>
                 </a>
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right">
                 <a class="nav-link" href="{{ url('/admin/preguntas-frecuentes') }}">
-                    <i class="fa fa-fw fa-cogs"></i>
+                    <i class="fa fa-fw fa-question-circle"></i>
                     <span class="nav-link-text">Preguntas Frecuentes</span>
                 </a>
             </li>
 <!--            <li class="nav-item" data-toggle="tooltip" data-placement="right">
                 <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#nav_settings">
-                    <i class="fa fa-fw fa-cogs"></i>
+                    <i class="fa fa-fw fa-circle-o-notch"></i>
                     <span class="nav-link-text">Configuracion</span>
                 </a>
                 <ul class="sidenav-second-level collapse" id="nav_settings">
