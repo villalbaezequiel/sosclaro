@@ -20,9 +20,6 @@
                         <a href="{{ url('/que-es') }}">Qué es?</a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ url('/mis-logros') }}">Logros</a>
-                    </li>
-                    <li class="nav-item">
                         <a href="{{ url('/catalogo') }}">Catálogo</a>
                     </li>
                     <li class="nav-item">
@@ -45,6 +42,7 @@
                             <span class="badge badge-danger">{{ \App\Dni::getPuntos(Auth::user()->id) }} puntos</span>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
                                 <a class="dropdown-item" href="{{ url('/usuario/canjes') }}">Mis canjes</a>
+                                <a class="dropdown-item" href="{{ url('/mis-logros') }}">Mis logros</a>
                                 <a class="dropdown-item" href="{{ url('/usuario/historial') }}">Historial de cuenta</a>
                                 <a class="dropdown-item" href="{{ url('/usuario/mi-cuenta') }}">Mi cuenta</a>
                                 <a class="dropdown-item" href="{{ url('/contactanos') }}">Contactanos</a>
