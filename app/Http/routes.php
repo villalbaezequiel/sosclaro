@@ -36,6 +36,7 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
         Route::get('/exchanges/export', 'Backend\ExchangesController@export');
         Route::get('/results/export', 'Backend\ResultsController@export');
         Route::get('/bonus_track/export', 'Backend\BonusTrackController@export');
+        Route::get('/users_update/export', 'Backend\UsersUpdateController@export');
 
         //Import
         Route::get('/results/import/{values}', 'Backend\ResultsController@import');     

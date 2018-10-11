@@ -6,6 +6,11 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\DB;
+use App\Dni;
+use App\UsersProfile;
+use App\Agentes;
 
 class UsersUpdateController extends Controller
 {
@@ -37,7 +42,63 @@ class UsersUpdateController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       $message;
+        try {
+            if($request->hasFile('import_dni')){
+                $path = $request->file('import_dni')->getRealPath();
+                $data = Excel::load($path, function($reader){})->get();
+                
+                if(!empty($data) && $data->count()){
+                  foreach ($data as $key => $value) {
+                    if(!empty($value->dni)){
+                        
+                        // id DNI user
+                        $idDni = Dni::where('dni', '=', $value->dni)->get();
+                        
+                        // update puntos
+                        $dni = Dni::find($idDni[0]->id);
+                        $dni->puntos = ($dni->puntos + $value->puntos);;
+                        $dni->historical_puntos = ($dni->historical_puntos + $value->puntos);
+                        $dni->save();
+                                
+                        // verifico si existe el agente. Sino lo inserto
+                        if(Agentes::checkAgente($value->agente) == FALSE){
+                            $agente = new Agentes;
+                            $agente->name = $value->agente;
+                            $agente->description = '';
+                            $agente->active = 1;
+                            $agente->save();
+                        }
+                        
+                        // id USERSPROFILE user
+                        $idUsersProfile = UsersProfile::where('id_user', '=', $value->id)->get();
+                        
+                        $userProfile = UsersProfile::find($idUsersProfile[0]->id);
+                        $userProfile->id_agente = Agentes::getIdForName($value->agente);
+                        $userProfile->save();
+                    }  
+                  }
+                  
+                  return redirect('/admin/users')->with('message', '¡Usuarios Registrados actualizados con exito!');
+                  
+                } else {
+                  return redirect('/admin/users_update/create')->with('message', 'Hubo un error al Actualizar los Usuarios. Por favor, revise que este subiendo el archivo correcto');
+                }
+            }
+     
+        } catch(\Exception $e) {
+
+            if(\Config::get('app.debug'))
+              $message = 'ERROR('.$e->getLine().'): '.$e->getMessage();
+            else
+              $message = 'Se ha producido un error. Por favor intente nuevamente.';
+
+            $respuesta = array(
+                    'estado' => false,
+                    'mensaje' => $message
+            );
+            return \Response::json($respuesta);
+	} 
     }
 
     /**
@@ -83,5 +144,30 @@ class UsersUpdateController extends Controller
     public function destroy($id)
     {
         //
+    }
+    
+    public function export()
+    {
+        $timestamp = date('Y_m_d_h_i_s');
+        Excel::create('export_users_'.$timestamp, function($excel) {
+ 
+            $excel->sheet('Usuarios registrados', function($sheet) {
+                
+                $users = DB::table('users')->select('users.id', 'users.email', 'users_profile.id_agente as agente')
+                        ->join('users_profile', 'users_profile.id_user', '=', 'users.id')
+                        ->get();
+
+		foreach($users as &$user){
+                    $user->dni = Dni::getDni($user->id);
+                    $user->nombre_completo = Dni::getName($user->id);
+                    $user->agente = Agentes::getName($user->agente);
+                    $user->puntos = 0;
+		}
+
+                $sheet->fromArray(json_decode( json_encode($users), true));
+ 
+            });
+            
+        })->export('xls');
     }
 }
