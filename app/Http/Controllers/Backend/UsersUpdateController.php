@@ -74,7 +74,22 @@ class UsersUpdateController extends Controller
                         $idUsersProfile = UsersProfile::where('id_user', '=', $value->id)->get();
                         
                         $userProfile = UsersProfile::find($idUsersProfile[0]->id);
-                        $userProfile->id_agente = Agentes::getIdForName($value->agente);
+                        
+                        // update agente user
+                        if($value->agente && !empty($value->agente)){
+                            $userProfile->id_agente = Agentes::getIdForName($value->agente);    
+                        }
+                        
+                        // udpdate fecha_ingreso user
+                        if($value->fecha_ingreso && !empty($value->fecha_ingreso)){
+                            $userProfile->admission_date = $value->fecha_ingreso;    
+                        }
+                        
+                        // update tipo usuario user
+                        if($value->tipo_usuario && !empty($value->tipo_usuario)){
+                            $userProfile->type_user = $value->tipo_usuario;
+                        }
+                        
                         $userProfile->save();
                     }  
                   }
@@ -162,6 +177,8 @@ class UsersUpdateController extends Controller
                     $user->nombre_completo = Dni::getName($user->id);
                     $user->agente = Agentes::getName($user->agente);
                     $user->puntos = 0;
+                    $user->fecha_ingreso = '';
+                    $user->tipo_usuario = '';
 		}
 
                 $sheet->fromArray(json_decode( json_encode($users), true));
