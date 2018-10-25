@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\DB;
 use App\Dni;
 use App\UsersProfile;
 use App\Agentes;
+use App\Cities;
+use App\Provinces;
 
 class UsersUpdateController extends Controller
 {
@@ -55,19 +57,52 @@ class UsersUpdateController extends Controller
                         // id DNI user
                         $idDni = Dni::where('dni', '=', $value->dni)->get();
                         
-                        // update puntos
                         $dni = Dni::find($idDni[0]->id);
-                        $dni->puntos = ($dni->puntos + $value->puntos);;
-                        $dni->historical_puntos = ($dni->historical_puntos + $value->puntos);
+                        // update name
+                        if($value->nombres && !empty($value->nombres)){
+                            $dni->name = $value->nombres;
+                        }
+                        // update last_name
+                        if($value->apellidos && !empty($value->apellidos)){
+                            $dni->last_name = $value->apellidos;
+                        }
+                        // update puntos and historical_puntos
+                        if($value->puntos && !empty($value->puntos)){
+                            $dni->puntos = ($dni->puntos + $value->puntos);
+                            $dni->historical_puntos = ($dni->historical_puntos + $value->puntos);
+                        }
+                        // save update
                         $dni->save();
                                 
                         // verifico si existe el agente. Sino lo inserto
-                        if(Agentes::checkAgente($value->agente) == FALSE){
+                        if($value->agente && !empty($value->agente)){
+                          if(Agentes::checkAgente($value->agente) == FALSE){
                             $agente = new Agentes;
                             $agente->name = $value->agente;
                             $agente->description = '';
                             $agente->active = 1;
                             $agente->save();
+                          }
+                        }
+                        
+                        //insert city
+                        if($value->localidad && !empty($value->localidad)){
+                          if(Cities::checkCitie($value->localidad) == FALSE){
+                            $citie = new Cities;
+                            $citie->id_province = 0;
+                            $citie->name = $value->localidad;
+                            $citie->active = 1;
+                            $citie->save();
+                          }
+                        }
+                        
+                        //insert province
+                        if($value->provincia && !empty($value->provincia)){
+                          if(Provinces::checkProvince($value->provincia) == FALSE){
+                            $prov = new Provinces;
+                            $prov->name = $value->provincia;
+                            $prov->save();
+                          }
                         }
                         
                         // id USERSPROFILE user
@@ -75,17 +110,37 @@ class UsersUpdateController extends Controller
                         
                         $userProfile = UsersProfile::find($idUsersProfile[0]->id);
                         
-                        // update agente user
+                        // update agente
                         if($value->agente && !empty($value->agente)){
                             $userProfile->id_agente = Agentes::getIdForName($value->agente);    
                         }
                         
-                        // udpdate fecha_ingreso user
+                        // update address
+                        if($value->direccion && !empty($value->direccion)){
+                            $userProfile->address = $value->direccion;    
+                        }
+                        
+                        // update cp
+                        if($value->cp && !empty($value->cp)){
+                            $userProfile->cp = $value->cp;    
+                        }
+                        
+                        // update city
+                        if($value->localidad && !empty($value->localidad)){
+                            $userProfile->id_city = Cities::getIdForName($value->localidad);
+                        }
+                        
+                        // update province
+                        if($value->provincia && !empty($value->provincia)){
+                            $userProfile->id_province = Provinces::getIdForName($value->provincia);
+                        }
+                        
+                        // udpdate admission_date
                         if($value->fecha_ingreso && !empty($value->fecha_ingreso)){
                             $userProfile->admission_date = $value->fecha_ingreso;    
                         }
                         
-                        // update tipo usuario user
+                        // update type_user
                         if($value->tipo_usuario && !empty($value->tipo_usuario)){
                             $userProfile->type_user = $value->tipo_usuario;
                         }
@@ -168,17 +223,35 @@ class UsersUpdateController extends Controller
  
             $excel->sheet('Usuarios registrados', function($sheet) {
                 
-                $users = DB::table('users')->select('users.id', 'users.email', 'users_profile.id_agente as agente')
+                $users = DB::table('users')->select('users.id', 
+                                                    'users_profile.id_user',
+                                                    'users_profile.id_region',
+                        
+                                                    'users.id as dni',
+                                                    'users.id as nombres',
+                                                    'users.id as apellidos',
+                                                    
+                                                    'users_profile.id_agente as agente',
+                                                    'users_profile.address as direccion',
+                                                    'users_profile.cp',
+                                                    'users_profile.id_city as localidad',
+                                                    'users_profile.id_province as provincia',
+                                                    'users_profile.admission_date as fecha_ingreso',
+                                                    'users_profile.type_user as tipo_usuario')
                         ->join('users_profile', 'users_profile.id_user', '=', 'users.id')
                         ->get();
 
 		foreach($users as &$user){
-                    $user->dni = Dni::getDni($user->id);
-                    $user->nombre_completo = Dni::getName($user->id);
+                    $user->dni = Dni::getDni($user->dni);
+                    $user->nombres = Dni::getName($user->nombres);
+                    $user->apellidos = Dni::getName($user->apellidos);
                     $user->agente = Agentes::getName($user->agente);
-                    $user->puntos = 0;
-                    $user->fecha_ingreso = '';
-                    $user->tipo_usuario = '';
+                    $user->localidad = Cities::getName($user->localidad);
+                    $user->provincia = Provinces::getName($user->provincia);
+                    $user->puntos = '';
+                    
+                    unset($user->id); // users ID
+                    unset($user->id_user); // users_profile ID_USER
 		}
 
                 $sheet->fromArray(json_decode( json_encode($users), true));
