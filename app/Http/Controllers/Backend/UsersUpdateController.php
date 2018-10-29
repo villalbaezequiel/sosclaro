@@ -75,6 +75,10 @@ class UsersUpdateController extends Controller
                         // save update
                         $dni->save();
                                 
+                        
+                        // id user
+                        $ID_user = $dni->id_user;
+                        
                         // verifico si existe el agente. Sino lo inserto
                         if($value->agente && !empty($value->agente)){
                           if(Agentes::checkAgente($value->agente) == FALSE){
@@ -107,7 +111,7 @@ class UsersUpdateController extends Controller
                         }
                         
                         // id USERSPROFILE user
-                        $idUsersProfile = UsersProfile::where('id_user', '=', $value->id)->get()->toArray();
+                        $idUsersProfile = UsersProfile::where('id_user', '=', $ID_user)->get()->toArray();
                         
                         if(!empty($idUsersProfile)){
                             $userProfile = UsersProfile::find($idUsersProfile[0]['id']);
