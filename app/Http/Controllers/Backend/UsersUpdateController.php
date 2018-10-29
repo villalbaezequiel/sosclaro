@@ -54,10 +54,11 @@ class UsersUpdateController extends Controller
                   foreach ($data as $key => $value) {
                     if(!empty($value->dni)){
                         
-                        // id DNI user
-                        $idDni = Dni::where('dni', '=', $value->dni)->get();
-                        
-                        $dni = Dni::find($idDni[0]->id);
+                       // id DNI user
+                      $idDni = Dni::where('dni', '=', $value->dni)->get()->toArray();
+                      if(!empty($idDni)){
+                          
+                        $dni = Dni::find($idDni[0]['id']);
                         // update name
                         if($value->nombres && !empty($value->nombres)){
                             $dni->name = $value->nombres;
@@ -106,48 +107,53 @@ class UsersUpdateController extends Controller
                         }
                         
                         // id USERSPROFILE user
-                        $idUsersProfile = UsersProfile::where('id_user', '=', $value->id)->get();
+                        $idUsersProfile = UsersProfile::where('id_user', '=', $value->id)->get()->toArray();
                         
-                        $userProfile = UsersProfile::find($idUsersProfile[0]->id);
-                        
-                        // update agente
-                        if($value->agente && !empty($value->agente)){
-                            $userProfile->id_agente = Agentes::getIdForName($value->agente);    
+                        if(!empty($idUsersProfile)){
+                            $userProfile = UsersProfile::find($idUsersProfile[0]['id']);
+
+                            // update agente
+                            if($value->agente && !empty($value->agente)){
+                                $userProfile->id_agente = Agentes::getIdForName($value->agente);    
+                            }
+
+                            // update address
+                            if($value->direccion && !empty($value->direccion)){
+                                $userProfile->address = $value->direccion;    
+                            }
+
+                            // update cp
+                            if($value->cp && !empty($value->cp)){
+                                $userProfile->cp = $value->cp;    
+                            }
+
+                            // update city
+                            if($value->localidad && !empty($value->localidad)){
+                                $userProfile->id_city = Cities::getIdForName($value->localidad);
+                            }
+
+                            // update province
+                            if($value->provincia && !empty($value->provincia)){
+                                $userProfile->id_province = Provinces::getIdForName($value->provincia);
+                            }
+
+                            // udpdate admission_date
+                            if($value->fecha_ingreso && !empty($value->fecha_ingreso)){
+                                $userProfile->admission_date = $value->fecha_ingreso;    
+                            }
+
+                            // update type_user
+                            if($value->tipo_usuario && !empty($value->tipo_usuario)){
+                                $userProfile->type_user = $value->tipo_usuario;
+                            }
+
+                            $userProfile->save();
                         }
-                        
-                        // update address
-                        if($value->direccion && !empty($value->direccion)){
-                            $userProfile->address = $value->direccion;    
-                        }
-                        
-                        // update cp
-                        if($value->cp && !empty($value->cp)){
-                            $userProfile->cp = $value->cp;    
-                        }
-                        
-                        // update city
-                        if($value->localidad && !empty($value->localidad)){
-                            $userProfile->id_city = Cities::getIdForName($value->localidad);
-                        }
-                        
-                        // update province
-                        if($value->provincia && !empty($value->provincia)){
-                            $userProfile->id_province = Provinces::getIdForName($value->provincia);
-                        }
-                        
-                        // udpdate admission_date
-                        if($value->fecha_ingreso && !empty($value->fecha_ingreso)){
-                            $userProfile->admission_date = $value->fecha_ingreso;    
-                        }
-                        
-                        // update type_user
-                        if($value->tipo_usuario && !empty($value->tipo_usuario)){
-                            $userProfile->type_user = $value->tipo_usuario;
-                        }
-                        
-                        $userProfile->save();
-                    }  
+                      }  
+                    }
                   }
+                  
+                  die();
                   
                   return redirect('/admin/users')->with('message', '¡Usuarios Registrados actualizados con exito!');
                   
