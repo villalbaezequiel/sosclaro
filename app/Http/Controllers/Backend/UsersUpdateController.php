@@ -153,8 +153,6 @@ class UsersUpdateController extends Controller
                     }
                   }
                   
-                  die();
-                  
                   return redirect('/admin/users')->with('message', '¡Usuarios Registrados actualizados con exito!');
                   
                 } else {
