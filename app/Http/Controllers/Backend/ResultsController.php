@@ -71,7 +71,8 @@ class ResultsController extends Controller
                         && !empty($request->get('month_results')) ){
                   
                   $asunto = (!empty($request->get('asunto')) ? $request->get('asunto')." (Mes ".$request->get('month_results').")" : ResultsCategories::getNameCategory($request->get('category_results'))." (Mes ".$request->get('month_results').")" );
-                    
+                  $puesto = ($value->puesto == null ? 0 : $value->puesto);
+                  
                   $values[] = 
                     array(
                       'id_user' => $value->id_user,
@@ -83,9 +84,47 @@ class ResultsController extends Controller
                       'month' => $request->get('month_results'),
                       'puntos' => $value->puntos,
                       'desempeno' => $value->desempeno,
-                      'puesto' => $value->puesto);
+                      'puesto' => $puesto);
                 } 
               }
+              
+              
+            // excepcion de carga de desempeño por problema de request por GET
+            $resultsPerfomance = json_decode($values);
+            
+            if(!empty($resultsPerfomance)){
+              foreach($resultsPerfomance as $value) {
+
+                //insert new performance
+                $insert = new UsersGanadores;
+                $insert->id_user = $value->id_user;
+                $insert->indicador_1 = 0;
+                $insert->indicador_2 = 0;
+                $insert->promedio = 0;
+                $insert->total = $value->desempeno;
+
+                $insert->puntos = $value->puntos;
+                $insert->asunto = $value->asunto;
+                $insert->save();
+
+                //actualizo DESEMPENO HISTORICO DEL USER
+                $historical_performance = Dni::find(Dni::getIdUser($value->id_user));
+                $historical_performance->puntos = ($historical_performance->puntos + $value->puntos);
+                $historical_performance->historical_puntos = ($historical_performance->historical_puntos + $value->puntos);
+                $historical_performance->save();
+
+
+                $results = new Results;
+                $results->id_category = $value->id_category;
+                $results->month = $value->month;
+                $results->id_user = $value->id_user;
+                $results->id_region = $value->id_region;
+                $results->puntos = $value->puntos;
+                $results->desempeno = $value->desempeno;
+                $results->puesto = $value->puesto;
+                $results->save();
+              }
+            } 
               
               //if isset image owner
               $image_owner = $request->file('image_owner');
@@ -100,8 +139,9 @@ class ResultsController extends Controller
                 Storage::disk('public')->put('results_media/'.$request->get('category_results').'/'.$request->get('month_results').'/'.$image_owner->getClientOriginalName(), file_get_contents($image_owner->getRealPath()));
               }
               
-              return response()->json(['preview' => $values]);
-
+//              return response()->json(['preview' => $values]);
+                return redirect('/admin/results')->with('message', "¡Resultados insertados con Exito!"); 
+              
             } else {
               return response()->json(['estado' => false]);
             }
