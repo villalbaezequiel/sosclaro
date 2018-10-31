@@ -90,11 +90,13 @@ class ResultsController extends Controller
               
               
             // excepcion de carga de desempeño por problema de request por GET
-            $resultsPerfomance = json_decode($values);
+            $resultsPerfomance = $values;
             
             if(!empty($resultsPerfomance)){
-              foreach($resultsPerfomance as $value) {
+              foreach($resultsPerfomance as $val) {
 
+                $value = (object) $val;
+    
                 //insert new performance
                 $insert = new UsersGanadores;
                 $insert->id_user = $value->id_user;
@@ -139,8 +141,7 @@ class ResultsController extends Controller
                 Storage::disk('public')->put('results_media/'.$request->get('category_results').'/'.$request->get('month_results').'/'.$image_owner->getClientOriginalName(), file_get_contents($image_owner->getRealPath()));
               }
               
-//              return response()->json(['preview' => $values]);
-                return redirect('/admin/results')->with('message', "¡Resultados insertados con Exito!"); 
+              return response()->json(['estado' => true]);
               
             } else {
               return response()->json(['estado' => false]);

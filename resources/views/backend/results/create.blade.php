@@ -103,63 +103,69 @@ $(document).ready(function(){
             type: 'POST',
             success: function(data){
               $(".loading").hide();
+              
               if(data.estado !== "undefined" && data.estado === false){ 
                 alert("¡Error Técnico! Comuníquese con Soporte! Asegure que esté subiendo correctamente el Excel de Resultados/Desempeño, con sus datos especificos.");
               } else {
-                var preview = data.preview;
-                if(preview.length == 0){
-                  alert("Asegure que esté subiendo correctamente el Excel de Resultados/Desempeño, con sus datos especificos.");
-                } else {
-                    
-                // hide form
-                form.hide();
-                    
-                //view preview list
-                $("#preview-desempeno").show();
-                  //each data
-                $.each(preview, function(i,v){
-                    $(".content-preview-desempeno").append("<tr><td>"+v.id_user+"</td>\n\
-                      <td>"+v.id_region+"</td>\n\
-                      <td>"+v.id_category+"</td>\n\
-                      <td>"+v.dni+"</td>\n\
-                      <td>"+v.nombre_apellido+"</td>\n\
-                      <td>"+v.asunto+"</td>\n\
-                      <td>"+v.month+"</td>\n\
-                      <td>"+v.puntos+"</td>\n\
-                      <td>"+v.desempeno+"</td>\n\
-                      <td>"+v.puesto+"</td></tr>");
-                });
-
-                $("#submit-preview-import").click(function(event){
-                  $(".loading").show();
-
-                  $.get('/admin/results/import/'+JSON.stringify(preview), function(data){
-                      $(".loading").hide();
-                      if(data.estado !== "undefined" && data.estado == false){
-                        alert("¡Error Técnico! Comuníquese con Soporte! Asegure que esté subiendo correctamente el Excel de Resultados/Desempeño, con sus datos especificos.");
-                      } else {
-                          if(data.estado == false){
-                            alert("Asegure que esté subiendo correctamente el Excel de Resultados/Desempeño, con sus datos especificos.");
-                          } else {
-                              form.show();
-                              $(".alert.alert-success").show();
-                              $("#preview-desempeno").hide();
-                              setTimeout(function(){ window.location = "/admin/results"; }, 4000);
-                          }
-                      }
-                    })
-                    .done(function() {
-                      $(".loading").hide();
-                    })
-                    .fail(function(response) {
-                      $(".loading").hide();
-                      alert("¡Error Técnico! Comuníquese con Soporte!");
-                    });
-
-                  event.preventDefault();
-                });
+                $(".loading").hide();
                 
-                }
+                $(".alert.alert-success").show();
+                setTimeout(function(){ window.location = "/admin/results"; }, 4000);
+                
+//                var preview = data.preview;
+//                if(preview.length == 0){
+//                  alert("Asegure que esté subiendo correctamente el Excel de Resultados/Desempeño, con sus datos especificos.");
+//                } else {
+//                    
+//                // hide form
+//                form.hide();
+//                    
+//                //view preview list
+//                $("#preview-desempeno").show();
+//                  //each data
+//                $.each(preview, function(i,v){
+//                    $(".content-preview-desempeno").append("<tr><td>"+v.id_user+"</td>\n\
+//                      <td>"+v.id_region+"</td>\n\
+//                      <td>"+v.id_category+"</td>\n\
+//                      <td>"+v.dni+"</td>\n\
+//                      <td>"+v.nombre_apellido+"</td>\n\
+//                      <td>"+v.asunto+"</td>\n\
+//                      <td>"+v.month+"</td>\n\
+//                      <td>"+v.puntos+"</td>\n\
+//                      <td>"+v.desempeno+"</td>\n\
+//                      <td>"+v.puesto+"</td></tr>");
+//                });
+//
+//                $("#submit-preview-import").click(function(event){
+//                  $(".loading").show();
+//
+//                  $.get('/admin/results/import/'+JSON.stringify(preview), function(data){
+//                      $(".loading").hide();
+//                      if(data.estado !== "undefined" && data.estado == false){
+//                        alert("¡Error Técnico! Comuníquese con Soporte! Asegure que esté subiendo correctamente el Excel de Resultados/Desempeño, con sus datos especificos.");
+//                      } else {
+//                          if(data.estado == false){
+//                            alert("Asegure que esté subiendo correctamente el Excel de Resultados/Desempeño, con sus datos especificos.");
+//                          } else {
+//                              form.show();
+//                              $(".alert.alert-success").show();
+//                              $("#preview-desempeno").hide();
+//                              setTimeout(function(){ window.location = "/admin/results"; }, 4000);
+//                          }
+//                      }
+//                    })
+//                    .done(function() {
+//                      $(".loading").hide();
+//                    })
+//                    .fail(function(response) {
+//                      $(".loading").hide();
+//                      alert("¡Error Técnico! Comuníquese con Soporte!");
+//                    });
+//
+//                  event.preventDefault();
+//                });
+//                
+//                }
               }
             },
             cache: false,
