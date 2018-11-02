@@ -69,7 +69,7 @@
                   <th scope="col">Nombre <!-- <span class="d-none d-md-inline-block">y Apellido</span> --></th>
                   <th scope="col">Agencia</th>
                   <th scope="col">Puntos</th>
-                  <th scope="col" class="head-menu-stop">Desempeño</th>
+                  <th scope="col" class="head-menu-stop">Total</th>
                 </tr>
               </thead>
               <tbody class="text-white list-results-table">
@@ -83,7 +83,7 @@
                     @if($name_category['id'] == 1)
                     <td>{{ $result['puntos'] }}</td>
                     @endif
-                    <td>{{ $result['desempeno'] }}%</td>
+                    <td>{{ $result['desempeno'] }}</td>
                   </tr>
                 @endforeach
               @endif
@@ -130,11 +130,11 @@ $(document).ready(function(){
                     $(".list-results-table").empty();
                     if(idCategory === 1){
                       $.each(results, function(i,v){
-                        $(".list-results-table").append("<tr><th scope='row'>"+v['region_name']+"</th><td>"+v['puesto']+"</td><td>"+v['user_name']+"</td><td>"+v['agente_name']+"</td><td>"+v['puntos']+"</td><td>"+v['desempeno']+"%</td></tr>");
+                        $(".list-results-table").append("<tr><th scope='row'>"+v['region_name']+"</th><td>"+v['puesto']+"</td><td>"+v['user_name']+"</td><td>"+v['agente_name']+"</td><td>"+v['puntos']+"</td><td>"+v['desempeno']+"</td></tr>");
                       });   
                     } else {
                       $.each(results, function(i,v){
-                        $(".list-results-table").append("<tr><th scope='row'>"+v['region_name']+"</th><td>"+v['user_name']+"</td><td>"+v['agente_name']+"</td><td>"+v['puntos']+"</td><td>"+v['desempeno']+"%</td></tr>");
+                        $(".list-results-table").append("<tr><th scope='row'>"+v['region_name']+"</th><td>"+v['user_name']+"</td><td>"+v['agente_name']+"</td><td>"+v['puntos']+"</td><td>"+v['desempeno']+"</td></tr>");
                       });  
                     }
                     
