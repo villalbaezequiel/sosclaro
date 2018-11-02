@@ -1,6 +1,6 @@
 @extends('layouts.backend')
 
-@section('title', "Categorias de Resultados/Desempeños / Editar")
+@section('title', "Categorias de Bonus Track / Editar")
 @section('content')
 {!! Form::open(['route' => ['admin.bonus_track_categories.update' , $bonus_track_category->id], 'method' => 'PUT', 'enctype' => 'multipart/form-data' ]) !!}
     <div class="form-group">

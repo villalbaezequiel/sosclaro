@@ -1,6 +1,6 @@
 @extends('layouts.backend')
 
-@section('title', "Resultados/Desempeños")
+@section('title', "Resultados Fijos")
 
 @section('message')
     @if (session('message'))

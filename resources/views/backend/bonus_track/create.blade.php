@@ -1,9 +1,9 @@
 @extends('layouts.backend')
 
-@section('title', "Resultados/Bonus Track / Importar")
+@section('title', "Bonus Track / Importar")
 
 @section('message')
-  <div class="alert alert-success" style="display: none;">Resultados/Bonus Track Importado con exito!</div>  
+  <div class="alert alert-success" style="display: none;">Bonus Track Importado con exito!</div>  
 @endsection
 
 @section('nav-button')
@@ -37,7 +37,7 @@
 
     <div class="custom-file">
         <input type="file" class="custom-file-input" id="file_bonus_track" name="file_bonus_track" required>
-        <label class="custom-file-label" for="file_bonus_track">Excel Resultados/Bonus Track</label>
+        <label class="custom-file-label" for="file_bonus_track">Excel Bonus Track</label>
     </div>
 
     <div class="form-group"></div>
@@ -104,11 +104,11 @@ $(document).ready(function(){
             success: function(data){
               $(".loading").hide();
               if(data.estado !== "undefined" && data.estado === false){ 
-                alert("¡Error Técnico! Comuníquese con Soporte! Asegure que esté subiendo correctamente el Excel de Resultados/Bonus Track, con sus datos especificos.");
+                alert("¡Error Técnico! Comuníquese con Soporte! Asegure que esté subiendo correctamente el Excel de Bonus Track, con sus datos especificos.");
               } else {
                 var preview = data.preview;
                 if(preview.length == 0){
-                  alert("Asegure que esté subiendo correctamente el Excel de Resultados/Bonus Track, con sus datos especificos.");
+                  alert("Asegure que esté subiendo correctamente el Excel de Bonus Track, con sus datos especificos.");
                 } else {
                     
                 // hide form
@@ -136,10 +136,10 @@ $(document).ready(function(){
                   $.get('/admin/bonus_track/import/'+JSON.stringify(preview), function(data){
                       $(".loading").hide();
                       if(data.estado !== "undefined" && data.estado == false){
-                        alert("¡Error Técnico! Comuníquese con Soporte! Asegure que esté subiendo correctamente el Excel de Resultados/Bonus Track, con sus datos especificos.");
+                        alert("¡Error Técnico! Comuníquese con Soporte! Asegure que esté subiendo correctamente el Excel de Bonus Track, con sus datos especificos.");
                       } else {
                           if(data.estado == false){
-                            alert("Asegure que esté subiendo correctamente el Excel de Resultados/Bonus Track, con sus datos especificos.");
+                            alert("Asegure que esté subiendo correctamente el Excel de Bonus Track, con sus datos especificos.");
                           } else {
                               form.show();
                               $(".alert.alert-success").show();

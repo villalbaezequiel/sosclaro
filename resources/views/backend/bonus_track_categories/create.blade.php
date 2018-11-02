@@ -1,6 +1,6 @@
 @extends('layouts.backend')
 
-@section('title', "Categorias de Resultados/Bonus Track / Alta")
+@section('title', "Categorias de Bonus Track / Alta")
 @section('content')
 {!! Form::open(['route' => 'admin.bonus_track_categories.store', 'method' => 'POST', 'enctype' => 'multipart/form-data' ]) !!}
     <div class="form-group">

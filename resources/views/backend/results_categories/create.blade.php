@@ -1,6 +1,6 @@
 @extends('layouts.backend')
 
-@section('title', "Categorias de Resultados/Desempeños / Alta")
+@section('title', "Categorias de Resultados Fijos / Alta")
 @section('content')
 {!! Form::open(['route' => 'admin.results_categories.store', 'method' => 'POST', 'enctype' => 'multipart/form-data' ]) !!}
     <div class="form-group">

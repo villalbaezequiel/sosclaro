@@ -38,28 +38,28 @@
             <li class="nav-item" data-toggle="tooltip" data-placement="right">
                 <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#nav_results">
                     <i class="fa fa-fw fa-circle-o-notch"></i>
-                    <span class="nav-link-text">Resultados/Desempeños</span>
+                    <span class="nav-link-text">Resultados Fijos</span>
                 </a>
                 <ul class="sidenav-second-level collapse" id="nav_results">
                     <li>
-                        <a href="{{ url('/admin/results_categories') }}">Categorias de Resultados/Desempeños</a>
+                        <a href="{{ url('/admin/results_categories') }}">Categorias de Resultados Fijos</a>
                     </li>
                     <li>
-                        <a href="{{ url('/admin/results') }}">Resultados/Desempeños</a>
+                        <a href="{{ url('/admin/results') }}">Resultados Fijos</a>
                     </li>
                 </ul>
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right">
                 <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#nav_bonus_track">
                     <i class="fa fa-fw fa-circle-o-notch"></i>
-                    <span class="nav-link-text">Resultados/Bonus Track</span>
+                    <span class="nav-link-text">Bonus Track</span>
                 </a>
                 <ul class="sidenav-second-level collapse" id="nav_bonus_track">
                     <li>
-                        <a href="{{ url('/admin/bonus_track_categories') }}">Categorias de Resultados/Bonus Track</a>
+                        <a href="{{ url('/admin/bonus_track_categories') }}">Categorias de Bonus Track</a>
                     </li>
                     <li>
-                        <a href="{{ url('/admin/bonus_track') }}">Resultados/Bonus Track</a>
+                        <a href="{{ url('/admin/bonus_track') }}">Bonus Track</a>
                     </li>
                 </ul>
             </li>

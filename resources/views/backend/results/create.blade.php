@@ -1,9 +1,9 @@
 @extends('layouts.backend')
 
-@section('title', "Resultados/Desempeños / Importar")
+@section('title', "Resultados Fijos / Importar")
 
 @section('message')
-  <div class="alert alert-success" style="display: none;">Resultados/Desempeños Importado con exito!</div>  
+  <div class="alert alert-success" style="display: none;">Resultados Fijos Importado con exito!</div>  
 @endsection
 
 @section('nav-button')
@@ -37,7 +37,7 @@
 
     <div class="custom-file">
         <input type="file" class="custom-file-input" id="file_results" name="file_results" required>
-        <label class="custom-file-label" for="file_results">Excel Resultados/Desempeños</label>
+        <label class="custom-file-label" for="file_results">Excel Resultados Fijos</label>
     </div>
 
     <div class="form-group"></div>
