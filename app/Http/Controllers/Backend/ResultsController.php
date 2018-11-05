@@ -110,10 +110,11 @@ class ResultsController extends Controller
                 $insert->save();
 
                 //actualizo DESEMPENO HISTORICO DEL USER
-                $historical_performance = Dni::find(Dni::getIdUser($value->id_user));
-                $historical_performance->puntos = ($historical_performance->puntos + $value->puntos);
-                $historical_performance->historical_puntos = ($historical_performance->historical_puntos + $value->puntos);
-                $historical_performance->save();
+                
+//                $historical_performance = Dni::find(Dni::getIdUser($value->id_user));
+//                $historical_performance->puntos = ($historical_performance->puntos + $value->puntos);
+//                $historical_performance->historical_puntos = ($historical_performance->historical_puntos + $value->puntos);
+//                $historical_performance->save();
 
 
                 $results = new Results;
@@ -261,10 +262,11 @@ class ResultsController extends Controller
               $insert->save();
 
               //actualizo DESEMPENO HISTORICO DEL USER
-              $historical_performance = Dni::find(Dni::getIdUser($value->id_user));
-              $historical_performance->puntos = ($historical_performance->puntos + $value->puntos);
-              $historical_performance->historical_puntos = ($historical_performance->historical_puntos + $value->puntos);
-              $historical_performance->save();
+              
+//              $historical_performance = Dni::find(Dni::getIdUser($value->id_user));
+//              $historical_performance->puntos = ($historical_performance->puntos + $value->puntos);
+//              $historical_performance->historical_puntos = ($historical_performance->historical_puntos + $value->puntos);
+//              $historical_performance->save();
               
               
               $results = new Results;
