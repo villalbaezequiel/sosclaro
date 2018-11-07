@@ -71,7 +71,8 @@ class BonusTrackController extends Controller
                         && !empty($request->get('month_bonus_track')) ){
                   
                   $asunto = (!empty($request->get('asunto')) ? "Bonus Track - ".$request->get('asunto')." (Mes ".$request->get('month_bonus_track').")" : "Bonus Track - ".BonusTrackCategories::getNameCategory($request->get('category_bonus_track'))." (Mes ".$request->get('month_bonus_track').")" );
-                    
+                  $puesto = ($value->puesto == null ? 0 : $value->puesto);
+                  
                   $values[] = 
                     array(
                       'id_user' => $value->id_user,
@@ -83,7 +84,7 @@ class BonusTrackController extends Controller
                       'month' => $request->get('month_bonus_track'),
                       'puntos' => $value->puntos,
                       'desempeno' => $value->desempeno,
-                      'puesto' => $value->puesto);
+                      'puesto' => $puesto);
                 } 
               }
               
@@ -121,7 +122,7 @@ class BonusTrackController extends Controller
                   $bonus_track->id_region = $value->id_region;
                   $bonus_track->puntos = $value->puntos;
                   $bonus_track->desempeno = $value->desempeno;
-                  $bonus_track->puesto = $value->puesto;
+                  $bonus_track->puesto = (!empty($value->puesto) ? $value->puesto : 0);
                   $bonus_track->save();
                 }
               }
