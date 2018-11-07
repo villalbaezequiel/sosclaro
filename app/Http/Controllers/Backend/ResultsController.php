@@ -64,8 +64,7 @@ class ResultsController extends Controller
             if(!empty($data) && $data->count()){
 
               foreach ($data as $key => $value) {
-                if(!empty($value->id_region)
-                        && !empty($value->puntos)
+                if(!empty($value->puntos)
                         && !empty($value->desempeno)
                         && !empty($request->get('category_results'))
                         && !empty($request->get('month_results')) ){
