@@ -63,9 +63,6 @@
               <thead class="thead-dark text-uppercase">
                 <tr>
                   <th scope="col" class="head-menu-start">Region</th>
-                  @if($name_category['id'] == 1)
-                  <th scope="col">Puesto</th>
-                  @endif
                   <th scope="col">Nombre <!-- <span class="d-none d-md-inline-block">y Apellido</span> --></th>
                   <th scope="col">Agencia</th>
                   <th scope="col">Puntos</th>
@@ -77,7 +74,6 @@
                 @foreach($results as $result)
                   <tr>
                     <th scope="row">{{ $result['region_name'] }}</th>
-                    <td>{{ $result['puesto'] }}</td>
                     <td>{{ $result['user_name'] }}</td>
                     <td>{{ $result['agente_name'] }}</td>
                     @if($name_category['id'] == 1)
@@ -130,7 +126,7 @@ $(document).ready(function(){
                     $(".list-results-table").empty();
                     if(idCategory === 1){
                       $.each(results, function(i,v){
-                        $(".list-results-table").append("<tr><th scope='row'>"+v['region_name']+"</th><td>"+v['puesto']+"</td><td>"+v['user_name']+"</td><td>"+v['agente_name']+"</td><td>"+v['puntos']+"</td><td>"+v['desempeno']+"</td></tr>");
+                        $(".list-results-table").append("<tr><th scope='row'>"+v['region_name']+"</th><td>"+v['user_name']+"</td><td>"+v['agente_name']+"</td><td>"+v['puntos']+"</td><td>"+v['desempeno']+"</td></tr>");
                       });   
                     } else {
                       $.each(results, function(i,v){
