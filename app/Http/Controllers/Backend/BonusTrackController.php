@@ -87,6 +87,45 @@ class BonusTrackController extends Controller
                 } 
               }
               
+              // excepcion de carga de Bonus Track por problema de request por GET
+              $listBonusTracks = $values;
+              
+              if(!empty($listBonusTracks)){
+                foreach($listBonusTracks as $val) {
+
+                  $value = (object) $val;
+                    
+                  //insert new performance
+                  $insert = new UsersGanadores;
+                  $insert->id_user = $value->id_user;
+                  $insert->indicador_1 = 0;
+                  $insert->indicador_2 = 0;
+                  $insert->promedio = 0;
+                  $insert->total = 0;
+
+                  $insert->puntos = $value->puntos;
+                  $insert->asunto = $value->asunto;
+                  $insert->save();
+
+                  //actualizo DESEMPENO HISTORICO DEL USER
+                  $historical_performance = Dni::find(Dni::getIdUser($value->id_user));
+                  $historical_performance->puntos = ($historical_performance->puntos + $value->puntos);
+                  $historical_performance->historical_puntos = ($historical_performance->historical_puntos + $value->puntos);
+                  $historical_performance->save();
+
+
+                  $bonus_track = new BonusTrack;
+                  $bonus_track->id_category = $value->id_category;
+                  $bonus_track->month = $value->month;
+                  $bonus_track->id_user = $value->id_user;
+                  $bonus_track->id_region = $value->id_region;
+                  $bonus_track->puntos = $value->puntos;
+                  $bonus_track->desempeno = $value->desempeno;
+                  $bonus_track->puesto = $value->puesto;
+                  $bonus_track->save();
+                }
+              }
+              
               //if isset image owner
               $image_owner = $request->file('image_owner');
               if($request->hasFile('image_owner')){
@@ -100,8 +139,8 @@ class BonusTrackController extends Controller
                 Storage::disk('public')->put('bonus_track_media/'.$request->get('category_bonus_track').'/'.$request->get('month_bonus_track').'/'.$image_owner->getClientOriginalName(), file_get_contents($image_owner->getRealPath()));
               }
               
-              return response()->json(['preview' => $values]);
-
+              return response()->json(['estado' => true]);
+              // return response()->json(['preview' => $values]);
             } else {
               return response()->json(['estado' => false]);
             }
