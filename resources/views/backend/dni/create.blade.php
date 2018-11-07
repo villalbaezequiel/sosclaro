@@ -71,61 +71,66 @@ $(document).ready(function(){
               $(".loading").hide();
               if(data.estado !== "undefined" && data.estado == false){ 
                 alert("¡Error Técnico! Comuníquese con Soporte! Asegure que esté subiendo correctamente el Excel de DNI, con sus datos especificos.");
-              } else {
-                var preview = data.preview;
-                if(preview.length == 0){
-                  alert("Asegure que esté subiendo correctamente el Excel de DNI, con sus datos especificos.");
-                } else {
-                // hide form
-                form.hide();
-                    
-                //view preview list
-                $("#preview-dni").show();
-                //each data
-                $.each(preview, function(i,v){
-                    $(".content-preview-dni").append("<tr><td>"+v.id_region+"</td>\n\
-                      <td>"+v.dni+"</td>\n\
-                      <td>"+v.nombres+"</td>\n\
-                      <td>"+v.apellidos+"</td>\n\
-                      <td>"+v.agente+"</td>\n\
-                      <td>"+v.direccion+"</td>\n\
-                      <td>"+v.cp+"</td>\n\
-                      <td>"+v.localidad+"</td>\n\
-                      <td>"+v.provincia+"</td>\n\
-                      <td>"+v.fecha_ingreso+"</td>\n\
-                      <td>"+v.tipo_usuario+"</td></tr>");
-                });
-
-                $("#submit-preview-import").click(function(event){
-                  $(".loading").show();
-
-                  $.get('/admin/dni/import/'+JSON.stringify(preview), function(data){
-                      $(".loading").hide();
-                      if(data.estado !== "undefined" && data.estado == false){
-                        alert("¡Error Técnico! Comuníquese con Soporte! Asegure que esté subiendo correctamente el Excel de DNI, con sus datos especificos.");
-                      } else {
-                          if(data.estado == false){
-                            alert("Asegure que esté subiendo correctamente el Excel de DNI, con sus datos especificos.");
-                          } else {
-                              form.show();
-                              $(".alert.alert-success").show();
-                              $("#preview-dni").hide();
-                              setTimeout(function(){ window.location = "/admin/dni"; }, 4000);
-                          }
-                      }
-                    })
-                    .done(function() {
-                      $(".loading").hide();
-                    })
-                    .fail(function(response) {
-                      $(".loading").hide();
-                      alert("¡Error Técnico! Comuníquese con Soporte!");
-                    });
-
-                  event.preventDefault();
-                });
+              } else {  
+                $(".loading").hide();
                 
-                }
+                $(".alert.alert-success").show();
+                setTimeout(function(){ window.location = "/admin/dni"; }, 4000);
+                
+//                var preview = data.preview;
+//                if(preview.length == 0){
+//                  alert("Asegure que esté subiendo correctamente el Excel de DNI, con sus datos especificos.");
+//                } else {
+//                // hide form
+//                form.hide();
+//                    
+//                //view preview list
+//                $("#preview-dni").show();
+//                //each data
+//                $.each(preview, function(i,v){
+//                    $(".content-preview-dni").append("<tr><td>"+v.id_region+"</td>\n\
+//                      <td>"+v.dni+"</td>\n\
+//                      <td>"+v.nombres+"</td>\n\
+//                      <td>"+v.apellidos+"</td>\n\
+//                      <td>"+v.agente+"</td>\n\
+//                      <td>"+v.direccion+"</td>\n\
+//                      <td>"+v.cp+"</td>\n\
+//                      <td>"+v.localidad+"</td>\n\
+//                      <td>"+v.provincia+"</td>\n\
+//                      <td>"+v.fecha_ingreso+"</td>\n\
+//                      <td>"+v.tipo_usuario+"</td></tr>");
+//                });
+//
+//                $("#submit-preview-import").click(function(event){
+//                  $(".loading").show();
+//
+//                  $.get('/admin/dni/import/'+JSON.stringify(preview), function(data){
+//                      $(".loading").hide();
+//                      if(data.estado !== "undefined" && data.estado == false){
+//                        alert("¡Error Técnico! Comuníquese con Soporte! Asegure que esté subiendo correctamente el Excel de DNI, con sus datos especificos.");
+//                      } else {
+//                          if(data.estado == false){
+//                            alert("Asegure que esté subiendo correctamente el Excel de DNI, con sus datos especificos.");
+//                          } else {
+//                              form.show();
+//                              $(".alert.alert-success").show();
+//                              $("#preview-dni").hide();
+//                              setTimeout(function(){ window.location = "/admin/dni"; }, 4000);
+//                          }
+//                      }
+//                    })
+//                    .done(function() {
+//                      $(".loading").hide();
+//                    })
+//                    .fail(function(response) {
+//                      $(".loading").hide();
+//                      alert("¡Error Técnico! Comuníquese con Soporte!");
+//                    });
+//
+//                  event.preventDefault();
+//                });
+//                
+//                }
               }
             },
             cache: false,

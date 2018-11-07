@@ -40,10 +40,10 @@ class DniController extends Controller
                 
                 if(!empty($data) && $data->count()){
                   foreach ($data as $key => $value) {
-                    if($value->dni && $value->id_region){
+                    if($value->dni){
                           
                       $values[] = 
-                        array('id_region' => $value->id_region,
+                        array('id_region' => (empty($value->id_region) ? 0 : $value->id_region),
                           'dni' => $value->dni,
                           'nombres' => $value->nombres,
                           'apellidos' => $value->apellidos,
@@ -56,8 +56,72 @@ class DniController extends Controller
                           'tipo_usuario' => $value->tipo_usuario);
                     }
                   }
-                 return response()->json(['preview' => $values]);
+            
+                // excepcion de carga de DNI por problema de request por GET
+                  $dniList = $values;      
                   
+                  if(!empty($dniList)){
+                    foreach ($dniList as $val) {
+
+                      $value = (object) $val;
+                        
+                      $searchDni = Dni::where('dni', '=', $value->dni)->get();
+                      if(!$searchDni->count()){
+
+                        $insert = new Dni;
+                        $insert->dni = $value->dni;       
+                        $insert->name = $value->nombres;
+                        $insert->last_name = $value->apellidos;
+                        $insert->id_region = $value->id_region;
+                        $insert->save();
+
+                        if(Dni::getIdDni($value->dni)){
+
+                            //insert agente
+                            if(Agentes::checkAgente($value->agente) == FALSE && !empty($value->agente)){
+                                $agente = new Agentes;
+                                $agente->name = $value->agente;
+                                $agente->description = '';
+                                $agente->active = 1;
+                                $agente->save();
+                            }
+
+                            //insert city
+                            if(Cities::checkCitie($value->localidad) == FALSE && !empty($value->localidad)){
+                                $citie = new Cities;
+                                $citie->id_province = 0;
+                                $citie->name = $value->localidad;
+                                $citie->active = 1;
+                                $citie->save();
+                            }
+
+                            //insert province
+                            if(Provinces::checkProvince($value->provincia) == FALSE && !empty($value->provincia)){
+                                $prov = new Provinces;
+                                $prov->name = $value->provincia;
+                                $prov->save();
+                            }
+
+                            $ID_UsersProfile = UsersProfile::getIdForIdDni(Dni::getIdDni($value->dni));
+                            
+                            $userProfile = ($ID_UsersProfile ? UsersProfile::find($ID_UsersProfile) : new UsersProfile);
+                            $userProfile->id_user = 0;
+                            $userProfile->id_dni= Dni::getIdDni($value->dni);
+                            $userProfile->id_agente = (empty($value->agente) ? 0 : Agentes::getIdForName($value->agente));
+                            $userProfile->id_province = (empty($value->provincia) ? 0 : Provinces::getIdForName($value->provincia));
+                            $userProfile->id_city = (empty($value->localidad) ? 0 : Cities::getIdForName($value->localidad));
+                            $userProfile->type_user = $value->tipo_usuario; // tipo de usuario
+                            $userProfile->admission_date = $value->fecha_ingreso; // fecha ingreso
+                            $userProfile->address = $value->direccion;
+                            $userProfile->cp = $value->cp;
+                            $userProfile->save();
+                        }
+                      }
+                    }
+                  }  
+                  
+                return response()->json(['estado' => true]);
+                // return response()->json(['preview' => $values]);
                 } else {
                   return response()->json(['estado' => false]);
                 }
@@ -97,54 +161,55 @@ class DniController extends Controller
                   $searchDni = Dni::where('dni', '=', $value->dni)->get();
                   if(!$searchDni->count()){
 
-                        $insert = new Dni;
-                        $insert->dni = $value->dni;       
-                        $insert->name = $value->nombres;
-                        $insert->last_name = $value->apellidos;
-                        $insert->id_region = $value->id_region;
-                        $insert->save();
+                    $insert = new Dni;
+                    $insert->dni = $value->dni;       
+                    $insert->name = $value->nombres;
+                    $insert->last_name = $value->apellidos;
+                    $insert->id_region = $value->id_region;
+                    $insert->save();
 
-                        if(Dni::getIdDni($value->dni)){
+                      if(Dni::getIdDni($value->dni)){
 
-                            //insert agente
-                            if(Agentes::checkAgente($value->agente) == FALSE){
-                                $agente = new Agentes;
-                                $agente->name = $value->agente;
-                                $agente->description = '';
-                                $agente->active = 1;
-                                $agente->save();
-                            }
-
-                            //insert city
-                            if(Cities::checkCitie($value->localidad) == FALSE){
-                                $citie = new Cities;
-                                $citie->id_province = 0;
-                                $citie->name = $value->localidad;
-                                $citie->active = 1;
-                                $citie->save();
-                            }
-
-                            //insert province
-                            if(Provinces::checkProvince($value->provincia) == FALSE){
-                                $prov = new Provinces;
-                                $prov->name = $value->provincia;
-                                $prov->save();
-                            }
-
-                            $userProfile = new UsersProfile;
-                            $userProfile->id_user = 0;
-                            $userProfile->id_dni= Dni::getIdDni($value->dni);
-                            $userProfile->id_agente = Agentes::getIdForName($value->agente);
-                            $userProfile->id_province = Provinces::getIdForName($value->provincia);
-                            $userProfile->id_city = Cities::getIdForName($value->localidad);
-                            $userProfile->type_user = $value->tipo_usuario; // tipo de usuario
-                            $userProfile->admission_date = $value->fecha_ingreso; // fecha ingreso
-                            $userProfile->address = $value->direccion;
-                            $userProfile->cp = $value->cp;
-                            $userProfile->save();
+                        //insert agente
+                        if(Agentes::checkAgente($value->agente) == FALSE && !empty($value->agente)){
+                            $agente = new Agentes;
+                            $agente->name = $value->agente;
+                            $agente->description = '';
+                            $agente->active = 1;
+                            $agente->save();
                         }
-                    }
 
+                        //insert city
+                        if(Cities::checkCitie($value->localidad) == FALSE && !empty($value->localidad)){
+                            $citie = new Cities;
+                            $citie->id_province = 0;
+                            $citie->name = $value->localidad;
+                            $citie->active = 1;
+                            $citie->save();
+                        }
+
+                        //insert province
+                        if(Provinces::checkProvince($value->provincia) == FALSE && !empty($value->provincia)){
+                            $prov = new Provinces;
+                            $prov->name = $value->provincia;
+                            $prov->save();
+                        }
+
+                        $ID_UsersProfile = UsersProfile::getIdForIdDni(Dni::getIdDni($value->dni));
+
+                        $userProfile = ($ID_UsersProfile ? UsersProfile::find($ID_UsersProfile) : new UsersProfile);
+                        $userProfile->id_user = 0;
+                        $userProfile->id_dni= Dni::getIdDni($value->dni);
+                        $userProfile->id_agente = (empty($value->agente) ? 0 : Agentes::getIdForName($value->agente));
+                        $userProfile->id_province = (empty($value->provincia) ? 0 : Provinces::getIdForName($value->provincia));
+                        $userProfile->id_city = (empty($value->localidad) ? 0 : Cities::getIdForName($value->localidad));
+                        $userProfile->type_user = $value->tipo_usuario; // tipo de usuario
+                        $userProfile->admission_date = $value->fecha_ingreso; // fecha ingreso
+                        $userProfile->address = $value->direccion;
+                        $userProfile->cp = $value->cp;
+                        $userProfile->save();
+                      }
+                  }
                 }
             } else {
               $status_message = false;
