@@ -70,12 +70,11 @@ class ResultsController extends Controller
                         && !empty($request->get('month_results')) ){
                   
                   $asunto = (!empty($request->get('asunto')) ? $request->get('asunto')." (Mes ".$request->get('month_results').")" : ResultsCategories::getNameCategory($request->get('category_results'))." (Mes ".$request->get('month_results').")" );
-                  $puesto = ($value->puesto == null ? 0 : $value->puesto);
                   
                   $values[] = 
                     array(
                       'id_user' => $value->id_user,
-                      'id_region' => $value->id_region,
+                      'id_region' => ($value->id_region == null ? 0 : $value->id_region),
                       'id_category' => $request->get('category_results'),
                       'dni' => $value->dni,
                       'nombre_apellido' => $value->nombre_apellido,
@@ -83,7 +82,7 @@ class ResultsController extends Controller
                       'month' => $request->get('month_results'),
                       'puntos' => $value->puntos,
                       'desempeno' => $value->desempeno,
-                      'puesto' => $puesto);
+                      'puesto' => ($value->puesto == null ? 0 : $value->puesto) );
                 } 
               }
               
