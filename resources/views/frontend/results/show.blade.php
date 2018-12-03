@@ -59,7 +59,7 @@
     <section class="section" id="section-results-table">
         <div class="card">
           <div class="card-body">
-            <table class="table table-sm table-striped table-hover text-center">
+            <table class="table table-sm table-striped table-hover">
               <thead class="thead-dark text-uppercase">
                 <tr>
                   <th scope="col" class="head-menu-start">Region</th>
@@ -113,7 +113,7 @@ $(document).ready(function(){
                 var month = data.month;
                 
                 if(results.length === 0){
-                    alert('No se encontró Resultados para el Mes seleccionado.');
+                    alert('No se encontraron resultados para el mes seleccionado.');
                     $(".list-months-results").removeClass('font-weight-bold');
                     $(".list-months-results p").removeClass('circle-white');
                 } else {
