@@ -69,6 +69,7 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
         Route::resource('/bonus_track_categories', 'Backend\BonusTrackCategoriesController');
         Route::resource('/bonus_track', 'Backend\BonusTrackController');
         Route::resource('/users_update', 'Backend\UsersUpdateController');
+        Route::resource('/popup', 'Backend\PopUpController');
 
         //Settings
         Route::resource('/settings/politics_privacy', 'Backend\PoliticsPrivacyController');

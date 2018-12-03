@@ -138,6 +138,12 @@
                 </a>
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right">
+                <a class="nav-link" href="{{ url('/admin/popup') }}">
+                    <i class="fa fa-fw fa-image"></i>
+                    <span class="nav-link-text">PopUp</span>
+                </a>
+            </li>
+            <li class="nav-item" data-toggle="tooltip" data-placement="right">
                 <a class="nav-link" href="{{ url('/admin/preguntas-frecuentes') }}">
                     <i class="fa fa-fw fa-question-circle"></i>
                     <span class="nav-link-text">Preguntas Frecuentes</span>
