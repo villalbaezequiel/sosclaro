@@ -100,7 +100,7 @@
     <div class="form-group">
         <div class="custom-control custom-checkbox">
             <input type="checkbox" class="custom-control-input" name="voucher_product" id="voucher_product" @if($product->voucher == 1) checked="checked" @endif>
-            <label class="custom-control-label" for="voucher_product">Voucher MercadoLibre</label>
+            <label class="custom-control-label" for="voucher_product">Voucher MercadoLibre o Netshoes</label>
         </div>
     </div>
     
