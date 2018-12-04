@@ -61,6 +61,7 @@ class ProductsController extends Controller
             $product->price = $request->get('price_product');
             $product->stock = $request->get('stock_initial_product');
             $product->notification = $request->get('stock_notification_product');
+            $product->voucher = ($request->get('voucher_product') ? 1 : 0);
             $product->active = $request->get('active_product');
             $product->save();
             
@@ -151,6 +152,7 @@ class ProductsController extends Controller
             $product->price = $request->get('price_product');
             $product->stock = (!empty($request->get('stock_initial_product')) ? ($request->get('stock_product')+$request->get('stock_initial_product')) : $request->get('stock_product'));
             $product->notification = $request->get('stock_notification_product');
+            $product->voucher = ($request->get('voucher_product') ? 1 : 0);
             $product->active = $request->get('active_product');
             $product->save();
             

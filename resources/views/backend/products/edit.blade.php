@@ -98,6 +98,13 @@
     </div>
     
     <div class="form-group">
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" name="voucher_product" id="voucher_product" @if($product->voucher == 1) checked="checked" @endif>
+            <label class="custom-control-label" for="voucher_product">Voucher MercadoLibre</label>
+        </div>
+    </div>
+    
+    <div class="form-group">
         <label for="active_product">Activo:</label>
         <select class="form-control" name="active_product" required>
             <option value="1" @if($product->active == 1) selected="selected" @endif>Si</option>

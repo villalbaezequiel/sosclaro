@@ -60,6 +60,13 @@
     </div>
     
     <div class="form-group">
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" name="voucher_product" id="voucher_product">
+            <label class="custom-control-label" for="voucher_product">Voucher MercadoLibre</label>
+        </div>
+    </div>
+    
+    <div class="form-group">
         <label for="active_product">Activo:</label>
         <select class="form-control" name="active_product" required>
             <option value="1">Si</option>
