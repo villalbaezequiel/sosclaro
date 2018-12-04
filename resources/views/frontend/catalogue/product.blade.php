@@ -69,9 +69,9 @@
                         <div class="form-group">
                             <label>
                             @if(strpos($product->name, 'Netshoes') !== false)
-                                ID MercadoLibre
-                            @else
                                 ID Netshoes
+                            @else
+                                ID MercadoLibre
                             @endif
                             </label>
                             <input type="text" class="form-control" name="voucher_product" required>
