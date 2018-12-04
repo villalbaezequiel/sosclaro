@@ -64,6 +64,13 @@
                             <br>
                             <strong>{{ $product->name }}</strong>
                         </p>
+                        
+                        @if($product->voucher == 1)
+                        <div class="form-group">
+                            <label>ID MercadoLibre:</label>
+                            <input type="text" class="form-control" name="voucher_product" required>
+                        </div>
+                        @endif
                     </div>
                     <div class="modal-footer">
                         

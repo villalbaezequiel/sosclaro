@@ -48,6 +48,11 @@ class CatalogueController extends Controller
             $canje = new Exchanges;
             $canje->id_user = $request->get('id_user');
             $canje->id_product = $request->get('id_product');
+            
+            if($request->get('voucher_product')){
+            $canje->ID_ML = $request->get('voucher_product');
+            }
+            
             $canje->status = 0;
             $canje->save();
             
