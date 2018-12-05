@@ -149,6 +149,8 @@ class Report extends Model
                    
                   'products.name as canje_producto_nombre',
                   'products.codigo as canje_producto_codigo',
+                  'exchanges.ID_ML as voucher',
+                  'exchanges.ID_ML as ID_voucher',
                   'exchanges.status as canje_estado',
                   'exchanges.created_at as canje_fecha_registro')
                 ->join('users_profile', 'users_profile.id_user', '=', 'users.id')
@@ -163,6 +165,7 @@ class Report extends Model
             $user->agente = Agentes::getName($user->agente);
             $user->fecha_registro = Functions::getDate($user->fecha_registro);
             $user->activo = ($user->activo == 0 ? 'No' : 'Si');
+            $user->voucher = ($user->voucher ? 'Si' : 'No');
             $user->canje_estado = Exchanges::getStatus($user->canje_estado);
             $user->canje_fecha_registro = Functions::getDate($user->canje_fecha_registro);
 
