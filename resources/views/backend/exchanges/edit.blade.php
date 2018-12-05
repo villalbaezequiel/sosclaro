@@ -24,6 +24,19 @@
         <input type="text" class="form-control" value="{{ \App\Products::getName($exchange->id_product) }}" disabled>
     </div>
 
+    @if(!empty($exchange->ID_ML))
+    <div class="form-group">
+        <label>
+        @if(strpos(\App\Products::getName($exchange->id_product), 'Netshoes') !== false)
+            ID Netshoes
+        @else
+            ID MercadoLibre
+        @endif
+        </label>
+        <input type="text" class="form-control" value="{{ $exchange->ID_ML }}" disabled>
+    </div>
+    @endif
+
     <div class="form-group">
         <label>Estado</label>
         <select class="form-control" name="exchange_status" required>
