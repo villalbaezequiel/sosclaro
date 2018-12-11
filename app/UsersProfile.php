@@ -71,4 +71,41 @@ class UsersProfile extends Model
       }
     }
     
+    static public function getTypeUser($id_user){
+      $type_user = UsersProfile::where('id_user', '=', $id_user)->get();
+      if(!empty($type_user[0])){
+            return $type_user[0]->type_user;
+      }
+    }
+    
+    static public function getListUsersByTypeUser($type_user, $id_user){
+        
+      $listUsers = array();        
+      if($type_user == 'SUPERVISOR' || $type_user == 'supervisor' || $type_user == 'Supervisor'){
+        
+        $id_agente = UsersProfile::getIdAgente($id_user);
+        $queryUsersByRole = UsersProfile::where('id_agente', '=', $id_agente)->where('type_user', 'like', "%vendedor%")->get()->toArray();
+        
+        foreach($queryUsersByRole as $value){
+          if($value['id_user'] != 0){
+            array_push($listUsers, $value['id_user']);
+          }
+        }
+      }
+        
+      if($type_user == 'GERENTE' || $type_user == 'gerente' || $type_user == 'Gerente'){
+        
+        $id_region = UsersProfile::getIdRegion($id_user);
+        $queryUsersByRole = UsersProfile::where('id_region', '=', $id_region)->get()->toArray();
+        
+        foreach($queryUsersByRole as $value){
+          if($value['id_user'] != 0){
+            array_push($listUsers, $value['id_user']);
+          }
+        }
+      }
+      
+      return $listUsers;
+    }
+    
 }

@@ -57,6 +57,22 @@
                                 </select>
                             </div>
                         </div>
+                        
+                        @if($type_user != '' && $type_user != 'VENDEDOR' && $type_user != 'Vendedor' && $type_user != 'vendedor')
+                        <div class="col col-md-6">
+                            <div class="form-group">
+                                <label for="selectDesempenoUserRole">Usuarios Relacionados</label>
+                                <select class="form-control" id="selectDesempenoUserRole">
+                                    <option value="0">Seleccionar...</option>
+                                  @foreach($list_users as $key => $val)
+                                    <option value="{{ $val }}">{{ \App\Dni::getName($val) }}</option>
+                                  @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        @else
+                        <input type="hidden" name="selectDesempenoUserRole" id="selectDesempenoUserRole" value="0" />
+                        @endif
                     </form>
                     <!-- Esto va a estar más adelante pero dinámico (tienen que aprobar el presupuesto)-->
 <!--                                <p class="text-center">
@@ -97,9 +113,11 @@ $(document).ready(function () {
     //history perfomance
     $("#selectDesempenoMes").change(function(){
         
+        var userCheck = $("#selectDesempenoUserRole").val();
+                
         $.ajax({
             type: 'GET',
-            url: '/desempeno_for_month/'+$(this).val(),
+            url: '/desempeno_for_month/'+$(this).val()+'/'+userCheck,
             dataType: 'json',
             success: function(data){
               var desempenos_for_month = data.desempenos_for_month;
@@ -120,6 +138,34 @@ $(document).ready(function () {
         });
     
     });
+    
+    $("#selectDesempenoUserRole").change(function(){
+    
+        var month = $("#selectDesempenoMes").val();
+                
+        $.ajax({
+            type: 'GET',
+            url: '/desempeno_for_month/'+month+'/'+$(this).val(),
+            dataType: 'json',
+            success: function(data){
+              var desempenos_for_month = data.desempenos_for_month;
+                
+              $("#content_desempeno").empty();
+              $.each(desempenos_for_month, function(k, v){
+                $("#content_desempeno").append('<tr><td>'+v.created_at+'</td><td>'+v.asunto+'</td><td>'+v.puntos+'</td></tr>');
+              });
+              if(desempenos_for_month.length === 0){
+                $("#empty_content_desempeno").removeClass('hidden');
+              } else {
+                $("#empty_content_desempeno").addClass('hidden');
+              }
+            },
+            error: function(xhr, status){
+                console.log('Error: '+xhr);
+            }
+        });
+    });
+    
 });
     
     function showGraph(){

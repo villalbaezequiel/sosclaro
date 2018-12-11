@@ -12,6 +12,7 @@ use App\UsersGanadores;
 use App\Dni;
 use App\Functions;
 use App\DesempenoName;
+use App\UsersProfile;
 
 class DesempenoController extends Controller
 {
@@ -41,9 +42,15 @@ class DesempenoController extends Controller
         'total' => $total
       );
       
+      // check type user
+       $type_user = UsersProfile::getTypeUser(Auth::user()->id);
+       $list_users = UsersProfile::getListUsersByTypeUser($type_user, Auth::user()->id);
+       
       return view('frontend.desempeno', [
         'all_desempeno' => $allDesempeno,
-        'ultimo_desempeno' => $last_perfomance
+        'ultimo_desempeno' => $last_perfomance,
+        'type_user' => $type_user,
+        'list_users' => $list_users
       ]);
     }
     
@@ -69,11 +76,17 @@ class DesempenoController extends Controller
       return response()->json(['allDesempeno' => $data]);
     }
     
-    public function desempenosForMonth($month)
-    {  
+    public function desempenosForMonth($month, $id_user)
+    {
+      if($id_user == 0){
+        $user = Auth::user()->id;
+      } else {
+        $user = $id_user;
+      }
+        
       $desempenosForMonth = DB::table('desempeno')
                             ->select('created_at', 'asunto', 'puntos')
-                            ->where('id_user', '=', Auth::user()->id)
+                            ->where('id_user', '=', $user)
                             ->whereMonth('created_at', '=', $month)
                             ->orderBy('id', 'DESC')
                             ->get();
