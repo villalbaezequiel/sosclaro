@@ -96,7 +96,7 @@ class UsersProfile extends Model
       if($type_user == 'GERENTE' || $type_user == 'gerente' || $type_user == 'Gerente'){
         
         $id_region = UsersProfile::getIdRegion($id_user);
-        $queryUsersByRole = UsersProfile::where('id_region', '=', $id_region)->get()->toArray();
+        $queryUsersByRole = UsersProfile::where('id_region', '=', $id_region)->where('type_user', 'not like', "%gerente%")->get()->toArray();
         
         foreach($queryUsersByRole as $value){
           if($value['id_user'] != 0){
