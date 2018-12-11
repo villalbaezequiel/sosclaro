@@ -58,12 +58,18 @@ class DesempenoController extends Controller
         return response()->json(['desempenos' => UsersGanadores::where('especification', '=', $name)->orderBy('puntos', 'DESC')->get()]);
     }
     
-    public function grafico()
+    public function grafico($id_user)
     {    
       $data = array();
+      if($id_user == 0){
+        $user = Auth::user()->id;
+      } else {
+        $user = $id_user;
+      }
+      
       foreach(Functions::getMonths() as $key => $value){
         $month = DB::table('desempeno')
-                    ->where('id_user', '=', Auth::user()->id)
+                    ->where('id_user', '=', $user)
                     ->whereMonth('created_at', '=', $key)
                     ->orderBy('id', 'DESC')
                     ->get(); 

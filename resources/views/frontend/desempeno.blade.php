@@ -108,7 +108,7 @@
 @section('javascript')
 <script>
 $(document).ready(function () {
-    showGraph();
+    showGraph($("#selectDesempenoUserRole").val());
     
     //history perfomance
     $("#selectDesempenoMes").change(function(){
@@ -141,6 +141,8 @@ $(document).ready(function () {
     
     $("#selectDesempenoUserRole").change(function(){
     
+        showGraph($(this).val());
+    
         var month = $("#selectDesempenoMes").val();
                 
         $.ajax({
@@ -168,10 +170,13 @@ $(document).ready(function () {
     
 });
     
-    function showGraph(){
+    function showGraph(id_user){
+    
+        
+    
         $.ajax({
             type: 'GET',
-            url: '/desempeno_grafico',
+            url: '/desempeno_grafico/'+id_user,
             dataType: 'json',
             success: function(data){
                 var allDesempeno = data.allDesempeno;
