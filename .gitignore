@@ -10,4 +10,3 @@ Homestead.json
 .DS_Store
 .vscode/
 /public/exports
-/bootstrap/cache/ 
