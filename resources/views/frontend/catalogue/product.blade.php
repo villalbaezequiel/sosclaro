@@ -24,7 +24,7 @@
                             {{ $product->description }}
                         </p>
                     </div>
-                    
+
                     <div class="card-body">
                     @if(\App\Dni::getPuntos(Auth::user()->id) >= $product->price)
                       @if($product->stock == 0)
@@ -36,7 +36,7 @@
                       <i>No tienes puntos suficientes para canjear este Producto.</i>
                     @endif
                     </div>
-                    
+
                     <div class="card-body">
                         <h6>Legales</h6>
                         <p>
@@ -64,14 +64,14 @@
                             <br>
                             <strong>{{ $product->name }}</strong>
                         </p>
-                        
+
                         @if($product->voucher == 1)
                         <div class="form-group">
                             <label>
                             @if(strpos($product->name, 'Netshoes') !== false)
-                                ID Netshoes
+                                Email de su Cuenta de Netshoes
                             @else
-                                ID MercadoLibre
+                                Email de su Cuenta de MercadoLibre
                             @endif
                             </label>
                             <input type="text" class="form-control" name="voucher_product" required>
@@ -79,12 +79,12 @@
                         @endif
                     </div>
                     <div class="modal-footer">
-                        
+
                         <input type="hidden" name="id_product" value="{{ $product->id }}">
                         <input type="hidden" name="product_puntos" value="{{ $product->price }}">
                         <input type="hidden" name="id_dni" value="{{ \App\Dni::getIdUser(Auth::user()->id) }}">
                         <input type="hidden" name="id_user" value="{{ Auth::user()->id }}">
-                        
+
                         <button type="button" class="btn btn-outline" data-dismiss="modal">Cancelar</button>
                         <input class="btn" type="submit" value="Confirmar" />
                     </div>
