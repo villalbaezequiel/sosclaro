@@ -16,53 +16,53 @@ use App\Dni;
 
 class CatalogueController extends Controller
 {
-    
+
     public function index() {
         return view('frontend.catalogue.index', [
             'products' => Products::where('active', '=', 1)->get()
         ]);
     }
-    
+
     public function productShow($id) {
         return view('frontend.catalogue.product', [
             'product' => Products::find($id)
         ]);
     }
-    
+
     public function productExchange(Request $request){
-        
+
        $message;
         try {
-            
+
             //actualizo stock del producto
             $product = Products::find($request->get('id_product'));
             $product->stock = ($product->stock - 1);
             $product->save();
-            
+
             //actualizo puntos del usuarios
             $dni = Dni::find($request->get('id_dni'));
             $dni->puntos = ($dni->puntos - $request->get('product_puntos'));
             $dni->save();
-            
+
             //agrego el canje a table Exchange
             $canje = new Exchanges;
             $canje->id_user = $request->get('id_user');
             $canje->id_product = $request->get('id_product');
-            
+
             if($request->get('voucher_product')){
             $canje->ID_ML = $request->get('voucher_product');
             }
-            
+
             $canje->status = 0;
             $canje->save();
-            
-            // send mail to Admin new Canje
-            $user = User::find($request->get('id_user'));
-            
+
+            $user = User::find($request->get('id_user')); // informacion del Usuario/Vendedor que proceso el Canje
+
+            // --- Send Mail to Admin new Canje ---
             // List Emails sending
             $mailTo = array('email' => 'marketingoperativo@claro.com.ar', 'name' => 'Marketing Operativo');
             $mailCc = array('email' => 'lucas.marozzi@claro.com.ar', 'name' => 'Lucas Marozzi');
-            
+
             $callback = function ($m) use ($mailTo, $mailCc) {
               $m->from('no-reply@mejoresvendedores.com.ar', 'Admin MejoresVendedores');
               $m->subject('¡Nuevo Canje!');
@@ -70,7 +70,17 @@ class CatalogueController extends Controller
               $m->cc($mailCc['email'], $mailCc['name']);
             };
             Functions::sendMail('emails.canje', ['url' => config('app.url'), 'canje' => $canje, 'product' => $product, 'dni' => $dni, 'user' => $user], $callback);
-            
+
+
+            // --- Envio Mail al Usuario/Vendedor que proceso el Canje ---
+            $callbackUserVendedor = function ($m) use ($user, $dni) {
+              $m->from('no-reply@mejoresvendedores.com.ar', 'MejoresVendedores');
+              $m->subject('¡Nuevo Canje!');
+              $m->to($user->email, $dni->name.' '.$dni->last_name);
+            };
+            Functions::sendMail('emails.canje_vendedor', ['url' => config('app.url'), 'product' => $product], $callbackUserVendedor);
+
+
             // send mail alerta de STOCK de Producto
             if($product->stock <= $product->notification){
               $callbackASP = function ($m) use ($mailTo, $mailCc) {
@@ -79,13 +89,13 @@ class CatalogueController extends Controller
                 $m->to($mailTo['email'], $mailTo['name']);
                 $m->cc($mailCc['email'], $mailCc['name']);
               };
-              Functions::sendMail('emails.stock_product', ['url' => config('app.url'), 'product' => $product], $callbackASP);   
+              Functions::sendMail('emails.stock_product', ['url' => config('app.url'), 'product' => $product], $callbackASP);
             }
-            
+
             $message = "Felicitaciones!";
 
             return redirect('/catalogo/producto/success')->with('message', $message);
-            
+
         } catch(\Exception $e) {
 
             if(\Config::get('app.debug'))
@@ -101,9 +111,9 @@ class CatalogueController extends Controller
             return \Response::json($respuesta);
 	}
     }
-    
+
     public function productSuccess() {
         return view('frontend.catalogue.success');
     }
-    
+
 }
