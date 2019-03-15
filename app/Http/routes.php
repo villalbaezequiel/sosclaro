@@ -15,7 +15,7 @@ Route::auth();
 
 // ------------- BACKEND -------------
 Route::group(['middleware' => ['auth', 'admin']], function () {
-    
+
     Route::group(['prefix' => 'admin'], function() {
 
         //Route::get('/', 'Backend\AdminController@index');
@@ -28,7 +28,7 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
         Route::get('/locations/getProvinces/{id}', 'Backend\LocationsController@getProvinces');
         Route::get('/locations/getCities/{id}', 'Backend\LocationsController@getCities');
 
-        //Export 
+        //Export
         Route::get('/products/export', 'Backend\ProductsController@export');
         Route::get('/categories/export', 'Backend\CategoriesController@export');
         Route::get('/guests/users/export', 'Backend\GuestUsersController@export');
@@ -39,11 +39,11 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
         Route::get('/users_update/export', 'Backend\UsersUpdateController@export');
 
         //Import
-        Route::get('/results/import/{values}', 'Backend\ResultsController@import');     
-        Route::get('/bonus_track/import/{values}', 'Backend\BonusTrackController@import');     
-        Route::get('/desempeno/import/{values}', 'Backend\UsersGanadoresController@import');     
+        Route::get('/results/import/{values}', 'Backend\ResultsController@import');
+        Route::get('/bonus_track/import/{values}', 'Backend\BonusTrackController@import');
+        Route::get('/desempeno/import/{values}', 'Backend\UsersGanadoresController@import');
         Route::get('/dni/import/{values}', 'Backend\DniController@import');
-        
+
         //ABM
         Route::resource('/users', 'Backend\UsersController');
         Route::resource('/desempeno', 'Backend\UsersGanadoresController');
@@ -78,9 +78,9 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
         Route::resource('/settings/emails', 'Backend\EmailsController');
         Route::resource('/settings/api', 'Backend\ApiController');
     });
-    
-});    
-    
+
+});
+
 // ------------- FRONTEND -------------
 Route::get('/home',function(){
     return redirect('/');
@@ -98,16 +98,16 @@ Route::get('/terminos', function(){
     return view('frontend.terminos');
 });
 
-Route::group(['middleware' => 'auth'], function () {    
+Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/dashboard',function(){
       return redirect('/inicio');
     });
-    
+
     //auth
     Route::get('/validar-dni', 'Frontend\AuthController@showValidarDni');
     Route::post('/validar-dni', 'Frontend\AuthController@updateValidarDni');
-    
+
     //user
     Route::get('/usuario/mi-cuenta', 'Frontend\UserController@profileEdit');
     Route::get('/usuario/historial', 'Frontend\UserController@history');
@@ -117,15 +117,15 @@ Route::group(['middleware' => 'auth'], function () {
     //user POST
     Route::post('/usuario/mi-cuenta', 'Frontend\UserController@profileUpdate');
     Route::post('/usuario/canjes/{id}', 'Frontend\UserController@updateExchanges');
-    
+
     //catalogue
     Route::get('/catalogo', 'Frontend\CatalogueController@index');
     Route::get('/catalogo/producto/success', 'Frontend\CatalogueController@productSuccess');
-    Route::get('/catalogo/producto/{id}', 'Frontend\CatalogueController@productShow');    
-    
+    Route::get('/catalogo/producto/{id}', 'Frontend\CatalogueController@productShow');
+
     //catalogue POST
     Route::post('/catalogo/producto/{id}', 'Frontend\CatalogueController@productExchange');
-    
+
     //desempeño / mis-logros
     Route::get('/mis-logros', 'Frontend\DesempenoController@index');
 
@@ -146,15 +146,15 @@ Route::group(['middleware' => 'auth'], function () {
     //Consejos
     Route::get('/novedades', 'Frontend\TipsController@index');
     Route::get('/novedades/{id}', 'Frontend\TipsController@show');
-    
+
     //qué es
     Route::get('/que-es', function(){
         return view('frontend.quees');
     });
-    
+
     //preguntas frecuentes
     Route::get('/preguntas-frecuentes', 'Frontend\PreguntasFrecuentesController@index');
-    
+
     //ajax
     Route::get('/desempeno_name/{name}', 'Frontend\DesempenoController@desempenosForName');
     Route::get('/desempeno_grafico/{id_user}', 'Frontend\DesempenoController@grafico');
@@ -167,58 +167,60 @@ Route::group(['middleware' => 'auth'], function () {
         return view('frontend.contactanos');
     });
 
+    Route::get('/estadisticas', 'Frontend\StatisticsController@index');
+
 });
 
 
 //API
 Route::group(['prefix' => 'api'], function() {
-    
+
     //USER
 
     //auth
     Route::get('/user/login', 'Api\UserApiController@login');
     Route::get('/user/logout', 'Api\UserApiController@logout');
-    
+
     //alta modificacion
     Route::get('/user/create', 'Api\UserApiController@store');
     Route::get('/user/edit/{id_user}', 'Api\UserApiController@update');
-    
+
     //info user
-     
+
     // user show, con estos datos el form se envia a /api/user/edit para ser editado
-    Route::get('/user/mi-cuenta/{id_user}', 'Api\UserApiController@miCuenta');//edit -> update    
-    Route::get('/user/historial/{id_user}', 'Api\UserApiController@history'); 
+    Route::get('/user/mi-cuenta/{id_user}', 'Api\UserApiController@miCuenta');//edit -> update
+    Route::get('/user/historial/{id_user}', 'Api\UserApiController@history');
     Route::get('/user/canjes/{id_user}', 'Api\UserApiController@allCanjes');
     Route::get('/user/canjes/single/{id_canje}', 'Api\UserApiController@singleCanje');
     Route::get('/user/canjes/single/confirmar/{id_canje}', 'Api\UserApiController@singleCanjeConfirmar');
-    
+
     // home
    Route::get('/home/banners', 'Api\HomeApiController@index');
-    
+
     // Encuestas
     Route::get('/user/encuestas/{id_user}', 'Api\GuestsApiController@allGuests');
     Route::get('/user/encuestas/{id_guest}/show', 'Api\GuestsApiController@showGuest');
     Route::get('/user/encuestas/{id_user}/{id_guest}/store', 'Api\GuestsApiController@storeGuest');
- 
-   // Catalogo 
+
+   // Catalogo
     Route::get('/catalogo', 'Api\CatalogueApiController@index');
-    Route::get('/catalogo/producto/{id_product}', 'Api\CatalogueApiController@productShow');   
+    Route::get('/catalogo/producto/{id_product}', 'Api\CatalogueApiController@productShow');
     Route::get('/catalogo/producto/{id_user}/{id_product}/store', 'Api\CatalogueApiController@productExchange');
-    
+
     // Novedades
     Route::get('/tips', 'Api\TipsApiController@allTips');
     Route::get('/tips/{id_tips}', 'Api\TipsApiController@showTips');
-    
+
     // Desempeno
     Route::get('/desempeno/{id_user}', 'Api\DesempenoApiController@index');
 
     // Resultados
     Route::get('/resultados/{id_user}', 'Api\ResultadosApiController@index');
     Route::get('/resultados/posicion_region/{id_region}/{id_user?}', 'Api\ResultadosApiController@ajax');
-    
+
     //configuracion api version
      Route::get('/settings/api', 'Backend\ApiController@endpointVersion');
-    
+
 });
 
 
@@ -227,11 +229,11 @@ Route::get('/updateRegion', function(){
             ->select('id_user', 'id_region')
             ->where('id_region', '!=', 0)
             ->get();
-    
+
     foreach($usersProfiles as $user){
         \Illuminate\Support\Facades\DB::table('dni')
             ->where('id_user', $user->id_user)
             ->update(['id_region' => $user->id_region]);
     }
-    
+
 });

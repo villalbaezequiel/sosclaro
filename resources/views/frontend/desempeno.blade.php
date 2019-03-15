@@ -10,7 +10,7 @@
         <article class="section-content" style="margin-bottom: -3.5rem;">
             <div class="card text-center">
                 <div class="card-body background-black-color-white">
-                    <div class="row card-text">  
+                    <div class="row card-text">
                         <div class="col-md-4">
                           @foreach(\App\Functions::getMonths() as $key => $value)
                             @if($key == date('n'))
@@ -19,7 +19,7 @@
                           @endforeach
                           <h5>{{ date('Y') }}</h5>
                         </div>
-                        <div class="col-md-4 background-red"> 
+                        <div class="col-md-4 background-red">
                           <h5 class="nav-month-result">{{ $ultimo_desempeno['puntos'] }}</h5>
                           <div class="nav-month-description"><strong>PUNTOS</strong></div>
                         </div>
@@ -57,7 +57,7 @@
                                 </select>
                             </div>
                         </div>
-                        
+
                         @if($type_user != '' && $type_user != 'VENDEDOR' && $type_user != 'Vendedor' && $type_user != 'vendedor')
                         <div class="col col-md-6">
                             <div class="form-group">
@@ -109,19 +109,19 @@
 <script>
 $(document).ready(function () {
     showGraph($("#selectDesempenoUserRole").val());
-    
+
     //history perfomance
     $("#selectDesempenoMes").change(function(){
-        
+
         var userCheck = $("#selectDesempenoUserRole").val();
-                
+
         $.ajax({
             type: 'GET',
             url: '/desempeno_for_month/'+$(this).val()+'/'+userCheck,
             dataType: 'json',
             success: function(data){
               var desempenos_for_month = data.desempenos_for_month;
-                
+
               $("#content_desempeno").empty();
               $.each(desempenos_for_month, function(k, v){
                 $("#content_desempeno").append('<tr><td>'+v.created_at+'</td><td>'+v.asunto+'</td><td>'+v.puntos+'</td></tr>');
@@ -136,22 +136,22 @@ $(document).ready(function () {
                 console.log('Error: '+xhr);
             }
         });
-    
+
     });
-    
+
     $("#selectDesempenoUserRole").change(function(){
-    
+
         showGraph($(this).val());
-    
+
         var month = $("#selectDesempenoMes").val();
-                
+
         $.ajax({
             type: 'GET',
             url: '/desempeno_for_month/'+month+'/'+$(this).val(),
             dataType: 'json',
             success: function(data){
               var desempenos_for_month = data.desempenos_for_month;
-                
+
               $("#content_desempeno").empty();
               $.each(desempenos_for_month, function(k, v){
                 $("#content_desempeno").append('<tr><td>'+v.created_at+'</td><td>'+v.asunto+'</td><td>'+v.puntos+'</td></tr>');
@@ -167,13 +167,13 @@ $(document).ready(function () {
             }
         });
     });
-    
+
 });
-    
+
     function showGraph(id_user){
-    
-        
-    
+
+
+
         $.ajax({
             type: 'GET',
             url: '/desempeno_grafico/'+id_user,
@@ -187,7 +187,7 @@ $(document).ready(function () {
                   labels.push(key);
                   puntos.push(value);
                 });
-                
+
                 var historialUsuario = {
                     labels: labels,
                     datasets: [
@@ -201,7 +201,7 @@ $(document).ready(function () {
                         }
                     ]
                 };
- 
+
                     var graphTarget = $("#graphCanvas");
 
                     var myChart = new Chart(graphTarget, {
@@ -219,7 +219,7 @@ $(document).ready(function () {
                           }
                         }
                     });
-                    
+
             },
             error: function(xhr, status){
                 console.log('Error: '+xhr);
@@ -229,7 +229,7 @@ $(document).ready(function () {
 </script>
 <style>
 .card {
-  border: 1px solid #000!important;        
+  border: 1px solid #000!important;
 }
 .background-red {
   background-color: red;
