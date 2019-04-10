@@ -77,6 +77,10 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
         Route::resource('/settings/social_networks', 'Backend\SocialNetworksController');
         Route::resource('/settings/emails', 'Backend\EmailsController');
         Route::resource('/settings/api', 'Backend\ApiController');
+
+        // bugs
+        Route::get('/dni_fix_duplicates/create', 'Backend\FixBugsController@createDuplicates')->name('admin.dni_fix_duplicates.create');
+        Route::post('/dni_fix_duplicates/store', 'Backend\FixBugsController@storeDuplicates')->name('admin.dni_fix_duplicates.store');
     });
 
 });
