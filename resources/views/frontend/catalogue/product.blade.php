@@ -27,7 +27,7 @@
 
                     <div class="card-body">
                     @if(\App\Dni::getPuntos(Auth::user()->id) >= $product->price)
-                      @if($product->stock == 0)
+                      @if($product->stock <= 0)
                         <i>Producto Sin Stock.</i>
                       @else
                         <button class="btn" type="button" data-toggle="modal" data-target="#{{ $product->id }}">Canjear</button>
@@ -49,7 +49,7 @@
         <!-- Modal-->
         <div class="modal fade" id="{{ $product->id }}" tabindex="-1" role="dialog" aria-labelledby="modalCanjeLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
-                <form action="{{ url('catalogo/producto') }}/{{ $product->id }}" method="POST" class="modal-content">
+                <form action="{{ url('catalogo/producto') }}/{{ $product->id }}" method="POST" class="modal-content" id="change-product-catalogo">
                     {{ csrf_field() }}
                     <div class="modal-header">
                         <div class="modal-title text-center">Confirmar Canje</div>
@@ -71,7 +71,7 @@
                             @if(strpos($product->name, 'Netshoes') !== false)
                                 Email de su Cuenta de Netshoes
                             @else
-                                Email de su Cuenta de MercadoLibre
+                                Nickname de su Cuenta de MercadoLibre
                             @endif
                             </label>
                             <input type="text" class="form-control" name="voucher_product" required>
