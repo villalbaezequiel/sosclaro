@@ -27,7 +27,7 @@ $(document).ready(function(){
             $.ajax({
                type: "POST",
                url: $("#change-product-catalogo").attr('action'),
-               data: $("#change-product-catalogo").serialize(),
+               data: { _method: 'POST', $("#change-product-catalogo").serialize() },
                success: function(data)
                {
                  window.location.href = window.origin+'/catalogo/producto/success_ml';
