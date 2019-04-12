@@ -23,7 +23,7 @@ $(document).ready(function(){
             $("input[name=id_ml]").val(seller.id);
             $("input[name=profile_ml]").val(profileUser);
 
-            $.ajaxSetup({ headers: {'X-CSRF-TOKEN': '<?= csrf_token() ?>'} });
+            $.ajaxSetup({ headers: {'X-CSRF-TOKEN': $("input[name=_token]").val()} });
             $.ajax({
                type: "POST",
                url: $("#change-product-catalogo").attr('action'),
