@@ -34,6 +34,80 @@ class CatalogueController extends Controller
        $message;
         try {
 
+            if($request->get('data')){
+
+              $data = $request->get('data');
+
+              //actualizo stock del producto
+              $product = Products::find($data['id_product']);
+              $product->stock = ($product->stock - 1);
+              $product->save();
+
+              //actualizo puntos del usuarios
+              $dni = Dni::find($data['id_dni']);
+              $dni->puntos = ($dni->puntos - $data['product_puntos']);
+              $dni->save();
+
+              //agrego el canje a table Exchange
+              $canje = new Exchanges;
+              $canje->id_user = $data['id_user'];
+              $canje->id_product = $data['id_product'];
+
+              if($data['nickname_ml']){
+              $canje->nickname_ml = $data['nickname_ml'];
+              }
+
+              if($data['id_ml']){
+              $canje->ID_ML = $data['id_ml'];
+              }
+
+              if($data['profile_ml']){
+              $canje->profile_ml = $data['profile_ml'];
+              }
+
+              $canje->status = 0;
+              $canje->save();
+
+              $user = User::find($data['id_user']); // informacion del Usuario/Vendedor que proceso el Canje
+
+              // --- Send Mail to Admin new Canje ---
+              // List Emails sending
+              $mailTo = array('email' => 'marketingoperativo@claro.com.ar', 'name' => 'Marketing Operativo');
+              $mailCc = array('email' => 'lucas.marozzi@claro.com.ar', 'name' => 'Lucas Marozzi');
+
+              $callback = function ($m) use ($mailTo, $mailCc) {
+                $m->from('no-reply@mejoresvendedores.com.ar', 'Admin MejoresVendedores');
+                $m->subject('¡Nuevo Canje!');
+                $m->to($mailTo['email'], $mailTo['name']);
+                $m->cc($mailCc['email'], $mailCc['name']);
+              };
+              Functions::sendMail('emails.canje', ['url' => config('app.url'), 'canje' => $canje, 'product' => $product, 'dni' => $dni, 'user' => $user], $callback);
+
+
+              // --- Envio Mail al Usuario/Vendedor que proceso el Canje ---
+              $callbackUserVendedor = function ($m) use ($user, $dni) {
+                $m->from('no-reply@mejoresvendedores.com.ar', 'MejoresVendedores');
+                $m->subject('¡Nuevo Canje!');
+                $m->to($user->email, $dni->name.' '.$dni->last_name);
+              };
+              Functions::sendMail('emails.canje_vendedor', ['url' => config('app.url'), 'product' => $product], $callbackUserVendedor);
+
+
+              // send mail alerta de STOCK de Producto
+              if($product->stock <= $product->notification){
+                $callbackASP = function ($m) use ($mailTo, $mailCc) {
+                  $m->from('no-reply@mejoresvendedores.com.ar', 'Admin MejoresVendedores');
+                  $m->subject('¡Alerta de Stock de Producto!');
+                  $m->to($mailTo['email'], $mailTo['name']);
+                  $m->cc($mailCc['email'], $mailCc['name']);
+                };
+                Functions::sendMail('emails.stock_product', ['url' => config('app.url'), 'product' => $product], $callbackASP);
+              }
+
+              return \Response::json(['status' => 1]);
+
+            } else {
+
             //actualizo stock del producto
             $product = Products::find($request->get('id_product'));
             $product->stock = ($product->stock - 1);
@@ -103,6 +177,8 @@ class CatalogueController extends Controller
             $message = "Felicitaciones!";
 
             return redirect('/catalogo/producto/success')->with('message', $message);
+
+          }
 
         } catch(\Exception $e) {
 

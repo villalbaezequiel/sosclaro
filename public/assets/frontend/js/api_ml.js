@@ -1,3 +1,14 @@
+function getFormData($form){
+    var unindexed_array = $form.serializeArray();
+    var indexed_array = {};
+
+    $.map(unindexed_array, function(n, i){
+        indexed_array[n['name']] = n['value'];
+    });
+
+    return indexed_array;
+}
+
 $(document).ready(function(){
 
   if($("input[name=is_voucher]").length != 0){
@@ -27,10 +38,13 @@ $(document).ready(function(){
             $.ajax({
                type: "POST",
                url: $("#change-product-catalogo").attr('action'),
-               data: { _method: 'POST', data: $("#change-product-catalogo").serialize() },
+               data: { _method: 'POST', data: getFormData($("#change-product-catalogo")) },
+               dataType: "json",
                success: function(data)
                {
-                 window.location.href = window.origin+'/catalogo/producto/success_ml';
+                 if(data.status == 1){
+                   window.location.href = window.origin+'/catalogo/producto/success_ml';
+                 }
                }
            });
 
