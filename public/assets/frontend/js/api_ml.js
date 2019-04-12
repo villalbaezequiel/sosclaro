@@ -45,6 +45,7 @@ $(document).ready(function(){
               confirmButtonText: 'Aceptar'
             });
             console.log(er);
+            return false;
           });
 
 
@@ -74,6 +75,7 @@ $(document).ready(function(){
           confirmButtonText: 'Aceptar'
         });
         console.log(error);
+        return false;
       });
 
     });
