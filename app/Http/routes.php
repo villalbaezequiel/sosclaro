@@ -125,6 +125,7 @@ Route::group(['middleware' => 'auth'], function () {
     //catalogue
     Route::get('/catalogo', 'Frontend\CatalogueController@index');
     Route::get('/catalogo/producto/success', 'Frontend\CatalogueController@productSuccess');
+    Route::get('/catalogo/producto/success_ml', 'Frontend\CatalogueController@productSuccessMl');
     Route::get('/catalogo/producto/{id}', 'Frontend\CatalogueController@productShow');
 
     //catalogue POST

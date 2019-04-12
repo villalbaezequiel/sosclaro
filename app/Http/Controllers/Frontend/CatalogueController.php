@@ -124,4 +124,8 @@ class CatalogueController extends Controller
         return view('frontend.catalogue.success');
     }
 
+    public function productSuccessMl() {
+        return view('frontend.catalogue.success_ml');
+    }
+
 }

@@ -76,6 +76,9 @@
                             </label>
                             <input type="text" class="form-control" name="voucher_product" required>
                         </div>
+
+                          <input type="hidden" name="is_voucher" value="1">
+
                         @endif
                     </div>
                     <div class="modal-footer">
@@ -107,5 +110,5 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.33.1/sweetalert2.min.js"></script>
 
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<script src="{{ asset('assets/frontend/js/api_ml.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/frontend/js/api_ml.js') }}"></script>
 @endsection
