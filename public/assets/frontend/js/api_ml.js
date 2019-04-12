@@ -20,7 +20,7 @@ $(document).ready(function(){
           $("input[name=id_ml]").val(seller.id);
           $("input[name=profile_ml]").val(profileUser);
 
-          document.getElementById("change-product-catalogo").submit()
+          document.getElementById("change-product-catalogo").submit();
 
         })
         .catch(function (er) {
