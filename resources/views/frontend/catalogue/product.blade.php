@@ -85,6 +85,10 @@
                         <input type="hidden" name="id_dni" value="{{ \App\Dni::getIdUser(Auth::user()->id) }}">
                         <input type="hidden" name="id_user" value="{{ Auth::user()->id }}">
 
+                        <input type="hidden" name="nickname_ml" value="">
+                        <input type="hidden" name="id_ml" value="">
+                        <input type="hidden" name="profile_ml" value="">
+
                         <button type="button" class="btn btn-outline" data-dismiss="modal">Cancelar</button>
                         <input class="btn" type="submit" value="Confirmar" />
                     </div>
@@ -96,4 +100,13 @@
         </div>
     </section>
 </main>
+@endsection
+
+@section('javascript')
+<link href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.33.1/sweetalert2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.33.1/sweetalert2.min.js"></script>
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="http://static.mlstatic.com/org-img/sdk/mercadolibre-1.0.4.js"></script>
+<script type="text/javascript" src="{{ asset('assets/frontend/js/api_ml.js') }}"></script>
 @endsection

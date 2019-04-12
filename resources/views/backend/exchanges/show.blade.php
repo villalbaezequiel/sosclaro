@@ -3,22 +3,22 @@
 @section('title', "Canjes / Ver")
 @section('content')
 {!! Form::open() !!}
-    
+
     <div class="form-group">
         <label for="name_indicador">Usuario DNI</label>
         <input type="text" class="form-control" value="{{ \App\Dni::getDni($exchange->id_user) }}" disabled>
     </div>
-    
+
     <div class="form-group">
         <label for="name_indicador">Usuario</label>
         <input type="text" class="form-control" value="{{ \App\Dni::getName($exchange->id_user) }}" disabled>
     </div>
-    
+
     <div class="form-group">
         <label for="name_indicador">Codigo de Producto</label>
         <input type="text" class="form-control" value="{{ \App\Products::getCodigo($exchange->id_product) }}" disabled>
     </div>
-    
+
     <div class="form-group">
         <label for="name_indicador">Nombre Producto</label>
         <input type="text" class="form-control" value="{{ \App\Products::getName($exchange->id_product) }}" disabled>
@@ -36,7 +36,21 @@
         <input type="text" class="form-control" value="{{ $exchange->ID_ML }}" disabled>
     </div>
     @endif
-    
+
+    @if(!empty($exchange->nickname_ml))
+      <div class="form-group">
+          <label>Nickname MercadoLibre</label>
+          <input type="text" class="form-control" value="{{ $exchange->nickname_ml }}" disabled>
+      </div>
+    @endif
+
+    @if(!empty($exchange->profile_ml))
+      <div class="form-group">
+          <label>Perfil Usuario MercadoLibre</label>
+          <input type="text" class="form-control" value="{{ $exchange->profile_ml }}" disabled>
+      </div>
+    @endif
+
     <div class="form-group">
         <label>Estado</label>
         <select class="form-control" disabled>

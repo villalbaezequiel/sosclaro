@@ -49,8 +49,16 @@ class CatalogueController extends Controller
             $canje->id_user = $request->get('id_user');
             $canje->id_product = $request->get('id_product');
 
-            if($request->get('voucher_product')){
-            $canje->ID_ML = $request->get('voucher_product');
+            if($request->get('nickname_ml')){
+            $canje->nickname_ml = $request->get('nickname_ml');
+            }
+
+            if($request->get('id_ml')){
+            $canje->ID_ML = $request->get('id_ml');
+            }
+
+            if($request->get('profile_ml')){
+            $canje->profile_ml = $request->get('profile_ml');
             }
 
             $canje->status = 0;
