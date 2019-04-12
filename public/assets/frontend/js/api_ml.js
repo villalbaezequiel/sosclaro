@@ -1,7 +1,5 @@
 $(document).ready(function(){
 
-  MELI.init({ client_id: 8175887529615074 });
-
   $("#change-product-catalogo").submit(function(event) {
     event.preventDefault();
 
