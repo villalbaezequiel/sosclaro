@@ -25,14 +25,14 @@
                     <li class="nav-item">
                         <a href="{{ url('/resultados') }}">Resultados</a>
                     </li>
-                    <!--li class="nav-item">
-                        <a href="{{ url('/novedades') }}">Novedades</a>
-                    </li-->
                     <li class="nav-item">
                         <a href="{{ url('/encuestas') }}">Encuestas</a>
                     </li>
                     <li class="nav-item">
                         <a href="{{ url('/preguntas-frecuentes') }}">Preguntas Frecuentes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url('/galeria-imagenes') }}">Galería de Imágenes</a>
                     </li>
                 </ul>
                 <ul class="nav-social">

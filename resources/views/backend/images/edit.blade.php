@@ -10,6 +10,11 @@
     </div>
 
     <div class="form-group">
+        <label>Descripción:</label>
+        <textarea name="description" class="form-control">{{ $image->description }}</textarea>
+    </div>
+
+    <div class="form-group">
         <label>Url:</label>
         <input type="text" class="form-control" name="link" value="{{ $image->link }}" placeholder="URL Imagen">
     </div>

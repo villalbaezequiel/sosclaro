@@ -176,6 +176,9 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/estadisticas', 'Frontend\StatisticsController@index');
 
+    // galeria de imagenes
+    Route::get('/galeria-imagenes', 'Frontend\GalleryController@index');
+
 });
 
 
