@@ -43,10 +43,10 @@ class ModalsController extends Controller
     {
         $message;
         try {
-            
+
             $image_desktop = $request->file('image_desktop_modal');
             $image_mobile = $request->file('image_mobile_modal');
-     
+
             $modal = new Modals;
             $modal->name = $request->get('name_modal');
             $modal->url = $request->get('url_modal');
@@ -55,19 +55,19 @@ class ModalsController extends Controller
             $modal->image_mobile = $image_mobile->getClientOriginalName();
             $modal->active = $request->get('active_modal');
             $modal->save();
-            
+
             if($request->hasFile('image_desktop_modal')){
                 Storage::disk('public')->put('modals/desktop/'.$modal->id.'/'.$image_desktop->getClientOriginalName(), file_get_contents($image_desktop->getRealPath()));
             }
-            
+
             if($request->hasFile('image_mobile_modal')){
                 Storage::disk('public')->put('modals/mobile/'.$modal->id.'/'.$image_mobile->getClientOriginalName(), file_get_contents($image_mobile->getRealPath()));
             }
-     
+
             $message = "Modals: ".$request->get('name_modal')." creado con exito!";
-            
+
             return redirect('/admin/modals')->with('message', $message);
-        
+
         } catch(\Exception $e) {
 
             if(\Config::get('app.debug'))
@@ -82,7 +82,7 @@ class ModalsController extends Controller
 
             return \Response::json($respuesta);
 	}
-        
+
     }
 
     /**
@@ -120,21 +120,21 @@ class ModalsController extends Controller
     {
         $message;
         try {
-            
+
             if($request->hasFile('image_desktop_modal')){
                 Storage::delete('public/modals/desktop/'.$id.'/'.$request->get('image_desktop_modal_old'));
-                
+
                 $image_desktop_modal = $request->file('image_desktop_modal');
                 Storage::disk('public')->put('modals/desktop/'.$id.'/'.$image_desktop_modal->getClientOriginalName(), file_get_contents($image_desktop_modal->getRealPath()));
-            }     
-            
+            }
+
             if($request->hasFile('image_mobile_modal')){
                 Storage::delete('public/modals/mobile/'.$id.'/'.$request->get('image_mobile_modal_old'));
-                
+
                 $image_mobile_modal = $request->file('image_mobile_modal');
                 Storage::disk('public')->put('modals/mobile/'.$id.'/'.$image_mobile_modal->getClientOriginalName(), file_get_contents($image_mobile_modal->getRealPath()));
-            }      
-            
+            }
+
             $modal = Modals::find($id);
             $modal->name = $request->get('name_modal');
             $modal->url = $request->get('url_modal');
@@ -143,11 +143,11 @@ class ModalsController extends Controller
             $modal->image_mobile = ($request->hasFile('image_mobile_modal') ? $image_mobile_modal->getClientOriginalName() : $request->get('image_mobile_modal_old'));
             $modal->active = $request->get('active_modal');
             $modal->save();
-            
+
             $message = "Modals: ".$request->get('name_modal')." editado con exito!";
-            
+
             return redirect('/admin/modals')->with('message', $message);
-        
+
         } catch(\Exception $e) {
 
             if(\Config::get('app.debug'))
@@ -174,7 +174,7 @@ class ModalsController extends Controller
     {
         $modal = Modals::find($id);
         $modal->delete();
-        
+
         Storage::deleteDirectory('public/modals/desktop/'.$id);
         Storage::deleteDirectory('public/modals/mobile/'.$id);
 

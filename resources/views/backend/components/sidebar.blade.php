@@ -5,7 +5,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav navbar-sidenav" style="overflow: auto;">
-            
+
             <li class="nav-item" data-toggle="tooltip" data-placement="right">
                 <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#nav_users">
                     <i class="fa fa-fw fa-users"></i>
@@ -142,6 +142,20 @@
                     <i class="fa fa-fw fa-image"></i>
                     <span class="nav-link-text">PopUp</span>
                 </a>
+            </li>
+            <li class="nav-item" data-toggle="tooltip" data-placement="right">
+                <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#nav_galeria_imagenes">
+                    <i class="fa fa-fw fa-image"></i>
+                    <span class="nav-link-text">Galeria Imágenes</span>
+                </a>
+                <ul class="sidenav-second-level collapse" id="nav_galeria_imagenes">
+                    <li>
+                        <a href="{{ url('/admin/media_images_categorias') }}">Categorias</a>
+                    </li>
+                    <li>
+                        <a href="{{ url('/admin/media_images') }}">Imágenes</a>
+                    </li>
+                </ul>
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right">
                 <a class="nav-link" href="{{ url('/admin/preguntas-frecuentes') }}">
