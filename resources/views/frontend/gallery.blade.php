@@ -51,7 +51,7 @@
               </button>
             </div>
             <div class="modal-body">
-              <img id="image-gallery-image" class="img-responsive col-md-12" style="max-width: 900px;" src="">
+              <img id="image-gallery-image" class="img-responsive col-md-12" style="max-width: 100%;" src="">
               <p style="padding: 10px;" id="image-gallery-description"></p>
             </div>
             <div class="modal-footer">
