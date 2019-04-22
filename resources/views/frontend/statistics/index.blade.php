@@ -14,38 +14,29 @@
 
     <section class="section-wrapper">
         <hgroup class="section-header">
-            <!-- <span class="title">Informes para { $user }. { $user_role }: { $user_zone }</span> -->
-            <span class="title">Informes para <strong>Ezequiel Villalba</strong>. Gerente: <strong>Agencia Lavalle</strong></span>
+            <span class="title">Informes para <strong>{{ \App\Dni::getNameShort(Auth::user()->id) }}</strong>. {{ $type_user }}: <strong>{{ $type_user_the }}</strong></span>
         </hgroup>
         <article class="section-content">
 
             <div class="card">
                 <div class="card-header text-center">
-                    <strong>Alta de Vendedores</strong>
+                    <strong>Resultados</strong>
                 </div>
                 <div class="card-body">
                   <div class="row">
-                    <canvas id="users_create"></canvas>
+                    <canvas id="results"></canvas>
                   </div>
                 </div>
             </div>
 
             <div class="card">
                 <div class="card-header text-center">
-                    <strong>Resultados y Bonus Track</strong>
+                    <strong>Bonus Track</strong>
                 </div>
                 <div class="card-body">
                   <div class="row">
-                    <canvas id="results_puntos"></canvas>
+                    <canvas id="bonus_track"></canvas>
                   </div>
-                  <!--
-                  mostrar en grafico la cantidad de puntos que se generaron por meses
-                  segun los resultados y bonus track
-
-
-                    vertical PUNTOS
-                    horizontal MESES
-                  -->
                 </div>
             </div>
 
@@ -55,7 +46,12 @@
                 </div>
                 <div class="card-body">
                   <div class="row">
-                    <canvas id="top_then_users"></canvas>
+                    <div class="col-md-12" style="margin-bottom: 20px;">
+                      <canvas id="top_then_users"></canvas>
+                    </div>
+                    <div class="col-md-12">
+                      <canvas id="top_then_history"></canvas>
+                    </div>
                   </div>
                 </div>
             </div>
@@ -105,7 +101,9 @@
 @endsection
 
 @section('javascript')
-  @if($type_user != '' && $type_user != 'VENDEDOR' && $type_user != 'Vendedor' && $type_user != 'vendedor')
-    <script type="text/javascript" src="{{ asset('assets/frontend/js/statistics.js') }}"></script>
-  @endif
+<script type="text/javascript">
+    var id_user = {!! json_encode($id_user,JSON_FORCE_OBJECT) !!};
+    var type_user = {!! json_encode($type_user,JSON_FORCE_OBJECT) !!};
+</script>
+<script type="text/javascript" src="{{ asset('assets/frontend/js/statistics.js') }}"></script>
 @endsection

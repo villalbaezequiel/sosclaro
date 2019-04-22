@@ -17,7 +17,6 @@
                   <h6 class="dropdown-header">Ordenar</h6>
                   <a id="sortPuntosAsc" class="dropdown-item" href="#">Más Nuevas</a>
                   <a id="sortPuntosDesc" class="dropdown-item" href="#">Más Antiguas</a>
-                  <a id="sortNombre" class="dropdown-item" href="#">Alfabéticamente</a>
               </div>
           </aside>
       </hgroup>

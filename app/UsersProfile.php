@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 use App\Cities;
 use App\UsersProfile;
+use App\Agentes;
 
 class UsersProfile extends Model
 {
@@ -76,6 +77,16 @@ class UsersProfile extends Model
       $type_user = UsersProfile::where('id_user', '=', $id_user)->get();
       if(!empty($type_user[0])){
             return $type_user[0]->type_user;
+      }
+    }
+
+    static public function getTypeUserThe($id_user){
+      $type_user = UsersProfile::where('id_user', '=', $id_user)->get();
+      if(!empty($type_user[0])){
+        if($type_user[0]->type_user == 'SUPERVISOR' || $type_user[0]->type_user == 'supervisor' || $type_user[0]->type_user == 'Supervisor'){
+          $id_agente = UsersProfile::getIdAgente($id_user);
+          return Agentes::getName($id_agente);
+        }
       }
     }
 
