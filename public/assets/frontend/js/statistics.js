@@ -27,7 +27,7 @@ $(document).ready(function(){
               legend: { display: false },
               title: {
                 display: true,
-                text: 'Evaluación de Puntos en "Resultados" según cada Mes relacionado a tu Agencia.'
+                text: 'Puntos obtenidos por los vendedores de tu equipo.'
               },
               onClick: function(c,i) {
                   e = i[0];
@@ -72,7 +72,7 @@ $(document).ready(function(){
               legend: { display: false },
               title: {
                 display: true,
-                text: 'Evaluación de Puntos en "Bonus Track" según cada Mes relacionado a tu Agencia.'
+                text: 'Puntos obtenidos en Bonus Track por los vendedores de tu equipo.'
               },
               onClick: function(c,i) {
                   e = i[0];
@@ -121,7 +121,7 @@ $(document).ready(function(){
           options: {
             title: {
               display: true,
-              text: 'Rankig de Puntos Actual'
+              text: 'Puntos actuales.'
             }
           }
         });
@@ -161,7 +161,7 @@ $(document).ready(function(){
           options: {
             title: {
               display: true,
-              text: 'Rankig de Puntos Historial'
+              text: 'Puntos acumulados históricos.'
             }
           }
         });
@@ -208,7 +208,7 @@ $(document).ready(function(){
               legend: { display: false },
               title: {
                 display: true,
-                text: 'Cantidad de Canjes por Producto relacionado a tu Agencia.'
+                text: 'Canjes por los vendedores de tu equipo.'
               },
               onClick: function(c,i) {
                   e = i[0];

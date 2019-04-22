@@ -45,8 +45,9 @@
                                 <a class="dropdown-item" href="{{ url('/mis-logros') }}">Mis logros</a>
                                 <a class="dropdown-item" href="{{ url('/usuario/historial') }}">Historial de cuenta</a>
                                 <a class="dropdown-item" href="{{ url('/usuario/mi-cuenta') }}">Mi cuenta</a>
-                                <a class="dropdown-item" href="{{ url('/contactanos') }}">Contactanos</a>
+                                <a class="dropdown-item" href="{{ url('/estadisticas') }}">Informes</a>
                                 <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="{{ url('/contactanos') }}">Contactanos</a>
                                 <a class="dropdown-item" href="{{ url('/logout') }}">Salir</a>
                             </div>
                         </div>

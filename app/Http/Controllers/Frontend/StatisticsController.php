@@ -33,11 +33,13 @@ class StatisticsController extends Controller
       if($type_user == 'SUPERVISOR' || $type_user == 'supervisor' || $type_user == 'Supervisor'
                 || $type_user == 'GERENTE' || $type_user == 'gerente' || $type_user == 'Gerente')
       {
+          $users = UsersProfile::getListUsersByTypeUser($type_user, Auth::user()->id);
 
           return view('frontend.statistics.index', [
             'type_user' => $type_user,
             'type_user_the' => $type_user_the,
-            'id_user' => Auth::user()->id
+            'id_user' => Auth::user()->id,
+            'count_users' => count($users)
           ]);
 
       } else {
