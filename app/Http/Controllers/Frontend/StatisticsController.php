@@ -286,7 +286,9 @@ class StatisticsController extends Controller
           $results[$guest->id] = array("completas" => 0, "incompletas" => 0);
 
           foreach ($users as $key => $val) {
-            $query = GuestUsers::where('id_user', $val)->get();
+            $query = GuestUsers::where('id_user', $val)
+                              ->where('id_guest', $guest->id)
+                              ->get();
 
             if(isset($query[0])){
               $results[$guest->id]['completas'] += 1;
