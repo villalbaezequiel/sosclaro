@@ -73,6 +73,9 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
         Route::resource('/media_images_categorias', 'Backend\MediaCategoriesController');
         Route::resource('/media_images', 'Backend\MediasController');
 
+        // MailChimp
+        Route::resource('/mailchimp', 'Backend\MailchimpController');
+
         //Settings
         Route::resource('/settings/politics_privacy', 'Backend\PoliticsPrivacyController');
         Route::resource('/settings/legal_products', 'Backend\LegalProductsController');
