@@ -30,6 +30,13 @@ class Products extends Model
         }
     }
     
+    static public function getValuePuntosByCode($code) {
+        $product = Products::where('codigo', '=', $code)->get();
+        if(!empty($product[0])){
+            return $product[0]->price;
+        }
+    }
+
     static public function getUrlImage($id) {
         $product = Products::where('id', '=', $id)->get();
         if(!empty($product[0])){
