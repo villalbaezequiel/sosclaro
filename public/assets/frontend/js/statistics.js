@@ -1,169 +1,269 @@
 $(document).ready(function(){
 
-  const months = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+  const months18 = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
 
-  // Creacion de Usuarios por Meses
-  new Chart(document.getElementById("users_create"), {
-      type: 'line',
-      data: {
-        labels: months,
-        datasets: [
-          {
-            label: "Vendedores",
-            borderColor: "#8e5ea2",
-            data: [20,50,30,80,56,70,68,89,54,64,19,45,]
-          }
-        ]
+  // RESULTADOS
+  $.ajax({
+      type: 'GET',
+      url: '/estadisticas/results/'+id_user+'/'+type_user,
+      dataType: 'json',
+      success: function(data){
+
+        var results = data.results;
+
+        new Chart(document.getElementById("results"), {
+            type: 'bar',
+            data: {
+              labels: months18,
+              datasets: [
+                {
+                  label: "Puntos",
+                  backgroundColor: ["#3e95cd", "#3cba9f","#3e95cd","#3cba9f","#3e95cd","#3cba9f", "#3e95cd","#3cba9f","#3e95cd","#3cba9f","#3e95cd","#3cba9f"],
+                  data: Object.values(results)
+                }
+              ]
+            },
+            options: {
+              legend: { display: false },
+              title: {
+                display: true,
+                text: 'Puntos obtenidos por los vendedores de tu equipo.'
+              },
+              onClick: function(c,i) {
+                  e = i[0];
+                  var x_value = this.data.labels[e._index];
+                  var y_value = this.data.datasets[0].data[e._index];
+                  console.log(x_value);
+                  console.log(y_value);
+
+                  // ajax
+
+              }
+            }
+        });
       },
-      options: {
-        legend: { display: false },
-        title: {
-          display: true,
-          text: 'Cantidad Total de Vendedores: 500'
-        }
+      error: function(xhr, status){
+          console.log('Error: '+xhr);
       }
   });
 
-  // Resultados y BonusTrack, puntos por meses
-  new Chart(document.getElementById("results_puntos"), {
-      type: 'bar',
-      data: {
-        labels: months,
-        datasets: [
-          {
-            label: "Puntos",
-            backgroundColor: ["#3e95cd", "#3cba9f","#3e95cd","#3cba9f","#3e95cd","#3cba9f", "#3e95cd","#3cba9f","#3e95cd","#3cba9f","#3e95cd","#3cba9f"],
-            data: [20,50,30,80,56,70,68,89,54,64,19,45,]
-          }
-        ]
+  // BONUS TRACK
+  $.ajax({
+      type: 'GET',
+      url: '/estadisticas/bonus_track/'+id_user+'/'+type_user,
+      dataType: 'json',
+      success: function(data){
+
+        var results = data.results;
+
+        new Chart(document.getElementById("bonus_track"), {
+            type: 'bar',
+            data: {
+              labels: months18,
+              datasets: [
+                {
+                  label: "Puntos",
+                  backgroundColor: ["#3e95cd", "#3cba9f","#3e95cd","#3cba9f","#3e95cd","#3cba9f", "#3e95cd","#3cba9f","#3e95cd","#3cba9f","#3e95cd","#3cba9f"],
+                  data: Object.values(results)
+                }
+              ]
+            },
+            options: {
+              legend: { display: false },
+              title: {
+                display: true,
+                text: 'Puntos obtenidos en Bonus Track por los vendedores de tu equipo.'
+              },
+              onClick: function(c,i) {
+                  e = i[0];
+                  var x_value = this.data.labels[e._index];
+                  var y_value = this.data.datasets[0].data[e._index];
+                  console.log(x_value);
+                  console.log(y_value);
+
+                  // ajax
+
+              }
+            }
+        });
       },
-      options: {
-        legend: { display: false },
-        title: {
-          display: true,
-          text: 'Evaluación de Puntos segun Mes de Todos los Vendedores.'
-        }
+      error: function(xhr, status){
+          console.log('Error: '+xhr);
       }
   });
 
-  // top 10 de los usuarios que mas puntos tienen actualmente
-  new Chart(document.getElementById("top_then_users"), {
-    type: 'pie',
-    data: {
-      labels: ["CARINA SCHEFFER	",
-               "IVAN BARENGO",
-               "German Ferrari",
-               "PRISCILA TORRES",
-               "JONATHAN EMMANUEL MARINI",
-               "FABIÁN MOLINA",
-               "LEONARDO ECHEVERRIA",
-               "LEONARDO ECHEVERRIA",
-               "NICOLAS LEDESMA",
-               "TOMAS PANADEIRO"],
-      datasets: [{
-        label: "Vendedor, Puntos",
-        backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850","#FFB00D", "#C0E8E7","#223663","#FF0000","#635F56"],
-        data: [2478,5267,734,784,433,1000,500,700,123,400]
-      }]
-    },
-    options: {
-      title: {
-        display: true,
-        text: 'Rankig Puntos'
+  // TOP 10, actual
+  $.ajax({
+      type: 'GET',
+      url: '/estadisticas/top_then_puntos/'+id_user+'/'+type_user+'/actual',
+      dataType: 'json',
+      success: function(data){
+
+        var results = data.results;
+        var name = [];
+        var puntos = [];
+
+        $.each(results, function(i,v){
+            name.push(v.name);
+            puntos.push(v.puntos);
+        });
+
+        new Chart(document.getElementById("top_then_users"), {
+          type: 'pie',
+          data: {
+            labels: name,
+            datasets: [{
+              label: "Vendedor, Puntos",
+              backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850","#FFB00D", "#C0E8E7","#223663","#FF0000","#635F56"],
+              data: puntos
+            }]
+          },
+          options: {
+            title: {
+              display: true,
+              text: 'Puntos actuales.'
+            }
+          }
+        });
+
+      },
+      error: function(xhr, status){
+          console.log('Error: '+xhr);
       }
-    }
   });
 
-  // canjes realizados, Meses Vertical, Cantidad horizontal
-  new Chart(document.getElementById("exchanges_users"), {
-    type: 'line',
-    data: {
-      labels: months,
-      datasets: [{
-          data: [2,3,5,1,3,1,3,4,3,9,2,12],
-          label: "Moto C  XT1756 LTE T",
-          borderColor: "#3e95cd",
-          fill: false
-        }, {
-          data: [4,5,7,3,5,3,5,6,5,11,4,14],
-          label: "Cafetera Oster 4401",
-          borderColor: "#8e5ea2",
-          fill: false
-        }, {
-          data: [0,1,3,0,9,5,3,2,1,7,0,9],
-          label: "Pelota Oficial Original Mundial Rusia 2018",
-          borderColor: "#3cba9f",
-          fill: false
-        }, {
-          data: [4,6,8,5,14,10,8,7,6,12,5,14],
-          label: "Set Matero Claro",
-          borderColor: "#c45850",
-          fill: false
-        }
-      ]
-    },
-    options: {
-      title: {
-        display: true,
-        text: ''
+  // TOP 10, history
+  $.ajax({
+      type: 'GET',
+      url: '/estadisticas/top_then_puntos/'+id_user+'/'+type_user+'/history',
+      dataType: 'json',
+      success: function(data){
+
+        var results = data.results;
+        var name = [];
+        var puntos = [];
+
+        $.each(results, function(i,v){
+            name.push(v.name);
+            puntos.push(v.puntos);
+        });
+
+        new Chart(document.getElementById("top_then_history"), {
+          type: 'pie',
+          data: {
+            labels: name,
+            datasets: [{
+              label: "Vendedor, Puntos",
+              backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850","#FFB00D", "#C0E8E7","#223663","#FF0000","#635F56"],
+              data: puntos
+            }]
+          },
+          options: {
+            title: {
+              display: true,
+              text: 'Puntos acumulados históricos.'
+            }
+          }
+        });
+
+      },
+      error: function(xhr, status){
+          console.log('Error: '+xhr);
       }
-    }
   });
 
-  // Encuestas each
-  // top 10 de los usuarios que mas puntos tienen actualmente
-  new Chart(document.getElementById("guests_users_1"), {
-    type: 'pie',
-    data: {
-      labels: ["Completas", "Incompletas"],
-      datasets: [{
-        label: "Vendedor, Puntos",
-        backgroundColor: ["#3e95cd", "#3cba9f"],
-        data: [78,25]
-      }]
-    },
-    options: {
-      title: {
-        display: true,
-        text: 'Intereses'
+
+  // EXCHANJES
+  $.ajax({
+      type: 'GET',
+      url: '/estadisticas/exchanges/'+id_user+'/'+type_user,
+      dataType: 'json',
+      success: function(data){
+
+        var results = data.results;
+        var products = [];
+        var counts = [];
+
+        $.each(results, function(i,v){
+          if(v.count != 0){
+            products.push(v.product);
+            counts.push(v.count);
+          }
+        });
+
+        new Chart(document.getElementById("exchanges_users"), {
+            type: 'bar',
+            data: {
+              labels: products,
+              datasets: [
+                {
+                  label: "Canjes",
+                  // backgroundColor: ["#FF0000", "#635F56", "#FF0000", "#635F56", "#FF0000", "#635F56", "#FF0000", "#635F56", "#FF0000", "#635F56", "#FF0000", "#635F56", "#FF0000", "#635F56"],
+                  backgroundColor: ["#3e95cd", "#3cba9f","#3e95cd","#3cba9f","#3e95cd","#3cba9f", "#3e95cd","#3cba9f","#3e95cd","#3cba9f","#3e95cd","#3cba9f"],
+                  data: counts
+                }
+              ]
+            },
+            options: {
+              legend: { display: false },
+              title: {
+                display: true,
+                text: 'Canjes por los vendedores de tu equipo.'
+              },
+              onClick: function(c,i) {
+                  e = i[0];
+                  var x_value = this.data.labels[e._index];
+                  var y_value = this.data.datasets[0].data[e._index];
+                  console.log(x_value);
+                  console.log(y_value);
+
+                  // ajax
+
+              }
+            }
+        });
+      },
+      error: function(xhr, status){
+          console.log('Error: '+xhr);
       }
-    }
   });
 
-  new Chart(document.getElementById("guests_users_2"), {
-    type: 'pie',
-    data: {
-      labels: ["Completas", "Incompletas"],
-      datasets: [{
-        label: "Vendedor, Puntos",
-        backgroundColor: ["#3e95cd", "#3cba9f"],
-        data: [14,85]
-      }]
-    },
-    options: {
-      title: {
-        display: true,
-        text: 'Netshoes'
-      }
-    }
-  });
+// ENCUESTAS
+$.ajax({
+    type: 'GET',
+    url: '/estadisticas/guests/'+id_user+'/'+type_user,
+    dataType: 'json',
+    success: function(data){
 
-  new Chart(document.getElementById("guests_users_3"), {
-    type: 'pie',
-    data: {
-      labels: ["Completas", "Incompletas"],
-      datasets: [{
-        label: "Vendedor, Puntos",
-        backgroundColor: ["#3e95cd", "#3cba9f"],
-        data: [45,38]
-      }]
+      var results = data.results;
+
+      $.each(results, function(i,v){
+
+
+
+        new Chart($("#guests_users_"+i), {
+          type: 'pie',
+          data: {
+            labels: ["Completas %", "Incompletas %"],
+            datasets: [{
+              backgroundColor: ["#3e95cd", "#3cba9f"],
+              data: [v.completas,v.incompletas]
+            }]
+          },
+          options: {
+            title: {
+              display: true,
+              text: v.guest
+            }
+          }
+        });
+      });
+
     },
-    options: {
-      title: {
-        display: true,
-        text: 'Mercado Libre'
-      }
+    error: function(xhr, status){
+        console.log('Error: '+xhr);
     }
-  });
+});
+
 
 });

@@ -162,13 +162,6 @@ Route::group(['middleware' => 'auth'], function () {
     //preguntas frecuentes
     Route::get('/preguntas-frecuentes', 'Frontend\PreguntasFrecuentesController@index');
 
-    //ajax
-    Route::get('/desempeno_name/{name}', 'Frontend\DesempenoController@desempenosForName');
-    Route::get('/desempeno_grafico/{id_user}', 'Frontend\DesempenoController@grafico');
-    Route::get('/desempeno_for_month/{month}/{id_user}', 'Frontend\DesempenoController@desempenosForMonth');
-    Route::get('/resultados/{id_category}/{month}', 'Frontend\RankingController@resultsForMonth');
-    Route::get('/bonus-track/{id_category}/{month}', 'Frontend\BonusTrackController@resultsForMonth');
-
     //contactanos
     Route::get('/contactanos', function(){
         return view('frontend.contactanos');
@@ -178,6 +171,23 @@ Route::group(['middleware' => 'auth'], function () {
 
     // galeria de imagenes
     Route::get('/galeria-imagenes', 'Frontend\GalleryController@index');
+
+
+
+
+    //ajax (siempre estas rutas se definen a lo ultimo)
+    Route::get('/desempeno_name/{name}', 'Frontend\DesempenoController@desempenosForName');
+    Route::get('/desempeno_grafico/{id_user}', 'Frontend\DesempenoController@grafico');
+    Route::get('/desempeno_for_month/{month}/{id_user}', 'Frontend\DesempenoController@desempenosForMonth');
+    Route::get('/resultados/{id_category}/{month}', 'Frontend\RankingController@resultsForMonth');
+    Route::get('/bonus-track/{id_category}/{month}', 'Frontend\BonusTrackController@resultsForMonth');
+
+    // --------- statistics ---------
+    Route::get('/estadisticas/results/{id_user}/{type_user}', 'Frontend\StatisticsController@getResults');
+    Route::get('/estadisticas/bonus_track/{id_user}/{type_user}', 'Frontend\StatisticsController@getBonusTrack');
+    Route::get('/estadisticas/top_then_puntos/{id_user}/{type_user}/{type_puntos}', 'Frontend\StatisticsController@getTopThen');
+    Route::get('/estadisticas/exchanges/{id_user}/{type_user}', 'Frontend\StatisticsController@getExchanges');
+    Route::get('/estadisticas/guests/{id_user}/{type_user}', 'Frontend\StatisticsController@getGuests');
 
 });
 

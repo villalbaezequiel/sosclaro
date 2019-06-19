@@ -8,7 +8,7 @@ use App\Exchanges;
 class Exchanges extends Model
 {
     protected $table = 'exchanges';
-    
+
     static public function getStatus($status) {
         if($status == 0){
             return "Pendiente (Envío Pendiente)";
@@ -17,6 +17,6 @@ class Exchanges extends Model
         } elseif ($status == 2) {
             return "Completo (Recepción confirmada)";
         }
-    }    
-    
+    }
+
 }
