@@ -12,6 +12,7 @@ use App\Dni;
 use App\UsersProfile;
 use App\Regions;
 use App\Agentes;
+use App\Products;
 use App\Exchanges;
 
 class Report extends Model
@@ -136,6 +137,7 @@ class Report extends Model
                 
           $users = DB::table('users')
                 ->select('users.id',
+                  'exchanges.id as id_canje',
                   'users.email',
                   'users_profile.date_year as fecha_nacimiento',
                   'users_profile.id_region as region',
@@ -157,8 +159,11 @@ class Report extends Model
                 ->join('exchanges', 'exchanges.id_user', '=', 'users.id')
                 ->join('products', 'products.id', '=', 'exchanges.id_product')
                 ->get();
-                
+        
+    $puntos_actuales_user = 0;
+    $userId = 0;
 	  foreach($users as &$user){
+
             $user->fecha_nacimiento = UsersProfile::getDateYear($user->fecha_nacimiento);
             $user->region = Regions::getName($user->region);
             $user->genero = ($user->genero == 'male' ? 'Masculino' : 'Femenino');
@@ -171,11 +176,24 @@ class Report extends Model
 
             $user->dni = Dni::getDni($user->id);
             $user->nombre_completo = Dni::getName($user->id);
-            $user->puntos_historicos = Dni::getPuntosHistorical($user->id);
-            $user->puntos_actuales = Dni::getPuntos($user->id);
-	  }
+        
+            if($userId == $user->id){
+              $puntos_actuales_user = ( $puntos_actuales_user - Products::getValuePuntosByCode($user->canje_producto_codigo) );
+            } else {
+              $puntos_actuales_user = ( Dni::getPuntosHistorical($user->id) - Products::getValuePuntosByCode($user->canje_producto_codigo) );  
+            }            
+            $user->puntos_actuales = $puntos_actuales_user;
+
+            $userId = $user->id;
+    }
+
+          $finish = json_decode( json_encode($users), true);
           
-          $sheet->fromArray(json_decode( json_encode($users), true));
+          usort($finish, function($a, $b) {
+              return $b['id_canje'] <=> $a['id_canje'];
+          });
+
+          $sheet->fromArray($finish);
  
         });
     }
