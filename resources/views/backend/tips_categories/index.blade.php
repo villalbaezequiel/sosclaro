@@ -1,6 +1,6 @@
 @extends('layouts.backend')
 
-@section('title', "Consejos / Categorias")
+@section('title', "Novedades / Categorias")
 
 @section('message')
     @if (session('message'))
@@ -11,7 +11,7 @@
 @endsection
 
 @section('nav-button')
-<a class="btn btn-primary mb-3" href="{{ url('/admin/tips/categories/create') }}">Nueva Categoría de Consejo</a>
+<a class="btn btn-primary mb-3" href="{{ url('/admin/tips/categories/create') }}">Nueva Categoría de Novedad</a>
 @endsection
 
 @section('content')

@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Mail;
 
 class Functions extends Model
 {
@@ -11,12 +12,122 @@ class Functions extends Model
         print_r($array);
         echo "</pre>";
     }
-    
+
     static public function getActive($param) {
         if($param == 1){
             echo "Si";
         } elseif($param == 0){
             echo "No";
         }
+    }
+
+    static public function getDate($param) {
+        $date = explode("-", substr("$param", 0, -9));
+        return $date[2]."/".$date[1]."/".$date[0];
+    }
+
+    static public function sendMail($template = 'emails.default', $data, $callback){
+        Mail::send($template, $data, $callback);
+    }
+
+    static public function checkPortMail($mail) {
+        $results = array();
+
+      if(@fsockopen($mail, 25, $errno, $errstr, 2)) {
+        $results[] = array("port-25" => "abierto");
+      } else {
+        $results[] = array("port-25" => "cerrado", "error" => ($errno.$errstr) );
+      }
+
+      if(@fsockopen($mail, 587, $errno, $errstr, 2)){
+        $results[] = array("port-587" => "abierto");
+      } else {
+        $results[] = array("port-587" => "cerrado", "error" => ($errno.$errstr) );
+      }
+
+      if(@fsockopen("ssl://".$mail, 465, $errno, $errstr, 2)) {
+	$results[] = array("port-465-ssl" => "abierto");
+      } else {
+        $results[] = array("port-465-ssl" => "cerrado", "error" => ($errno.$errstr) );
+      }
+
+      if(@fsockopen("tls://".$mail, 465, $errno, $errstr, 2)) {
+	$results[] = array("port-465-tls" => "abierto");
+      } else {
+        $results[] = array("port-465-tls" => "cerrado", "error" => ($errno.$errstr) );
+      }
+
+      dd($results);
+    }
+
+    static public function getGender($gender) {
+      if($gender == "male"){
+        echo "masculino";
+      } elseif($gender == "female"){
+        echo "femenino";
+      }
+    }
+
+    static public function getMonths() {
+      $months = array(
+        '5' => 'Mayo',
+        '6' => 'Junio',
+        '7' => 'Julio',
+        '8' => 'Agosto',
+        '9' => 'Septiembre',
+        '10' => 'Octubre',
+        '11' => 'Noviembre',
+        '12' => 'Diciembre',
+        '1' => 'Enero',
+        '2' => 'Febrero',
+        '3' => 'Marzo',
+        '4' => 'Abril'
+      );
+      return $months;
+    }
+
+    static public function getMonthShortcuts() {
+      $months = array(
+        '5' => 'MAY',
+        '6' => 'JUN',
+        '7' => 'JUL',
+        '8' => 'AGO',
+        '9' => 'SEP',
+        '10' => 'OCT',
+        '11' => 'NOV',
+        '12' => 'DIC',
+        '1' => 'ENE',
+        '2' => 'FEB',
+        '3' => 'MAR',
+        '4' => 'ABR'
+      );
+      return $months;
+    }
+
+    static public function getNameMonth($id_month) {
+      $months = Functions::getMonths();
+      $name_month = '';
+      foreach($months as $key => $value){
+          if($key == $id_month){
+            $name_month = $value;
+          }
+      }
+      return $name_month;
+    }
+
+    static function array_orderby() {
+        $args = func_get_args();
+        $data = array_shift($args);
+        foreach ($args as $n => $field) {
+            if (is_string($field)) {
+                $tmp = array();
+                foreach ($data as $key => $row)
+                    $tmp[$key] = $row[$field];
+                $args[$n] = $tmp;
+                }
+        }
+        $args[] = &$data;
+        call_user_func_array('array_multisort', $args);
+        return array_pop($args);
     }
 }

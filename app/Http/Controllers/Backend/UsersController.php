@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\DB;
 use App\Functions;
 use App\User;
 use App\UsersProfile;
@@ -14,6 +15,8 @@ use App\Dni;
 use App\Cities;
 use App\Regions;
 use App\Indicadores;
+use App\Provinces;
+use App\Agentes;
 
 class UsersController extends Controller
 {
@@ -48,15 +51,28 @@ class UsersController extends Controller
     public function store(Request $request)
     {
         $timestamp = date('Y_m_d_h_i_s');
-        $active = $request->get('active_users');
-        Excel::create('export_users_'.$timestamp, function($excel) {
+        Excel::create('export_users_'.$timestamp, function($excel) use ($request){
  
-            $excel->sheet('Usuarios', function($sheet) {
+            $excel->sheet('Usuarios registrado', function($sheet) use($request) {
  
-                //hacer join con datos de model DNI y UsersProfile
-                //$users = User::where('active', '=',$active)->get();
-                $users = User::all();
-                $sheet->fromArray($users);
+//                $users = DB::table('users')->select('dni.dni', 'dni.name', 'dni.last_name', 'users.email', 'dni.puntos', 'users_profile.id_region', 'users_profile.sexo as gender', 'users_profile.date_year', 'users_profile.telephone', 'users_profile.telephone_other', 'users_profile.address', 'users_profile.status as full_profile', 'users.active', 'users.created_at', 'dni.updated_at')
+//                        ->join('dni', 'dni.id_user', '=', 'users.id')
+//                        ->join('users_profile', 'users_profile.id_user', '=', 'users.id')
+//                        ->where('users.active', $request->get('active_users'))
+//                        ->get();
+                
+                $users = DB::table('users')->select('users.id', 'users.email', 'users.active', 'users_profile.id_region', 'users_profile.sexo as gender', 'users_profile.date_year', 'users_profile.telephone', 'users_profile.telephone_other', 'users_profile.address', 'users_profile.status as full_profile', 'users.created_at')
+                        ->join('users_profile', 'users_profile.id_user', '=', 'users.id')
+                        ->get();
+
+//echo "<pre>"; print_r($users); echo "</pre>"; die();
+                
+		foreach($users as &$user){
+			$user->dni = Dni::getDni($user->id);
+			$user->nombre_completo = Dni::getName($user->id);
+		}
+
+                $sheet->fromArray(json_decode( json_encode($users), true));
  
             });
             
@@ -86,9 +102,10 @@ class UsersController extends Controller
             'user' => User::find($id),
             'user_profile' => UsersProfile::where('id_user', '=', $id)->get(),
             'user_dni' => Dni::where('id_user', '=', $id)->get(),
+            'agentes' => Agentes::all(),
+            'provinces' => Provinces::all(),
             'cities' => Cities::all(),
-            'regions' => Regions::all(),
-            'indicadores' => Indicadores::all()
+            'regions' => Regions::all()
         ]);
     }
 
@@ -104,23 +121,32 @@ class UsersController extends Controller
         $message;
         try {
             
+                $dni = Dni::find($request->get('id_dni'));
+                $dni->name = $request->get('name_dni');
+                $dni->last_name = $request->get('last_name_dni');
+                $dni->id_region = $request->get('region_dni');
+                $dni->save();
+            
             $user = User::find($id);
-            $user->name = $request->get('name_user');    
             $user->email = $request->get('email_user');    
             $user->active = $request->get('active_user');    
             $user->save();    
             
             if($request->get('id_user_profile')){
                 $user_profile = UsersProfile::find($request->get('id_user_profile'));
-                $user_profile->id_city = $request->get('city_user_profile');    
-                $user_profile->id_region = $request->get('region_user_profile');    
-                $user_profile->telephone = $request->get('telephone_user_profile');    
-                $user_profile->telephone_other = $request->get('telephone_other_user_profile');    
+                $user_profile->admission_date = $request->get('admission_date_user_profile');    
                 $user_profile->address = $request->get('address_user_profile');    
+                $user_profile->cp = $request->get('cp_user_profile');    
+                $user_profile->id_city = $request->get('city_user_profile');    
+                $user_profile->id_province = $request->get('province_user_profile');    
+                $user_profile->id_agente = $request->get('agente_user_profile');    
+                $user_profile->type_user = $request->get('type_user_user_profile');    
                 $user_profile->save();    
             }
+            
+            
                        
-            $message = "Usuario Alias: ".$request->get('name_user')." editado con exito! DNI: ". $request->get('dni');
+            $message = "Usuario: ".$request->get('name_user')." editado con exito! DNI: ". $request->get('dni');
             
             return redirect('/admin/users')->with('message', $message);
         

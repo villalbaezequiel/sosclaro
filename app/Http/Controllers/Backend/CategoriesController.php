@@ -56,7 +56,7 @@ class CategoriesController extends Controller
             $category->save();
      
             if($request->hasFile('imagen_category')){
-                Storage::disk('public')->put('categories/'.$category->id.'/'.$imagen_category->getClientOriginalName(), true);
+                Storage::disk('public')->put('categories/'.$category->id.'/'.$imagen_category->getClientOriginalName(), file_get_contents($imagen_category->getRealPath()));
             }
 
             $message = "Categoria: ".$request->get('name_category')." creada con exito!";
@@ -120,7 +120,8 @@ class CategoriesController extends Controller
                 Storage::delete('public/categories/'.$id.'/'.$request->get('imagen_category_old'));
                 
                 $imagen_category = $request->file('imagen_category');
-                Storage::disk('public')->put('categories/'.$id.'/'.$imagen_category->getClientOriginalName(), true);
+                Storage::disk('public')->put('categories/'.$id.'/'.$imagen_category->getClientOriginalName(), file_get_contents($imagen_category->getRealPath()));
+
             }
                 
             $category = Categories::find($id);

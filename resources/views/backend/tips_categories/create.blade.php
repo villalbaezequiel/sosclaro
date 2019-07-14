@@ -1,10 +1,10 @@
 @extends('layouts.backend')
 
-@section('title', "Consejos / Categorias / Alta")
+@section('title', "Novedades / Categorias / Alta")
 @section('content')
 {!! Form::open(['route' => 'admin.tips.categories.store', 'method' => 'POST']) !!}
     <div class="form-group">
-        <label>Nombre Categoria de Consejos:</label>
+        <label>Nombre Categoria de Novedades:</label>
         <input type="text" class="form-control" name="name_tip_category" placeholder="Nombre Categoria" required>
     </div>
 

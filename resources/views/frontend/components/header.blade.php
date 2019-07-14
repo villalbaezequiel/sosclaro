@@ -1,0 +1,59 @@
+<header class="header">
+    <div class="container">
+        <hgroup class="brand">
+            <a class="brand-link" href="{{ url('/inicio') }}">
+                <img class="brand-logo" src="{{ asset('assets/frontend/img/logo-black.png') }}" alt="SOS CLARO">
+            </a>
+        </hgroup>
+        <nav class="nav" role="navigation">
+            <div class="nav-toggle">
+                <a href="#">
+                    <i class="fa fa-bars" aria-hidden="true"></i>
+                </a>
+            </div>
+            <div class="nav-menu">
+                <ul class="nav-main">
+                    <li class="nav-item">
+                        <a href="{{ url('/inicio') }}">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url('/que-es') }}">Qué es?</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url('/catalogo') }}">Catálogo</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url('/resultados') }}">Resultados</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url('/encuestas') }}">Encuestas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url('/preguntas-frecuentes') }}">Preguntas Frecuentes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url('/galeria-imagenes') }}">Galería de Imágenes</a>
+                    </li>
+                </ul>
+                <ul class="nav-social">
+                    <li class="nav-item">
+                        <div class="dropdown">
+                            <button class="btn btn-black dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ \App\Dni::getNameShort(Auth::user()->id) }}</button>
+                            <span class="badge badge-danger">{{ \App\Dni::getPuntos(Auth::user()->id) }} puntos</span>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="{{ url('/usuario/canjes') }}">Mis canjes</a>
+                                <a class="dropdown-item" href="{{ url('/mis-logros') }}">Mis logros</a>
+                                <a class="dropdown-item" href="{{ url('/usuario/historial') }}">Historial de cuenta</a>
+                                <a class="dropdown-item" href="{{ url('/usuario/mi-cuenta') }}">Mi cuenta</a>
+                                <a class="dropdown-item" href="{{ url('/estadisticas') }}">Informes</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="{{ url('/contactanos') }}">Contactanos</a>
+                                <a class="dropdown-item" href="{{ url('/logout') }}">Salir</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+</header>

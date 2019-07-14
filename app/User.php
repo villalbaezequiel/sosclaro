@@ -30,4 +30,11 @@ class User extends Authenticatable
     {
         return $this->hasMany(UsersProfile::class, 'id_user')->limit(10);
     }
+    
+    static public function getEmail($id_user){
+      $user = User::where('id', '=', $id_user)->get();
+      if(isset($user[0])){ 
+        return $user[0]->email;
+      }
+    }
 }

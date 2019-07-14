@@ -44,3 +44,8 @@ Sobre vendor\nilportugues\laravel5-json-api\src\NilPortugues\Laravel5\JsonApi\Pr
             }
         }
     }´
+
+## Accesos Cpanel
+- URL: https://sosclaro.com.ar:2083
+- User: sosclaro
+- Password: z?Zg++08d%g6

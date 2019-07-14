@@ -19,6 +19,16 @@
     </div>
 
     <div class="form-group">
+        <label for="active_guest_question">Tipo Input:</label>
+        <select class="form-control" name="type_input_question" id="type_input_question" required>
+            <option value="0">Radio</option>
+            <option value="1">Texto</option>
+            <option value="2">Checkbox</option>
+            <option value="3">TextArea</option>
+        </select>
+    </div>
+
+    <div class="form-group" id="content_posibles_respuestas">
         <label>Posibles Respuestas:</label>
         <div class="row">
             <div class="col-sm-9 mb-3">
@@ -39,6 +49,13 @@
     <input type="hidden" name="options_guest_question" id="options_guest_question" value="">
 
     <div class="form-group">
+        <label for="active_guest_question">Orden:</label>
+        <select class="form-control" name="order_question" disabled>
+            <option>Disponible editando la pregunta una vez Creada</option>
+        </select>
+    </div>
+
+    <div class="form-group">
         <label for="active_guest_question">Activo:</label>
         <select class="form-control" name="active_guest_question" required>
             <option value="1">Si</option>
@@ -50,6 +67,11 @@
     <a href="" onclick="window.history.go(-1); return false;" class="btn btn-danger">Cancelar</a>
 {!! Form::close() !!}
 @endsection
+
+@section('content-footer')
+<i>* El Orden de las Preguntas de Encuestas se deben Dar editandola.</i>
+@endsection
+
 @section('javascript')
 <script type="text/javascript">
     
@@ -77,6 +99,22 @@
             $('#options_guest_question').attr('value','');
             $('#content_question_options').empty();
         });
+        
+        $("#type_input_question").change(function(){
+            
+            if($(this).val() == 1){
+                
+                $("#content_posibles_respuestas").hide();
+                options = [];
+                $('#options_guest_question').attr('value','');
+                $('#content_question_options').empty();
+                
+            } else {
+                $("#content_posibles_respuestas").show();
+            }
+        
+        });
+    
     });
 </script>    
 @endsection

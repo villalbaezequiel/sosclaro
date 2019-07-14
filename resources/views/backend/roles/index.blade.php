@@ -11,32 +11,27 @@
 @endsection
 
 @section('nav-button')
-<a class="btn btn-primary mb-3" href="{{ url('/admin/roles/create') }}">Nuevo Role</a>
+<a class="btn btn-primary mb-3" href="{{ url('/admin/roles/export') }}">Exportar Roles</a>
 @endsection
 
 @section('content')
 <table class="table table-bordered" id="list_roles" width="100%" cellspacing="0">
     <thead>
         <tr>
+            <th>#</th>
             <th>Nombre</th>
             <th>Permisos</th>
-            <th>Activo</th>
-            <th>Acciones</th>
+            <th>Usuarios Relacionados</th>
         </tr>
     </thead>
     <tbody>
         @foreach($roles as $role)
-        <tr>
-            <td>{{ $role->name }}</td>
-            <td>{{ \App\Roles::getPermissions($role->permission) }}</td>
-            <td>{{ \App\Functions::getActive($role->active) }}</td>
-            <td>
-                {!! Form::open(['route' => ['admin.roles.destroy', $role->id], 'method' => 'DELETE']) !!}
-                    <a href="{{ url('/admin/roles/'.$role->id.'/edit') }}" class="btn btn-outline-primary">Editar</a>
-                    <button type="submit" class="btn btn-outline-danger">Eliminar</button>
-                {!! Form::close() !!}
-            </td>
-        </tr>
+            <tr>
+                <td>{{ $role->id }}</td>
+                <td>{{ $role->name }}</td>
+                <td>{{ $role->permission }}</td>
+                <td>{{ \App\UsersProfile::getCountUsersRole($role->id) }}</td>
+            </tr>
         @endforeach
     </tbody>
 </table>

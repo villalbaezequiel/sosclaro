@@ -50,7 +50,14 @@ class GuestQuestionsController extends Controller
             $guest_question = new GuestQuestions;
             $guest_question->id_guest = $request->get('id_guest');
             $guest_question->question = $request->get('guest_question');
-            $guest_question->options = json_encode(explode(',' ,$request->get('options_guest_question')));
+            $guest_question->type_input = $request->get('type_input_question');
+            
+            if($request->get('type_input_question') == 1){
+                $guest_question->options = '';
+            } else {
+                $guest_question->options = json_encode(explode(',' ,$request->get('options_guest_question')));
+            }
+            
             $guest_question->order = 0;
             $guest_question->active = $request->get('active_guest_question');
             $guest_question->save();
@@ -96,11 +103,20 @@ class GuestQuestionsController extends Controller
     public function edit($id)
     {
         $question = GuestQuestions::find($id);
+        if($question->type_input == 1){
+            $options_string = FALSE;
+        } else {
+            $options_string = implode(',' ,json_decode($question->options));
+        }
+        
+        $orders = GuestQuestions::where('id_guest', '=', $question->id_guest)->count();
+        
         return view('backend.guest_questions.edit', [
             'question' => $question,
             'options' => json_decode($question->options),
-            'options_string' => implode(',' ,json_decode($question->options)),
-            'guests' => Guest::all()
+            'options_string' => $options_string,
+            'guests' => Guest::all(),
+            'orders' => $orders 
         ]);
     }
 
@@ -119,8 +135,15 @@ class GuestQuestionsController extends Controller
             $guest_question = GuestQuestions::find($id);
             $guest_question->id_guest = $request->get('id_guest');
             $guest_question->question = $request->get('guest_question');
-            $guest_question->options = json_encode(explode(',' ,$request->get('options_guest_question')));
-            $guest_question->order = 0;
+            $guest_question->type_input = $request->get('type_input_question');
+            
+            if($request->get('type_input_question') == 1){
+                $guest_question->options = '';
+            } else {
+                $guest_question->options = json_encode(explode(',' ,$request->get('options_guest_question')));
+            }
+            
+            $guest_question->order = $request->get('order_question');
             $guest_question->active = $request->get('active_guest_question');
             $guest_question->save();
      

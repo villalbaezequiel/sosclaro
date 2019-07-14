@@ -21,6 +21,7 @@
             <th>#</th>
             <th>Pregunta</th>
             <th>Encuesta</th>
+            <th>Orden</th>
             <th>Activo</th>
             <th>Acciones</th>
         </tr>
@@ -31,6 +32,7 @@
             <td>{{ $question->id }}</td>
             <td>{{ $question->question }}</td>
             <td>{{ \App\Guest::getNameGuest($question->id_guest) }}</td>
+            <td>{{ $question->order }}</td>
             <td>{{ \App\Functions::getActive($question->active) }}</td>
             <td>
                 {!! Form::open(['route' => ['admin.guests.questions.destroy', $question->id], 'method' => 'DELETE']) !!}
