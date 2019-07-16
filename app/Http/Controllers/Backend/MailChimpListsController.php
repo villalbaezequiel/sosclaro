@@ -16,6 +16,11 @@ class MailChimpListsController extends MailChimpController
         parent::__construct();
     }
 
+    public function index()
+    {
+        return view('backend.mailchimp.lists.index');
+    }
+
     // Get information about all lists
     public function getLists()
     {

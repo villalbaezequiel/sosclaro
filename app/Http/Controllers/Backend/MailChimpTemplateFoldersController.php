@@ -16,6 +16,11 @@ class MailChimpTemplateFoldersController extends MailChimpController
         parent::__construct();
     }
 
+    public function index()
+    {
+        return view('backend.mailchimp.template_folders.index');
+    }
+
     // Create a template folder
     public function postTemplateFolders(Request $request)
     {

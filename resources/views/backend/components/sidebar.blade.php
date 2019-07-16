@@ -158,6 +158,29 @@
                 </ul>
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right">
+                <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#mailchimp">
+                    <i class="fa fa-fw fa-envelope"></i>
+                    <span class="nav-link-text">MailChimp</span>
+                </a>
+                <ul class="sidenav-second-level collapse" id="mailchimp">
+                    <li>
+                        <a href="{{ url('/admin/mailchimp/campaign/folders') }}">Campañas en Carpetas</a>
+                    </li>
+                    <li>
+                        <a href="{{ url('/admin/mailchimp/campaigns') }}">Campañas</a>
+                    </li>
+                    <li>
+                        <a href="{{ url('/admin/mailchimp/lists') }}">Listas</a>
+                    </li>
+                    <li>
+                        <a href="{{ url('/admin/mailchimp/template/folders') }}">Templates en Carpetas</a>
+                    </li>
+                    <li>
+                        <a href="{{ url('/admin/mailchimp/templates') }}">Templates</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item" data-toggle="tooltip" data-placement="right">
                 <a class="nav-link" href="{{ url('/admin/preguntas-frecuentes') }}">
                     <i class="fa fa-fw fa-question-circle"></i>
                     <span class="nav-link-text">Preguntas Frecuentes</span>

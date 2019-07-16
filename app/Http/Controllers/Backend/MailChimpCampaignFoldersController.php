@@ -16,6 +16,11 @@ class MailChimpCampaignFoldersController extends MailChimpController
         parent::__construct();
     }
 
+    public function index()
+    {
+        return view('backend.mailchimp.campaign_folders.index');
+    }
+
     // Create campaign folder
     public function postCampaignFolders(Request $request)
     {

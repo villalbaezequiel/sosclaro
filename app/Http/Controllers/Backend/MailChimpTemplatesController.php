@@ -16,6 +16,11 @@ class MailChimpTemplatesController extends MailChimpController
         parent::__construct();
     }
 
+    public function index()
+    {
+        return view('backend.mailchimp.templates.index');
+    }
+
     // Create a templates 
     public function postTemplates(Request $request)
     {

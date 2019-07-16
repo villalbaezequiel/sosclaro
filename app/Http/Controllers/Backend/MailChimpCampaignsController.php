@@ -16,6 +16,11 @@ class MailChimpCampaignsController extends MailChimpController
         parent::__construct();
     }
 
+    public function index()
+    {
+        return view('backend.mailchimp.campaigns.index');
+    }
+
     // Create a new campaign
     public function postCampaigns(Request $request)
     {
