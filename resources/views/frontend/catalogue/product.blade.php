@@ -93,7 +93,7 @@
                         <input type="hidden" name="profile_ml" value="">
 
                         <button type="button" class="btn btn-outline" data-dismiss="modal">Cancelar</button>
-                        <input class="btn" type="submit" value="Confirmar" />
+                        <input class="btn" type="submit" value="Confirmar" onclick="setDisabled(this)" />
                     </div>
                 </form>
             </div>
@@ -111,4 +111,12 @@
 
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script type="text/javascript" src="{{ asset('assets/frontend/js/api_ml.js') }}"></script>
+
+<script>
+    function setDisabled(row)
+    {
+        $(row).prop('disabled', true);
+    }
+</script>
+
 @endsection

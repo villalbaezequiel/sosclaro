@@ -130,4 +130,18 @@ class Functions extends Model
         call_user_func_array('array_multisort', $args);
         return array_pop($args);
     }
+
+    static public function catchErr($e){
+      if(\Config::get('app.debug'))
+        $message = 'ERROR('.$e->getLine().'): '.$e->getMessage();
+      else
+        $message = 'Se ha producido un error. Por favor intente nuevamente.';
+
+      $respuesta = array(
+        'estado' => false,
+        'mensaje' => $message
+      );
+
+      return \Response::json($respuesta);
+    }
 }

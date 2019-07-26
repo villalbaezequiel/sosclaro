@@ -73,6 +73,13 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
         Route::resource('/media_images_categorias', 'Backend\MediaCategoriesController');
         Route::resource('/media_images', 'Backend\MediasController');
 
+        // MailChimp
+        Route::get('/mailchimp/campaigns', 'Backend\MailChimpCampaignsController@index');
+        Route::get('/mailchimp/campaign/folders', 'Backend\MailChimpCampaignFoldersController@index');
+        Route::get('/mailchimp/lists', 'Backend\MailChimpListsController@index');
+        Route::get('/mailchimp/templates', 'Backend\MailChimpTemplatesController@index');
+        Route::get('/mailchimp/template/folders', 'Backend\MailChimpTemplateFoldersController@index');
+
         //Settings
         Route::resource('/settings/politics_privacy', 'Backend\PoliticsPrivacyController');
         Route::resource('/settings/legal_products', 'Backend\LegalProductsController');
