@@ -4,11 +4,18 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
-use App\Dni;
 
 class Dni extends Model
 {
     protected $table = 'dni';
+
+    /**
+     * Get the user that owns the dni.
+     */
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
 
     static public function getPuntos($id) {
         $puntos = Dni::where('id_user', '=', $id)->get();

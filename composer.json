@@ -10,7 +10,8 @@
         "laravelcollective/html": "^5.2",
         "maatwebsite/excel": "^2.1",
         "nilportugues/laravel5-json-api": "^2.4",
-        "guzzlehttp/guzzle": "^6.3"
+        "guzzlehttp/guzzle": "^6.3",
+        "doctrine/dbal": "*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

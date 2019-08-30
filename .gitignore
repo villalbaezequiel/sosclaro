@@ -11,3 +11,7 @@ Homestead.json
 .vscode/
 /public/exports
 /bootstrap/cache
+storage/*
+.idea/
+composer.lock
+server.php

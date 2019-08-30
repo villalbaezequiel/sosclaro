@@ -5,13 +5,20 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 use App\Cities;
-use App\UsersProfile;
 use App\Agentes;
 use App\Regions;
 
 class UsersProfile extends Model
 {
     protected $table = 'users_profile';
+
+    /**
+     * Get the user.
+     */
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
 
     static public function getCityUser($id_city) {
         $cityUser = Cities::where('id', '=', $id_city)->get();
