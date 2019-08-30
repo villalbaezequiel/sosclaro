@@ -3,11 +3,35 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Products;
+
 
 class Products extends Model
 {
     protected $table = 'products';
+
+    /**
+     * Get the category that owns the product.
+     */
+    public function category()
+    {
+        return $this->belongsTo('App\Categories');
+    }
+
+    /**
+     * Get the exchanges for the products.
+     */
+    public function exchanges()
+    {
+        return $this->hasMany('App\Exchanges');
+    }
+
+    /**
+     * Get the exchanges for the products.
+     */
+    public function productsHistoryStock()
+    {
+        return $this->hasMany('App\ProductsHistoryStock');
+    }
     
     static public function getName($id) {
         $product = Products::where('id', '=', $id)->get();

@@ -3,12 +3,29 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Guest;
-use App\GuestQuestions;
+
 
 class Guest extends Model
 {
     protected $table = "guest";
+
+    /**
+     * Get the guest question for the guest.
+     */
+    public function guestQuestions()
+    {
+        return $this->hasMany('App\GuestQuestions');
+    }
+
+    /**
+     * Get the guest users for the guest.
+     */
+    public function guestUsers()
+    {
+        return $this->hasMany('App\GuestUsers');
+    }
+
+
 
     static public function getNameGuest($id_guest) {
         $guest = Guest::find($id_guest);

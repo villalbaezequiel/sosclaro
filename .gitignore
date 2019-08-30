@@ -15,6 +15,7 @@ Homestead.json
 /public/exports
 /bootstrap/cache
 server.php
+storage/*
 .idea/
 composer.lock
 .env.example
