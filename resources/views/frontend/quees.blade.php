@@ -41,7 +41,9 @@
                     <br />Este indicador va a medir el porcentaje de PSRs con compra de recarga de $200 o más, sobre el total de PSRs asigndos por vendedor.</p>
                 <p>
                     <strong>2) Cantidad de sus PSRs asignados con ICB:</strong>
-                    <br /> Este indicador va a medir el porcentaje de PSRs con ICB (primera recarga) sobre el total de PSRs asignados por vendedor.</p>
+                    <br /> Este indicador va a medir el porcentaje de PSRs con ICB (primera recarga) sobre el total de PSRs asignados por vendedor.
+                    <br /> *Solo se considera ICB nominado el cual se contabilizará a los 5 días posteriores del cierre de mes
+                </p>
                 <p>
                     <strong>3) Crecimiento de ICB de tu agencia:</strong>
                     <br /> Este indicador va a medir el porcentaje de crecimiento de tu Agencia de ICB (primera recarga).</p>
