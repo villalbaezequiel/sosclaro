@@ -152,7 +152,7 @@ class Report extends Model
                   'products.name as canje_producto_nombre',
                   'products.codigo as canje_producto_codigo',
                   'exchanges.ID_ML as voucher',
-                  'exchanges.ID_ML as ID_voucher',
+                  'exchanges.ID_ML as email_ML',
                   'exchanges.status as canje_estado',
                   'exchanges.created_at as canje_fecha_registro')
                 ->join('users_profile', 'users_profile.id_user', '=', 'users.id')
