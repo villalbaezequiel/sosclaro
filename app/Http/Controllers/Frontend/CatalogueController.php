@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use App\Functions;
 use App\User;
@@ -29,10 +30,11 @@ class CatalogueController extends Controller
         ]);
     }
 
-    public function productExchange(Request $request){
-
-       $message;
+    public function productExchange(Request $request) {
+        $message;
         try {
+
+            DB::beginTransaction();
 
             if($request->get('data')){
 
@@ -40,13 +42,40 @@ class CatalogueController extends Controller
 
               //actualizo stock del producto
               $product = Products::find($data['id_product']);
+
+              if ($product->stock = 0) {
+                  DB::rollback();
+                  $message = 'No hay más stock de este producto.';
+
+                  $respuesta = array(
+                      'estado' => false,
+                      'mensaje' => $message
+                  );
+
+                  return \Response::json($respuesta);
+              }
+
               $product->stock = ($product->stock - 1);
               $product->save();
 
               //actualizo puntos del usuarios
               $dni = Dni::find($data['id_dni']);
+
+              if ($dni->puntos - $data['product_puntos'] < 0) {
+                  DB::rollback();
+                  $message = 'No tienes los puntos suficientes para realizar este canje.';
+
+                  $respuesta = array(
+                      'estado' => false,
+                      'mensaje' => $message
+                  );
+
+                  return \Response::json($respuesta);
+              }
+
               $dni->puntos = ($dni->puntos - $data['product_puntos']);
               $dni->save();
+
 
               //agrego el canje a table Exchange
               $canje = new Exchanges;
@@ -54,19 +83,21 @@ class CatalogueController extends Controller
               $canje->id_product = $data['id_product'];
 
               if($data['nickname_ml']){
-              $canje->nickname_ml = $data['nickname_ml'];
+                $canje->nickname_ml = $data['nickname_ml'];
               }
 
               if($data['id_ml']){
-              $canje->ID_ML = $data['id_ml'];
+                $canje->ID_ML = $data['id_ml'];
               }
 
               if($data['profile_ml']){
-              $canje->profile_ml = $data['profile_ml'];
+                $canje->profile_ml = $data['profile_ml'];
               }
 
               $canje->status = 0;
               $canje->save();
+
+              DB::commit();
 
               $user = User::find($data['id_user']); // informacion del Usuario/Vendedor que proceso el Canje
 
@@ -124,15 +155,15 @@ class CatalogueController extends Controller
             $canje->id_product = $request->get('id_product');
 
             if($request->get('nickname_ml')){
-            $canje->nickname_ml = $request->get('nickname_ml');
+                $canje->nickname_ml = $request->get('nickname_ml');
             }
 
             if($request->get('id_ml')){
-            $canje->ID_ML = $request->get('id_ml');
+                $canje->ID_ML = $request->get('id_ml');
             }
 
             if($request->get('profile_ml')){
-            $canje->profile_ml = $request->get('profile_ml');
+                $canje->profile_ml = $request->get('profile_ml');
             }
 
             $canje->status = 0;
@@ -193,7 +224,7 @@ class CatalogueController extends Controller
             );
 
             return \Response::json($respuesta);
-	}
+	    }
     }
 
     public function productSuccess() {
