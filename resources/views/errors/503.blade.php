@@ -60,8 +60,7 @@
     <body>
         <div class="container">
             <div class="contentImage">
-                <img class="mantenimiento" src="/assets/frontend/img/mantenimiento.png" alt="SOS CLARO">
-
+                <img  src="img/mantenimiento.png" alt="SOS CLARO">
             </div>
         </div>
     </body>
