@@ -173,12 +173,11 @@ class Report extends Model
             $user->voucher = ($user->voucher ? 'Si' : 'No');
             $user->canje_estado = Exchanges::getStatus($user->canje_estado);
             $user->canje_fecha_registro = Functions::getDate($user->canje_fecha_registro);
-
             $user->dni = Dni::getDni($user->id);
             $user->nombre_completo = Dni::getName($user->id);
-        
+
             if($userId == $user->id){
-              $user->puntos_historicos = $puntos_actuales_user;
+              //$user->puntos_historicos = $puntos_actuales_user;
               $puntos_actuales_user = ( $puntos_actuales_user - Products::getValuePuntosByCode($user->canje_producto_codigo) );
             } else {
               $user->puntos_historicos = Dni::getPuntosHistorical($user->id);
