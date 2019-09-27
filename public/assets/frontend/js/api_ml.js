@@ -15,6 +15,9 @@ $(document).ready(function(){
 
     $("#change-product-catalogo").submit(function(event) {
 
+      //disable the submit button
+      $("#btnSubmit").attr("disabled", true);
+
       event.preventDefault();
 
       var nickname = $("input[name=voucher_product]").val();
