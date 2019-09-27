@@ -178,12 +178,15 @@ class Report extends Model
 
             if($userId == $user->id){
               //$user->puntos_historicos = $puntos_actuales_user;
+              $user->puntos_historicos = Dni::getPuntosHistorical($user->id);
               $puntos_actuales_user = ( $puntos_actuales_user - Products::getValuePuntosByCode($user->canje_producto_codigo) );
             } else {
               $user->puntos_historicos = Dni::getPuntosHistorical($user->id);
               $puntos_actuales_user = ( Dni::getPuntosHistorical($user->id) - Products::getValuePuntosByCode($user->canje_producto_codigo) );  
             }            
             $user->puntos_actuales = $puntos_actuales_user;
+
+            $user->puntos_hoy = \App\Dni::getPuntos($user->id);
 
             $userId = $user->id;
     }
