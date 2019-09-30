@@ -77,7 +77,7 @@ class Report extends Model
             $user->dni = Dni::getDni($user->id);
             $user->nombre_completo = Dni::getName($user->id);
             $user->puntos_historicos = Dni::getPuntosHistorical($user->id);
-            $user->puntos_actuales = Dni::getPuntos($user->id);
+            $user->puntos_disponibles_hoy = Dni::getPuntos($user->id);
 	  }
           
           $sheet->fromArray(json_decode( json_encode($users), true));
@@ -124,7 +124,7 @@ class Report extends Model
             $user->dni = Dni::getDni($user->id);
             $user->nombre_completo = Dni::getName($user->id);
             $user->puntos_historicos = Dni::getPuntosHistorical($user->id);
-            $user->puntos_actuales = Dni::getPuntos($user->id);
+            $user->puntos_disponibles_hoy = Dni::getPuntos($user->id);
 	  }
           
           $sheet->fromArray(json_decode( json_encode($users), true));
@@ -175,7 +175,10 @@ class Report extends Model
             $user->canje_fecha_registro = Functions::getDate($user->canje_fecha_registro);
             $user->dni = Dni::getDni($user->id);
             $user->nombre_completo = Dni::getName($user->id);
+            $user->puntos_historicos = Dni::getPuntosHistorical($user->id);
+            $user->puntos_disponibles_hoy = Dni::getPuntos($user->id);
 
+            /*
             if($userId == $user->id){
               //$user->puntos_historicos = $puntos_actuales_user;
               $user->puntos_historicos = Dni::getPuntosHistorical($user->id);
@@ -187,6 +190,7 @@ class Report extends Model
             $user->puntos_actuales = $puntos_actuales_user;
 
             $user->puntos_hoy = \App\Dni::getPuntos($user->id);
+            */
 
             $userId = $user->id;
     }
