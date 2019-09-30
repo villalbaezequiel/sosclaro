@@ -43,16 +43,11 @@ class CatalogueController extends Controller
                 //actualizo stock del producto
                 $product = Products::find($data['id_product']);
 
-                if ($product->stock = 0) {
+                if ($product->stock == 0) {
                   DB::rollback();
                   $message = 'No hay más stock de este producto.';
 
-                  $respuesta = array(
-                      'estado' => false,
-                      'mensaje' => $message
-                  );
-
-                  return \Response::json($respuesta);
+                  return back()->withErrors($message);
                 }
 
                 $product->stock = ($product->stock - 1);
@@ -65,12 +60,7 @@ class CatalogueController extends Controller
                   DB::rollback();
                   $message = 'No tienes los puntos suficientes para realizar este canje.';
 
-                  $respuesta = array(
-                      'estado' => false,
-                      'mensaje' => $message
-                  );
-
-                  return \Response::json($respuesta);
+                  return back()->withErrors($message);
                 }
 
                 $dni->puntos = ($dni->puntos - $data['product_puntos']);
@@ -146,16 +136,11 @@ class CatalogueController extends Controller
 
                 //actualizo stock del producto
                 $product = Products::find($request->get('id_product'));
-                if ($product->stock = 0) {
+                if ($product->stock == 0) {
                     DB::rollback();
                     $message = 'No hay más stock de este producto.';
 
-                    $respuesta = array(
-                        'estado' => false,
-                        'mensaje' => $message
-                    );
-
-                    return \Response::json($respuesta);
+                    return back()->withErrors($message);
                 }
 
                 $product->stock = ($product->stock - 1);
@@ -168,12 +153,7 @@ class CatalogueController extends Controller
                     DB::rollback();
                     $message = 'No tienes los puntos suficientes para realizar este canje.';
 
-                    $respuesta = array(
-                        'estado' => false,
-                        'mensaje' => $message
-                    );
-
-                    return \Response::json($respuesta);
+                    return back()->withErrors($message);
                 }
 
                 $dni->puntos = ($dni->puntos - $request->get('product_puntos'));

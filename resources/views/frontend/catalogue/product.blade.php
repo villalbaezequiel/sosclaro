@@ -10,6 +10,11 @@
             <span class="title">Producto</span>
         </hgroup>
         <article class="section-content">
+
+            @if(count($errors) > 0)
+                <div class="alert alert-danger" role="alert">{{ $errors->first() }}</div>
+            @endif
+
             <div class="row">
                 <div class="col-md-7">
                     <div class="card">
@@ -93,7 +98,7 @@
                         <input type="hidden" name="profile_ml" value="">
 
                         <button type="button" class="btn btn-outline" data-dismiss="modal">Cancelar</button>
-                        <input class="btn" type="submit" value="Confirmar" onclick="setDisabled(this)" />
+                        <input class="btn" id="btnSubmit" type="submit" value="Confirmar" />
                     </div>
                 </form>
             </div>
@@ -115,7 +120,7 @@
 <script>
     function setDisabled(row)
     {
-        $(row).prop('disabled', true);
+        //$(row).prop('disabled', true);
     }
 </script>
 
