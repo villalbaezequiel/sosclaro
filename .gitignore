@@ -1,6 +1,9 @@
+# Don't track content of these folder
 /vendor
 /node_modules
 /public/storage
+storage/
+
 Homestead.yaml
 Homestead.json
 .env
@@ -11,3 +14,12 @@ Homestead.json
 .vscode/
 /public/exports
 /bootstrap/cache
+server.php
+.idea/
+composer.lock
+.env.example
+.gitattributes
+artisan
+gulpfile.js
+phpunit.xml
+public/.htaccess
