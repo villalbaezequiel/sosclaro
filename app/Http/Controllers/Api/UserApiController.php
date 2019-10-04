@@ -17,14 +17,12 @@ use App\Exchanges;
 use App\GuestUsers;
 use App\Products;
 use App\Guest;
-use App\DesempenoName;
 
 class UserApiController extends Controller
 {
     
     public function store(Request $request)
     {
-        $message;
         try {
             
             $checkDni = Dni::where('dni', '=', $request->get('dni'))->get()->toArray();

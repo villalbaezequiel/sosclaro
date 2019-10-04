@@ -15,11 +15,25 @@ class AddFkUsersProfile extends Migration
 
         DB::table("users_profile")->select('*')->whereNotIn('id_user',function($query) {
             $query->select('id')->from('users');
-        })->delete();
-
-        DB::table("users_profile")->select('*')->whereNotIn('id_dni',function($query) {
+        })->whereNotIn('id_dni',function($query) {
             $query->select('id')->from('dni');
         })->delete();
+
+        $users_profile_sin_dni = DB::table("users_profile")->select('*')->whereNotIn('id_dni',function($query) {
+            $query->select('id')->from('dni');
+        })->get();
+
+        foreach ($users_profile_sin_dni as $user_profile_sin_dni) {
+            $dni = \App\Dni::where('id_user', $user_profile_sin_dni->id_user)->first();
+            if ($dni) {
+                $user_profile = \App\UsersProfile::find($user_profile_sin_dni->id);
+                $user_profile->id_dni = $dni->id;
+                echo ". Actualiza UserProfile " . $user_profile->id . " con id_dni " . $dni->id;
+                echo "\r\n";
+                $user_profile->save();
+            }
+
+        }
 
 
 /*
@@ -50,19 +64,19 @@ class AddFkUsersProfile extends Migration
 
 
         Schema::table('users_profile', function (Blueprint $table) {
-            $table->integer('id_user')->unsigned()->unique()->change();
-            $table->foreign('id_user')->references('id')->on('users');
-            $table->integer('id_dni')->unsigned()->unique()->change();
-            $table->foreign('id_dni')->references('id')->on('dni');
-            /*$table->foreign('id_agente')->references('id')->on('agentes');
-            $table->integer('id_province')->unsigned()->change();
-            $table->foreign('id_province')->references('id')->on('provinces');
-            $table->integer('id_city')->unsigned()->change();
-            $table->foreign('id_city')->references('id')->on('city');
-            $table->integer('id_region')->unsigned()->change();
-            $table->foreign('id_region')->references('id')->on('regions');
-            $table->integer('id_role')->unsigned()->change();
-            $table->foreign('id_role')->references('id')->on('roles');*/
+            /*$table->integer('id_user')->unsigned()->unique()->change();
+             $table->foreign('id_user')->references('id')->on('users');
+             $table->integer('id_dni')->unsigned()->unique()->change();
+             $table->foreign('id_dni')->references('id')->on('dni');
+             $table->foreign('id_agente')->references('id')->on('agentes');
+             $table->integer('id_province')->unsigned()->change();
+             $table->foreign('id_province')->references('id')->on('provinces');
+             $table->integer('id_city')->unsigned()->change();
+             $table->foreign('id_city')->references('id')->on('city');
+             $table->integer('id_region')->unsigned()->change();
+             $table->foreign('id_region')->references('id')->on('regions');
+             $table->integer('id_role')->unsigned()->change();
+             $table->foreign('id_role')->references('id')->on('roles');*/
         });
     }
 

@@ -73,15 +73,15 @@ class CatalogueController extends Controller
                 $canje->id_product = $data['id_product'];
 
                 if($data['nickname_ml']){
-                $canje->nickname_ml = $data['nickname_ml'];
+                    $canje->nickname_ml = $data['nickname_ml'];
                 }
 
                 if($data['id_ml']){
-                $canje->ID_ML = $data['id_ml'];
+                    $canje->ID_ML = $data['id_ml'];
                 }
 
                 if($data['profile_ml']){
-                $canje->profile_ml = $data['profile_ml'];
+                    $canje->profile_ml = $data['profile_ml'];
                 }
 
                 $canje->status = 0;
