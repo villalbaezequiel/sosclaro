@@ -12,7 +12,7 @@ class AddFkExchanges extends Migration
      */
     public function up()
     {
-        //DB::table('products')->insert(['id' => 9999, 'codigo' => 99999999, 'id_category' => 1, 'name' => 'Producto borrado', 'active' => 0]);
+        DB::table('products')->insert(['id' => 9999, 'codigo' => 99999999, 'id_category' => 1, 'name' => 'Producto borrado', 'active' => 0]);
 
         $exchanges_sin_producto = DB::table("exchanges")->select('*')->whereNotIn('id_product',function($query) {
             $query->select('id')->from('products');
