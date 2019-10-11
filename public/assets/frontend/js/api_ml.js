@@ -22,6 +22,32 @@ $(document).ready(function(){
 
       var nickname = $("input[name=voucher_product]").val();
 
+      /*axios.get('https://auth.mercadolibre.com.ar/authorization?response_type=token&client_id=5707152971206336')
+          .then(function (response) {
+              var seller = response.data;
+              console.log (seller);
+          }) */
+
+        axios.post('https://auth.mercadolibre.com.ar/authorization?response_type=token&client_id=5707152971206336', {
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+            }
+        }).then(function (response) {
+            console.log('response is : ' + response.data);
+        }).catch(function (error) {
+            if (error.response) {
+                console.log(error.response.headers);
+            }
+            else if (error.request) {
+                console.log(error.request);
+            }
+            else {
+                console.log(error.message);
+            }
+            console.log(error.config);
+        });
+
+      /*
       axios.get('https://api.mercadolibre.com/sites/MLA/search?nickname='+nickname)
       .then(function (response) {
         var seller = response.data.seller;
@@ -93,7 +119,7 @@ $(document).ready(function(){
         });
         console.log(error);
         return false;
-      });
+      });*/
 
     });
 
