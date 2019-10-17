@@ -72,14 +72,10 @@
 
                         @if($product->voucher == 1)
                         <div class="form-group">
-                            <label>
                             @if(strpos($product->name, 'Netshoes') !== false)
-                                Email de su Cuenta de Netshoes
-                            @else
-                                Nickname de su Cuenta de MercadoLibre
+                                <label>Email de su Cuenta de Netshoes</label>
+                                <input type="text" class="form-control" name="voucher_product" required>
                             @endif
-                            </label>
-                            <input type="text" class="form-control" name="voucher_product" required>
                         </div>
 
                           <input type="hidden" name="is_voucher" value="1">
@@ -96,9 +92,15 @@
                         <input type="hidden" name="nickname_ml" value="">
                         <input type="hidden" name="id_ml" value="">
                         <input type="hidden" name="profile_ml" value="">
+                        <input type="hidden" name="email_ml" value="">
 
                         <button type="button" class="btn btn-outline" data-dismiss="modal">Cancelar</button>
-                        <input class="btn" id="btnSubmit" type="submit" value="Confirmar" />
+                        @if(strpos($product->name, 'Netshoes') !== false)
+                            <input class="btn" id="btnSubmit" type="submit" value="Confirmar" />
+                        @else
+                            <input class="btn" id="btnSubmit" type="submit" value="Conectar con Mercado Libre" />
+                        @endif
+
                     </div>
                 </form>
             </div>
@@ -113,6 +115,7 @@
 @section('javascript')
 <link href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.33.1/sweetalert2.min.css" rel="stylesheet" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.33.1/sweetalert2.min.js"></script>
+<script src="https://static.mlstatic.com/org-img/sdk/mercadolibre-1.0.4.min.js"></script>
 
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script type="text/javascript" src="{{ asset('assets/frontend/js/api_ml.js') }}"></script>

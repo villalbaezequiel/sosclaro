@@ -31,7 +31,7 @@ class CatalogueController extends Controller
     }
 
     public function productExchange(Request $request) {
-        $message;
+
         try {
 
             if($request->get('data')){
@@ -63,6 +63,9 @@ class CatalogueController extends Controller
                   return back()->withErrors($message);
                 }
 
+                //puntos antes del canje
+                $puntos_before_exchange = $dni->puntos;
+
                 $dni->puntos = ($dni->puntos - $data['product_puntos']);
                 $dni->save();
 
@@ -71,6 +74,7 @@ class CatalogueController extends Controller
                 $canje = new Exchanges;
                 $canje->id_user = $data['id_user'];
                 $canje->id_product = $data['id_product'];
+                $canje->puntos_before_exchange = $puntos_before_exchange;
 
                 if($data['nickname_ml']){
                     $canje->nickname_ml = $data['nickname_ml'];
@@ -82,6 +86,10 @@ class CatalogueController extends Controller
 
                 if($data['profile_ml']){
                     $canje->profile_ml = $data['profile_ml'];
+                }
+
+                if($data['email_ml']){
+                    $canje->email_ml = $data['email_ml'];
                 }
 
                 $canje->status = 0;
@@ -103,9 +111,8 @@ class CatalogueController extends Controller
                     $m->subject('¡Nuevo Canje!');
                     $m->to($mailTo['email'], $mailTo['name']);
                     $m->cc($mailCc['email'], $mailCc['name']);
-                    };
+                };
                 Functions::sendMail('emails.canje', ['url' => config('app.url'), 'canje' => $canje, 'product' => $product, 'dni' => $dni, 'user' => $user], $callback);
-
 
                 // --- Envio Mail al Usuario/Vendedor que proceso el Canje ---
                 $callbackUserVendedor = function ($m) use ($user, $dni) {
