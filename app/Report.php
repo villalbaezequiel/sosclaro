@@ -151,17 +151,16 @@ class Report extends Model
                    
                   'products.name as canje_producto_nombre',
                   'products.codigo as canje_producto_codigo',
-                  'exchanges.ID_ML as voucher',
-                  'exchanges.ID_ML as email_ML',
+                  'exchanges.nickname_ML as nickname_ML',
+                  'exchanges.email_ML as email_ML',
                   'exchanges.status as canje_estado',
+                  'exchanges.puntos_before_exchange as puntos_antes_del_canje',
                   'exchanges.created_at as canje_fecha_registro')
                 ->join('users_profile', 'users_profile.id_user', '=', 'users.id')
                 ->join('exchanges', 'exchanges.id_user', '=', 'users.id')
                 ->join('products', 'products.id', '=', 'exchanges.id_product')
                 ->get();
-        
-    $puntos_actuales_user = 0;
-    $userId = 0;
+
 	  foreach($users as &$user){
 
             $user->fecha_nacimiento = UsersProfile::getDateYear($user->fecha_nacimiento);
@@ -190,9 +189,9 @@ class Report extends Model
             $user->puntos_actuales = $puntos_actuales_user;
 
             $user->puntos_hoy = \App\Dni::getPuntos($user->id);
-            */
 
-            $userId = $user->id;
+
+            $userId = $user->id; */
     }
 
           $finish = json_decode( json_encode($users), true);

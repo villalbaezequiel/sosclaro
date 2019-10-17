@@ -15,84 +15,71 @@ $(document).ready(function(){
 
     $("#change-product-catalogo").submit(function(event) {
 
-      //disable the submit button
-      $("#btnSubmit").attr("disabled", true);
+        event.preventDefault();
 
-      event.preventDefault();
+        //disable the submit button
+        //$("#btnSubmit").attr("disabled", true);
 
-      var nickname = $("input[name=voucher_product]").val();
-
-      /*axios.get('https://auth.mercadolibre.com.ar/authorization?response_type=token&client_id=5707152971206336')
-          .then(function (response) {
-              var seller = response.data;
-              console.log (seller);
-          }) */
-
-        axios.post('https://auth.mercadolibre.com.ar/authorization?response_type=token&client_id=5707152971206336', {
-            headers: {
-                'Access-Control-Allow-Origin': '*',
-            }
-        }).then(function (response) {
-            console.log('response is : ' + response.data);
-        }).catch(function (error) {
-            if (error.response) {
-                console.log(error.response.headers);
-            }
-            else if (error.request) {
-                console.log(error.request);
-            }
-            else {
-                console.log(error.message);
-            }
-            console.log(error.config);
+        MELI.init({
+            client_id: 5707152971206336,
+            xauth_protocol: "https://",
+            xauth_domain: "secure.mlstatic.com",
+            xd_url: "/org-img/sdk/xd-1.0.4.html"
         });
 
-      /*
-      axios.get('https://api.mercadolibre.com/sites/MLA/search?nickname='+nickname)
-      .then(function (response) {
-        var seller = response.data.seller;
+        MELI.login(function() {
+            MELI.get("/users/me", {}, function(dataMl) {
+                var dataUser = dataMl[2];
+                console.log(dataUser);
+                if(dataUser != null){
+                    $("input[name=nickname_ml]").val(dataUser.nickname);
+                    $("input[name=id_ml]").val(dataUser.id);
+                    $("input[name=profile_ml]").val(dataUser.permalink);
+                    $("input[name=email_ml]").val(dataUser.email);
 
-        if(seller != null){
+                    $.ajaxSetup({ headers: {'X-CSRF-TOKEN': $("input[name=_token]").val()} });
+                    $.ajax({
+                        type: "POST",
+                        url: $("#change-product-catalogo").attr('action'),
+                        data: { _method: 'POST', data: getFormData($("#change-product-catalogo")) },
+                        dataType: "json",
+                        success: function(data)
+                        {
+                            console.log(data);
+                            if(data.status == 1){
+                                window.location.href = window.origin+'/catalogo/producto/success_ml';
+                            } else {
+                                Swal.fire({
+                                    title: 'Se ha Producido un error! Por favor comuniquese con Soporte Tecnico. Gracias!',
+                                    type: 'info',
+                                    showCancelButton: false,
+                                    confirmButtonColor: '#3085d6',
+                                    cancelButtonColor: '#d33',
+                                    confirmButtonText: 'Aceptar'
+                                });
+                                return false;
+                            }
+                        }
+                    })
+                    .catch(function (er) {
+                        Swal.fire({
+                            title: 'Se ha Producido un error! Por favor comuniquese con Soporte Tecnico. Gracias!',
+                            type: 'info',
+                            showCancelButton: false,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: 'Aceptar'
+                        });
+                        console.log(er);
+                        return false;
+                    });
 
-          axios.get('https://api.mercadolibre.com/users/'+seller.id)
-          .then(function (res) {
-            var dataUsers = res.data;
-            var profileUser = dataUsers.permalink;
-
-            $("input[name=nickname_ml]").val(nickname);
-            $("input[name=id_ml]").val(seller.id);
-            $("input[name=profile_ml]").val(profileUser);
-
-            $.ajaxSetup({ headers: {'X-CSRF-TOKEN': $("input[name=_token]").val()} });
-            $.ajax({
-               type: "POST",
-               url: $("#change-product-catalogo").attr('action'),
-               data: { _method: 'POST', data: getFormData($("#change-product-catalogo")) },
-               dataType: "json",
-               success: function(data)
-               {
-                 if(data.status == 1){
-                   window.location.href = window.origin+'/catalogo/producto/success_ml';
-                 }
-               }
-           });
-
-          })
-          .catch(function (er) {
-            Swal.fire({
-              title: 'Se ha Producido un error! Por favor comuniquese con Soporte Tecnico. Gracias!',
-              type: 'info',
-              showCancelButton: false,
-              confirmButtonColor: '#3085d6',
-              cancelButtonColor: '#d33',
-              confirmButtonText: 'Aceptar'
+                }
             });
-            console.log(er);
-            return false;
-          });
+        });
 
 
-        } else {
+       /* } else {
           Swal.fire({
             title: 'Usuario de MercadoLibre Incorrecto',
             type: 'warning',
@@ -105,24 +92,9 @@ $(document).ready(function(){
             cancelButtonColor: '#d33',
             confirmButtonText: 'Aceptar'
           });
-        }
+        } */
 
       })
-      .catch(function (error) {
-        Swal.fire({
-          title: 'Se ha Producido un error! Por favor comuniquese con Soporte Tecnico. Gracias!',
-          type: 'info',
-          showCancelButton: false,
-          confirmButtonColor: '#3085d6',
-          cancelButtonColor: '#d33',
-          confirmButtonText: 'Aceptar'
-        });
-        console.log(error);
-        return false;
-      });*/
-
-    });
-
   }
 
 });
