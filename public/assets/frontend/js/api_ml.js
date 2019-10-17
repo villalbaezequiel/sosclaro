@@ -18,7 +18,7 @@ $(document).ready(function(){
         event.preventDefault();
 
         //disable the submit button
-        //$("#btnSubmit").attr("disabled", true);
+        $("#btnSubmit").attr("disabled", true);
 
         MELI.init({
             client_id: 5707152971206336,
@@ -30,7 +30,7 @@ $(document).ready(function(){
         MELI.login(function() {
             MELI.get("/users/me", {}, function(dataMl) {
                 var dataUser = dataMl[2];
-                console.log(dataUser);
+
                 if(dataUser != null){
                     $("input[name=nickname_ml]").val(dataUser.nickname);
                     $("input[name=id_ml]").val(dataUser.id);
@@ -45,7 +45,7 @@ $(document).ready(function(){
                         dataType: "json",
                         success: function(data)
                         {
-                            console.log(data);
+
                             if(data.status == 1){
                                 window.location.href = window.origin+'/catalogo/producto/success_ml';
                             } else {
@@ -77,23 +77,7 @@ $(document).ready(function(){
                 }
             });
         });
-
-
-       /* } else {
-          Swal.fire({
-            title: 'Usuario de MercadoLibre Incorrecto',
-            type: 'warning',
-            html:
-                '<p>¡Verifique sus <a target="_blank" href="https://myaccount.mercadolibre.com.ar/profile">"Datos de cuenta"</a> de MercadoLibre!</p>'+
-                '<p>Nota: <em>Su Nickname se encuentra en la sección "Datos de cuenta", y es la información de "Usuario".</em></p>'+
-                '<p>Su Nickname se puede modificar <a target="_blank" href="https://myaccount.mercadolibre.com.ar/profile/changeNickName">aquí</a></p>',
-            showCancelButton: false,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Aceptar'
-          });
-        } */
-
+        
       })
   }
 
