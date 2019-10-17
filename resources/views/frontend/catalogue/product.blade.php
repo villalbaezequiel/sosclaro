@@ -97,6 +97,8 @@
                         <button type="button" class="btn btn-outline" data-dismiss="modal">Cancelar</button>
                         @if(strpos($product->name, 'Netshoes') !== false)
                             <input class="btn" id="btnSubmit" type="submit" value="Confirmar" />
+                        @elseif($product->voucher == 0)
+                            <input class="btn" id="btnSubmit" type="submit" value="Confirmar" />
                         @else
                             <input class="btn" id="btnSubmit" type="submit" value="Conectar con Mercado Libre" />
                         @endif
