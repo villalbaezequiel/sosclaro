@@ -169,7 +169,6 @@ class Report extends Model
             $user->agente = Agentes::getName($user->agente);
             $user->fecha_registro = Functions::getDate($user->fecha_registro);
             $user->activo = ($user->activo == 0 ? 'No' : 'Si');
-            $user->voucher = ($user->voucher ? 'Si' : 'No');
             $user->canje_estado = Exchanges::getStatus($user->canje_estado);
             $user->canje_fecha_registro = Functions::getDate($user->canje_fecha_registro);
             $user->dni = Dni::getDni($user->id);
