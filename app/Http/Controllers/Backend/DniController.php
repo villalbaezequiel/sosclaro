@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\UsersAllowed;
 use Illuminate\Http\Request;
 
 use Carbon\Carbon;
@@ -64,58 +65,36 @@ class DniController extends Controller
                     foreach ($dniList as $val) {
 
                       $value = (object) $val;
-                        
-                      $searchDni = Dni::where('dni', '=', $value->dni)->get();
+
+                      $searchDni = UsersAllowed::where('dni', '=', $value->dni)->get();
                       if(!$searchDni->count()){
 
-                        $insert = new Dni;
+                        $insert = new UsersAllowed;
                         $insert->dni = $value->dni;       
                         $insert->name = $value->nombres;
                         $insert->last_name = $value->apellidos;
                         $insert->id_region = $value->id_region;
+
+                        if (!empty($value->agente)) {
+                            $agency_id = Agentes::getIdForName($value->agente);
+                            $insert->id_agency = $agency_id;
+                        }
+
+                        if (!empty($value->localidad)) {
+                          $insert->city = $value->localidad;
+                        }
+
+                        if (!empty($value->provincia)) {
+                          $insert->id_province = Provinces::getIdForName($value->provincia);
+                        }
+
+                        $insert->type_user = strtoupper($value->tipo_usuario); // tipo de usuario
+                        $insert->admission_date = $value->fecha_ingreso; // fecha ingreso
+                        $insert->address = $value->direccion;
+                        $insert->postal_code = $value->cp;
+
                         $insert->save();
 
-                        if(Dni::getIdDni($value->dni)){
-
-                            //insert agente
-                            if(Agentes::checkAgente($value->agente) == FALSE && !empty($value->agente)){
-                                $agente = new Agentes;
-                                $agente->name = $value->agente;
-                                $agente->description = '';
-                                $agente->active = 1;
-                                $agente->save();
-                            }
-
-                            //insert city
-                            if(Cities::checkCitie($value->localidad) == FALSE && !empty($value->localidad)){
-                                $citie = new Cities;
-                                $citie->id_province = 0;
-                                $citie->name = $value->localidad;
-                                $citie->active = 1;
-                                $citie->save();
-                            }
-
-                            //insert province
-                            if(Provinces::checkProvince($value->provincia) == FALSE && !empty($value->provincia)){
-                                $prov = new Provinces;
-                                $prov->name = $value->provincia;
-                                $prov->save();
-                            }
-
-                            $ID_UsersProfile = UsersProfile::getIdForIdDni(Dni::getIdDni($value->dni));
-                            
-                            $userProfile = ($ID_UsersProfile ? UsersProfile::find($ID_UsersProfile) : new UsersProfile);
-                            $userProfile->id_user = 0;
-                            $userProfile->id_dni= Dni::getIdDni($value->dni);
-                            $userProfile->id_agente = (empty($value->agente) ? 0 : Agentes::getIdForName($value->agente));
-                            $userProfile->id_province = (empty($value->provincia) ? 0 : Provinces::getIdForName($value->provincia));
-                            $userProfile->id_city = (empty($value->localidad) ? 0 : Cities::getIdForName($value->localidad));
-                            $userProfile->type_user = $value->tipo_usuario; // tipo de usuario
-                            $userProfile->admission_date = $value->fecha_ingreso; // fecha ingreso
-                            $userProfile->address = $value->direccion;
-                            $userProfile->cp = $value->cp;
-                            $userProfile->save();
-                        }
                       }
                     }
                   }  

@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Agentes;
+use App\Cities;
+use App\Provinces;
+use App\UsersAllowed;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -27,26 +31,47 @@ class UserApiController extends Controller
             
             $checkDni = Dni::where('dni', '=', $request->get('dni'))->get()->toArray();
             $checkEmail = User::where('email', '=', $request->get('email'))->get()->toArray();
-            
-            if(!empty($checkDni[0]) && $checkDni[0]['id_user'] == 0 && empty($checkEmail[0])){
-                $user = new User;
-                $user->name = ' ';    
-                $user->email = $request->get('email');    
-                $user->password = bcrypt($request->get('password'));    
-                $user->active = 1;    
-                $user->save(); 
+            $userAllowed = UsersAllowed::where('dni', '=', $request->get('dni'))->get();
 
+            if(!empty($checkUserAllowed) && empty($checkDni[0]) && empty($checkEmail[0])){
+
+                DB::beginTransaction();
+
+                $user = new User;
+                $user->name = $request->get('dni_name');
+                $user->email = $request->get('email');
+                $user->password = bcrypt($request->get('password'));
+                $user->active = 1;
+                $user->save();
+
+                //dni
+                $dni = new Dni;
+                $dni->dni = $userAllowed->dni;
+                $dni->id_region = $userAllowed->id_region;
+                $dni->id_user = $user->id;
+                $dni->name = $request->get('dni_name');
+                $dni->last_name = $request->get('dni_last_name');
+                $dni->puntos = 0;
+                $dni->historical_puntos = 0;
+                $dni->save();
+
+                //user profile
                 $userProfile = new UsersProfile;
+                $userProfile->id_dni = Dni::getIdDni($userAllowed->dni);
+                $userProfile->id_agente = $userAllowed->id_agency;
+                $userProfile->id_province = $userAllowed->id_province;
+                $userProfile->id_city = (empty($userAllowed->localidad) ? 0 : Cities::getIdForName($userAllowed->localidad));
+                $userProfile->type_user = $userAllowed->type_user; // tipo de usuario
+                $userProfile->admission_date = $userAllowed->admission_date; // fecha ingreso
+                $userProfile->address = $userAllowed->address;
+                $userProfile->cp = $userAllowed->postal_code;
+
                 $userProfile->id_user = $user->id;
                 $userProfile->id_role = 2;
                 $userProfile->save();
-                
-                $dni = Dni::find($checkDni[0]['id']);
-                $dni->id_user = $user->id;  
-                $dni->name = $request->get('dni_name');  
-                $dni->last_name = $request->get('dni_last_name');  
-                $dni->save(); 
-                
+
+                DB::commit();
+
                 $message = "Usuario: creado con exito!";
             }
             
