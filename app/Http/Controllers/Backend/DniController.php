@@ -69,7 +69,7 @@ class DniController extends Controller
                       $searchDni = UsersAllowed::where('dni', '=', $value->dni)->get();
                       if(!$searchDni->count()){
 
-                        $insert = new UsersAllowed;
+                        $insert = new UsersAllowed();
                         $insert->dni = $value->dni;       
                         $insert->name = $value->nombres;
                         $insert->last_name = $value->apellidos;
