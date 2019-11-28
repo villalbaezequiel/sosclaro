@@ -28,9 +28,9 @@ class AuthController extends Controller
 
             $checkDni = Dni::where('dni', '=', $request->get('dni'))->get()->toArray();
             $checkEmail = User::where('email', '=', $request->get('email'))->get()->toArray();
-            $userAllowed = UsersAllowed::where('dni', '=', $request->get('dni'))->get();
+            $userAllowed = UsersAllowed::where('dni', '=', $request->get('dni'))->first();
 
-            if(!empty($checkUserAllowed) && empty($checkDni[0]) && empty($checkEmail[0])){
+            if(!empty($userAllowed) && empty($checkDni[0]) && empty($checkEmail[0])){
 
                 DB::beginTransaction();
 
@@ -72,15 +72,15 @@ class AuthController extends Controller
                 $message = "Usuario: creado con exito!";
             }
             
-            if(empty($checkDni[0])){
+            if(empty($userAllowed)){
                 $message = "El DNI no se encuentra en nuestro sistema. Contactá a tu superior o mandanos un mail con tus datos a marketingoperativo@claro.com.ar";
                 return redirect('/registro')->with('message', $message);
 
-            } elseif($checkDni[0]['id_user'] != 0){
+            } elseif(!empty($checkDni)){
                 $message = "Este DNI ya se encuentra registrado";
                 return redirect('/registro')->with('message', $message);
 
-            } elseif(!empty($checkEmail[0])){
+            } elseif(!empty(($checkEmail))){
                 $message = "Email: ".$request->get('email')." ya se encuenta asociado a otro Usuario. ";
                 return redirect('/registro')->with('message', $message);
 
