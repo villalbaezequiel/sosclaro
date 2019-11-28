@@ -93,6 +93,8 @@ class UserApiController extends Controller
         
         } catch(\Exception $e) {
 
+            DB::rollback();
+
             if(\Config::get('app.debug'))
                     $message = 'ERROR('.$e->getLine().'): '.$e->getMessage();
             else
