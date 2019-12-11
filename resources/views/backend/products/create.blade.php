@@ -58,11 +58,20 @@
         <label>Notificar por Mail, cuando el STOCK del Producto, este igual a:</label>
         <input type="number" class="form-control" name="stock_notification_product" required>
     </div>
-    
+
+
+
     <div class="form-group">
-        <div class="custom-control custom-checkbox">
-            <input type="checkbox" class="custom-control-input" name="voucher_product" id="voucher_product">
-            <label class="custom-control-label" for="voucher_product">Voucher MercadoLibre o Netshoes</label>
+        <div class="form-check">
+            <input type="checkbox" class="form-check-input" name="voucher_product" id="voucher_product">
+            <label class="custom-label" for="voucher_product">¿Es voucher de Mercado Libre o Netshoes?</label>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="form-check">
+            <input type="checkbox" class="form-check-input" name="is_fanbag" id="is_fanbag">
+            <label class="custom-label" for="is_fanbag">¿Es código Fanbag?</label>
         </div>
     </div>
     
@@ -81,4 +90,20 @@
 
 @section('content-footer')
 <i>* Los nombres de las imágenes NO DEBEN TENER ESPACIOS. Se recomienda subir en formato JPG y con un tamaño de 640x480px.</i>
+@endsection
+
+
+@section('javascript')
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('#voucher_product').on("click", function() {
+                $('#is_fanbag').prop("checked", false);
+            });
+
+            $('#is_fanbag').on("click", function() {
+                $('#voucher_product').prop("checked", false);
+            });
+
+        });
+    </script>
 @endsection

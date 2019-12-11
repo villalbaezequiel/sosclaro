@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\CodigoFanbag;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -40,6 +41,14 @@ class CatalogueController extends Controller
 
                 $data = $request->get('data');
 
+                if($data['is_fanbag']) {
+                    if($data['email_fanbag'] != $data['email_fanbag_repeat']) {
+                        DB::rollback();
+                        $message = 'Los emails deben coincidir. Por favor intente nuevamente.';
+                        return back()->withErrors($message);
+                    }
+                }
+
                 //actualizo stock del producto
                 $product = Products::find($data['id_product']);
 
@@ -69,12 +78,29 @@ class CatalogueController extends Controller
                 $dni->puntos = ($dni->puntos - $data['product_puntos']);
                 $dni->save();
 
+                //get and update codigo fanbag
+                if($data['is_fanbag']) {
+                    $codigoFanbag = $this->getAndUpdateCodigoFanbag();
+                }
+
 
                 //agrego el canje a table Exchange
                 $canje = new Exchanges;
                 $canje->id_user = $data['id_user'];
                 $canje->id_product = $data['id_product'];
                 $canje->puntos_before_exchange = $puntos_before_exchange;
+
+                if (is_null($canje->puntos_before_exchange) || $canje->puntos_before_exchange == 0 ) {
+                    DB::rollback();
+                    $message = 'Error en el sistema. Por favor intente nuevamente.';
+
+                    return back()->withErrors($message);
+                }
+
+                if ($codigoFanbag) {
+                    $canje->codigo_fanbag = $codigoFanbag->codigo_fanbag;
+                    $canje->email_ml = $data['email_fanbag'];
+                }
 
                 if($data['nickname_ml']){
                     $canje->nickname_ml = $data['nickname_ml'];
@@ -101,41 +127,16 @@ class CatalogueController extends Controller
 
                 $user = User::find($data['id_user']); // informacion del Usuario/Vendedor que proceso el Canje
 
-                // --- Send Mail to Admin new Canje ---
-                // List Emails sending
-                $mailTo = array('email' => 'marketingoperativo@claro.com.ar', 'name' => 'Marketing Operativo');
-                $mailCc = array('email' => 'lucas.marozzi@claro.com.ar', 'name' => 'Lucas Marozzi');
+                $this->sendEmailAndAlerts($canje, $product, $dni, $user);
 
-                $callback = function ($m) use ($mailTo, $mailCc) {
-                    $m->from('no-reply@mejoresvendedores.com.ar', 'Admin MejoresVendedores');
-                    $m->subject('¡Nuevo Canje!');
-                    $m->to($mailTo['email'], $mailTo['name']);
-                    $m->cc($mailCc['email'], $mailCc['name']);
-                };
-                Functions::sendMail('emails.canje', ['url' => config('app.url'), 'canje' => $canje, 'product' => $product, 'dni' => $dni, 'user' => $user], $callback);
+                if($data['is_fanbag']) {
+                    return \Response::json(['status' => 1, 'codigo_fanbag' => $codigoFanbag->codigo_fanbag]);
 
-                // --- Envio Mail al Usuario/Vendedor que proceso el Canje ---
-                $callbackUserVendedor = function ($m) use ($user, $dni) {
-                    $m->from('no-reply@mejoresvendedores.com.ar', 'MejoresVendedores');
-                    $m->subject('¡Nuevo Canje!');
-                    $m->to($user->email, $dni->name.' '.$dni->last_name);
-                };
-
-                Functions::sendMail('emails.canje_vendedor', ['url' => config('app.url'), 'product' => $product], $callbackUserVendedor);
-
-
-                // send mail alerta de STOCK de Producto
-                if($product->stock <= $product->notification){
-                    $callbackASP = function ($m) use ($mailTo, $mailCc) {
-                      $m->from('no-reply@mejoresvendedores.com.ar', 'Admin MejoresVendedores');
-                      $m->subject('¡Alerta de Stock de Producto!');
-                      $m->to($mailTo['email'], $mailTo['name']);
-                      $m->cc($mailCc['email'], $mailCc['name']);
-                    };
-                Functions::sendMail('emails.stock_product', ['url' => config('app.url'), 'product' => $product], $callbackASP);
+                } else {
+                    return \Response::json(['status' => 1]);
                 }
 
-              return \Response::json(['status' => 1]);
+
 
             } else {
 
@@ -190,43 +191,11 @@ class CatalogueController extends Controller
 
                 $user = User::find($request->get('id_user')); // informacion del Usuario/Vendedor que proceso el Canje
 
-                // --- Send Mail to Admin new Canje ---
-                // List Emails sending
-                $mailTo = array('email' => 'marketingoperativo@claro.com.ar', 'name' => 'Marketing Operativo');
-                $mailCc = array('email' => 'lucas.marozzi@claro.com.ar', 'name' => 'Lucas Marozzi');
-
-                $callback = function ($m) use ($mailTo, $mailCc) {
-                  $m->from('no-reply@mejoresvendedores.com.ar', 'Admin MejoresVendedores');
-                  $m->subject('¡Nuevo Canje!');
-                  $m->to($mailTo['email'], $mailTo['name']);
-                  $m->cc($mailCc['email'], $mailCc['name']);
-                };
-                Functions::sendMail('emails.canje', ['url' => config('app.url'), 'canje' => $canje, 'product' => $product, 'dni' => $dni, 'user' => $user], $callback);
-
-
-                // --- Envio Mail al Usuario/Vendedor que proceso el Canje ---
-                $callbackUserVendedor = function ($m) use ($user, $dni) {
-                  $m->from('no-reply@mejoresvendedores.com.ar', 'MejoresVendedores');
-                  $m->subject('¡Nuevo Canje!');
-                  $m->to($user->email, $dni->name.' '.$dni->last_name);
-                };
-                Functions::sendMail('emails.canje_vendedor', ['url' => config('app.url'), 'product' => $product], $callbackUserVendedor);
-
-
-                // send mail alerta de STOCK de Producto
-                if($product->stock <= $product->notification){
-                  $callbackASP = function ($m) use ($mailTo, $mailCc) {
-                    $m->from('no-reply@mejoresvendedores.com.ar', 'Admin MejoresVendedores');
-                    $m->subject('¡Alerta de Stock de Producto!');
-                    $m->to($mailTo['email'], $mailTo['name']);
-                    $m->cc($mailCc['email'], $mailCc['name']);
-                  };
-                  Functions::sendMail('emails.stock_product', ['url' => config('app.url'), 'product' => $product], $callbackASP);
-                }
+                $this->sendEmailAndAlerts($canje, $product, $dni, $user);
 
                 $message = "Felicitaciones!";
 
-                return redirect('/catalogo/producto/success')->with('message', $message);
+                return redirect('/catalogo/producto/success')->with('codigoFanbag', $message);
 
           }
 
@@ -252,6 +221,60 @@ class CatalogueController extends Controller
 
     public function productSuccessMl() {
         return view('frontend.catalogue.success_ml');
+    }
+
+    public function productSuccessFanbag() {
+
+        return view('frontend.catalogue.success_fanbag');
+    }
+
+
+
+    private function getAndUpdateCodigoFanbag() {
+        $codigoFanbag = CodigoFanbag::where('active', '=', 0)->firstOrFail();
+
+        if ($codigoFanbag) {
+            $codigoFanbag->active = 1;
+            $codigoFanbag->save();
+        }
+
+        return $codigoFanbag;
+    }
+
+    private function sendEmailAndAlerts($canje, $product, $dni, $user) {
+        // --- Send Mail to Admin new Canje ---
+        // List Emails sending
+        $mailTo = array('email' => 'marketingoperativo@claro.com.ar', 'name' => 'Marketing Operativo');
+        $mailCc = array('email' => 'lucas.marozzi@claro.com.ar', 'name' => 'Lucas Marozzi');
+
+        $callback = function ($m) use ($mailTo, $mailCc) {
+            $m->from('no-reply@mejoresvendedores.com.ar', 'Admin MejoresVendedores');
+            $m->subject('¡Nuevo Canje!');
+            $m->to($mailTo['email'], $mailTo['name']);
+            $m->cc($mailCc['email'], $mailCc['name']);
+        };
+        Functions::sendMail('emails.canje', ['url' => config('app.url'), 'canje' => $canje, 'product' => $product, 'dni' => $dni, 'user' => $user], $callback);
+
+
+        // --- Envio Mail al Usuario/Vendedor que proceso el Canje ---
+        $callbackUserVendedor = function ($m) use ($user, $dni) {
+            $m->from('no-reply@mejoresvendedores.com.ar', 'MejoresVendedores');
+            $m->subject('¡Nuevo Canje!');
+            $m->to($user->email, $dni->name.' '.$dni->last_name);
+        };
+        Functions::sendMail('emails.canje_vendedor', ['url' => config('app.url'), 'product' => $product], $callbackUserVendedor);
+
+
+        // send mail alerta de STOCK de Producto
+        if($product->stock <= $product->notification){
+            $callbackASP = function ($m) use ($mailTo, $mailCc) {
+                $m->from('no-reply@mejoresvendedores.com.ar', 'Admin MejoresVendedores');
+                $m->subject('¡Alerta de Stock de Producto!');
+                $m->to($mailTo['email'], $mailTo['name']);
+                $m->cc($mailCc['email'], $mailCc['name']);
+            };
+            Functions::sendMail('emails.stock_product', ['url' => config('app.url'), 'product' => $product], $callbackASP);
+        }
     }
 
 }

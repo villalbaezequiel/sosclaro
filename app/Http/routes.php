@@ -55,6 +55,8 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
         Route::resource('/locations', 'Backend\LocationsController');
         Route::resource('/categories', 'Backend\CategoriesController');
         Route::resource('/products', 'Backend\ProductsController');
+        Route::resource('/codigos_fanbag', 'Backend\CodigosFanbagController');
+        Route::resource('/codigos_fanbag/store', 'Backend\CodigosFanbagController@store');
         Route::resource('/exchanges', 'Backend\ExchangesController');
         Route::resource('/tips/categories', 'Backend\TipsCategoriesController');
         Route::resource('/tips', 'Backend\TipsController');
@@ -135,6 +137,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/catalogo', 'Frontend\CatalogueController@index');
     Route::get('/catalogo/producto/success', 'Frontend\CatalogueController@productSuccess');
     Route::get('/catalogo/producto/success_ml', 'Frontend\CatalogueController@productSuccessMl');
+    Route::get('/catalogo/producto/success_fanbag', 'Frontend\CatalogueController@productSuccessFanbag');
     Route::get('/catalogo/producto/{id}', 'Frontend\CatalogueController@productShow');
 
     //catalogue POST

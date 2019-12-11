@@ -7,7 +7,7 @@
 @endsection
 
 @section('content')
-{!! Form::open(['route' => 'admin.dni.store', 'method' => 'POST', 'enctype' => 'multipart/form-data', 'id' => 'admin-dni-store' ]) !!}
+{!! Form::open(['route' => 'admin.codigos_fanbag.store', 'method' => 'POST', 'enctype' => 'multipart/form-data', 'id' => 'admin-dni-store' ]) !!}
     <div class="custom-file">
         <input type="file" class="custom-file-input" id="import_dni" name="import_dni" onchange="$('#upload-file-info').val($(this).val());" required>
         <label class="custom-file-label" for="import_dni">Listado DNI</label>

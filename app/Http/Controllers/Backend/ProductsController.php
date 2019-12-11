@@ -62,7 +62,9 @@ class ProductsController extends Controller
             $product->stock = $request->get('stock_initial_product');
             $product->notification = $request->get('stock_notification_product');
             $product->voucher = ($request->get('voucher_product') ? 1 : 0);
+            $product->is_fanbag = ($request->get('is_fanbag') ? 1 : 0);
             $product->active = $request->get('active_product');
+
             $product->save();
             
             // add stock initial to Product

@@ -77,9 +77,12 @@
                                 <input type="text" class="form-control" name="voucher_product" required>
                             @endif
                         </div>
-
                           <input type="hidden" name="is_voucher" value="1">
-
+                        @elseif($product->is_fanbag == 1)
+                            <label>Ingrese su email:</label>
+                            <input type="text" class="form-control" id="email_fanbag" name="email_fanbag" required>
+                            <label>Repita su email:</label>
+                            <input type="text" class="form-control" id="email_fanbag_repeat" name="email_fanbag_repeat" required>
                         @endif
                     </div>
                     <div class="modal-footer">
@@ -97,7 +100,8 @@
                         <button type="button" class="btn btn-outline" data-dismiss="modal">Cancelar</button>
                         @if(strpos($product->name, 'Netshoes') !== false)
                             <input class="btn" id="btnSubmit" type="submit" value="Confirmar" />
-                        @elseif($product->voucher == 0)
+                        @elseif($product->is_fanbag == 1)
+                            <input type="hidden" name="is_fanbag" value="{{ $product->is_fanbag }}">
                             <input class="btn" id="btnSubmit" type="submit" value="Confirmar" />
                         @else
                             <input class="btn" id="btnSubmit" type="submit" value="Conectar con Mercado Libre" />

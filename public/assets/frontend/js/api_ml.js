@@ -9,6 +9,21 @@ function getFormData($form){
     return indexed_array;
 }
 
+function comprobarEmail(){
+
+    if ($("#email_fanbag").val() == $("#email_fanbag_repeat").val()) {
+        return true;
+    }
+    return false;
+
+}
+
+function isEmail(email) {
+    var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+    return regex.test(email);
+}
+
+
 $(document).ready(function(){
 
   if($("input[name=is_voucher]").length != 0){
@@ -47,7 +62,7 @@ $(document).ready(function(){
                         {
 
                             if(data.status == 1){
-                                window.location.href = window.origin+'/catalogo/producto/success_ml';
+                                window.location.href = window.origin+'/catalogo/producto/success_fanbag';
                             } else {
                                 Swal.fire({
                                     title: 'Se ha Producido un error! Por favor comuniquese con Soporte Tecnico. Gracias!',
@@ -79,6 +94,99 @@ $(document).ready(function(){
         });
         
       })
+  } else {
+
+      $("#change-product-catalogo").submit(function(event) {
+
+          
+          if (!isEmail($("#email_fanbag").val())) {
+              Swal.fire({
+                  title: 'Debe ingresar un email válido. Por favor intente nuevamente.',
+                  type: 'info',
+                  showCancelButton: false,
+                  confirmButtonColor: '#3085d6',
+                  cancelButtonColor: '#d33',
+                  confirmButtonText: 'Aceptar'
+              });
+              return false;
+          }
+
+          if (!isEmail($("#email_fanbag_repeat").val())) {
+              Swal.fire({
+                  title: 'Debe ingresar un email válido. Por favor intente nuevamente.',
+                  type: 'info',
+                  showCancelButton: false,
+                  confirmButtonColor: '#3085d6',
+                  cancelButtonColor: '#d33',
+                  confirmButtonText: 'Aceptar'
+              });
+              return false;
+          }
+
+          if (!comprobarEmail()) {
+              Swal.fire({
+                  title: 'Los emails deben coincidir. Por favor intente nuevamente.',
+                  type: 'info',
+                  showCancelButton: false,
+                  confirmButtonColor: '#3085d6',
+                  cancelButtonColor: '#d33',
+                  confirmButtonText: 'Aceptar'
+              });
+              return false;
+          }
+
+          event.preventDefault();
+
+          $.ajaxSetup({ headers: {'X-CSRF-TOKEN': $("input[name=_token]").val()} });
+          $.ajax({
+              type: "POST",
+              url: $("#change-product-catalogo").attr('action'),
+              data: { _method: 'POST', data: getFormData($("#change-product-catalogo")) },
+              dataType: "json",
+              success: function(data)
+              {
+
+                  if(data.status == 1){
+                      window.location.href = window.origin+'/catalogo/producto/success_fanbag?codigo=' + data.codigo_fanbag;
+                  } else {
+                      Swal.fire({
+                          title: 'Se ha Producido un error! Por favor comuniquese con Soporte Tecnico. Gracias!',
+                          type: 'info',
+                          showCancelButton: false,
+                          confirmButtonColor: '#3085d6',
+                          cancelButtonColor: '#d33',
+                          confirmButtonText: 'Aceptar'
+                      });
+                      return false;
+                  }
+              }
+          })
+              .catch(function (er) {
+                  Swal.fire({
+                      title: 'Se ha Producido un error! Por favor comuniquese con Soporte Tecnico. Gracias!',
+                      type: 'info',
+                      showCancelButton: false,
+                      confirmButtonColor: '#3085d6',
+                      cancelButtonColor: '#d33',
+                      confirmButtonText: 'Aceptar'
+                  });
+                  console.log(er);
+                  return false;
+              });
+      });
+
   }
+
+
+    $("#email_fanbag_repeat").on('paste', function(e){
+        e.preventDefault();
+        alert('Esta acción está prohibida');
+    });
+
+    $("#email_fanbag").on('copy', function(e){
+        e.preventDefault();
+        alert('Esta acción está prohibida');
+    });
+
 
 });
