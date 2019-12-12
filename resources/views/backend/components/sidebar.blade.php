@@ -75,6 +75,9 @@
                     <li>
                         <a href="{{ url('/admin/products') }}">Productos</a>
                     </li>
+                    <li>
+                        <a href="{{ url('/admin/codigos_fanbag') }}">Códigos Fanbag</a>
+                    </li>
                 </ul>
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right">
