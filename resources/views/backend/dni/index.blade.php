@@ -12,7 +12,7 @@
 
 @section('nav-button')
 <a class="btn btn-primary mb-3" href="{{ url('/admin/dni/create') }}">Importar Lista DNI</a>
-<a class="btn btn-primary mb-3" href="{{ asset('assets/backend/docs/plantilla_import_dni.xlsx') }}">Descargar Plantilla Excel</a>
+<a class="btn btn-success mb-3" href="{{ asset('assets/backend/docs/plantilla_import_dni.xlsx') }}">Descargar Plantilla Excel</a>
 
 @endsection
 

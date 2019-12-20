@@ -31,13 +31,16 @@
                     </div>
 
                     <div class="card-body">
-                    @if(\App\Dni::getPuntos(Auth::user()->id) >= $product->price)
+
+                    @if(\App\Exchanges::getCountPendientes(Auth::user()->id) > 2)
+                        <i>Te recordamos que debes cambiar el estado del envio una vez que lo recibas para poder seguir canjeando.</i>
+                    @elseif(\App\Dni::getPuntos(Auth::user()->id) >= $product->price)
                       @if($product->stock <= 0)
                         <i>Producto Sin Stock.</i>
                       @else
                         <button class="btn" type="button" data-toggle="modal" data-target="#{{ $product->id }}">Canjear</button>
                       @endif
-                    @else
+                    @elseif (\App\Dni::getPuntos(Auth::user()->id) < $product->price)
                       <i>No tienes puntos suficientes para canjear este Producto.</i>
                     @endif
                     </div>

@@ -12,6 +12,8 @@
 
 @section('nav-button')
 <a class="btn btn-primary mb-3" href="{{ url('/admin/codigos_fanbag/create') }}">Importar Codigos Fanbag</a>
+<a class="btn btn-success mb-3" href="{{ asset('assets/backend/docs/plantilla_import_fanbag.xlsx') }}">Descargar Plantilla Excel</a>
+
 @endsection
 
 @section('content')
@@ -34,7 +36,7 @@
             <td>{{ $codigo->fanbag }}</td>
             <td>{{ $codigo->codigo_fanbag }}</td>
             <td>{{ $codigo->active }}</td>
-            <td>{{ $codigo->expires }}</td>
+            <td>{{ $codigo->expire }}</td>
         </tr>
         @endforeach
     </tbody>
@@ -45,7 +47,7 @@
 @section('javascript')
 <script type="text/javascript">
 $(document).ready(function(){
-    $("#list_dni").DataTable({
+    $("#list_codigo_fanbag").DataTable({
         "language": {
             "url": "https://cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
         }

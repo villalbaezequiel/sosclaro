@@ -70,7 +70,8 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
         Route::resource('/results', 'Backend\ResultsController');
         Route::resource('/bonus_track_categories', 'Backend\BonusTrackCategoriesController');
         Route::resource('/bonus_track', 'Backend\BonusTrackController');
-        Route::resource('/users_update', 'Backend\UsersUpdateController');
+        Route::resource('/users_update', 'Backend\UserActiveController');
+        Route::resource('/users_update/store', 'Backend\UserActiveController@store');
         Route::resource('/popup', 'Backend\PopUpController');
         Route::resource('/media_images_categorias', 'Backend\MediaCategoriesController');
         Route::resource('/media_images', 'Backend\MediasController');

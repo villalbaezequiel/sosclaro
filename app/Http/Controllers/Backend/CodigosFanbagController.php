@@ -65,18 +65,22 @@ class CodigosFanbagController extends Controller
 
                             $value = (object) $val;
 
-                            $searchCodigo = CodigoFanbag::where('codigo_fanbag', '=', $value->codigo_voucher)->get();
-                            if(!$searchCodigo->count()){
+                            if (!is_null($value->fanbag)) {
+                                $searchCodigo = CodigoFanbag::where('codigo_fanbag', '=', $value->codigo_voucher)->get();
+                                if(!$searchCodigo->count()){
 
-                                $insert = new CodigoFanbag();
-                                $insert->fanbag = $value->fanbag;
-                                $insert->codigo_fanbag = $value->codigo_voucher;
-                                $insert->active = $value->active;
-                                $insert->expire = $value->expire;
+                                    $insert = new CodigoFanbag();
+                                    $insert->fanbag = $value->fanbag;
+                                    $insert->codigo_fanbag = $value->codigo_voucher;
+                                    $insert->active = $value->active;
+                                    $insert->expire = $expected = new \DateTime($value->expire);
 
-                                $insert->save();
+                                    $insert->save();
 
+                                }
                             }
+
+
                         }
                     }
 

@@ -35,4 +35,9 @@ class Exchanges extends Model
         }
     }
 
+    static public function getCountPendientes($id) {
+        return Exchanges::where('id_user', '=', $id)
+            ->where('status', '<>', 2)->count();
+    }
+
 }

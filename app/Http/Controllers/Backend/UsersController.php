@@ -43,6 +43,20 @@ class UsersController extends Controller
     }
 
     /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function test2()
+    {
+        return view('backend.users.index', [
+            'users' => User::all()
+        ]);
+    }
+
+
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request

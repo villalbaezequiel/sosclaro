@@ -22,7 +22,7 @@
     <a href="" onclick="window.history.go(-1); return false;" class="btn btn-danger">Cancelar</a>
 {!! Form::close() !!}
 
-<div id="preview-dni" style="display: none">
+<div id="preview-codigos-fanbag" style="display: none">
     <table class="table table-striped">
       <thead>
         <tr>
@@ -49,13 +49,13 @@
 @endsection
 
 @section('content-footer')
-<i>* Al Importar una Nueva Lista de números DNI, si el Numero DNI ya existe, se renovaran los puntos y indicador.</i>
+<i>* Al Importar una nueva lista de códigos, los códigos ya existentes no serán tenidos en cuenta.</i>
 @endsection
 
 @section('javascript')
 <script type="text/javascript">
 $(document).ready(function(){
-    var form = $("#admin-dni-store");
+    var form = $("#admin-codigos_fanbag-store");
     
     form.submit(function(event){
         

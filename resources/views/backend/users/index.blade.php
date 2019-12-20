@@ -12,7 +12,10 @@
 
 @section('nav-button')
 <a class="btn btn-primary mb-3" href="{{ url('/admin/users/create') }}">Exportar Usuarios</a>
+<a class="btn btn-primary mb-3" href="{{ url('/admin/users/update_users') }}">Importar Usuarios Activos</a>
 @endsection
+
+
 
 @section('content')
 <table class="table table-bordered" id="list_users" width="100%" cellspacing="0">
