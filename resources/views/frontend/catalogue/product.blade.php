@@ -32,9 +32,10 @@
 
                     <div class="card-body">
 
-                    @if(\App\Exchanges::getCountPendientes(Auth::user()->id) > 2)
-                        <i>Te recordamos que debes cambiar el estado del envio una vez que lo recibas para poder seguir canjeando.</i>
-                    @elseif(\App\Dni::getPuntos(Auth::user()->id) >= $product->price)
+                    @if(\App\Exchanges::getCountPendientes(Auth::user()->id) >= 2)
+                        <h5>Te recordamos que debes cambiar el estado del envio una vez que lo recibas para poder seguir canjeando.</h5>
+                            <p><a class="btn btn-primary" href="/usuario/canjes">Ver Mis Canjes</a></p>
+                            @elseif(\App\Dni::getPuntos(Auth::user()->id) >= $product->price)
                       @if($product->stock <= 0)
                         <i>Producto Sin Stock.</i>
                       @else

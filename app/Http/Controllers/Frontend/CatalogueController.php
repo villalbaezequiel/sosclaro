@@ -89,6 +89,7 @@ class CatalogueController extends Controller
                 $canje->id_user = $data['id_user'];
                 $canje->id_product = $data['id_product'];
                 $canje->puntos_before_exchange = $puntos_before_exchange;
+                $canje->status = 0;
 
                 if (is_null($canje->puntos_before_exchange) || $canje->puntos_before_exchange == 0 ) {
                     DB::rollback();
@@ -100,6 +101,7 @@ class CatalogueController extends Controller
                 if ($codigoFanbag) {
                     $canje->codigo_fanbag = $codigoFanbag->codigo_fanbag;
                     $canje->email_ml = $data['email_fanbag'];
+                    $canje->status = 1;
                 }
 
                 if($data['nickname_ml']){
@@ -118,7 +120,7 @@ class CatalogueController extends Controller
                     $canje->email_ml = $data['email_ml'];
                 }
 
-                $canje->status = 0;
+
                 $canje->save();
 
                 DB::commit();
