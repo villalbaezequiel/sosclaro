@@ -277,7 +277,7 @@ class CatalogueController extends Controller
             Functions::sendMail('emails.canje_vendedor', ['url' => config('app.url'), 'product' => $product], $callbackUserVendedor);
         }
         else {
-            Functions::sendMail('emails.canje_vendedor', ['url' => config('app.url'), 'product' => $product, 'code_fanbag' => $code_fanbag], $callbackUserVendedor);
+            Functions::sendMail('emails.canje_fanbag', ['url' => config('app.url'), 'product' => $product, 'code_fanbag' => $code_fanbag], $callbackUserVendedor);
 
         }
 
