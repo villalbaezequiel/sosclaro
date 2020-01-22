@@ -48,7 +48,9 @@ class CodigosFanbagController extends Controller
         try {
             if($request->hasFile('import_codigos')){
                 $path = $request->file('import_codigos')->getRealPath();
-                $data = Excel::load($path, function($reader) {})->get();
+                $data = Excel::load($path, function($reader) {})
+                    ->ignoreEmpty()
+                    ->get();
                 $values = array();
 
                 if(!empty($data) && $data->count()){

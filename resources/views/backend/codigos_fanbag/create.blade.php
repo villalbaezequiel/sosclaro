@@ -75,7 +75,7 @@ $(document).ready(function(){
                 $(".loading").hide();
                 
                 $(".alert.alert-success").show();
-                setTimeout(function(){ window.location = "/admin/codigosFanbag"; }, 4000);
+                setTimeout(function(){ window.location = "/admin/codigos_fanbag"; }, 4000);
 
               }
             },
