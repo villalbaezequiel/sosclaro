@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Agentes;
 use App\CodigoFanbag;
 use App\Http\Controllers\Controller;
+use App\Products;
 use App\Provinces;
 use App\UsersAllowed;
 use Illuminate\Http\Request;
@@ -33,7 +34,10 @@ class CodigosFanbagController extends Controller
      */
     public function create()
     {
-        return view('backend.codigos_fanbag.create');
+
+        return view('backend.codigos_fanbag.create', [
+            'products' => Products::where('is_fanbag','=', 1)->get()
+        ]);
     }
 
     /**
@@ -44,7 +48,7 @@ class CodigosFanbagController extends Controller
      */
     public function store(Request $request)
     {
-
+        $id_product = $request->get('id_product');
         try {
             if($request->hasFile('import_codigos')){
                 $path = $request->file('import_codigos')->getRealPath();
@@ -72,6 +76,7 @@ class CodigosFanbagController extends Controller
                                 if(!$searchCodigo->count()){
 
                                     $insert = new CodigoFanbag();
+                                    $insert->id_product = $id_product;
                                     $insert->fanbag = $value->fanbag;
                                     $insert->codigo_fanbag = $value->codigo_voucher;
                                     $insert->active = $value->active;

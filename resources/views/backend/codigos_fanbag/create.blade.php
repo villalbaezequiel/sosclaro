@@ -8,6 +8,15 @@
 
 @section('content')
 {!! Form::open(['route' => 'admin.codigos_fanbag.store', 'method' => 'POST', 'enctype' => 'multipart/form-data', 'id' => 'admin-codigos_fanbag-store' ]) !!}
+    <div class="form-group">
+        <label>Producto Fanbag:</label>
+        <select class="form-control" name="id_product" required>
+            <option value="">Seleccionar...</option>
+            @foreach($products as $product)
+                <option value="{{ $product->id }}">{{ $product->name }}</option>
+            @endforeach
+        </select>
+    </div>
     <div class="custom-file">
         <input type="file" class="custom-file-input" id="import_codigos" name="import_codigos" onchange="$('#upload-file-info').val($(this).val());" required>
         <label class="custom-file-label" for="import_dni">Listado Codigos Fanbag</label>

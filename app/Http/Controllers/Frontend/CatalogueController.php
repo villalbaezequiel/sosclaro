@@ -80,7 +80,7 @@ class CatalogueController extends Controller
 
                 //get and update codigo fanbag
                 if($data['is_fanbag']) {
-                    $codigoFanbag = $this->getAndUpdateCodigoFanbag();
+                    $codigoFanbag = $this->getAndUpdateCodigoFanbag($data['id_product']);
                 }
 
 
@@ -237,8 +237,8 @@ class CatalogueController extends Controller
 
 
 
-    private function getAndUpdateCodigoFanbag() {
-        $codigoFanbag = CodigoFanbag::where('active', '=', 0)->firstOrFail();
+    private function getAndUpdateCodigoFanbag($id_product) {
+        $codigoFanbag = CodigoFanbag::where('active', '=', 0)->where('id_product', '=', $id_product)->firstOrFail();
 
         if ($codigoFanbag) {
             $codigoFanbag->active = 1;
