@@ -81,6 +81,11 @@ class CatalogueController extends Controller
                 //get and update codigo fanbag
                 if($data['is_fanbag']) {
                     $codigoFanbag = $this->getAndUpdateCodigoFanbag($data['id_product']);
+                    if (is_null($codigoFanbag) ) {
+                        DB::rollback();
+                        $message = 'No se encontro ningún producto Fanbag disponible.';
+                        return back()->withErrors($message);
+                    }
                 }
 
 
@@ -143,70 +148,9 @@ class CatalogueController extends Controller
 
             }
 
-            /*
-            else {
-
-                DB::beginTransaction();
-
-                //actualizo stock del producto
-                $product = Products::find($request->get('id_product'));
-                if ($product->stock == 0) {
-                    DB::rollback();
-                    $message = 'No hay más stock de este producto.';
-
-                    return back()->withErrors($message);
-                }
-
-                $product->stock = ($product->stock - 1);
-                $product->save();
-
-                //actualizo puntos del usuarios
-                $dni = Dni::find($request->get('id_dni'));
-
-                if ($dni->puntos - $request->get('product_puntos') < 0) {
-                    DB::rollback();
-                    $message = 'No tienes los puntos suficientes para realizar este canje.';
-
-                    return back()->withErrors($message);
-                }
-
-                $dni->puntos = ($dni->puntos - $request->get('product_puntos'));
-                $dni->save();
-
-                //agrego el canje a table Exchange
-                $canje = new Exchanges;
-                $canje->id_user = $request->get('id_user');
-                $canje->id_product = $request->get('id_product');
-
-                if($request->get('nickname_ml')){
-                    $canje->nickname_ml = $request->get('nickname_ml');
-                }
-
-                if($request->get('id_ml')){
-                    $canje->ID_ML = $request->get('id_ml');
-                }
-
-                if($request->get('profile_ml')){
-                    $canje->profile_ml = $request->get('profile_ml');
-                }
-
-                $canje->status = 0;
-                $canje->save();
-
-                DB::commit();
-
-                $user = User::find($request->get('id_user')); // informacion del Usuario/Vendedor que proceso el Canje
-
-                $this->sendEmailAndAlerts($canje, $product, $dni, $user);
-
-                $message = "Felicitaciones!";
-
-                return redirect('/catalogo/producto/success')->with('codigoFanbag', $message);
-
-          }
-            */
-
         } catch(\Exception $e) {
+
+            DB::rollback();
 
             if(\Config::get('app.debug'))
                     $message = 'ERROR('.$e->getLine().'): '.$e->getMessage();
@@ -238,7 +182,7 @@ class CatalogueController extends Controller
 
 
     private function getAndUpdateCodigoFanbag($id_product) {
-        $codigoFanbag = CodigoFanbag::where('active', '=', 0)->where('id_product', '=', $id_product)->firstOrFail();
+        $codigoFanbag = CodigoFanbag::where('active', '=', 0)->where('id_product', '=', $id_product)->first();
 
         if ($codigoFanbag) {
             $codigoFanbag->active = 1;
