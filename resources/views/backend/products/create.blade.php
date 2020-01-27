@@ -1,5 +1,4 @@
 @extends('layouts.backend')
-
 @section('title', "Productos / Alta")
 @section('content')
 {!! Form::open(['route' => 'admin.products.store', 'method' => 'POST', 'enctype' => 'multipart/form-data' ]) !!}
@@ -25,7 +24,7 @@
 
     <div class="form-group">
         <label>Descripción:</label>
-        <textarea class="form-control" name="description_product" rows="3" required></textarea>
+        <textarea class="form-control summernote" name="description_product" rows="3" required></textarea>
     </div>
 
     <div class="form-group">
@@ -94,6 +93,7 @@
 
 
 @section('javascript')
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.4/summernote.js"></script>
     <script type="text/javascript">
         $(document).ready(function(){
             $('#voucher_product').on("click", function() {
@@ -102,6 +102,13 @@
 
             $('#is_fanbag').on("click", function() {
                 $('#voucher_product').prop("checked", false);
+            });
+
+            $('.summernote').summernote({
+                height: 150,   //set editable area's height
+                codemirror: { // codemirror options
+                    theme: 'monokai'
+                }
             });
 
         });

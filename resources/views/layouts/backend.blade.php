@@ -16,7 +16,10 @@
     <!-- plugin CSS-->
     <link href="{{ asset('assets/backend/css/dataTables.bootstrap4.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/backend/css/sb-admin.css') }}" rel="stylesheet">
-    
+    <!-- Text Edit HTML -->
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote.min.css" rel="stylesheet">
+
+
     @yield('css')
 </head>
 

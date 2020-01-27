@@ -26,7 +26,7 @@
                         <span class="badge badge-danger badge-large">{{ $product->price }} puntos</span>
                         <h4 class="card-title">{{ $product->name }}</h4>
                         <p class="card-text">
-                            {{ $product->description }}
+                            {!! $product->description !!}
                         </p>
                     </div>
 
