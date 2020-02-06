@@ -28,7 +28,7 @@
                         <a href="{{ url('/admin/roles') }}">Roles</a>
                     </li>
                     <li>
-                        <a href="{{ url('/admin/users_update') }}">Actualizar Puntos/Agencia</a>
+                        <a href="{{ url('/admin/users_update/create') }}">Actualizar Puntos/Agencia</a>
                     </li>
 <!--                    <li>
                         <a href="{{ url('/admin/users') }}">Historial Usuarios</a>
