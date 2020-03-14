@@ -36,7 +36,9 @@ class DniController extends Controller
         try {
             if($request->hasFile('import_dni')){
                 $path = $request->file('import_dni')->getRealPath();
-                $data = Excel::load($path, function($reader) {})->get();
+                $data = Excel::load($path, function($reader) {})
+                    ->ignoreEmpty()
+                    ->get();
                 $values = array();
                 
                 if(!empty($data) && $data->count()){
@@ -112,6 +114,8 @@ class DniController extends Controller
               $message = 'ERROR('.$e->getLine().'): '.$e->getMessage();
             else
               $message = 'Se ha producido un error. Por favor intente nuevamente.';
+
+            $message = 'ERROR('.$e->getLine().'): '.$e->getMessage();
 
             $respuesta = array(
                     'estado' => false,
@@ -196,11 +200,13 @@ class DniController extends Controller
             return response()->json(['estado' => $status_message]);
         
         } catch(\Exception $e) {
-
+            /*
             if(\Config::get('app.debug'))
               $message = 'ERROR('.$e->getLine().'): '.$e->getMessage();
             else
               $message = 'Se ha producido un error. Por favor intente nuevamente.';
+            */
+            $message = 'ERROR('.$e->getLine().'): '.$e->getMessage();
 
             $respuesta = array(
                     'estado' => false,
