@@ -23,7 +23,7 @@
     
     <section class="section section-results btn-black">
       <div class="col-md-12">
-        <div class="text-white text-center">Categorias</div>
+        <div class="text-center">Categorias</div>
       </div>
     </section>
     
@@ -33,7 +33,7 @@
             <div class="col-sm-6 col-xl-3 mb-md-0" style="margin: 0 auto;">
               <a href="{{ url('/resultados/'.$category->id) }}" class="card card-results" style="text-decoration: none;">
                 <img class="card-img-top card-img-top-results" src="{{ asset('storage/app/public/results_categories/') }}/{{ $category->id.'/'.$category->image }}">
-                <div class="card-body card-body-results btn-black text-white text-center">
+                <div class="card-body card-body-results btn-black text-center">
                   <?php $name_category = explode(" ", $category->name); ?>
                   <span>{{ $name_category[0] }}</span>
                   <p class="h4">{{ $name_category[1] }}</p>
@@ -46,7 +46,7 @@
     
     <section class="section section-results btn-black">
       <div class="col-md-12">
-        <div class="text-white text-center">Bonus Track</div>
+        <div class="text-center">Bonus Track</div>
       </div>
     </section>
     
@@ -56,7 +56,7 @@
             <div class="col-sm-6 col-xl-3 mb-md-0" style="margin: 0 auto;">
               <a href="{{ url('/bonus-track/'.$category->id) }}" class="card card-results" style="text-decoration: none;">
                 <img class="card-img-top card-img-top-results" src="{{ asset('storage/app/public/bonus_track_categories/') }}/{{ $category->id.'/'.$category->image }}">
-                <div class="card-body card-body-results btn-black text-white text-center">
+                <div class="card-body card-body-results btn-black text-center">
                   <?php $name_category = explode(" ", $category->name); ?>
                   @if(isset($name_category[0]))
                     <span>{{ $name_category[0] }}</span>

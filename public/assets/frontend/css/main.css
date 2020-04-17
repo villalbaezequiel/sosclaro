@@ -4315,7 +4315,7 @@ body {
 /* Partials */
 /* Header */
 .header {
-  background: #000;
+  background: linear-gradient(to right, #A7A8AA , white, #CCC);
   padding: 0.5em 0; }
   .header .container, .header .main-user {
     display: -ms-flexbox;
