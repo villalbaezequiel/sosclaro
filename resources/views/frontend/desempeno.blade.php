@@ -19,13 +19,13 @@
                           @endforeach
                           <h5>{{ date('Y') }}</h5>
                         </div>
-                        <div class="col-md-4 background-red">
-                          <h5 class="nav-month-result">{{ $ultimo_desempeno['puntos'] }}</h5>
-                          <div class="nav-month-description"><strong>PUNTOS</strong></div>
+                        <div class="col-md-4" style="background:linear-gradient(to right, #A7A8AA , white, #CCC);">
+                          <h5 class="nav-month-result font-black">{{ $ultimo_desempeno['puntos'] }}</h5>
+                          <div class="nav-month-description font-black"><strong>PUNTOS</strong></div>
                         </div>
-                        <div class="col-md-4 background-red">
-                          <h5 class="nav-month-result">{{ $ultimo_desempeno['total'] }}</h5>
-                          <div class="nav-month-description"><strong>TOTAL</strong></div>
+                        <div class="col-md-4" style="background:linear-gradient(to right, #A7A8AA , white, #CCC);">
+                          <h5 class="nav-month-result font-black">{{ $ultimo_desempeno['total'] }}</h5>
+                          <div class="nav-month-description font-black"><strong>TOTAL</strong></div>
                         </div>
                     </div>
                 </div>
@@ -249,6 +249,9 @@ $(document).ready(function () {
 }
 .nav-month-result {
   margin-top: 1.5%!important;
+}
+.font-black {
+    color: #2b2e31;
 }
 </style>
 @endsection
