@@ -80,17 +80,6 @@
                 </div>
             </div>
             <hr>
-            <div class="col col-md-12">
-                <div class="banner">
-                    <h4>
-                        <img src="{{ asset('assets/frontend/img/bonus-track.png') }}" alt="Bonus Track" />
-                    </h4>
-                    <p>Son logros espontáneos con variados objetivos y puntos.
-                        <br />
-                        <strong>¡Seguí de cerca el programa y sumá puntos extra!</strong>
-                    </p>
-                </div>
-            </div>
         </div>
     </section>
 </main>

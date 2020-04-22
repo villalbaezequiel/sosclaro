@@ -53,20 +53,22 @@
     <section class="section">
       <div class="row">
         @foreach($bonus_track_categories as $category)
-            <div class="col-sm-6 col-xl-3 mb-md-0" style="margin: 0 auto;">
-              <a href="{{ url('/bonus-track/'.$category->id) }}" class="card card-results" style="text-decoration: none;">
-                <img class="card-img-top card-img-top-results" src="{{ asset('storage/app/public/bonus_track_categories/') }}/{{ $category->id.'/'.$category->image }}">
-                <div class="card-body card-body-results btn-black text-center">
-                  <?php $name_category = explode(" ", $category->name); ?>
-                  @if(isset($name_category[0]))
-                    <span>{{ $name_category[0] }}</span>
-                  @endif
-                  @if(isset($name_category[1]))
-                  <p class="h4">{{ $name_category[1] }}</p>
-                  @endif
+            @if ($category->active == 1)
+                <div class="col-sm-6 col-xl-3 mb-md-0" style="margin: 0 auto;">
+                  <a href="{{ url('/bonus-track/'.$category->id) }}" class="card card-results" style="text-decoration: none;">
+                    <img class="card-img-top card-img-top-results" src="{{ asset('storage/app/public/bonus_track_categories/') }}/{{ $category->id.'/'.$category->image }}">
+                    <div class="card-body card-body-results btn-black text-center">
+                      <?php $name_category = explode(" ", $category->name); ?>
+                      @if(isset($name_category[0]))
+                        <span>{{ $name_category[0] }}</span>
+                      @endif
+                      @if(isset($name_category[1]))
+                      <p class="h4">{{ $name_category[1] }}</p>
+                      @endif
+                    </div>
+                  </a>
                 </div>
-              </a>
-            </div>
+            @endif
         @endforeach
       </div>
     </section>
