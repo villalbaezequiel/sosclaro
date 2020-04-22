@@ -69,7 +69,7 @@ class BonusTrackController extends Controller
         
       return view('frontend.bonus_track.show', [
         'months' => Functions::getMonthShortcuts(),
-        'name_category' => BonusTrackCategories::find($id_category)->toArray(),
+        'name_category' => BonusTrackCategories::find($id_category)->where('active', 1)->toArray(),
         'results' => $results,
         'imagen_destacada' => ($imagen_destacada && !empty($imagen_destacada[0]) ? $imagen_destacada[0] : '')  
       ]);
