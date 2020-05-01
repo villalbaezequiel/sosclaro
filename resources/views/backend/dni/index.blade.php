@@ -24,6 +24,7 @@
             <th>DNI</th>
             <th>Puntos</th>
             <th>Usuario Relacionado</th>
+            <th>Fecha Creacion</th>
         </tr>
     </thead>
     <tbody>
@@ -47,6 +48,7 @@
                     {{ \App\Dni::getName($dni->id_user) }}
                 @endif
             </td>
+            <td>{{$dni->created_at}}</td>
         </tr>
         @endforeach
     </tbody>
@@ -62,7 +64,8 @@
 $(document).ready(function(){
     $("#list_dni").DataTable({
         "language": {
-            "url": "https://cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
+            "url": "https://cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json",
+            "order": [[ 4, "desc" ]]
         }
     });
     
