@@ -17,12 +17,12 @@ use App\Agentes;
 use App\Provinces;
 use App\Cities;
 
-class DniController extends Controller
+class DniController_backup extends Controller
 {
     public function index() {
-        return view('backend.dni.index', [
+        /*return view('backend.dni.index', [
             'dnis' => Dni::all()
-        ]);
+        ]);*/
     }
     
     public function create(){

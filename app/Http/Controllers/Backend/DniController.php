@@ -24,10 +24,11 @@ class DniController extends Controller
 
         $dnis = DB::table('dni')
             ->leftJoin('users_allowed', 'dni.dni', '=', 'users_allowed.dni')
+            ->orderBy('users_allowed.created_at','asc')
             ->get();
 
         return view('backend.dni.index', [
-            'dnis' => $dnis
+            'dnis' => Dni::all()
         ]);
     }
     
