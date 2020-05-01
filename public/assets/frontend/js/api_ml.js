@@ -28,6 +28,32 @@ $(document).ready(function(){
 
   if($("input[name=is_voucher]").length != 0){
 
+    $("#connect-ml").on('click', function (event) {
+        $.ajaxSetup({ headers: {'X-CSRF-TOKEN': $("input[name=_token]").val()} });
+        $.ajax({
+            type: "GET",
+            url: $("#connect-ml").attr('action'),
+            dataType: "json",
+            success: function(data)
+            {
+
+                if(data.status == 1){
+                    window.location.href = window.origin+'/catalogo/producto/success_fanbag';
+                } else {
+                    Swal.fire({
+                        title: 'Se ha Producido un error! Por favor comuniquese con Soporte Tecnico. Gracias!',
+                        type: 'info',
+                        showCancelButton: false,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Aceptar'
+                    });
+                    return false;
+                }
+            }
+        })
+    });
+
     $("#change-product-catalogo").submit(function(event) {
 
         event.preventDefault();
@@ -37,6 +63,7 @@ $(document).ready(function(){
 
         MELI.init({
             client_id: 5707152971206336,
+            site_id: 'SOSCLARO_API',
             xauth_protocol: "https://",
             xauth_domain: "secure.mlstatic.com",
             xd_url: "/org-img/sdk/xd-1.0.4.html"

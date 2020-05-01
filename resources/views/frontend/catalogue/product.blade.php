@@ -108,7 +108,7 @@
                             <input type="hidden" name="is_fanbag" value="{{ $product->is_fanbag }}">
                             <input class="btn" id="btnSubmit" type="submit" value="Confirmar" />
                         @else
-                            <input class="btn" id="btnSubmit" type="submit" value="Conectar con Mercado Libre" />
+                            <input class="btn" id="connect-ml" action="{{ url('meli/authentication') }}" value="Conectar con Mercado Libre" />
                         @endif
 
                     </div>
