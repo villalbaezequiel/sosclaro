@@ -21,8 +21,13 @@ use App\Cities;
 class DniController extends Controller
 {
     public function index() {
+
+        $dnis = DB::table('dni')
+            ->leftJoin('users_allowed', 'dni.dni', '=', 'users_allowed.dni')
+            ->get();
+
         return view('backend.dni.index', [
-            'dnis' => Dni::all()
+            'dnis' => $dnis
         ]);
     }
     
