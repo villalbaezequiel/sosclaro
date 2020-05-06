@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Redirect;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\DB;
@@ -20,9 +21,10 @@ class MeliController extends Controller
 {
     public function authentication()
     {
+        header("Access-Control-Allow-Headers : Content-Type");
+        header("Access-Control-Allow-Methods : POST, OPTIONS");
         $meli = new Meli(env('App_ID'), env('Secret_Key'));
-        $redirectUrl = $meli->getAuthUrl("http://localhost:8000/admin/meli/redirect", Meli::$AUTH_URL['MLA']);
-        return redirect($redirectUrl);
+        return $meli->getAuthUrl("http://localhost:8000/admin/meli/redirect", Meli::$AUTH_URL['MLA']);
     }
 
     public function redirect(Request $request)
@@ -32,7 +34,7 @@ class MeliController extends Controller
         $params = array('access_token' => $user['body']->access_token);
         $result = $meli->get('/users/me', $params);
 
-        //$result['body]->email;
+        return json_encode($result);
 
     }
 
