@@ -59,17 +59,41 @@ $(document).ready(function(){
           e.preventDefault();
           $.ajaxSetup({ headers: {'X-CSRF-TOKEN': $("input[name=_token]").val()} });
           $.ajax({
-              type: "GET",
+              type: "POST",
               url: window.origin + '/admin/meli/authentication',
               success: function(result) {
-                  res = window.location.href = result;
-                  alert(res)
+
+                  $.ajax({
+                      type: "GET",
+                      url: result,
+                      dataType: 'jsonp', // added data type
+                      cors: true ,
+                      contentType:'application/json',
+                      secure: true,
+                      headers: {
+                          'Access-Control-Allow-Origin': '*',
+                      },
+                      beforeSend: function (xhr) {
+                          xhr.setRequestHeader ("Authorization", "Basic " + btoa(""));
+                      },
+                      success: function(res) {
+                          console.log(res);
+                          alert(res);
+                      },
+                      error: function(res) {
+                          console.log(res);
+                          alert(res);
+
+                      }
+                  });
               },
               error: function(result) {
+                  console.log(result);
                   alert('error');
               }
           });
       });
+
 
     $("#change-product-catalogo").submit(function(event) {
 
@@ -78,7 +102,7 @@ $(document).ready(function(){
         //disable the submit button
         $("#btnSubmit").attr("disabled", true);
 
-        $.ajaxSetup({ headers: {'X-CSRF-TOKEN': $("input[name=_token]").val()} });
+       /* $.ajaxSetup({ headers: {'X-CSRF-TOKEN': $("input[name=_token]").val()} });
         $.ajax({
             type: "POST",
             url: $("#connect-ml").attr('href'),
@@ -129,7 +153,7 @@ $(document).ready(function(){
                         });
                 }
             }
-        });
+        }); */
 
         MELI.login(function() {
             MELI.get("/users/me", {}, function(dataMl) {

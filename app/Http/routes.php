@@ -95,7 +95,7 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
         Route::post('/dni_fix_duplicates/store', 'Backend\FixBugsController@storeDuplicates')->name('admin.dni_fix_duplicates.store');
 
         //Meli
-        Route::get('/meli/authentication', 'Backend\MeliController@authentication')->name('admin.ml.authentication');
+        Route::post('/meli/authentication', 'Backend\MeliController@authentication')->name('admin.ml.authentication');
         Route::get('/meli/redirect', 'Backend\MeliController@redirect')->name('admin.ml.redirect');
 
 

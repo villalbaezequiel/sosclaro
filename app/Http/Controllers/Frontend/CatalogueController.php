@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\CodigoFanbag;
+use App\Http\Controllers\Backend\MeliController;
+use App\Meli;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -18,6 +20,15 @@ use App\Dni;
 
 class CatalogueController extends Controller
 {
+    private $meliController;
+
+    /**
+     * CatalogueController constructor.
+     * @param MeliController $meliController
+     */
+    public function __construct(MeliController $meliController) {
+        $this->meliController = $meliController;
+    }
 
     public function index() {
         return view('frontend.catalogue.index', [
@@ -34,6 +45,10 @@ class CatalogueController extends Controller
     public function productExchange(Request $request) {
 
         try {
+
+            $meli = new Meli(env('App_ID'), env('Secret_Key'));
+            $meli->getAuthUrl("http://localhost:8000/admin/meli/redirect", Meli::$AUTH_URL['MLA']);
+
 
             if($request->get('data')){
 
