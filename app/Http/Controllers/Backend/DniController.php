@@ -22,8 +22,8 @@ class DniController extends Controller
 {
     public function index() {
 
-        $dnis = DB::table('users_allowed')
-            ->rightJoin('dni', 'users_allowed.dni', '=', 'dni.dni')
+        $dnis = DB::table('dni')
+            ->rightJoin('users_allowed', 'users_allowed.dni', '=', 'dni.dni')
             ->get();
 
         return view('backend.dni.index', [
