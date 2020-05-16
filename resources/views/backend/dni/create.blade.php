@@ -70,7 +70,7 @@ $(document).ready(function(){
             success: function(data){
               $(".loading").hide();
               if(data.estado !== "undefined" && data.estado == false){ 
-                alert("¡Error Técnico! Comuníquese con Soporte! Asegure que esté subiendo correctamente el Excel de DNI, con sus datos especificos.");
+                alert("¡Error Técnico! Por favor asegurese que el ID REGION, NOMBRE, AGENTE, PROVINCIA, FECHA y/o TIPO DE VENDEDOR sea correcto.");
               } else {  
                 $(".loading").hide();
                 

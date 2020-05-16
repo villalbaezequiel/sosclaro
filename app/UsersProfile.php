@@ -151,4 +151,9 @@ class UsersProfile extends Model
       return $usersResults;
     }
 
+    static public function getTypeUsers()
+    {
+        return ['VENDEDOR', 'SUPERVISOR', 'GERENTE', 'ADMIN'];
+    }
+
 }

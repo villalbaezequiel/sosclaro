@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Regions;
 use App\UsersAllowed;
 use Illuminate\Http\Request;
 
@@ -22,9 +23,12 @@ class DniController extends Controller
 {
     public function index() {
 
-        $dnis = DB::table('dni')
-            ->rightJoin('users_allowed', 'users_allowed.dni', '=', 'dni.dni')
-            ->get();
+
+
+        $dnis = Dni::all();
+
+        $dnis2 = UsersAllowed::all();
+        $dnis->merge($dnis2)->unique();
 
         return view('backend.dni.index', [
             'dnis' => $dnis
@@ -80,10 +84,22 @@ class DniController extends Controller
                         $insert->dni = $value->dni;       
                         $insert->name = $value->nombres;
                         $insert->last_name = $value->apellidos;
-                        $insert->id_region = $value->id_region;
 
+                        //check region
+                        if (!empty($value->id_region)) {
+                            $id_region = Regions::find($value->id_region);
+                            if (is_null($id_region)) {
+                                return response()->json(['estado' => false]);
+                            }
+                            $insert->id_region = $value->id_region;
+                        }
+
+                        //check agente
                         if (!empty($value->agente)) {
                             $agency_id = Agentes::getIdForName($value->agente);
+                            if (is_null($agency_id)) {
+                                return response()->json(['estado' => false]);
+                            }
                             $insert->id_agency = $agency_id;
                         }
 
@@ -91,8 +107,18 @@ class DniController extends Controller
                           $insert->city = $value->localidad;
                         }
 
+                        //check provincia
                         if (!empty($value->provincia)) {
-                          $insert->id_province = Provinces::getIdForName($value->provincia);
+                           $province = Provinces::getIdForName($value->provincia);
+                            if (is_null($province)) {
+                                return response()->json(['estado' => false]);
+                            }
+                            $insert->id_province = $province;
+                        }
+
+                        //check typo de usuario
+                        if (!in_array(strtoupper($value->tipo_usuario), UsersProfile::getTypeUsers())) {
+                            return response()->json(['estado' => false]);
                         }
 
                         $insert->type_user = strtoupper($value->tipo_usuario); // tipo de usuario
