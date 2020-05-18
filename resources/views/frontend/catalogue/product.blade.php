@@ -108,7 +108,7 @@
                             <input type="hidden" name="is_fanbag" value="{{ $product->is_fanbag }}">
                             <input class="btn" id="btnSubmit" type="submit" value="Confirmar" />
                         @else
-                            <button class="btn" id="connect-ml" >Conectar con Mercado Libre</button>
+                            <button type="submit" class="btn" id="connect-ml" >Conectar con Mercado Libre</button>
                         @endif
 
                     </div>

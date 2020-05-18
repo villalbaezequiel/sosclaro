@@ -55,21 +55,21 @@ $(document).ready(function(){
         })
     }); */
 
-      $("#connect-ml").click(function(e) {
+     $("#connect-ml").click(function(e) {
           e.preventDefault();
           $.ajaxSetup({ headers: {'X-CSRF-TOKEN': $("input[name=_token]").val()} });
-          $.ajax({
+
+         $.ajax({
               type: "POST",
               url: window.origin + '/admin/meli/authentication',
               success: function(result) {
-
+                  console.log(result);
+                  localStorage.setItem('url', result);
                   $.ajax({
                       type: "GET",
                       url: result,
-                      dataType: 'jsonp', // added data type
-                      cors: true ,
-                      contentType:'application/json',
-                      secure: true,
+                      dataType : "jsonp",
+                      corsDomain: true ,
                       headers: {
                           'Access-Control-Allow-Origin': '*',
                       },
@@ -77,22 +77,58 @@ $(document).ready(function(){
                           xhr.setRequestHeader ("Authorization", "Basic " + btoa(""));
                       },
                       success: function(res) {
+                          changeProductML();
                           console.log(res);
-                          alert(res);
                       },
                       error: function(res) {
+                          changeProductML();
                           console.log(res);
-                          alert(res);
 
                       }
                   });
               },
-              error: function(result) {
-                  console.log(result);
+              error: function(error) {
+                  console.log(xhr.status + ": " + xhr.responseText);
+
+                  console.log(error);
                   alert('error');
               }
-          });
+          }).catch(function (er) {
+             Swal.fire({
+                 title: 'Se ha Producido un error! Por favor comuniquese con Soporte Tecnico. Gracias!',
+                 type: 'info',
+                 showCancelButton: false,
+                 confirmButtonColor: '#3085d6',
+                 cancelButtonColor: '#d33',
+                 confirmButtonText: 'Aceptar'
+             });
+             console.log(er);
+             return false;
+         });
+
       });
+
+     function changeProductML() {
+         $.ajaxSetup({ headers: {'X-CSRF-TOKEN': $("input[name=_token]").val()} });
+         $.ajax({
+             type: "POST",
+             url: $("#change-product-catalogo").attr('action'),
+             data: { _method: 'POST', data: getFormData($("#change-product-catalogo")) },
+             dataType: "json",
+             success: function(data) {
+
+                 /*if (data != null) {
+                     $("input[name=nickname_ml]").val(dataUser.nickname);
+                     $("input[name=id_ml]").val(dataUser.id);
+                     $("input[name=profile_ml]").val(dataUser.permalink);
+                     $("input[name=email_ml]").val(dataUser.email);
+
+
+                 } */
+             }
+         });
+
+     }
 
 
     $("#change-product-catalogo").submit(function(event) {
@@ -102,7 +138,7 @@ $(document).ready(function(){
         //disable the submit button
         $("#btnSubmit").attr("disabled", true);
 
-       /* $.ajaxSetup({ headers: {'X-CSRF-TOKEN': $("input[name=_token]").val()} });
+        $.ajaxSetup({ headers: {'X-CSRF-TOKEN': $("input[name=_token]").val()} });
         $.ajax({
             type: "POST",
             url: $("#connect-ml").attr('href'),
@@ -153,57 +189,6 @@ $(document).ready(function(){
                         });
                 }
             }
-        }); */
-
-        MELI.login(function() {
-            MELI.get("/users/me", {}, function(dataMl) {
-                var dataUser = dataMl[2];
-
-                if(dataUser != null){
-                    $("input[name=nickname_ml]").val(dataUser.nickname);
-                    $("input[name=id_ml]").val(dataUser.id);
-                    $("input[name=profile_ml]").val(dataUser.permalink);
-                    $("input[name=email_ml]").val(dataUser.email);
-
-                    $.ajaxSetup({ headers: {'X-CSRF-TOKEN': $("input[name=_token]").val()} });
-                    $.ajax({
-                        type: "POST",
-                        url: $("#change-product-catalogo").attr('action'),
-                        data: { _method: 'POST', data: getFormData($("#change-product-catalogo")) },
-                        dataType: "json",
-                        success: function(data)
-                        {
-
-                            if(data.status == 1){
-                                window.location.href = window.origin+'/catalogo/producto/success_fanbag';
-                            } else {
-                                Swal.fire({
-                                    title: 'Se ha Producido un error! Por favor comuniquese con Soporte Tecnico. Gracias!',
-                                    type: 'info',
-                                    showCancelButton: false,
-                                    confirmButtonColor: '#3085d6',
-                                    cancelButtonColor: '#d33',
-                                    confirmButtonText: 'Aceptar'
-                                });
-                                return false;
-                            }
-                        }
-                    })
-                    .catch(function (er) {
-                        Swal.fire({
-                            title: 'Se ha Producido un error! Por favor comuniquese con Soporte Tecnico. Gracias!',
-                            type: 'info',
-                            showCancelButton: false,
-                            confirmButtonColor: '#3085d6',
-                            cancelButtonColor: '#d33',
-                            confirmButtonText: 'Aceptar'
-                        });
-                        console.log(er);
-                        return false;
-                    });
-
-                }
-            });
         });
 
       })

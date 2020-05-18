@@ -17,6 +17,7 @@ use App\User;
 use App\Products;
 use App\Exchanges;
 use App\Dni;
+use Illuminate\Support\Facades\Session;
 
 class CatalogueController extends Controller
 {
@@ -44,10 +45,13 @@ class CatalogueController extends Controller
 
     public function productExchange(Request $request) {
 
+
         try {
 
-            $meli = new Meli(env('App_ID'), env('Secret_Key'));
-            $meli->getAuthUrl("http://localhost:8000/admin/meli/redirect", Meli::$AUTH_URL['MLA']);
+            if (Session::has('ml')) {
+                $ml = Session::get('ml');
+            }
+
 
 
             if($request->get('data')){
@@ -56,7 +60,7 @@ class CatalogueController extends Controller
 
                 $data = $request->get('data');
 
-                if($data['is_fanbag']) {
+                if(isset($data['is_fanbag'])) {
                     if($data['email_fanbag'] != $data['email_fanbag_repeat']) {
                         DB::rollback();
                         $message = 'Los emails deben coincidir. Por favor intente nuevamente.';
@@ -94,7 +98,7 @@ class CatalogueController extends Controller
                 $dni->save();
 
                 //get and update codigo fanbag
-                if($data['is_fanbag']) {
+                if(isset($data['is_fanbag']) and $data['is_fanbag'] == true) {
                     $codigoFanbag = $this->getAndUpdateCodigoFanbag($data['id_product']);
                     if (is_null($codigoFanbag) ) {
                         DB::rollback();
@@ -118,28 +122,17 @@ class CatalogueController extends Controller
                     return back()->withErrors($message);
                 }
 
-                if ($codigoFanbag) {
+                if (isset($codigoFanbag)) {
                     $canje->codigo_fanbag = $codigoFanbag->codigo_fanbag;
                     $canje->email_ml = $data['email_fanbag'];
                     $canje->status = 1;
                 }
 
-                if($data['nickname_ml']){
-                    $canje->nickname_ml = $data['nickname_ml'];
+                if(isset($ml)){
+                    $canje->nickname_ml = $ml->nickname;
+                    $canje->ID_ML = $ml->id;
+                    $canje->email_ml = $ml->email;
                 }
-
-                if($data['id_ml']){
-                    $canje->ID_ML = $data['id_ml'];
-                }
-
-                if($data['profile_ml']){
-                    $canje->profile_ml = $data['profile_ml'];
-                }
-
-                if($data['email_ml']){
-                    $canje->email_ml = $data['email_ml'];
-                }
-
 
                 $canje->save();
 
@@ -150,7 +143,7 @@ class CatalogueController extends Controller
                 $user = User::find($data['id_user']); // informacion del Usuario/Vendedor que proceso el Canje
 
 
-                if($data['is_fanbag']) {
+                if(isset($data['is_fanbag']) and $data['is_fanbag'] == true) {
                     $this->sendEmailAndAlerts($canje, $product, $dni, $user, $codigoFanbag->codigo_fanbag);
                     return \Response::json(['status' => 1, 'codigo_fanbag' => $codigoFanbag->codigo_fanbag]);
 
