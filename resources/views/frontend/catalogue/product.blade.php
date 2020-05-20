@@ -106,9 +106,11 @@
                             <input class="btn" id="btnSubmit" type="submit" value="Confirmar" />
                         @elseif($product->is_fanbag == 1)
                             <input type="hidden" name="is_fanbag" value="{{ $product->is_fanbag }}">
-                            <input class="btn" id="btnSubmit" type="submit" value="Confirmar" />
-                        @else
+                            <button type="submit" class="btn" id="fanbagSubmit" >Confirmar</button>
+                        @elseif($product->id_category == 2)
                             <button type="submit" class="btn" id="connect-ml" >Conectar con Mercado Libre</button>
+                        @else
+                            <button type="submit" class="btn" id="fanbagSubmit" >Confirmar</button>
                         @endif
 
                     </div>
