@@ -93,6 +93,12 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
         // bugs
         Route::get('/dni_fix_duplicates/create', 'Backend\FixBugsController@createDuplicates')->name('admin.dni_fix_duplicates.create');
         Route::post('/dni_fix_duplicates/store', 'Backend\FixBugsController@storeDuplicates')->name('admin.dni_fix_duplicates.store');
+
+        //Meli
+        Route::post('/meli/authentication', 'Backend\MeliController@authentication')->name('admin.ml.authentication');
+        Route::get('/meli/redirect', 'Backend\MeliController@redirect')->name('admin.ml.redirect');
+
+
     });
 
 });

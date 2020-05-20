@@ -3,7 +3,7 @@
 @section('title', "Bases y Condiciones")
 @section('content')
 
-    @include('frontend.components.header_auth')
+@include('frontend.components.header_auth')
 
     <main class="main main-user">
         <section class="section-wrapper">
