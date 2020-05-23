@@ -17,9 +17,12 @@
                     </div>
                     <div class="article-body">
                         <p>
-                            <strong>1.</strong> AMX ARGENTINA S.A. (en adelante el “ORGANIZADOR”) con domicilio en Av. de Mayo 878, promueve El
-                            <strong>“PROGRAMA DE RECONOCIMIENTO A VENDEDORES DE DISTRIBUCIÓN”</strong> (en adelante el “Programa”), en la República Argentina desde el 1 de Mayo de 2018 a las 00:00 horas y hasta el 31 de diciembre de 2018 a las 23:59 horas
-                            (en adelante la “VIGENCIA”), y estará sujeto al presente Reglamento (en adelante, el “Reglamento”).</p>
+                            <strong>1.</strong> AMX ARGENTINA S.A. (en adelante el “ORGANIZADOR”) con domicilio en Av.
+                            de Mayo 878, promueve El <strong>“PROGRAMA DE RECONOCIMIENTO A
+                                VENDEDORES DE DISTRIBUCIÓN”</strong> (en adelante el “Programa”), en la República
+                            Argentina desde el 1 de Mayo de 2018 a las 00:00 horas y hasta el 31 de diciembre de
+                            2020 a las 23:59 horas (en adelante la “VIGENCIA”), y estará sujeto al presente
+                            Reglamento (en adelante, el “Reglamento”).</p>
                         <p>Las personas intervinientes en este Programa por su sola participación aceptan de pleno
                             derecho todas y cada una de las disposiciones descriptas en este Reglamento, así como
                             las decisiones que conforme a Derecho adopte EL ORGANIZADOR sobre cualquier
@@ -29,8 +32,10 @@
                             que serán inapelables y respecto de las cuales los participantes no tendrán derecho a
                             reclamo alguno, aclarándose que cualquier modificación será ajustada a la legislación
                             vigente.</p>
-                        <p>EL ORGANIZADOR expresamente se reserva el derecho, bajo su exclusiva discreción, de cambiar, modificar, agregar o eliminar partes del presente Reglamento en cualquier momento y sin previo aviso. En tal caso, EL ORGANIZADOR
-                            publicará las modificaciones al Reglamento en
+                        <p> EL ORGANIZADOR expresamente se reserva el derecho, bajo su exclusiva discreción,
+                            de cambiar, modificar, agregar o eliminar partes del presente Reglamento en cualquier
+                            momento y sin previo aviso. En tal caso, EL ORGANIZADOR publicará las
+                            modificaciones al Reglamento en
                             <a href="http://www.mejoresvendedores.com.ar">www.mejoresvendedores.com.ar</a> e indicará en la parte
                             superior de la misma la fecha de última revisión. Si Usted continúa participando de El
                             Programa una vez introducidas tales modificaciones habrá aceptado implícitamente el
@@ -155,19 +160,30 @@
                             condiciones. Cualquier gasto que surja para el uso del premio será a exclusivo cargo del
                             Ganador.</p>
                         <p>
-                            <strong>8.</strong> La adquisición y entrega del premio mencionado al Ganador será responsabilidad exclusiva del ORGANIZADOR. Dicho premio y/o los puntos acumulados no serán transferibles a terceras personas, salvo conformidad
-                            expresa del CLARO.</p>
+                            <strong>8.</strong> La adquisición y entrega del premio mencionado al Ganador será responsabilidad
+                            exclusiva del ORGANIZADOR. Dicho premio y/o los puntos acumulados no serán
+                            transferibles a terceras personas, salvo conformidad expresa del CLARO.</p>
                         <p>
-                            <strong>9.</strong> Al recibir cualquier premio, el participante acepta el mismo y libera al ORGANIZADOR de cualquier obligación futura. El participante también acepta liberar al ORGANIZADOR y a sus respectivas compañías afiliadas,
-                            subsidiarias y matrices, funcionarios, directores, empleados y agentes, de toda y cualquier demanda o acción de responsabilidad legal de cualquier naturaleza en relación con el recibo o uso del premio, o con la participación
-                            en El Programa.</p>
-                        <p>Con la participación en este Programa los participantes aceptan desde ya que en caso de ser acreedores del premio liberan al ORGANIZADOR hasta donde lo permita la ley local por la responsabilidad derivada de daño, muerte,
-                            accidente, lesiones o perjuicios personales, corporales o patrimoniales que pueda sufrir el ganador, con motivo u ocasión del retiro y/o uso y disfrute del premio.</p>
+                            <strong>9.</strong>Al recibir cualquier premio, el participante acepta el mismo y libera al
+                            ORGANIZADOR de cualquier obligación futura. El participante también acepta liberar
+                            al ORGANIZADOR y a sus respectivas compañías afiliadas, subsidiarias y matrices,
+                            funcionarios, directores, empleados y agentes, de toda y cualquier demanda o acción de
+                            responsabilidad legal de cualquier naturaleza en relación con el recibo o uso del premio,
+                            o con la participación en El Programa.</p>
+                        <p>Con la participación en este Programa los participantes aceptan desde ya que en caso de
+                            ser acreedores del premio liberan al ORGANIZADOR hasta donde lo permita la ley local
+                            por la responsabilidad derivada de daño, muerte, accidente, lesiones o perjuicios
+                            personales, corporales o patrimoniales que pueda sufrir el ganador, con motivo u ocasión
+                            del retiro y/o uso y disfrute del premio.</p>
                         <p>
-                            <strong>10.</strong> El Programa podrá ser difundido a través de los medios que CLARO estime conveniente. Asimismo CLARO podrá difundir El Programa mediante sus medios tradicionales de comunicación.</p>
+                            <strong>10.</strong> El Programa podrá ser difundido a través de los medios que CLARO estime
+                            conveniente. Asimismo CLARO podrá difundir El Programa mediante sus medios
+                            tradicionales de comunicación.</p>
                         <p>
-                            <strong>11.</strong> Los Participantes autorizan a CLARO a utilizar los datos y/o imágenes obtenidos a través del desarrollo de El Programa para la creación de una base de datos con el sólo objetivo de realizar el listado de
-                            Posibles Ganadores de El Programa, sin derecho a indemnización o compensación alguna.</p>
+                            <strong>11.</strong> Los Participantes autorizan a CLARO a utilizar los datos y/o imágenes obtenidos a
+                            través del desarrollo de El Programa para la creación de una base de datos con el sólo
+                            objetivo de realizar el listado de Posibles Ganadores de El Programa, sin derecho a
+                            indemnización o compensación alguna.</p>
                         <p>
                             <strong>12.</strong> 12. La participación en la presente Promoción importará la expresa autorización para la
                             difusión pública, transmisión, retransmisión, reproducción o publicación de las
@@ -186,10 +202,12 @@
                             causa ningún perjuicio patrimonial, por tanto, renuncian a cualquier reclamo que puedan
                             efectuar por la posible disminución de sus ingresos.</p>
                         <p>
-                            <strong>13.</strong> La probabilidad de obtener premios en El Programa dependerá del desempeño de los participantes para cumplir los objetivos mensuales y acumular la cantidad de puntos suficientes para canjearlos por premios
-                            disponibles.</p>
+                            <strong>13.</strong> La probabilidad de obtener premios en El Programa dependerá del desempeño de los
+                            participantes para cumplir los objetivos mensuales y acumular la cantidad de puntos
+                            suficientes para canjearlos por premios disponibles.</p>
                         <p>
-                            <strong>14.</strong> Será anulado cualquier intento o método de participación que se realice por cualquier proceso, técnica o mecánica de participación distinta de la detallada precedentemente.</p>
+                            <strong>14.</strong> Será anulado cualquier intento o método de participación que se realice por cualquier
+                            proceso, técnica o mecánica de participación distinta de la detallada precedentemente.</p>
                         <p>EL ORGANIZADOR se reserva el derecho de impedir la participación y/o de eliminar a
                             todo aquel Vendedor que participe en forma indebida. Para participar en El Programa
                             queda estrictamente prohibida la utilización de software, sistemas especiales y otros
@@ -244,7 +262,7 @@
                             a La Información Pública podrá dirigirse a Av. Pte. Gral. Julio A. Roca 710 Piso 2° de la
                             Ciudad Autónoma de Buenos Aires (C1067ABP) o por teléfono al ( 5411) 2821-0047.
                             Vía Internet en <a href="www.jus.gob.ar/datos-personales.aspx ">www.jus.gob.ar/datos-personales.aspx </a>www.jus.gob.ar/datos-personales.aspx o por mail a
-                            <a href="mailto:datospersonales@aaip.gob.ar">datospersonales@aaip.gob.ar</a>".</p>
+                            <a href="mailto:datospersonales@aaip.gob.ar">datospersonales@aaip.gob.ar</a>.</p>
                     </div>
                 </div>
             </article>
