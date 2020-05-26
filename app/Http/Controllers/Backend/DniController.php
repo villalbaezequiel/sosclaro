@@ -47,9 +47,6 @@ class DniController extends Controller
         $dnis2 = UsersAllowed::all();
 
         foreach ($dnis2 as $dni2) {
-            $exist = $totalDnis->where('dni', $dni2->dni);
-
-            if (!$exist) {
                 $newDni = new \StdClass();
                 $newDni->id = $dni2->id;
                 $newDni->dni = $dni2->dni;
@@ -61,14 +58,14 @@ class DniController extends Controller
                 $newDni->id_user = null;
                 $newDni->created_at = $dni->created_at;
 
-
                 $totalDnis->push($newDni);
-            }
 
         }
 
+        $unique_dnis = $totalDnis->unique('dni');
+
         return view('backend.dni.index', [
-            'dnis' => $totalDnis
+            'dnis' => $unique_dnis
         ]);
     }
     
