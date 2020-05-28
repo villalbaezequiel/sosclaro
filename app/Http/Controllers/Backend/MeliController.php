@@ -43,7 +43,7 @@ class MeliController extends Controller
         header("Access-Control-Allow-Headers : Content-Type");
         header("Access-Control-Allow-Methods : POST, OPTIONS");
         $meli = new Meli(env('App_ID'), env('Secret_Key'));
-        $url = $meli->getAuthUrl("http://localhost:8000/admin/meli/redirect", Meli::$AUTH_URL['MLA']);
+        $url = $meli->getAuthUrl("https://staging.mejoresvendedores.com.ar/admin/meli/redirect", Meli::$AUTH_URL['MLA']);
 
         return Redirect::to($url);
 
@@ -52,7 +52,7 @@ class MeliController extends Controller
     public function redirect(Request $request)
     {
         $meli = new Meli(env('App_ID'), env('Secret_Key'));
-        $user = $meli->authorize($_GET['code'], "http://localhost:8000/admin/meli/redirect");
+        $user = $meli->authorize($_GET['code'], "https://staging.mejoresvendedores.com.ar/admin/meli/redirect");
         $params = array('access_token' => $user['body']->access_token);
         $ml = $meli->get('/users/me', $params);
 
