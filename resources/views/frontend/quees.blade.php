@@ -21,9 +21,8 @@
                 </div>
                 <div class="col col-md-5">
                     <h4>¿Qué es el programa?</h4>
-                    <p>SOSClaro, es un programa de reconocimiento e incentivo dirigido a todos los vendedores de distribución del país, que tiene como objetivo brindar un espacio de comunicación y reconocimiento donde podremos compartir tus logros
-                        individuales y grupales entre todo el equipo.</p>
-                    <p>Porque SOSClaro, queremos conocerte, reconocerte y premiarte. Sumate al programa, sumá logros, suma premios.</p>
+                    <p>Sos Claro, es un programa de reconocimiento e incentivo dirigido a todos los vendedores de distribución del país, que tiene como objetivo brindar un espacio de comunicación y reconocimiento donde podremos compartir tus logros..</p>
+                    <p>Queremos conocerte, reconocerte y premiarte. Sumate al programa. Sumá logros, suma premios.</p>
                 </div>
             </div>
         </div>
@@ -33,36 +32,36 @@
             <div class="col col-md-6">
                 <h3>
                     <span class="badge badge-black">1</span> Mejor vendedor del mes</h3>
-                <p>Mensualmente el
-                    <strong>mejor vendedor del país</strong> recibirá
-                    <strong>400 puntos</strong>, mientras que los 3 mejores vendedores de cada región recibirán 200, 150 y 100 puntos respectivamente. ¿Qué indicadores tendremos en cuenta?</p>
+                <p>Mensualmente los 3 mejores vendedores de cada región recibirán <strong>200, 150 y 100 puntos</strong> respectivamente. ¿Qué indicadores tendremos en cuenta?
                 <p>
-                    <strong>1) Cantidad de tus PSRs asignados con compra:</strong>
-                    <br />Este indicador va a medir el porcentaje de PSRs con compra de recarga de $200 o más, sobre el total de PSRs asigndos por vendedor.</p>
+                    1) % PSRs con venta mayor a <strong>$800, respecto de la cartera asignada</strong> (peso: 35%)
+
                 <p>
-                    <strong>2) Cantidad de sus PSRs asignados con ICB:</strong>
-                    <br /> Este indicador va a medir el porcentaje de PSRs con ICB (primera recarga) sobre el total de PSRs asignados por vendedor.
-                    <br /> *Solo se considera ICB nominado el cual se contabilizará a los 5 días posteriores del cierre de mes
+                    2) % PSRs con <strong>ICB mayor a $80, respecto de la cartera asignada</strong> (peso: 35%)
                 </p>
                 <p>
-                    <strong>3) Crecimiento de ICB de tu agencia:</strong>
-                    <br /> Este indicador va a medir el porcentaje de crecimiento de tu Agencia de ICB (primera recarga).</p>
-                <p>
-                    <small>
-                        <strong>IMPORTANTE:</strong> participan todos los vendedores que tengan al menos 100 PSRs asignados.</small>
+                    3) Crecimiento de PSRs con venta mayor a <b>$800</b> (peso 30%):
+                    <span>&nbsp;&nbsp; a. Menor o igual a cero, no suma puntos.</span> <br/>
+                    <span>&nbsp;&nbsp; b. Mayor a 0%, menor a 10%: 25%</span><br/>
+                    <span>&nbsp;&nbsp; c. Mayor a 10%, menor a 20%: 50%</span><br/>
+                    <span>&nbsp;&nbsp; d. Mayor a 20%, menor a 30%: 75%</span><br/>
+                    <span>&nbsp;&nbsp; e. Mayor a 30%, 100%</span>
                 </p>
             </div>
             <div class="col col-md-6">
                 <h3>
-                    <span class="badge badge-black">2</span> Mejor equipo del semestre</h3>
-                <p>Reconoceremos al
-                    <strong>mejor equipo de ventas de las 10 regiones</strong>. Los indicadores serán los mismos que en los logros individuales.
-                    <strong>¡A cada integrante del equipo ganador se le asignarán 50 puntos!</strong>
+                    <span class="badge badge-black">2</span> Vendedores Destacados</h3>
+                <p>
+                    Reconoceremos mensualmente el alta de NUEVOS PSR´S que logren <strong>venta de sims con carga inicial, recibirán 100 puntos.</strong>
                 </p>
+                <p>- Alta de puntos con ICB >= $80 – Escala de PSR.</p>
                 <p>
                     <small>
-                        <strong>IMPORTANTE:</strong> se le asignarán puntos solamente a los vendedores que tengan a menos 100 PSRs asignados y que su resultado individual del período seal al menos el 50% del resultado grupal.</small>
+                        <strong>IMPORTANTE:</strong> Participan todos los vendedores que tengan al menos 100 PSRs asignados.
+                    </small>
                 </p>
+
+                <!--
                 <hr>
                 <h3>
                     <span class="badge badge-black">3</span> Mejor vendedor anual</h3>
@@ -71,12 +70,13 @@
                 <h3>
                     <span class="badge badge-black">4</span> Vendedores Destacados</h3>
                 <p>Reconoceremos mensualmente a los vendedores que logren <strong>mejores promedios de venta de sims con carga inicial</strong> en su cartera de PSRs.</p>
-                
+                -->
             </div>
+
             <hr>
             <div class="col col-md-12">
                 <div class="banner" style="background: none;padding:  2em 0em 1em;">
-                    <img src="http://mejoresvendedores.com.ar/assets/frontend/img/image_que_es.png" />
+                    <img src="/assets/frontend/img/que_es.png" />
                 </div>
             </div>
             <hr>
