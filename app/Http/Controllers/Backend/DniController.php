@@ -143,7 +143,7 @@ class DniController extends Controller
 
                         //check provincia
                         if (!empty($value->provincia)) {
-                           $province = Provinces::getIdForName($value->provincia);
+                           $province = Provinces::getIdForName(strtoupper($value->provincia));
                             if (is_null($province)) {
                                 return response()->json(['estado' => false]);
                             }

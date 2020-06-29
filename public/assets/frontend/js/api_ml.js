@@ -26,142 +26,108 @@ function isEmail(email) {
 
 $(document).ready(function(){
 
-  if($("input[name=is_voucher]").length != 0){
+    $("#connect-ml").click(function(e) {
+        $( "#connect-ml" ).prop( "disabled", true );
+    });
 
-    $("#change-product-catalogo").submit(function(event) {
+    $("#productSubmit").click(function(event) {
+        $("#productSubmit").prop( "disabled", true );
 
         event.preventDefault();
 
-        //disable the submit button
-        $("#btnSubmit").attr("disabled", true);
+        $.ajaxSetup({ headers: {'X-CSRF-TOKEN': $("input[name=_token]").val()} });
+        $.ajax({
+            type: "POST",
+            url: $("#change-product-catalogo").val(),
+            data: { _method: 'POST', data: getFormData($("#change-product")) },
+            dataType: "json",
+            success: function(data)
+            {
 
-        MELI.init({
-            client_id: 5707152971206336,
-            xauth_protocol: "https://",
-            xauth_domain: "secure.mlstatic.com",
-            xd_url: "/org-img/sdk/xd-1.0.4.html"
-        });
-
-        MELI.login(function() {
-            MELI.get("/users/me", {}, function(dataMl) {
-                var dataUser = dataMl[2];
-
-                if(dataUser != null){
-                    $("input[name=nickname_ml]").val(dataUser.nickname);
-                    $("input[name=id_ml]").val(dataUser.id);
-                    $("input[name=profile_ml]").val(dataUser.permalink);
-                    $("input[name=email_ml]").val(dataUser.email);
-
-                    $.ajaxSetup({ headers: {'X-CSRF-TOKEN': $("input[name=_token]").val()} });
-                    $.ajax({
-                        type: "POST",
-                        url: $("#change-product-catalogo").attr('action'),
-                        data: { _method: 'POST', data: getFormData($("#change-product-catalogo")) },
-                        dataType: "json",
-                        success: function(data)
-                        {
-
-                            if(data.status == 1){
-                                window.location.href = window.origin+'/catalogo/producto/success_fanbag';
-                            } else {
-                                Swal.fire({
-                                    title: 'Se ha Producido un error! Por favor comuniquese con Soporte Tecnico. Gracias!',
-                                    type: 'info',
-                                    showCancelButton: false,
-                                    confirmButtonColor: '#3085d6',
-                                    cancelButtonColor: '#d33',
-                                    confirmButtonText: 'Aceptar'
-                                });
-                                return false;
-                            }
-                        }
-                    })
-                    .catch(function (er) {
-                        Swal.fire({
-                            title: 'Se ha Producido un error! Por favor comuniquese con Soporte Tecnico. Gracias!',
-                            type: 'info',
-                            showCancelButton: false,
-                            confirmButtonColor: '#3085d6',
-                            cancelButtonColor: '#d33',
-                            confirmButtonText: 'Aceptar'
-                        });
-                        console.log(er);
-                        return false;
+                if(data.status == 1){
+                    window.location.href = window.origin+'/catalogo/producto/success_ml';
+                } else {
+                    Swal.fire({
+                        title: 'Se ha Producido un error! Por favor comuniquese con Soporte Tecnico. Gracias!',
+                        type: 'info',
+                        showCancelButton: false,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Aceptar'
                     });
-
+                    return false;
                 }
+            }
+        })
+            .catch(function (er) {
+                Swal.fire({
+                    title: 'Se ha Producido un error! Por favor comuniquese con Soporte Tecnico. Gracias!',
+                    type: 'info',
+                    showCancelButton: false,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Aceptar'
+                });
+                console.log(er);
+                return false;
             });
-        });
-        
-      })
-  } else {
+    });
 
-      $("#change-product-catalogo").submit(function(event) {
 
-          
-          if (!isEmail($("#email_fanbag").val())) {
-              Swal.fire({
-                  title: 'Debe ingresar un email válido. Por favor intente nuevamente.',
-                  type: 'info',
-                  showCancelButton: false,
-                  confirmButtonColor: '#3085d6',
-                  cancelButtonColor: '#d33',
-                  confirmButtonText: 'Aceptar'
-              });
-              return false;
-          }
+    $("#fanbagSubmit").click(function(event) {
 
-          if (!isEmail($("#email_fanbag_repeat").val())) {
-              Swal.fire({
-                  title: 'Debe ingresar un email válido. Por favor intente nuevamente.',
-                  type: 'info',
-                  showCancelButton: false,
-                  confirmButtonColor: '#3085d6',
-                  cancelButtonColor: '#d33',
-                  confirmButtonText: 'Aceptar'
-              });
-              return false;
-          }
+      $( "#fanbagSubmit" ).prop( "disabled", true );
 
-          if (!comprobarEmail()) {
-              Swal.fire({
-                  title: 'Los emails deben coincidir. Por favor intente nuevamente.',
-                  type: 'info',
-                  showCancelButton: false,
-                  confirmButtonColor: '#3085d6',
-                  cancelButtonColor: '#d33',
-                  confirmButtonText: 'Aceptar'
-              });
-              return false;
-          }
+      if (!isEmail($("#email_fanbag").val())) {
+          Swal.fire({
+              title: 'Debe ingresar un email válido. Por favor intente nuevamente.',
+              type: 'info',
+              showCancelButton: false,
+              confirmButtonColor: '#3085d6',
+              cancelButtonColor: '#d33',
+              confirmButtonText: 'Aceptar'
+          });
+          return false;
+      }
 
-          event.preventDefault();
+      if (!isEmail($("#email_fanbag_repeat").val())) {
+          Swal.fire({
+              title: 'Debe ingresar un email válido. Por favor intente nuevamente.',
+              type: 'info',
+              showCancelButton: false,
+              confirmButtonColor: '#3085d6',
+              cancelButtonColor: '#d33',
+              confirmButtonText: 'Aceptar'
+          });
+          return false;
+      }
 
-          $.ajaxSetup({ headers: {'X-CSRF-TOKEN': $("input[name=_token]").val()} });
-          $.ajax({
-              type: "POST",
-              url: $("#change-product-catalogo").attr('action'),
-              data: { _method: 'POST', data: getFormData($("#change-product-catalogo")) },
-              dataType: "json",
-              success: function(data)
-              {
+      if (!comprobarEmail()) {
+          Swal.fire({
+              title: 'Los emails deben coincidir. Por favor intente nuevamente.',
+              type: 'info',
+              showCancelButton: false,
+              confirmButtonColor: '#3085d6',
+              cancelButtonColor: '#d33',
+              confirmButtonText: 'Aceptar'
+          });
+          return false;
+      }
 
-                  if(data.status == 1){
-                      window.location.href = window.origin+'/catalogo/producto/success_fanbag?codigo=' + data.codigo_fanbag;
-                  } else {
-                      Swal.fire({
-                          title: 'Se ha Producido un error! Por favor comuniquese con Soporte Tecnico. Gracias!',
-                          type: 'info',
-                          showCancelButton: false,
-                          confirmButtonColor: '#3085d6',
-                          cancelButtonColor: '#d33',
-                          confirmButtonText: 'Aceptar'
-                      });
-                      return false;
-                  }
-              }
-          })
-              .catch(function (er) {
+      event.preventDefault();
+
+      $.ajaxSetup({ headers: {'X-CSRF-TOKEN': $("input[name=_token]").val()} });
+      $.ajax({
+          type: "POST",
+          url: $("#change-product-catalogo").val(),
+          data: { _method: 'POST', data: getFormData($("#change-product")) },
+          dataType: "json",
+          success: function(data)
+          {
+
+              if(data.status == 1){
+                  window.location.href = window.origin+'/catalogo/producto/success_fanbag?codigo=' + data.codigo_fanbag;
+              } else {
                   Swal.fire({
                       title: 'Se ha Producido un error! Por favor comuniquese con Soporte Tecnico. Gracias!',
                       type: 'info',
@@ -170,12 +136,23 @@ $(document).ready(function(){
                       cancelButtonColor: '#d33',
                       confirmButtonText: 'Aceptar'
                   });
-                  console.log(er);
                   return false;
+              }
+          }
+      })
+          .catch(function (er) {
+              Swal.fire({
+                  title: 'Se ha Producido un error! Por favor comuniquese con Soporte Tecnico. Gracias!',
+                  type: 'info',
+                  showCancelButton: false,
+                  confirmButtonColor: '#3085d6',
+                  cancelButtonColor: '#d33',
+                  confirmButtonText: 'Aceptar'
               });
-      });
-
-  }
+              console.log(er);
+              return false;
+          });
+    });
 
 
     $("#email_fanbag_repeat").on('paste', function(e){

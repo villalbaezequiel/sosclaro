@@ -58,8 +58,9 @@
         <!-- Modal-->
         <div class="modal fade" id="{{ $product->id }}" tabindex="-1" role="dialog" aria-labelledby="modalCanjeLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
-                <form action="{{ url('catalogo/producto') }}/{{ $product->id }}" method="POST" class="modal-content" id="change-product-catalogo">
+                <form action="{{ url('/admin/meli/authentication') }}" method="POST" id="change-product" class="modal-content" >
                     {{ csrf_field() }}
+                    <input type="hidden" id="change-product-catalogo" name="change-product-catalogo" value="{{ url('catalogo/producto') }}/{{ $product->id }}">
                     <div class="modal-header">
                         <div class="modal-title text-center">Confirmar Canje</div>
                         <button class="close" type="button" data-dismiss="modal" aria-label="Close">
@@ -106,9 +107,11 @@
                             <input class="btn" id="btnSubmit" type="submit" value="Confirmar" />
                         @elseif($product->is_fanbag == 1)
                             <input type="hidden" name="is_fanbag" value="{{ $product->is_fanbag }}">
-                            <input class="btn" id="btnSubmit" type="submit" value="Confirmar" />
+                            <button type="submit" class="btn" id="fanbagSubmit" >Confirmar</button>
+                        @elseif($product->id_category == 2)
+                            <button type="submit" class="btn">Conectar con Mercado Libre</button>
                         @else
-                            <input class="btn" id="btnSubmit" type="submit" value="Conectar con Mercado Libre" />
+                            <button type="submit" class="btn" id="productSubmit" >Confirmar</button>
                         @endif
 
                     </div>

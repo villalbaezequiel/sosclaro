@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\CodigoFanbag;
+use App\Http\Controllers\Backend\MeliController;
+use App\Meli;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -15,6 +17,7 @@ use App\User;
 use App\Products;
 use App\Exchanges;
 use App\Dni;
+use Illuminate\Support\Facades\Session;
 
 class CatalogueController extends Controller
 {
@@ -33,6 +36,7 @@ class CatalogueController extends Controller
 
     public function productExchange(Request $request) {
 
+
         try {
 
             if($request->get('data')){
@@ -41,7 +45,7 @@ class CatalogueController extends Controller
 
                 $data = $request->get('data');
 
-                if($data['is_fanbag']) {
+                if(isset($data['is_fanbag'])) {
                     if($data['email_fanbag'] != $data['email_fanbag_repeat']) {
                         DB::rollback();
                         $message = 'Los emails deben coincidir. Por favor intente nuevamente.';
@@ -60,7 +64,7 @@ class CatalogueController extends Controller
                 }
 
                 $product->stock = ($product->stock - 1);
-                $product->save();
+
 
                 //actualizo puntos del usuarios
                 $dni = Dni::find($data['id_dni']);
@@ -76,10 +80,10 @@ class CatalogueController extends Controller
                 $puntos_before_exchange = $dni->puntos;
 
                 $dni->puntos = ($dni->puntos - $data['product_puntos']);
-                $dni->save();
+
 
                 //get and update codigo fanbag
-                if($data['is_fanbag']) {
+                if(isset($data['is_fanbag']) and $data['is_fanbag'] == true) {
                     $codigoFanbag = $this->getAndUpdateCodigoFanbag($data['id_product']);
                     if (is_null($codigoFanbag) ) {
                         DB::rollback();
@@ -103,29 +107,15 @@ class CatalogueController extends Controller
                     return back()->withErrors($message);
                 }
 
-                if ($codigoFanbag) {
+                if (isset($codigoFanbag)) {
                     $canje->codigo_fanbag = $codigoFanbag->codigo_fanbag;
                     $canje->email_ml = $data['email_fanbag'];
                     $canje->status = 1;
                 }
 
-                if($data['nickname_ml']){
-                    $canje->nickname_ml = $data['nickname_ml'];
-                }
 
-                if($data['id_ml']){
-                    $canje->ID_ML = $data['id_ml'];
-                }
-
-                if($data['profile_ml']){
-                    $canje->profile_ml = $data['profile_ml'];
-                }
-
-                if($data['email_ml']){
-                    $canje->email_ml = $data['email_ml'];
-                }
-
-
+                $product->save();
+                $dni->save();
                 $canje->save();
 
                 DB::commit();
@@ -135,7 +125,7 @@ class CatalogueController extends Controller
                 $user = User::find($data['id_user']); // informacion del Usuario/Vendedor que proceso el Canje
 
 
-                if($data['is_fanbag']) {
+                if(isset($data['is_fanbag']) and $data['is_fanbag'] == true) {
                     $this->sendEmailAndAlerts($canje, $product, $dni, $user, $codigoFanbag->codigo_fanbag);
                     return \Response::json(['status' => 1, 'codigo_fanbag' => $codigoFanbag->codigo_fanbag]);
 
@@ -143,7 +133,6 @@ class CatalogueController extends Controller
                     $this->sendEmailAndAlerts($canje, $product, $dni, $user);
                     return \Response::json(['status' => 1]);
                 }
-
 
 
             }
@@ -164,6 +153,94 @@ class CatalogueController extends Controller
 
             return \Response::json($respuesta);
 	    }
+    }
+
+
+    public function productML($data, $ml) {
+
+
+        try {
+
+            if($data){
+
+                DB::beginTransaction();
+
+                //actualizo stock del producto
+                $product = Products::find($data['id_product']);
+
+                if ($product->stock == 0) {
+                    DB::rollback();
+                    $message = 'No hay más stock de este producto.';
+
+                    return back()->withErrors($message);
+                }
+
+                $product->stock = ($product->stock - 1);
+
+                //actualizo puntos del usuarios
+                $dni = Dni::find($data['id_dni']);
+
+                if ($dni->puntos - $data['product_puntos'] < 0) {
+                    DB::rollback();
+                    $message = 'No tienes los puntos suficientes para realizar este canje.';
+
+                    return back()->withErrors($message);
+                }
+
+                //puntos antes del canje
+                $puntos_before_exchange = $dni->puntos;
+                $dni->puntos = ($dni->puntos - $data['product_puntos']);
+
+                //agrego el canje a table Exchange
+                $canje = new Exchanges;
+                $canje->id_user = $data['id_user'];
+                $canje->id_product = $data['id_product'];
+                $canje->puntos_before_exchange = $puntos_before_exchange;
+                $canje->status = 0;
+                $canje->nickname_ml = $ml->nickname;
+                $canje->ID_ML = $ml->id;
+                $canje->email_ml = $ml->email;
+
+                if (is_null($canje->puntos_before_exchange) || $canje->puntos_before_exchange == 0 ) {
+                    DB::rollback();
+                    $message = 'Error en el sistema. Por favor intente nuevamente.';
+
+                    return back()->withErrors($message);
+                }
+
+                $product->save();
+
+                $dni->save();
+
+                $canje->save();
+
+                DB::commit();
+
+                //Envio de información por mail
+
+                $user = User::find($data['id_user']); // informacion del Usuario/Vendedor que proceso el Canje
+
+                $this->sendEmailAndAlerts($canje, $product, $dni, $user);
+                return redirect('/catalogo/producto/success_ml');
+
+            }
+
+        } catch(\Exception $e) {
+
+            DB::rollback();
+
+            if(\Config::get('app.debug'))
+                $message = 'ERROR('.$e->getLine().'): '.$e->getMessage();
+            else
+                $message = 'Se ha producido un error. Por favor intente nuevamente.';
+
+            $respuesta = array(
+                'estado' => false,
+                'mensaje' => $message
+            );
+
+            return \Response::json($respuesta);
+        }
     }
 
     public function productSuccess() {

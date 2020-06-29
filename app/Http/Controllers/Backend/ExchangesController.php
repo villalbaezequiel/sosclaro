@@ -14,6 +14,7 @@ use App\Dni;
 use App\Exchanges;
 use App\Products;
 use App\User;
+use Meli;
 
 class ExchangesController extends Controller
 {
