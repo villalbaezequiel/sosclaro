@@ -58,7 +58,7 @@
         <!-- Modal-->
         <div class="modal fade" id="{{ $product->id }}" tabindex="-1" role="dialog" aria-labelledby="modalCanjeLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
-                <form action="{{ url('/admin/meli/authentication') }}" method="POST" id="change-product" class="modal-content" >
+                <form action="{{ url('/meli/authentication') }}" method="POST" id="change-product" class="modal-content" >
                     {{ csrf_field() }}
                     <input type="hidden" id="change-product-catalogo" name="change-product-catalogo" value="{{ url('catalogo/producto') }}/{{ $product->id }}">
                     <div class="modal-header">
@@ -113,7 +113,7 @@
                         @else
                             <button type="submit" class="btn" id="productSubmit" >Confirmar</button>
                         @endif
-
+i
                     </div>
                 </form>
             </div>
