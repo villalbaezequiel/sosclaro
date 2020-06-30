@@ -23,7 +23,7 @@ class RankingController extends Controller
     public function index()
     {
       return view('frontend.results.index', [
-        'results_categories' => ResultsCategories::all(),
+        'results_categories' => ResultsCategories::where('active','=', 1)->get(),
         'bonus_track_categories' => BonusTrackCategories::all(),
         'modals' => Modals::where('active', '=', 1)->get()
       ]);
