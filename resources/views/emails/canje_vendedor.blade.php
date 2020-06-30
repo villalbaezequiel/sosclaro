@@ -248,31 +248,21 @@
               <div class="wrapper">
                 <div>
                   <p>Hola,</p>
-                  <p>Has realizado un Nuevo Canje.</p>
+                  <p>Gracias por haber realizado un canje en Mejores Vendedores. Tu premio será acreditado dentro de las próximas 72hs.</p>
                 </div>
                 <div>
-                    <p><a class="btn btn-primary" href="{{ $url }}/usuario/canjes" target="_blank">Ver Mis Canjes</a></p>
-                </div>
-                <div>
-                    <p><a class="btn btn-primary" href="{{ $url }}/catalogo/producto{{ $product->id }}">Producto:</a>
-                      <ul>
-                        <li>Codigo: {{ $product->codigo }}</li>
-                        <li>Nombre: {{ $product->name }}</li>
-                        <li>Stock Actual: {{ $product->stock }}</li>
-                      </ul>
-                    </p>
+                    <p><a class="btn" href="{{ $url }}/usuario/canjes" target="_blank">Ver Mis Canjes</a></p>
                 </div>
               </div>
             </div>
 
             <div class="footer">
               <div class="content-block">
-                <span class="apple-link">© Copyright 2018. Algunos derechos reservados. <a href="http://www.mejoresvendedores.com.ar/terminos">Bases y condiciones</a></span>
+                <span class="apple-link">© Copyright 2020. Algunos derechos reservados. <a href="http://www.mejoresvendedores.com.ar/terminos">Bases y condiciones</a></span>
               </div>
               <div class="content-block powered-by">
-                <span>Powered by <a href="https://www.linkedin.com/in/ezequiel-villalba-7b7933a4">Ezequiel Villalba</a></span> <br/>
-                <span>Mail <a href="mailto:villalbaezequiel64@gmail.com">villalbaezequiel64@gmail.com</a></span> <br/>
-                <span>Telephone +549 11 62322902</span>
+                <span>Mejores Vendedores</span> <br/>
+                <span><a href="wwww.mejoresvendedores.com.ar">wwww.mejoresvendedores.com.ar</a></span> <br/>
               </div>
             </div>
 

@@ -11,9 +11,9 @@
         </hgroup>
         <article class="section-content">
             <div class="jumbotron jumbotron-fluid text-center">
-                <h3>Felicitaciones!</h3>
+                <h3>¡Felicitaciones!</h3>
                 <p class="lead">El canje ha sido realizado.
-                    <br> En los próximos días lo enviaremos a tu base de operaciones.</p>
+                    <br> Tu premio será acreditado dentro de las próximas 72hs.</p>
                 <a class="btn" href="{{ url('/catalogo') }}">Continuar canjeando</a>
             </div>
         </article>
