@@ -76,9 +76,9 @@
                         <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;d. Mayor a 20%, menor a 30%: 75%</p>
                         <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;e. Mayor a 30%, 100%</p>
                         <p>2) Vendedores Destacados:</p>
-                        <p>Reconoceremos mensualmente el alta de NUEVOS PSR ́S que logren venta de sims
-                            con carga inicial, recibirán 100 puntos.</p>
-                        <p>&nbsp;&nbsp;&nbsp;- Alta de puntos con ICB >= $80 – Escala de PSR.</p>
+                        <p>Reconoceremos mensualmente el alta de NIEVOS PSRs, correctamente registrados
+                            en ITEC.</p>
+                        <p>Recibirán 5 puntos por PSR dado de alta.</p>
                         <p><strong>Modalidades de Participación: BONUS TRACK.</strong></p>
                         <p>Son logros espontáneos con diferentes objetivos que SUMAN PUNTOS. Revisar
                             vigencias y bases y condiciones específicas de la promoción:</p>
@@ -210,7 +210,10 @@
                             responsabilidad legal de cualquier naturaleza en relación con el recibo o uso del premio,
                             o con la participación en El Programa.
                             Con la participación en este Programa los participantes aceptan desde ya que en caso de
-                            ser acreedores del premio liberan al ORGANIZADOR hasta donde lo permita la ley local
+                            ser acreedores del premio liberan a2) Vendedores Destacados:
+Reconoceremos mensualmente el alta de NIEVOS PSRs, correctamente registrados
+en ITEC.
+Recibirán 5 puntos por PSR dado de alta.l ORGANIZADOR hasta donde lo permita la ley local
                             por la responsabilidad derivada de daño, muerte, accidente, lesiones o perjuicios
                             personales, corporales o patrimoniales que pueda sufrir el ganador, con motivo u ocasión
                             del retiro y/o uso y disfrute del premio. </p>
