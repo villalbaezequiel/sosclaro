@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -28,8 +29,13 @@ class ResultsController extends Controller
      */
     public function index()
     {
+        $start_date = Carbon::now()->firstOfYear();
+        $results = Results::where('created_at', '>=', $start_date)
+            ->orderBy('created_at', 'desc')
+            ->get();
+
         return view('backend.results.index', [
-            'results' => Results::all()
+            'results' => $results
         ]);
     }
 

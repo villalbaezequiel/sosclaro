@@ -70,7 +70,7 @@ class User extends Authenticatable
      */
     public function results()
     {
-        return $this->hasMany('App\Results');
+        return $this->hasMany(Results::class);
     }
     
     static public function getEmail($id_user){
