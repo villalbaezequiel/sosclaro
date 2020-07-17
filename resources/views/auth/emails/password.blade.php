@@ -11,3 +11,6 @@
   Para resetear su contraseña, visite el siguiente enlace: <br />
   <a href="{{ $link = url('password/reset', $token).'?email='.urlencode($user->getEmailForPasswordReset()) }}">{{ $link }}</a>
 </p>
+<p>
+  Este link caducará en los próximos 60 minutos. En ese caso deberás solicitarlo nuevamente.
+</p>

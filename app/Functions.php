@@ -88,6 +88,10 @@ class Functions extends Model
 
     static public function getMonthShortcuts() {
       $months = array(
+        '1' => 'ENE',
+        '2' => 'FEB',
+        '3' => 'MAR',
+        '4' => 'ABR',
         '5' => 'MAY',
         '6' => 'JUN',
         '7' => 'JUL',
@@ -96,10 +100,6 @@ class Functions extends Model
         '10' => 'OCT',
         '11' => 'NOV',
         '12' => 'DIC',
-        '1' => 'ENE',
-        '2' => 'FEB',
-        '3' => 'MAR',
-        '4' => 'ABR'
       );
       return $months;
     }

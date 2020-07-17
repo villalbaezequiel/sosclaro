@@ -24,14 +24,48 @@ class DniController extends Controller
     public function index() {
 
 
-
+        $totalDnis = collect();
         $dnis = Dni::all();
 
+        foreach ($dnis as $dni) {
+            $newDni = new \StdClass();
+            $newDni->id = $dni->id;
+            $newDni->dni = $dni->dni;
+            $newDni->name = $dni->name;
+            $newDni->last_name = $dni->last_name;
+            $newDni->id_agency = $dni->id_agency;
+            $newDni->id_region = $dni->id_region;
+            $newDni->puntos = $dni->puntos;
+            $newDni->id_user = $dni->id_user;
+            $newDni->created_at = $dni->created_at;
+
+
+
+            $totalDnis->push($newDni);
+        }
+
         $dnis2 = UsersAllowed::all();
-        $dnis->merge($dnis2)->unique();
+
+        foreach ($dnis2 as $dni2) {
+                $newDni = new \StdClass();
+                $newDni->id = $dni2->id;
+                $newDni->dni = $dni2->dni;
+                $newDni->name = $dni2->name;
+                $newDni->last_name = $dni2->last_name;
+                $newDni->id_agency = $dni2->id_agency;
+                $newDni->id_region = $dni2->id_region;
+                $newDni->puntos = 0;
+                $newDni->id_user = null;
+                $newDni->created_at = $dni->created_at;
+
+                $totalDnis->push($newDni);
+
+        }
+
+        $unique_dnis = $totalDnis->unique('dni');
 
         return view('backend.dni.index', [
-            'dnis' => $dnis
+            'dnis' => $unique_dnis
         ]);
     }
     

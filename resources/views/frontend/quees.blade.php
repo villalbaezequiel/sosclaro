@@ -47,19 +47,23 @@
                     <span>&nbsp;&nbsp; d. Mayor a 20%, menor a 30%: 75%</span><br/>
                     <span>&nbsp;&nbsp; e. Mayor a 30%, 100%</span>
                 </p>
-            </div>
-            <div class="col col-md-6">
-                <h3>
-                    <span class="badge badge-black">2</span> Vendedores Destacados</h3>
-                <p>
-                    Reconoceremos mensualmente el alta de NUEVOS PSR´S que logren <strong>venta de sims con carga inicial, recibirán 100 puntos.</strong>
-                </p>
-                <p>- Alta de puntos con ICB >= $80 – Escala de PSR.</p>
                 <p>
                     <small>
                         <strong>IMPORTANTE:</strong> Participan todos los vendedores que tengan al menos 100 PSRs asignados.
                     </small>
                 </p>
+            </div>
+            <div class="col col-md-6">
+                    <h3>
+                        <span class="badge badge-black">2</span> Vendedores Destacados
+                    </h3>
+                    <img style="height: 40px; margin-bottom: 10px;" src="/assets/frontend/img/nuevo.png" />
+
+                <p>
+                    Reconoceremos mensualmente el alta de NUEVOS PSRs, correctamente registrados en ITEC.
+                </p>
+                <p><strong>Recibirán 5 puntos por PSR dado de alta.</strong></p>
+
 
                 <!--
                 <hr>

@@ -79,7 +79,7 @@
                     @if($name_category['id'] == 1)
                     <td>{{ $result['puntos'] }}</td>
                     @endif
-                    <td>{{ $result['desempeno'] }}</td>
+                    <td>{{ round($result['desempeno'],2) }} %</td>
                   </tr>
                 @endforeach
               @endif
@@ -113,9 +113,11 @@ $(document).ready(function(){
                 var month = data.month;
                 
                 if(results.length === 0){
-                    alert('No se encontraron resultados para el mes seleccionado.');
-                    $(".list-months-results").removeClass('font-weight-bold');
-                    $(".list-months-results p").removeClass('circle-white');
+                    //alert('No se encontraron resultados para el mes seleccionado.');
+                    //   $(".list-months-results").removeClass('font-weight-bold');
+                    //   $(".list-months-results p").removeClass('circle-white');
+                    $(".list-results-table").empty();
+
                 } else {
                     
                     if($(".hidden-results-start")){
@@ -126,11 +128,11 @@ $(document).ready(function(){
                     $(".list-results-table").empty();
                     if(idCategory === 1){
                       $.each(results, function(i,v){
-                        $(".list-results-table").append("<tr><th scope='row'>"+v['region_name']+"</th><td>"+v['user_name']+"</td><td>"+v['agente_name']+"</td><td>"+v['puntos']+"</td><td>"+v['desempeno']+"</td></tr>");
+                        $(".list-results-table").append("<tr><th scope='row'>"+v['region_name']+"</th><td>"+v['user_name']+"</td><td>"+v['agente_name']+"</td><td>"+v['puntos']+"</td><td>"+parseFloat(v['desempeno']).toFixed(2)+"%</td></tr>");
                       });   
                     } else {
                       $.each(results, function(i,v){
-                        $(".list-results-table").append("<tr><th scope='row'>"+v['region_name']+"</th><td>"+v['user_name']+"</td><td>"+v['agente_name']+"</td><td>"+v['puntos']+"</td><td>"+v['desempeno']+"</td></tr>");
+                        $(".list-results-table").append("<tr><th scope='row'>"+v['region_name']+"</th><td>"+v['user_name']+"</td><td>"+v['agente_name']+"</td><td>"+v['puntos']+"</td><td>"+parseFloat(v['desempeno']).toFixed(2)+"%</td></tr>");
                       });  
                     }
                     

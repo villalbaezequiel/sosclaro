@@ -63,9 +63,10 @@
 <script type="text/javascript">
 $(document).ready(function(){
     $("#list_dni").DataTable({
+        aaSorting: [[4, 'desc']],
         "language": {
-            "url": "https://cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json",
-            "order": [[ 4, "desc" ]]
+            "url": "https://cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
+
         }
     });
     

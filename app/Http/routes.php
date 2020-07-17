@@ -189,7 +189,9 @@ Route::group(['middleware' => 'auth'], function () {
     // galeria de imagenes
     Route::get('/galeria-imagenes', 'Frontend\GalleryController@index');
 
-
+    //Meli
+    Route::post('/meli/authentication', 'Backend\MeliController@authentication')->name('admin.ml.authentication');
+    Route::get('/meli/redirect', 'Backend\MeliController@redirect')->name('admin.ml.redirect');
 
 
     //ajax (siempre estas rutas se definen a lo ultimo)

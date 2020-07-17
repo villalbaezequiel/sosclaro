@@ -23,7 +23,7 @@ class RankingController extends Controller
     public function index()
     {
       return view('frontend.results.index', [
-        'results_categories' => ResultsCategories::all(),
+        'results_categories' => ResultsCategories::where('active','=', 1)->get(),
         'bonus_track_categories' => BonusTrackCategories::all(),
         'modals' => Modals::where('active', '=', 1)->get()
       ]);
@@ -31,7 +31,13 @@ class RankingController extends Controller
 
     public function show($id_category)
     {
-      $results = Results::where('id_category', '=', $id_category)->where('month', '=', date('n'))->orderby('puesto', 'ASC')->orderby('puntos', 'DESC')->get()->toArray();
+      $results = Results::where('id_category', '=', $id_category)
+          ->where('month', '=', date('n'))
+          ->whereYear('created_at', '=',  date("Y"))
+          ->orderby('puesto', 'ASC')
+          ->orderby('puntos', 'DESC')
+          ->get()->toArray();
+
       foreach ($results as &$result) {
         $result['user_name'] = Dni::getName($result['id_user']);
         $result['region_name'] = Regions::getName($result['id_region']);
@@ -56,8 +62,9 @@ class RankingController extends Controller
       } else if($month == "2_semestre"){
         $results = Results::where('id_category', '=', $id_category)->where('month', '>=', 7)->orderby('puesto', 'ASC')->orderby('puntos', 'DESC')->get()->toArray();
       } else {  
-        $results = Results::where('id_category', '=', $id_category)->where('month', '=', $month)->orderby('puesto', 'ASC')->orderby('puntos', 'DESC')->get()->toArray();
+        $results = Results::where('id_category', '=', $id_category)->where('month', '=', $month)->whereYear('created_at', '=',  date("Y"))->orderby('puesto', 'ASC')->orderby('puntos', 'DESC')->get()->toArray();
       }
+
       foreach ($results as &$result) {
         $result['user_name'] = Dni::getName($result['id_user']);
         $result['region_name'] = Regions::getName($result['id_region']);
