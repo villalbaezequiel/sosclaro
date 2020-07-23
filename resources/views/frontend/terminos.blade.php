@@ -91,7 +91,7 @@
                             cada uno. </p>
                         <p>CONDICIONES BONUS TRACK: </p>
                         <p>1) Participan todos los Vendedores, Back Office y Supervisores de Distribución que
-                            estén registrados y activos en ITEC. </p>
+                            estén activos en ITEC y registrados en SOS CLARO. </p>
                         <p>2) Para el cálculo de las recargas se consideran las ventas realizadas por los PSRs a
                             clientes finales, excepto las de PSRs rubro “Locales Claro Exclusivo” ó “Sin Rubro” </p>
                         <p>3) Se tomará como base para el cálculo de crecimiento el mes de mayor venta de
