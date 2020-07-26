@@ -36,7 +36,7 @@
             <td>{{ \App\Functions::getNameMonth($result->month) }}</td>
             <td>{{ \App\Regions::getName($result->id_region) }}</td>
             <td>{{ $result->puntos }}</td>
-            <td>{{ $result->desempeno }}</td>
+            <td>{{ round($result->desempeno,2) }}</td>
             <td>{{ \App\Functions::getDate($result->created_at) }}</td>
         </tr>
         @endforeach

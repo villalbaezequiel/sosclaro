@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Results;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -28,6 +30,10 @@ class BonusTrackController extends Controller
      */
     public function index()
     {
+        $start_date = Carbon::now()->firstOfYear();
+        $results = BonusTrack::where('created_at', '>=', $start_date)
+            ->orderBy('created_at', 'desc')
+            ->get();
         return view('backend.bonus_track.index', [
             'bonus_track' => BonusTrack::all()
         ]);

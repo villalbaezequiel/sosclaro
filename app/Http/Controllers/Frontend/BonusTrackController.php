@@ -58,7 +58,13 @@ class BonusTrackController extends Controller
      */
     public function show($id_category)
     {
-      $results = BonusTrack::where('id_category', '=', $id_category)->where('month', '=', date('n'))->orderby('puesto', 'ASC')->orderby('puntos', 'DESC')->limit(15)->get()->toArray();
+      $results = BonusTrack::where('id_category', '=', $id_category)
+          ->where('month', '=', date('n'))
+          ->whereYear('created_at', '=',  date("Y"))
+          ->orderby('puesto', 'ASC')
+          ->orderby('puntos', 'DESC')
+          ->limit(15)
+          ->get()->toArray();
       foreach ($results as &$result) {
         $result['user_name'] = Dni::getName($result['id_user']);
         $result['region_name'] = Regions::getName($result['id_region']);
@@ -111,7 +117,11 @@ class BonusTrackController extends Controller
     
     public function resultsForMonth($id_category, $month)
     {
-      $results = BonusTrack::where('id_category', '=', $id_category)->where('month', '=', $month)->orderby('puesto', 'ASC')->orderby('puntos', 'DESC')->limit(15)->get()->toArray();
+      $results = BonusTrack::where('id_category', '=', $id_category)
+          ->where('month', '=', $month)
+          ->whereYear('created_at', '=',  date("Y"))
+          ->orderby('puesto', 'ASC')->orderby('puntos', 'DESC')
+          ->limit(15)->get()->toArray();
       
       foreach ($results as &$result) {
         $result['user_name'] = Dni::getName($result['id_user']);

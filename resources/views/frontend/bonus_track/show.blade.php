@@ -89,9 +89,11 @@ $(document).ready(function(){
                 var imagenDestacada = data.imagen_destacada;
                 
                 if(results.length === 0){
-                    alert('No se encontró Bonus Track para el Mes seleccionado.');
+              /*      alert('No se encontró Bonus Track para el Mes seleccionado.');
                     $(".list-months-results").removeClass('font-weight-bold');
-                    $(".list-months-results p").removeClass('circle-white');
+                    $(".list-months-results p").removeClass('circle-white');*/
+                    $(".list-results-table").empty();
+
                 } else {
                     
                     if($(".hidden-results-start")){
@@ -101,7 +103,7 @@ $(document).ready(function(){
                     //list results table
                     $(".list-results-table").empty();
                     $.each(results, function(i,v){
-                      $(".list-results-table").append("<tr><th scope='row'>"+v['region_name']+"</th><td>"+v['user_name']+"</td><td>"+v['agente_name']+"</td><td>"+v['puntos']+"</td><td>"+v['desempeno']+"%</td></tr>");
+                      $(".list-results-table").append("<tr><th scope='row'>"+v['region_name']+"</th><td>"+v['user_name']+"</td><td>"+v['agente_name']+"</td><td>"+v['puntos']+"</td><td>"+parseFloat(v['desempeno']).toFixed(2)+"%</td></tr>");
                     });
                     
                     //imagen destacada 
