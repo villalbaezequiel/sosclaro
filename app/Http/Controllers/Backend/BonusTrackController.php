@@ -35,7 +35,7 @@ class BonusTrackController extends Controller
             ->orderBy('created_at', 'desc')
             ->get();
         return view('backend.bonus_track.index', [
-            'bonus_track' => BonusTrack::all()
+            'bonus_track' => $results
         ]);
     }
 

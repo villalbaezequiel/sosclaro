@@ -99,15 +99,22 @@
 
     <div class="form-group">
         <div class="form-check">
-            <input type="checkbox" class="form-check-input" name="voucher_product" id="voucher_product">
+            @if($product->voucher)
+            <input type="checkbox" class="form-check-input" name="voucher_product" id="voucher_product" checked>
+            @else
+                <input type="checkbox" class="form-check-input" name="voucher_product" id="voucher_product">
+            @endif
             <label class="custom-label" for="voucher_product">¿Es voucher de Mercado Libre o Netshoes?</label>
         </div>
     </div>
-
     <div class="form-group">
         <div class="form-check">
-            <input type="checkbox" class="form-check-input" name="is_fanbag" id="is_fanbag">
-            <label class="custom-label" for="is_fanbag">¿Es código Fanbag?</label>
+            @if($product->is_fanbag)
+                <input type="checkbox" class="form-check-input" name="is_fanbag" id="is_fanbag" checked >
+            @else
+                <input type="checkbox" class="form-check-input" name="is_fanbag" id="is_fanbag"  >
+            @endif
+                <label class="custom-label" for="is_fanbag">¿Es código Fanbag?</label>
         </div>
     </div>
     

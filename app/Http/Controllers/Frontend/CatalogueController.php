@@ -83,22 +83,20 @@ class CatalogueController extends Controller
 
 
                 //get and update codigo fanbag
-                if(isset($data['is_fanbag']) and $data['is_fanbag'] == true) {
-                    $codigoFanbag = $this->getAndUpdateCodigoFanbag($data['id_product']);
-                    if (is_null($codigoFanbag) ) {
-                        DB::rollback();
-                        $message = 'No se encontro ningún producto Fanbag disponible.';
-                        return back()->withErrors($message);
-                    }
-                }
+                $codigoFanbag = $this->getAndUpdateCodigoFanbag($data['id_product']);
 
+                if (is_null($codigoFanbag) ) {
+                    DB::rollback();
+                    $message = 'No se encontro ningún producto Fanbag disponible.';
+                    return back()->withErrors($message);
+                }
 
                 //agrego el canje a table Exchange
                 $canje = new Exchanges;
                 $canje->id_user = $data['id_user'];
                 $canje->id_product = $data['id_product'];
                 $canje->puntos_before_exchange = $puntos_before_exchange;
-                $canje->status = 0;
+                $canje->status = 1;
 
                 if (is_null($canje->puntos_before_exchange) || $canje->puntos_before_exchange == 0 ) {
                     DB::rollback();
@@ -110,9 +108,14 @@ class CatalogueController extends Controller
                 if (isset($codigoFanbag)) {
                     $canje->codigo_fanbag = $codigoFanbag->codigo_fanbag;
                     $canje->email_ml = $data['email_fanbag'];
-                    $canje->status = 1;
+                    $canje->status = 2;
                 }
 
+                if($product->is_fanbag && is_null($canje->codigo_fanbag)) {
+                    DB::rollback();
+                    $message = 'No se ha encontrado un código Fanbag';
+                    return back()->withErrors($message);
+                }
 
                 $product->save();
                 $dni->save();
@@ -196,7 +199,7 @@ class CatalogueController extends Controller
                 $canje->id_user = $data['id_user'];
                 $canje->id_product = $data['id_product'];
                 $canje->puntos_before_exchange = $puntos_before_exchange;
-                $canje->status = 0;
+                $canje->status = 1;
                 $canje->nickname_ml = $ml->nickname;
                 $canje->ID_ML = $ml->id;
                 $canje->email_ml = $ml->email;
