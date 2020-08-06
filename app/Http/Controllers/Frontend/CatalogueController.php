@@ -69,6 +69,13 @@ class CatalogueController extends Controller
                 //actualizo puntos del usuarios
                 $dni = Dni::find($data['id_dni']);
 
+                if (is_null($dni)) {
+                    DB::rollback();
+                    $message = 'No tienes los puntos suficientes para realizar este canje.';
+
+                    return back()->withErrors($message);
+                }
+
                 if ($dni->puntos - $data['product_puntos'] < 0) {
                   DB::rollback();
                   $message = 'No tienes los puntos suficientes para realizar este canje.';
@@ -183,6 +190,13 @@ class CatalogueController extends Controller
                 //actualizo puntos del usuarios
                 $dni = Dni::find($data['id_dni']);
 
+                if (is_null($dni)) {
+                    DB::rollback();
+                    $message = 'DNI no encontrado.';
+
+                    return back()->withErrors($message);
+                }
+
                 if ($dni->puntos - $data['product_puntos'] < 0) {
                     DB::rollback();
                     $message = 'No tienes los puntos suficientes para realizar este canje.';
@@ -209,22 +223,22 @@ class CatalogueController extends Controller
                     $message = 'Error en el sistema. Por favor intente nuevamente.';
 
                     return back()->withErrors($message);
+                } else {
+                    $product->save();
+
+                    $dni->save();
+
+                    $canje->save();
+
+                    DB::commit();
+
+                    //Envio de información por mail
+
+                    $user = User::find($data['id_user']); // informacion del Usuario/Vendedor que proceso el Canje
+
+                    $this->sendEmailAndAlerts($canje, $product, $dni, $user);
+                    return redirect('/catalogo/producto/success_ml');
                 }
-
-                $product->save();
-
-                $dni->save();
-
-                $canje->save();
-
-                DB::commit();
-
-                //Envio de información por mail
-
-                $user = User::find($data['id_user']); // informacion del Usuario/Vendedor que proceso el Canje
-
-                $this->sendEmailAndAlerts($canje, $product, $dni, $user);
-                return redirect('/catalogo/producto/success_ml');
 
             }
 
