@@ -103,7 +103,7 @@ class CatalogueController extends Controller
                 $canje->id_user = $data['id_user'];
                 $canje->id_product = $data['id_product'];
                 $canje->puntos_before_exchange = $puntos_before_exchange;
-                $canje->status = 1;
+                $canje->status = 0;
 
                 if (is_null($canje->puntos_before_exchange) || $canje->puntos_before_exchange == 0 ) {
                     DB::rollback();
@@ -115,7 +115,7 @@ class CatalogueController extends Controller
                 if (isset($codigoFanbag)) {
                     $canje->codigo_fanbag = $codigoFanbag->codigo_fanbag;
                     $canje->email_ml = $data['email_fanbag'];
-                    $canje->status = 2;
+                    $canje->status = 1;
                 }
 
                 if($product->is_fanbag && is_null($canje->codigo_fanbag)) {
@@ -167,11 +167,16 @@ class CatalogueController extends Controller
 
 
     public function productML($data, $ml) {
-
-
+        
         try {
 
-            if($data){
+            if($data && $ml){
+
+                if(is_null($ml->email_ml)) {
+                    $message = 'Error en el sistema. Por favor intente nuevamente.';
+
+                    return back()->withErrors($message);
+                }
 
                 DB::beginTransaction();
 
@@ -212,13 +217,14 @@ class CatalogueController extends Controller
                 $canje = new Exchanges;
                 $canje->id_user = $data['id_user'];
                 $canje->id_product = $data['id_product'];
+                $canje->price_product = $product->price;
                 $canje->puntos_before_exchange = $puntos_before_exchange;
-                $canje->status = 1;
+                $canje->status = 2;
                 $canje->nickname_ml = $ml->nickname;
                 $canje->ID_ML = $ml->id;
                 $canje->email_ml = $ml->email;
 
-                if (is_null($canje->puntos_before_exchange) || $canje->puntos_before_exchange == 0 ) {
+                if (is_null($canje->puntos_before_exchange) || $canje->puntos_before_exchange == 0  || is_null($canje->email_ml)) {
                     DB::rollback();
                     $message = 'Error en el sistema. Por favor intente nuevamente.';
 
