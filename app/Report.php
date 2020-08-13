@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Dni;
+use App\Dni;
 use Illuminate\Database\Eloquent\Model;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\DB;
@@ -153,8 +155,10 @@ class Report extends Model
                   'products.codigo as canje_producto_codigo',
                   'exchanges.nickname_ML as nickname_ML',
                   'exchanges.email_ML as email_ML',
+                  'exchanges.dni_ml as dni_ML',
                   'exchanges.status as canje_estado',
                   'exchanges.puntos_before_exchange as puntos_antes_del_canje',
+                  'exchanges.price_product as precio_producto',
                   'exchanges.created_at as canje_fecha_registro')
                 ->join('users_profile', 'users_profile.id_user', '=', 'users.id')
                 ->join('exchanges', 'exchanges.id_user', '=', 'users.id')
@@ -163,6 +167,8 @@ class Report extends Model
 
 	  foreach($users as &$user){
 
+            $user->nombre_completo = Dni::getName($user->id);
+            $user->dni = Dni::getDni($user->id);
             $user->fecha_nacimiento = UsersProfile::getDateYear($user->fecha_nacimiento);
             $user->region = Regions::getName($user->region);
             $user->genero = ($user->genero == 'male' ? 'Masculino' : 'Femenino');
@@ -171,8 +177,6 @@ class Report extends Model
             $user->activo = ($user->activo == 0 ? 'No' : 'Si');
             $user->canje_estado = Exchanges::getStatus($user->canje_estado);
             $user->canje_fecha_registro = Functions::getDate($user->canje_fecha_registro);
-            $user->dni = Dni::getDni($user->id);
-            $user->nombre_completo = Dni::getName($user->id);
             $user->puntos_historicos = Dni::getPuntosHistorical($user->id);
             $user->puntos_disponibles_hoy = Dni::getPuntos($user->id);
 
