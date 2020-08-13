@@ -113,7 +113,7 @@
                         @else
                             <button type="submit" class="btn" id="productSubmit" >Confirmar</button>
                         @endif
-i
+
                     </div>
                 </form>
             </div>

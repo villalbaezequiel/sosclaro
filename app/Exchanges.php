@@ -27,9 +27,9 @@ class Exchanges extends Model
 
     static public function getStatus($status) {
         if($status == 0){
-            return "Pendiente (Envío Pendiente)";
+            return "Pendiente de acreditación";
         } elseif($status == 1){
-            return "En Transito (Envío realizado)";
+            return "Entregado";
         } elseif ($status == 2) {
             return "Completo (Recepción confirmada)";
         }

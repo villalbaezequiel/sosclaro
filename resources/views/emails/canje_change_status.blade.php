@@ -248,7 +248,7 @@
               <div class="wrapper">
                 <div>
                   <p>Hola,</p>
-                  <p>Su Canje fue procesado con exito por el Administrador, y ha cambiado su estado a Canje "En Transito (Envío realizado)".</p>
+                  <p>Su Canje fue procesado con exito por el Administrador, y ha cambiado su estado a Canje "Entregado".</p>
                 </div>
                 <div>
                     <p><a class="btn btn-primary" href="{{ $url }}/usuario/canjes/{{ $canje->id }}" target="_blank">Ver Canje</a></p>
@@ -260,11 +260,11 @@
               <div class="content-block">
                 <span class="apple-link">© Copyright 2018. Algunos derechos reservados. <a href="http://www.mejoresvendedores.com.ar/terminos">Bases y condiciones</a></span>
               </div>
-              <div class="content-block powered-by">
+            <!--  <div class="content-block powered-by">
                 <span>Powered by <a href="https://www.linkedin.com/in/ezequiel-villalba-7b7933a4">Ezequiel Villalba</a></span> <br/>
                 <span>Mail <a href="mailto:villalbaezequiel64@gmail.com">villalbaezequiel64@gmail.com</a></span> <br/>
                 <span>Telephone +549 11 62322902</span>
-              </div>
+              </div> -->
             </div>
 
           </div>

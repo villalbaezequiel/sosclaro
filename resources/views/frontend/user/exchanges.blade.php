@@ -30,13 +30,15 @@
                             </div>
                             <div class="card-footer">
                                 @if($canje['status'] == 1)
-                                    <a href="{{ url('/usuario/canjes').'/'.$canje['id'] }}">
+                                    <i class="fa fa-check-square"></i> Entregado
+
+                                <!-- <a href="{{ url('/usuario/canjes').'/'.$canje['id'] }}">
                                         <i class="fa fa-square-o"></i> Confirmar recepción</a> (
-                                    <i class="fa fa-truck"></i> Envío realizado )
+                                    <i class="fa fa-truck"></i> Envío realizado ) -->
                                 @elseif($canje['status'] == 2)
                                     <i class="fa fa-check-square"></i> Recepción confirmada
                                 @else
-                                    <i class="fa fa-truck"></i> Envio Pendiente
+                                    <i class="fa fa-truck"></i> Pendiente de acreditación
                                 @endif
                             </div>
                         </div>
