@@ -3,14 +3,12 @@
 namespace App;
 
 use App\Dni;
-use App\Dni;
 use Illuminate\Database\Eloquent\Model;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\DB;
 use App\Functions;
 use App\Guest;
 use App\GuestQuestions;
-use App\Dni;
 use App\UsersProfile;
 use App\Regions;
 use App\Agentes;
