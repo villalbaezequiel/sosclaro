@@ -6,6 +6,7 @@
 @include('frontend.components.header')
 
 <main class="main main-user">
+    <!--
     <section class="section section-dashboard">
         <div class="slider slider-single">
           @if(!empty($modals))
@@ -20,6 +21,7 @@
           @endif
         </div>
     </section>
+    -->
     
     <section class="section" id="section-results-month">
       <div class="col-md-12">
@@ -139,6 +141,8 @@ $(document).ready(function(){
                     //imagen destacada 
                     if(imagenDestacada[0]){
                       $("#imagen_destacada").attr("src", $("#get-url-imagen-destacada").val()+month+"/"+imagenDestacada[0].image);
+                    } else {
+                        $("#imagen_destacada").attr("src", "#");
                     }
                 }
             },
