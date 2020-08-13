@@ -26,8 +26,8 @@ function isEmail(email) {
 
 $(document).ready(function(){
 
-    $("#connect-ml").click(function(e) {
-        $( "#connect-ml" ).prop( "disabled", true );
+    $(".connect-ml").click(function(e) {
+        $(".connect-ml").prop( "disabled", true );
     });
 
     $("#productSubmit").click(function(event) {

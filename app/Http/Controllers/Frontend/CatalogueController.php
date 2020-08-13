@@ -219,7 +219,7 @@ class CatalogueController extends Controller
                 $canje->id_product = $data['id_product'];
                 $canje->price_product = $product->price;
                 $canje->puntos_before_exchange = $puntos_before_exchange;
-                $canje->status = 2;
+                $canje->status = 0;
                 $canje->nickname_ml = $ml->nickname;
                 $canje->ID_ML = $ml->id;
                 $canje->email_ml = $ml->email;
