@@ -118,7 +118,8 @@ class CatalogueController extends Controller
                     $canje->status = 1;
                 }
 
-                if($product->is_fanbag && is_null($canje->codigo_fanbag)) {
+                //TODO SI ES PRODUCTO FISICO VA A FALLAR
+                if(is_null($canje->codigo_fanbag)) {
                     DB::rollback();
                     $message = 'No se ha encontrado un código Fanbag';
                     return back()->withErrors($message);
@@ -167,14 +168,13 @@ class CatalogueController extends Controller
 
 
     public function productML($data, $ml) {
-        
+
         try {
 
             if($data && $ml){
 
-                if(is_null($ml->email_ml)) {
+                if(is_null($ml->email)) {
                     $message = 'Error en el sistema. Por favor intente nuevamente.';
-
                     return back()->withErrors($message);
                 }
 
@@ -223,6 +223,7 @@ class CatalogueController extends Controller
                 $canje->nickname_ml = $ml->nickname;
                 $canje->ID_ML = $ml->id;
                 $canje->email_ml = $ml->email;
+                $canje->dni_ml = $ml->identification->number;
 
                 if (is_null($canje->puntos_before_exchange) || $canje->puntos_before_exchange == 0  || is_null($canje->email_ml)) {
                     DB::rollback();
