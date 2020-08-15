@@ -26,8 +26,13 @@ function isEmail(email) {
 
 $(document).ready(function(){
 
-    $(".connect-ml").click(function(e) {
+ /*   $(".connect-ml").click(function(e) {
         $(".connect-ml").prop( "disabled", true );
+    });*/
+
+
+    $('#change-product').submit(function(){
+        $('button[type=submit]', this).attr('disabled', 'disabled');
     });
 
     $("#productSubmit").click(function(event) {
