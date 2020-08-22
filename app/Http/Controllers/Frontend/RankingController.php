@@ -44,7 +44,7 @@ class RankingController extends Controller
         $result['agente_name'] = Agentes::getName(UsersProfile::getIdAgente($result['id_user']));
       }
         
-      $imagen_destacada = ResultsMedia::where('id_category', '=',$id_category )->where('month', '=', date('n'))->orderby('id', 'DESC')->limit(1)->get();
+      $imagen_destacada = ResultsMedia::where('id_category', '=',$id_category )->where('month', '=', date('n'))->whereYear('created_at', '=',  date("Y"))->orderby('id', 'DESC')->limit(1)->get();
       
       return view('frontend.results.show', [
         'months' => Functions::getMonthShortcuts(),
@@ -71,7 +71,7 @@ class RankingController extends Controller
         $result['agente_name'] = Agentes::getName(UsersProfile::getIdAgente($result['id_user']));
       }
       
-      $imagen_destacada = ResultsMedia::where('id_category', '=',$id_category )->where('month', '=', $month)->orderby('id', 'DESC')->limit(1)->get();
+      $imagen_destacada = ResultsMedia::where('id_category', '=',$id_category )->where('month', '=', $month)->whereYear('created_at', '=',  date("Y"))->orderby('id', 'DESC')->limit(1)->get();
 
       return response()->json(['results' => $results, 'id_category' => $id_category, 'imagen_destacada' => $imagen_destacada, 'month' => $month]);
     }
