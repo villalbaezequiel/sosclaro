@@ -140,10 +140,11 @@ $(document).ready(function(){
                     
                     //imagen destacada 
                     if(imagenDestacada[0]){
+                        $("#imagen_destacada").show();
                       $("#imagen_destacada").attr("src", $("#get-url-imagen-destacada").val()+month+"/"+imagenDestacada[0].image);
                     } else
                     {
-                        $("#imagen_destacada").remove();
+                        $("#imagen_destacada").hide();
                     }
                 }
             },
