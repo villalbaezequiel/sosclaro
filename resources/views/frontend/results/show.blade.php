@@ -119,7 +119,7 @@ $(document).ready(function(){
                     //   $(".list-months-results").removeClass('font-weight-bold');
                     //   $(".list-months-results p").removeClass('circle-white');
                     $(".list-results-table").empty();
-                    $("#imagen_destacada").hide();
+                    $("#imagen_destacada").remove();
 
                 } else {
                     
@@ -141,7 +141,7 @@ $(document).ready(function(){
                     
                     //imagen destacada 
                     if(imagenDestacada[0]){
-                        $("#imagen_destacada").show();
+                      $('#slider-item').append('<img id="imagen_destacada" class="visible-md-up" src="" style="margin: 0 auto;">');
                       $("#imagen_destacada").attr("src", $("#get-url-imagen-destacada").val()+month+"/"+imagenDestacada[0].image);
                     }
                 }
