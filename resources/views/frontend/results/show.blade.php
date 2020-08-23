@@ -119,6 +119,7 @@ $(document).ready(function(){
                     //   $(".list-months-results").removeClass('font-weight-bold');
                     //   $(".list-months-results p").removeClass('circle-white');
                     $(".list-results-table").empty();
+                    $("#imagen_destacada").hide();
 
                 } else {
                     
@@ -142,9 +143,6 @@ $(document).ready(function(){
                     if(imagenDestacada[0]){
                         $("#imagen_destacada").show();
                       $("#imagen_destacada").attr("src", $("#get-url-imagen-destacada").val()+month+"/"+imagenDestacada[0].image);
-                    } else
-                    {
-                        $("#imagen_destacada").hide();
                     }
                 }
             },
