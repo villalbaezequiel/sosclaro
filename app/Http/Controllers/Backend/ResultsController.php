@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -70,6 +71,14 @@ class ResultsController extends Controller
             if(!empty($data) && $data->count()){
 
               foreach ($data as $key => $value) {
+
+                $user = User::where('id',  $value->id_user)->first();
+
+                if ($user && $user->active == 0)
+                {
+                    continue;
+                }
+
                 if(!empty($value->puntos)
                         && !empty($value->desempeno)
                         && !empty($request->get('category_results'))

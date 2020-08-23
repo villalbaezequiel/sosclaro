@@ -54,8 +54,8 @@
     <div class="form-group">
         <label>Estado</label>
         <select class="form-control" name="exchange_status" required>
-            <option value="0" @if($exchange->status == 0) selected="selected" @endif>Envio Pendiente</option>
-            <option value="1" @if($exchange->status == 1) selected="selected" @endif>En Transito (Envío realizado)</option>
+            <option value="0" @if($exchange->status == 0) selected="selected" @endif>Envio Pendiente de acreditación</option>
+            <option value="1" @if($exchange->status == 1) selected="selected" @endif>Entregado</option>
         </select>
     </div>
     <button type="submit" class="btn btn-primary">Editar</button>

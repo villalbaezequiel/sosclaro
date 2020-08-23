@@ -36,6 +36,11 @@ class CatalogueController extends Controller
 
     public function productExchange(Request $request) {
 
+        if (Auth::user()->active == 0)
+        {
+            $message = 'Error en el sistema. Por favor intente nuevamente.';
+            return back()->withErrors($message);
+        }
 
         try {
 
@@ -168,6 +173,13 @@ class CatalogueController extends Controller
 
 
     public function productML($data, $ml) {
+
+        if (Auth::user()->active == 0)
+        {
+            $message = 'Error en el sistema. Por favor intente nuevamente.';
+            return back()->withErrors($message);
+        }
+
 
         try {
 
