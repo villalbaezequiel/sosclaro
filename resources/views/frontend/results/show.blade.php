@@ -48,9 +48,9 @@
         <div class="slider-item">
           <a target="_blank">
             @if(isset($imagen_destacada) && !empty($imagen_destacada))
-              <img id="imagen_destacada" class="visible-md-up" src="{{ asset('storage/app/public/results_media') }}/{{ $name_category['id'] }}/{{ date('n') }}/{{ $imagen_destacada->image }}" style="margin: 0 auto;">
+              <img id="imagen_destacada"  src="{{ asset('storage/app/public/results_media') }}/{{ $name_category['id'] }}/{{ date('n') }}/{{ $imagen_destacada->image }}" style="margin: 0 auto;">
             @else
-              <img id="imagen_destacada" class="visible-md-up" src="" style="margin: 0 auto;">
+              <img id="imagen_destacada"  src="" style="margin: 0 auto;">
             @endif
           </a>
         </div>
@@ -119,7 +119,7 @@ $(document).ready(function(){
                     //   $(".list-months-results").removeClass('font-weight-bold');
                     //   $(".list-months-results p").removeClass('circle-white');
                     $(".list-results-table").empty();
-                    $("#imagen_destacada").remove();
+                    $("#imagen_destacada").hide();
 
                 } else {
                     
@@ -141,7 +141,7 @@ $(document).ready(function(){
                     
                     //imagen destacada 
                     if(imagenDestacada[0]){
-                      $('#slider-item').append('<img id="imagen_destacada" class="visible-md-up" src="" style="margin: 0 auto;">');
+                      $("#imagen_destacada").show();
                       $("#imagen_destacada").attr("src", $("#get-url-imagen-destacada").val()+month+"/"+imagenDestacada[0].image);
                     }
                 }
