@@ -67,7 +67,9 @@
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" value="" id="signup-terminos" required>
                                     <label class="form-check-label" for="signup-terminos">Acepto las
-                                        <a href="{{ url('/terminos') }}" target="_blank">bases y condiciones</a>
+{{--                                        <a href="{{ url('/terminos') }}" target="_blank">bases y condiciones</a>--}}
+                                        <a href="{{ asset('assets/backend/docs/REGLAMENTO.pdf') }}" target="_blank">bases y condiciones</a>
+
                                     </label>
                                 </div>
                             </div>
