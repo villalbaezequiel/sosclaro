@@ -26,7 +26,7 @@ class Functions extends Model
         return $date[2]."/".$date[1]."/".$date[0];
     }
 
-    static public function sendMail($template = 'emails.default', $data, $callback){
+    static public function sendMail($template, $data, $callback){
         Mail::send($template, $data, $callback);
     }
 

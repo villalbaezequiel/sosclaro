@@ -11,7 +11,7 @@ use App\UsersAllowed;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-use Maatwebsite\Excel\Facades\Excel;
+use App\Support\Excel;
 
 class CodigosFanbagController extends Controller
 {

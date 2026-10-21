@@ -1,51 +1,31 @@
-# Laravel PHP Framework
+# SOS Claro
 
-[![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
-[![Total Downloads](https://poser.pugx.org/laravel/framework/d/total.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/framework/v/stable.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/framework/v/unstable.svg)](https://packagist.org/packages/laravel/framework)
-[![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
+Aplicación Laravel 12 (PHP ^8.2): panel de administración, sitio de usuarios y API.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as authentication, routing, sessions, queueing, and caching.
+## Requisitos
 
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications. A superb inversion of control container, expressive migration system, and tightly integrated unit testing support give you the tools you need to build any application with which you are tasked.
+- PHP ^8.2 con extensiones habituales de Laravel (mbstring, pdo_mysql, zip, gd)
+- Composer 2
+- MySQL
 
-## Official Documentation
+## Instalación
 
-Documentation for the framework can be found on the [Laravel website](http://laravel.com/docs).
+```bash
+composer install
+cp .env.example .env
+php artisan key:generate
+# completar DB_*, MAIL_* y MAILCHIMP_KEY en .env
+php artisan migrate --seed
+php artisan serve
+```
 
-## Contributing
+## Estructura
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
+- `routes/web.php`: todas las rutas (admin, frontend, `/api`).
+- `app/Http/Controllers/{Backend,Frontend,Api}`: controllers.
+- `app/Support/Excel.php`: capa de compatibilidad para imports/exports (ver `Docs/Briefs/03-excel-shim.md`).
+- `database/seeds`: seeders (cargados por classmap).
 
-## Security Vulnerabilities
+## Upgrade desde Laravel 5.2
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
-
-
-## JSON API
-
-Sobre vendor\nilportugues\laravel5-json-api\src\NilPortugues\Laravel5\JsonApi\Providers\Laravel52Provider.php, sobre escribir la function calculateRoute() por
-´    protected function calculateRoute(array $value)
-    {
-        $router = Container::getInstance()->make('url');
-        $route = '';
-
-        /** @var \Illuminate\Routing\Route $routerObject */
-        foreach ($this->getRouterCollection($router) as $routerObject) {
-            if ($routerObject->getName() === $value['name']) {
-                $route = $routerObject->getPath();
-
-                return $this->calculateFullPath($value, $route);
-            }
-        }
-    }´
-
-## Accesos Cpanel
-- URL: https://sosclaro.com.ar:2083
-- User: sosclaro
-- Password: z?Zg++08d%g6
+Historial de decisiones y pendientes en [Docs/Briefs](Docs/Briefs/README.md).
