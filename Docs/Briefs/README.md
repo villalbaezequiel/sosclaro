@@ -8,3 +8,4 @@ Registro de decisiones y cambios del upgrade de Laravel 5.2 a 12.
 | [02-dependencias.md](02-dependencias.md) | Paquetes reemplazados o eliminados |
 | [03-excel-shim.md](03-excel-shim.md) | `App\Support\Excel` (reemplazo de maatwebsite/excel 2.x) |
 | [04-pendientes.md](04-pendientes.md) | Verificación pendiente y deuda conocida |
+| [05-sail.md](05-sail.md) | Entorno local con Laravel Sail |

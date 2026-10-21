@@ -1,6 +1,6 @@
 # 04 - Pendientes
 
-## Sin verificar (no había MySQL local)
+## Sin verificar (no había MySQL local; ahora hay Sail, ver `05-sail.md`)
 
 - Login/logout, registro y reset de password.
 - Panel admin completo (ABM, imports/exports Excel).

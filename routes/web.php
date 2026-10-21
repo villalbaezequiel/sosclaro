@@ -19,7 +19,8 @@ Route::get('/logout', [\App\Http\Controllers\Auth\LoginController::class, 'logou
 // ------------- BACKEND -------------
 Route::group(['middleware' => ['auth', 'admin']], function () {
 
-    Route::group(['prefix' => 'admin'], function() {
+    // 5.2 prefijaba los nombres de resource con el prefix del grupo (admin.products.*)
+    Route::group(['prefix' => 'admin', 'as' => 'admin.'], function() {
 
         //Route::get('/', 'Backend\AdminController@index');
         Route::get('/', function(){
@@ -61,10 +62,10 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
         Route::resource('/codigos_fanbag', 'Backend\CodigosFanbagController');
         Route::resource('/codigos_fanbag/store', 'Backend\CodigosFanbagController@store');
         Route::resource('/exchanges', 'Backend\ExchangesController');
-        Route::resource('/tips/categories', 'Backend\TipsCategoriesController');
+        Route::resource('/tips/categories', 'Backend\TipsCategoriesController')->names('tips.categories');
         Route::resource('/tips', 'Backend\TipsController');
-        Route::resource('/guests/users', 'Backend\GuestUsersController');
-        Route::resource('/guests/questions', 'Backend\GuestQuestionsController');
+        Route::resource('/guests/users', 'Backend\GuestUsersController')->names('guests.users');
+        Route::resource('/guests/questions', 'Backend\GuestQuestionsController')->names('guests.questions');
         Route::resource('/guests', 'Backend\GuestsController');
         Route::resource('/modals', 'Backend\ModalsController');
         Route::resource('/preguntas-frecuentes', 'Backend\PreguntasFrecuentesController');
@@ -87,19 +88,19 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
         Route::get('/mailchimp/template/folders', 'Backend\MailChimpTemplateFoldersController@index');
 
         //Settings
-        Route::resource('/settings/politics_privacy', 'Backend\PoliticsPrivacyController');
-        Route::resource('/settings/legal_products', 'Backend\LegalProductsController');
-        Route::resource('/settings/social_networks', 'Backend\SocialNetworksController');
-        Route::resource('/settings/emails', 'Backend\EmailsController');
-        Route::resource('/settings/api', 'Backend\ApiController');
+        Route::resource('/settings/politics_privacy', 'Backend\PoliticsPrivacyController')->names('settings.politics_privacy');
+        Route::resource('/settings/legal_products', 'Backend\LegalProductsController')->names('settings.legal_products');
+        Route::resource('/settings/social_networks', 'Backend\SocialNetworksController')->names('settings.social_networks');
+        Route::resource('/settings/emails', 'Backend\EmailsController')->names('settings.emails');
+        Route::resource('/settings/api', 'Backend\ApiController')->names('settings.api');
 
         // bugs
-        Route::get('/dni_fix_duplicates/create', 'Backend\FixBugsController@createDuplicates')->name('admin.dni_fix_duplicates.create');
-        Route::post('/dni_fix_duplicates/store', 'Backend\FixBugsController@storeDuplicates')->name('admin.dni_fix_duplicates.store');
+        Route::get('/dni_fix_duplicates/create', 'Backend\FixBugsController@createDuplicates')->name('dni_fix_duplicates.create');
+        Route::post('/dni_fix_duplicates/store', 'Backend\FixBugsController@storeDuplicates')->name('dni_fix_duplicates.store');
 
         //Meli
-        Route::post('/meli/authentication', 'Backend\MeliController@authentication')->name('admin.ml.authentication');
-        Route::get('/meli/redirect', 'Backend\MeliController@redirect')->name('admin.ml.redirect');
+        Route::post('/meli/authentication', 'Backend\MeliController@authentication')->name('ml.authentication');
+        Route::get('/meli/redirect', 'Backend\MeliController@redirect')->name('ml.redirect');
 
 
     });

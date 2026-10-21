@@ -123,7 +123,7 @@
                             <label class="col col-sm-3 col-form-label">Ciudad/Localidad</label>
                             <div class="col col-sm-9">
                                 <select class="form-control" name="user_profile_id_city" readonly>
-                                    <option value="{{ $user_profile[0]['id_city'] }}">{{ \App\Cities::getName($dni[0]['id_region']) }}</option>
+                                    <option value="{{ $user_profile[0]['id_city'] }}">{{ \App\Cities::getName($user_profile[0]['id_city']) }}</option>
                                 </select>
                             </div>
                         </div>
@@ -157,7 +157,7 @@
                             <label class="col col-sm-3 col-form-label">Región Comercial</label>
                             <div class="col col-sm-9">
                                 <select class="form-control" name="dni_id_region" readonly>
-                                    <option value="{{ $dni[0]['id_region'] }}">{{ \App\Regions::getName($dni[0]['id_region']) }}</option>
+                                    <option value="{{ $user_profile[0]['id_region'] }}">{{ \App\Regions::getName($user_profile[0]['id_region']) }}</option>
                                 </select>
                             </div>
                         </div>
