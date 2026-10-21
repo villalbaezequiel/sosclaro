@@ -4,7 +4,7 @@ namespace App;
 
 use App\Dni;
 use Illuminate\Database\Eloquent\Model;
-use Maatwebsite\Excel\Facades\Excel;
+use App\Support\Excel;
 use Illuminate\Support\Facades\DB;
 use App\Functions;
 use App\Guest;

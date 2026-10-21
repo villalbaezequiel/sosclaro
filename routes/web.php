@@ -11,7 +11,10 @@
 |
 */
 
-Route::auth();
+Auth::routes(['confirm' => false, 'verify' => false]);
+
+// Route::auth() in 5.2 exposed logout via GET; views link to it
+Route::get('/logout', [\App\Http\Controllers\Auth\LoginController::class, 'logout']);
 
 // ------------- BACKEND -------------
 Route::group(['middleware' => ['auth', 'admin']], function () {
